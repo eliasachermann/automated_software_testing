@@ -1,26 +1,24 @@
 from sql_generator import generate_query
 from bug_detector import BugDetector
 from bug_logger import BugLogger
-from coverage import clean_gcov_data, collect_coverage, calculate_coverage
+from coverage import clean_gcov_data, get_coverage
 
 def main():
-    test_path = "/tmp/sqlite-autoconf-3260000/sqlite3"
+    measure_coverage = False
+    test_path = "/usr/bin/sqlite3-3.26.0"
     # test_path = "/usr/bin/sqlite3-3.39.4"
-    oracle_path = "/tmp/sqlite-autoconf-3490100/sqlite3"
-
-    clean_gcov_data()
-    
+    oracle_path = "/usr/bin/sqlite3-3.49.1"
     detector = BugDetector(test_path, oracle_path)
-    logger = BugLogger()
+    clean_gcov_data()
+
+    for i in range(1000):
+        query = generate_query()
+        detector.detect_bug(query)
+        if i % 100 == 0 and measure_coverage:
+            get_coverage(i)
+        
     
-    for i in range(100):
-        detector.close()  # forcibly close sqlite3 binary (flush .gcda)
-        collect_coverage()
-        coverage = calculate_coverage()
-        print(f"[+] {i+1} queries generated - Current coverage: {coverage:.2f}%")
-
-        # Recreate detector (new sqlite3 process)
-        detector = BugDetector(test_path, oracle_path)
-
+    #detector.close()  # forcibly close sqlite3 binary (flush .gcda)
+    
 if __name__ == "__main__":
     main()

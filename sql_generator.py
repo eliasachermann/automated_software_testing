@@ -919,7 +919,7 @@ def generate_query():
             statements.append(insert_stmt + ";")
     
     # Generate various statement types
-    num_queries = random.randint(2, 5)
+    num_queries = random.randint(2, 5) 
     
     for _ in range(num_queries):
         stmt_type = random.choice([
