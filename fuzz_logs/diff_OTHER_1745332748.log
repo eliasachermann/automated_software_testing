@@ -1,0 +1,36 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_KiTm (c_gqW INTEGER, c_FqqMo NUMERIC, c_u0aQDe8l TEXT CHECK (length(c_u0aQDe8l) > 0), c_cehDUz TEXT DEFAULT 'Ga2M4qFl0VbIGobn', c_WlJVyd TEXT UNIQUE COLLATE RTRIM, c_5wM TEXT PRIMARY KEY NOT NULL DEFAULT 'tLdypmMoLgyIAQng6FHA', c_nxJRL8 TEXT UNIQUE, FOREIGN KEY (c_5wM) REFERENCES t_PxtyO(c_F7VkP));
+CREATE TABLE t_pjy2Wq82TP (c_L2i TEXT COLLATE BINARY, c_Bf8EP6 INTEGER DEFAULT 868303, c_XHtqoMGw TEXT DEFAULT '61NOM', UNIQUE (c_Bf8EP6));
+CREATE TABLE t_c8qUg (c_R4B9M7PK3 TEXT NOT NULL, c_khiUC TEXT, c_9x3IMIiv TEXT NOT NULL);
+INSERT OR IGNORE INTO t_KiTm (c_gqW, c_FqqMo, c_u0aQDe8l, c_cehDUz, c_WlJVyd, c_5wM, c_nxJRL8) VALUES (4678, -252445, 'LrRSfxW28RQhZPHK_2', 'fKrMcPFV6P05ZVVOpWH1_3', 'mgg_4', 'fB_5', 'sCyBfidZgFsnrTez0X_6'), (355643, 1737438, 'sAdl7aTE3q2R7_102', 'DDPDTTj_103', '1vkF2h5a4Qb_104', 'I9YybgZ9F627kTQtWMVJ_105', 'wPyLJ3r2WX_106');
+INSERT INTO t_pjy2Wq82TP (c_L2i, c_Bf8EP6, c_XHtqoMGw) VALUES ('kqQ3AT0i9_0', -712554, 'asUTyyQ0tjdjuaLUgOBr_2');
+INSERT OR REPLACE INTO t_pjy2Wq82TP (c_L2i, c_Bf8EP6, c_XHtqoMGw) VALUES ('nouOO9Deet_0', -968355, '3gadkPxJyuXzwqdeQ1_2'), ('XGmd5PRTgcmZFJcwKVr_100', 1313037, 'vXgz_102'), ('9wS4bwjgExm_200', 1013922, 'vHnTUPzgpmjIfDDtOZw0_202');
+REPLACE INTO t_pjy2Wq82TP (c_L2i, c_Bf8EP6, c_XHtqoMGw) VALUES ('TOszhqyJTgG_0', 416324, 'WSBd3_2');
+INSERT OR ABORT INTO t_pjy2Wq82TP (c_L2i, c_Bf8EP6, c_XHtqoMGw) VALUES ('IkYrbg0_0', -43746, 'Bb615wP_2');
+INSERT OR REPLACE INTO t_c8qUg (c_R4B9M7PK3, c_khiUC, c_9x3IMIiv) VALUES ('H3CHKAZsQ_0', 'bBJxfKCOy_1', '6yya3M3dkQJridDpa_2'), ('HHYqtV_100', 'tm3_101', 'tw_102'), ('JZcYZE_200', 'Ro4Du7mR1mydW65bYCYC_201', '8n0nNadI_202');
+SELECT * FROM t_c8qUg WHERE CASE WHEN CASE t_c8qUg.c_9x3IMIiv WHEN t_c8qUg.c_R4B9M7PK3 THEN FALSE END THEN t_c8qUg.c_khiUC WHEN + t_c8qUg.c_9x3IMIiv THEN CASE t_KiTm.c_FqqMo WHEN t_c8qUg.c_khiUC THEN t_KiTm.c_u0aQDe8l WHEN t_c8qUg.c_R4B9M7PK3 THEN t_pjy2Wq82TP.c_XHtqoMGw ELSE t_c8qUg.c_khiUC END WHEN TRUE THEN CASE WHEN t_pjy2Wq82TP.c_L2i THEN t_pjy2Wq82TP.c_L2i END END INTERSECT SELECT * FROM t_c8qUg LEFT OUTER JOIN t_pjy2Wq82TP ON t_c8qUg.c_R4B9M7PK3 = t_pjy2Wq82TP.c_XHtqoMGw WHERE c_khiUC ORDER BY c_XHtqoMGw ASC LIMIT 2;
+CREATE INDEX IF NOT EXISTS idx_up1Wx ON t_c8qUg(c_R4B9M7PK3 COLLATE BINARY) WHERE c_9x3IMIiv >= -147596;
+ALTER TABLE t_KiTm ADD COLUMN c_Wax20btAz INTEGER;
+CREATE INDEX IF NOT EXISTS idx_upoyx ON t_pjy2Wq82TP(c_L2i) WHERE c_Bf8EP6 IS NULL;
+UPDATE OR ABORT t_c8qUg SET c_khiUC = 'Y7', c_R4B9M7PK3 = 'AMJ2GxbrZZQP', c_9x3IMIiv = 'BB1lXrLcC1TtFVrsbNU' WHERE c_khiUC IS NOT NULL;
+SELECT COUNT(*) FROM t_pjy2Wq82TP;
+
+--- v3.26.0 ---
+OUT:
+6
+
+ERR:
+Parse error near line 10: no such column: t_KiTm.c_FqqMo
+  c8qUg.c_khiUC WHEN + t_c8qUg.c_9x3IMIiv THEN CASE t_KiTm.c_FqqMo WHEN t_c8qUg.
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+6
+
+ERR:
+Parse error near line 10: no such column: t_KiTm.c_FqqMo
+  c8qUg.c_khiUC WHEN + t_c8qUg.c_9x3IMIiv THEN CASE t_KiTm.c_FqqMo WHEN t_c8qUg.
+                                      error here ---^
+

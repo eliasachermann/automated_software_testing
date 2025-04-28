@@ -1,0 +1,43 @@
+SQL:
+PRAGMA ignore_check_constraints(0);
+CREATE TABLE IF NOT EXISTS t_eBx7yze6X6 (c_Paoqk INTEGER DEFAULT -716523, c_A046pz1 INTEGER CHECK (c_A046pz1 >= 0), c_ldaHmz TEXT, c_HviK TEXT, c_VfeOVXYR REAL, c_jP8iVEfZ NUMERIC UNIQUE, c_po5L REAL UNIQUE DEFAULT 305590.98757759086, c_9o2vgS REAL DEFAULT -164349.36707562592, c_1jJSUwTn75 NUMERIC UNIQUE DEFAULT 643655, c_n6xrplhby NUMERIC NOT NULL, PRIMARY KEY (c_po5L, c_A046pz1));
+CREATE TEMP TABLE t_JFvJfvbt (c_ieJXb INTEGER);
+WITH cte_Mp0 AS (SELECT 1) INSERT OR FAIL INTO t_eBx7yze6X6 (c_Paoqk, c_A046pz1, c_ldaHmz, c_HviK, c_VfeOVXYR, c_jP8iVEfZ, c_po5L, c_9o2vgS, c_1jJSUwTn75, c_n6xrplhby) VALUES (122532, -186321, 'Pe_2', 'dvhGy5Bc9Ebqmn1_3', 620734.3013832925, 945387, -571451.1386865946, -632608.3492798072, 241269, -180860), (651002, 1285924, 'ym84t6RO_102', '82XeqMTO_103', 711534.5168723878, 933547, -582027.770563506, 23244.331968931598, 206644, 258020);
+INSERT OR ABORT INTO t_eBx7yze6X6 (c_Paoqk, c_A046pz1, c_ldaHmz, c_HviK, c_VfeOVXYR, c_jP8iVEfZ, c_po5L, c_9o2vgS, c_1jJSUwTn75, c_n6xrplhby) VALUES (-113111, 198755, 'PaEwAL_2', '28v3Qg8DOzWirDjEb_3', -523868.42373228306, 992063, -267243.59412549017, -846695.232534985, 358298, 639013), (1082841, 698955, 'g3d6ym_102', 'uHbLFcSTm8C_103', 727934.9199661752, 1747352, -173173.48460041895, -825349.2652352975, 270134, 844333);
+INSERT INTO t_JFvJfvbt (c_ieJXb) SELECT 918788;
+INSERT OR ABORT INTO t_JFvJfvbt (c_ieJXb) SELECT NULL;
+SELECT t_eBx7yze6X6.c_VfeOVXYR, LOWER((t_eBx7yze6X6.c_ldaHmz == t_JFvJfvbt.c_ieJXb)) AS alias_0Yt, t_eBx7yze6X6.c_A046pz1, (NOT 318616 < ZEROBLOB(t_JFvJfvbt.c_ieJXb, t_eBx7yze6X6.c_n6xrplhby)) AS alias_YLS FROM t_JFvJfvbt, t_eBx7yze6X6 WHERE c_po5L ORDER BY c_ieJXb DESC LIMIT 74 OFFSET 6;
+CREATE INDEX idx_ik2Eo ON t_JFvJfvbt(c_ieJXb COLLATE RTRIM);
+SELECT t_eBx7yze6X6.c_1jJSUwTn75, c_ieJXb FROM t_JFvJfvbt WHERE UPPER(t_JFvJfvbt.c_ieJXb) ORDER BY c_po5L DESC;
+BEGIN TRANSACTION;
+UPDATE t_JFvJfvbt SET c_ieJXb = 498785 WHERE c_ieJXb >= 295819;
+COMMIT;
+SELECT COUNT(*) FROM t_eBx7yze6X6;
+
+--- v3.26.0 ---
+OUT:
+2
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_A046pz1 >= 0 (19)
+Parse error near line 8: wrong number of arguments to function ZEROBLOB()
+   alias_0Yt, t_eBx7yze6X6.c_A046pz1, (NOT 318616 < ZEROBLOB(t_JFvJfvbt.c_ieJXb,
+                                      error here ---^
+Parse error near line 10: no such column: t_eBx7yze6X6.c_1jJSUwTn75
+  SELECT t_eBx7yze6X6.c_1jJSUwTn75, c_ieJXb FROM t_JFvJfvbt WHERE UPPER(t_JFvJfv
+         ^--- error here
+
+
+--- v3.39.4 ---
+OUT:
+2
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_A046pz1 >= 0 (19)
+Parse error near line 8: wrong number of arguments to function ZEROBLOB()
+   alias_0Yt, t_eBx7yze6X6.c_A046pz1, (NOT 318616 < ZEROBLOB(t_JFvJfvbt.c_ieJXb,
+                                      error here ---^
+Parse error near line 10: no such column: t_eBx7yze6X6.c_1jJSUwTn75
+  SELECT t_eBx7yze6X6.c_1jJSUwTn75, c_ieJXb FROM t_JFvJfvbt WHERE UPPER(t_JFvJfv
+         ^--- error here
+

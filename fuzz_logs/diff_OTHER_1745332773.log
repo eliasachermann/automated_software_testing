@@ -1,0 +1,43 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_H0jlVBH (c_snS TEXT PRIMARY KEY CHECK (length(c_snS) > 0), c_8uBAF4lkWb INTEGER, c_QxpSm INTEGER CHECK (c_QxpSm >= 0));
+CREATE TABLE IF NOT EXISTS t_roVzan (c_SR5btRvb NUMERIC NOT NULL CHECK (c_SR5btRvb >= 0), c_I8EB INTEGER, FOREIGN KEY (c_SR5btRvb) REFERENCES t_DKEPZ(c_0zFOs));
+CREATE TABLE IF NOT EXISTS t_OGuSkSu (c_CjTIqMG TEXT, c_6reT1 NUMERIC, c_BJXG1yC8Xe INTEGER UNIQUE, c_oigYDsv INTEGER, c_uMLVNxy INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE);
+INSERT OR REPLACE INTO t_H0jlVBH (c_snS, c_8uBAF4lkWb, c_QxpSm) VALUES ('lGp_0', -163135, 318436), ('IdOLAStl_100', 662698, 216685), ('x8G0N_200', 2875452, 2796833);
+INSERT INTO t_H0jlVBH (c_snS, c_8uBAF4lkWb, c_QxpSm) VALUES ('tYELsYG0O9smrp_0', -981672, -345538);
+INSERT INTO t_H0jlVBH (c_snS, c_8uBAF4lkWb, c_QxpSm) VALUES ('XlMfcn_0', -471597, -143783);
+INSERT OR ABORT INTO t_roVzan (c_SR5btRvb, c_I8EB) VALUES (119231, 157131);
+INSERT INTO t_OGuSkSu (c_CjTIqMG, c_6reT1, c_BJXG1yC8Xe, c_oigYDsv, c_uMLVNxy) VALUES ('TT8J6mqFX30mTATqiq7v_0', 108592, -799880, -225582, 633224), ('udLoP65xDmreOduK3dwW_100', 30831, 1586645, 206361, 216065), ('7WfjOB9oJHOERm_200', 2974614, 2828225, 2950033, 1318707);
+INSERT INTO t_OGuSkSu (c_CjTIqMG, c_6reT1, c_BJXG1yC8Xe, c_oigYDsv, c_uMLVNxy) VALUES ('mveP5xOVGNkK_0', 1003304, -865077, 43865, 835366), ('DhTUy_100', 376074, 201291, 1413361, 342634);
+REPLACE INTO t_OGuSkSu (c_CjTIqMG, c_6reT1, c_BJXG1yC8Xe, c_oigYDsv, c_uMLVNxy) VALUES ('Siz_0', 305372, 439435, 729244, 886285);
+INSERT OR IGNORE INTO t_OGuSkSu (c_CjTIqMG, c_6reT1, c_BJXG1yC8Xe, c_oigYDsv, c_uMLVNxy) SELECT 'B3BI1NnF', -621324, -896880, -423838, 383752;
+INSERT OR ABORT INTO t_OGuSkSu (c_CjTIqMG, c_6reT1, c_BJXG1yC8Xe, c_oigYDsv, c_uMLVNxy) VALUES ('wB14PxzU0X2LV7AX3_0', 899088, 274088, -638171, 709501);
+ALTER TABLE t_OGuSkSu ADD COLUMN c_myKzFj REAL;
+SELECT *, c_8uBAF4lkWb, * FROM t_roVzan WHERE JULIANDAY(~ t_roVzan.c_SR5btRvb) LIMIT 11;
+WITH cte_Jxj AS (SELECT * FROM t_roVzan LIMIT 10) SELECT * FROM cte_Jxj;
+SELECT COUNT(*) FROM t_OGuSkSu;
+
+--- v3.26.0 ---
+OUT:
+119231|157131
+8
+
+ERR:
+Runtime error near line 5: CHECK constraint failed: c_QxpSm >= 0 (19)
+Runtime error near line 6: CHECK constraint failed: c_QxpSm >= 0 (19)
+Parse error near line 14: no such column: c_8uBAF4lkWb
+  SELECT *, c_8uBAF4lkWb, * FROM t_roVzan WHERE JULIANDAY(~ t_roVzan.c_SR5btRvb)
+            ^--- error here
+
+
+--- v3.39.4 ---
+OUT:
+119231|157131
+8
+
+ERR:
+Runtime error near line 5: CHECK constraint failed: c_QxpSm >= 0 (19)
+Runtime error near line 6: CHECK constraint failed: c_QxpSm >= 0 (19)
+Parse error near line 14: no such column: c_8uBAF4lkWb
+  SELECT *, c_8uBAF4lkWb, * FROM t_roVzan WHERE JULIANDAY(~ t_roVzan.c_SR5btRvb)
+            ^--- error here
+

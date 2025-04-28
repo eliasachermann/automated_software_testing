@@ -1,0 +1,35 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_ALMONpI (c_SCZJ9rQsBA INTEGER, c_Oky73yz5jm TEXT DEFAULT 'T3', c_tIqD TEXT NOT NULL, c_EtISdMS INTEGER, c_I34fe TEXT, c_ApXhhc NUMERIC CHECK (c_ApXhhc >= 0), c_jO5zk9W TEXT DEFAULT 'InrVhcAp2kxWJAoENqJW', c_Xe5ngdoCC TEXT NOT NULL COLLATE RTRIM, PRIMARY KEY (c_Xe5ngdoCC, c_jO5zk9W), UNIQUE (c_ApXhhc, c_SCZJ9rQsBA));
+CREATE TEMP TABLE IF NOT EXISTS t_ymgfnY4Gkl (c_PYg1YDLUL REAL, c_ICqCQKC INTEGER, c_vxw REAL, c_9zWTV25yn NUMERIC UNIQUE DEFAULT 182409 CHECK (c_9zWTV25yn >= 0), c_haXN8SG NUMERIC, c_F8u9w NUMERIC NOT NULL, c_87Mj9rG TEXT PRIMARY KEY DEFAULT 'b');
+INSERT OR IGNORE INTO t_ALMONpI (c_SCZJ9rQsBA, c_Oky73yz5jm, c_tIqD, c_EtISdMS, c_I34fe, c_ApXhhc, c_jO5zk9W, c_Xe5ngdoCC) VALUES (507314, 'euhQ3jVlIvR2aM6ARrB_1', 'gCtgselEzUyEemh32s_2', 643682, 'x_4', -347599, '0ucoZJFVAc6PYQm_6', 'fDFJExes1Ha_7'), (1994996, 'A_101', 'PoIxZt5eva8K8_102', 1908508, 'aERp8ko22jBxKZfU_104', 1177278, 'KtN8Sweoaob6C0_106', 'LuTGLUkpH1_107'), (2532455, 'N_201', 'HKoZF7o_202', 1903768, 'xrZVxaGLvPIl_204', 2586758, 'V9JS_206', 'jrtUfBmin7Artn2_207');
+REPLACE INTO t_ALMONpI (c_SCZJ9rQsBA, c_Oky73yz5jm, c_tIqD, c_EtISdMS, c_I34fe, c_ApXhhc, c_jO5zk9W, c_Xe5ngdoCC) VALUES (-872412, 'Z_1', 'K3T_2', 997595, 'Wj9aJ4prgX0s_4', 387469, 'zV8GA5EYWnh3vl20Z_6', 'WJhYyRygrb4ZhKfu6WX1_7'), (1122371, 'mhfQa3xgK_101', 'y4h_102', 1627654, '7SFMIkD_104', 830659, 'lGXcbyIlBAvF4u_106', 'n_107');
+REPLACE INTO t_ALMONpI (c_SCZJ9rQsBA, c_Oky73yz5jm, c_tIqD, c_EtISdMS, c_I34fe, c_ApXhhc, c_jO5zk9W, c_Xe5ngdoCC) VALUES (426660, 'EdNij1iXRmh_1', 'uNUsn_2', -647215, 'FdZ1hb3Y7RNgnZ08Vl3_4', 909994, 'MM0i8mqyrQSBip6RjaZ_6', '2wa2RG6pe57m16Pol_7'), (1566400, 'vTLNr_101', 'Ho72j2wS_102', 1078110, 'g6YTG7DXkDodiHUY7_104', 1800889, 'nAgC8out_106', 'uKWu7XYDGRzo7lUZNOfC_107'), (2044695, 'ayb_201', 'vwVg_202', 2149448, 'hiXkpri8qqccKXADO7_204', 2421757, 'xa9z2YWWidRbAheym_206', 'PmpmAhfv591ofq_207');
+INSERT OR FAIL INTO t_ALMONpI (c_SCZJ9rQsBA, c_Oky73yz5jm, c_tIqD, c_EtISdMS, c_I34fe, c_ApXhhc, c_jO5zk9W, c_Xe5ngdoCC) VALUES (869504, '5FFzvAY_1', 'pUc_2', 421233, 'bfVHzzrwbNK2Q82pgF_4', 398270, 'KtczC0XR9GSbsP_6', 'fs4RUrGSjqpSF3gcO_7');
+INSERT OR REPLACE INTO t_ymgfnY4Gkl (c_PYg1YDLUL, c_ICqCQKC, c_vxw, c_9zWTV25yn, c_haXN8SG, c_F8u9w, c_87Mj9rG) VALUES (-809613.6865705809, 786612, -623096.0216089468, -653532, -358894, -416842, 'HeCsiWoARhJL_6');
+CREATE INDEX idx_cD2jX ON t_ymgfnY4Gkl(c_ICqCQKC ASC, c_vxw);
+ALTER TABLE t_ALMONpI ADD COLUMN c_PdH REAL;
+SELECT (CASE WHEN t_ALMONpI.c_tIqD THEN t_ALMONpI.c_Xe5ngdoCC WHEN t_ALMONpI.c_SCZJ9rQsBA THEN NULL WHEN t_ymgfnY4Gkl.c_vxw THEN TRUE END = LTRIM('zT0T0BAB0KnsP55bNkI1')) AS alias_TMU FROM t_ALMONpI WHERE NULL GROUP BY c_ICqCQKC, c_87Mj9rG LIMIT 14;
+DELETE FROM t_ymgfnY4Gkl;
+SELECT COUNT(*) FROM t_ALMONpI;
+
+--- v3.26.0 ---
+OUT:
+8
+
+ERR:
+Runtime error near line 7: CHECK constraint failed: c_9zWTV25yn >= 0 (19)
+Parse error near line 10: no such column: t_ymgfnY4Gkl.c_vxw
+  ngdoCC WHEN t_ALMONpI.c_SCZJ9rQsBA THEN NULL WHEN t_ymgfnY4Gkl.c_vxw THEN TRUE
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+8
+
+ERR:
+Runtime error near line 7: CHECK constraint failed: c_9zWTV25yn >= 0 (19)
+Parse error near line 10: no such column: t_ymgfnY4Gkl.c_vxw
+  ngdoCC WHEN t_ALMONpI.c_SCZJ9rQsBA THEN NULL WHEN t_ymgfnY4Gkl.c_vxw THEN TRUE
+                                      error here ---^
+

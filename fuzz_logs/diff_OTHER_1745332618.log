@@ -1,0 +1,38 @@
+SQL:
+CREATE TABLE t_S4iLB (c_FznJnQvRic REAL DEFAULT -14116.065978987142, c_wU9 INTEGER PRIMARY KEY CHECK (c_wU9 >= 0), c_EQJrI NUMERIC DEFAULT -418187 CHECK (c_EQJrI >= 0), c_PpRJ NUMERIC, c_3C8RmSY INTEGER) WITHOUT ROWID;
+INSERT INTO t_S4iLB (c_FznJnQvRic, c_wU9, c_EQJrI, c_PpRJ, c_3C8RmSY) VALUES (719118.3931008114, -913662, -267288, 967042, -618622);
+INSERT OR ABORT INTO t_S4iLB (c_FznJnQvRic, c_wU9, c_EQJrI, c_PpRJ, c_3C8RmSY) VALUES (-174349.32409860182, -180705, 202633, -876893, 674252), (567996.0246573817, 149469, 249557, 1091455, 420771);
+INSERT OR IGNORE INTO t_S4iLB (c_FznJnQvRic, c_wU9, c_EQJrI, c_PpRJ, c_3C8RmSY) VALUES (-585942.9567385342, 143668, -130830, -328207, -246503), (-365980.82934450475, 1956471, 1563450, 593222, 398611), (596295.7351121637, 1057807, 2908906, 2606234, 2954434);
+INSERT OR ABORT INTO t_S4iLB (c_FznJnQvRic, c_wU9, c_EQJrI, c_PpRJ, c_3C8RmSY) VALUES (-567094.1382256981, 911413, 14040, 536132, -626084), (-645417.5251960121, 596549, 1251379, 663078, 693879), (783091.4608638347, 2601909, 2835435, 1214286, 1559923);
+ALTER TABLE t_S4iLB ADD COLUMN c_v1bFg INTEGER;
+SELECT *, *, t_S4iLB.c_EQJrI FROM t_S4iLB WHERE COUNT(*) GROUP BY c_wU9 ORDER BY c_3C8RmSY, c_FznJnQvRic DESC;
+SELECT *, *, t_S4iLB.*, t_S4iLB.c_PpRJ AS alias_iHZ FROM t_S4iLB WHERE (TRIM(t_S4iLB.c_wU9, t_S4iLB.c_FznJnQvRic) <= LOWER(NULL)) ORDER BY c_EQJrI, c_FznJnQvRic ASC;
+SELECT c_EQJrI, *, *, c_EQJrI, c_3C8RmSY FROM t_S4iLB WHERE CASE WHEN t_S4iLB.c_FznJnQvRic THEN - t_S4iLB.c_EQJrI WHEN t_S4iLB.c_FznJnQvRic THEN FALSE ELSE ('eZC6LoLvxLTPnjlP' IS NOT t_S4iLB.c_PpRJ) END EXCEPT SELECT t_S4iLB.c_3C8RmSY, CASE WHEN + t_S4iLB.c_3C8RmSY THEN t_S4iLB.c_PpRJ END FROM t_S4iLB WHERE t_S4iLB.c_PpRJ GROUP BY c_EQJrI, c_wU9, c_PpRJ;
+DELETE FROM t_S4iLB WHERE c_EQJrI = NULL;
+SELECT COUNT(*) FROM t_S4iLB;
+
+--- v3.26.0 ---
+OUT:
+5
+
+ERR:
+Runtime error near line 2: CHECK constraint failed: c_wU9 >= 0 (19)
+Runtime error near line 3: CHECK constraint failed: c_wU9 >= 0 (19)
+Parse error near line 7: misuse of aggregate: COUNT()
+  SELECT *, *, t_S4iLB.c_EQJrI FROM t_S4iLB WHERE COUNT(*) GROUP BY c_wU9 ORDER 
+                                    error here ---^
+Parse error near line 9: SELECTs to the left and right of EXCEPT do not have the same number of result columns
+
+
+--- v3.39.4 ---
+OUT:
+5
+
+ERR:
+Runtime error near line 2: CHECK constraint failed: c_wU9 >= 0 (19)
+Runtime error near line 3: CHECK constraint failed: c_wU9 >= 0 (19)
+Parse error near line 7: misuse of aggregate: COUNT()
+  SELECT *, *, t_S4iLB.c_EQJrI FROM t_S4iLB WHERE COUNT(*) GROUP BY c_wU9 ORDER 
+                                    error here ---^
+Parse error near line 9: SELECTs to the left and right of EXCEPT do not have the same number of result columns
+

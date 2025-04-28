@@ -1,0 +1,34 @@
+SQL:
+PRAGMA table_info;
+CREATE TABLE t_sFlSj (c_eLqB11FM NUMERIC PRIMARY KEY, c_bfhTGe INTEGER, c_ESo TEXT, c_cwhqOj5 REAL, c_FDJarlf NUMERIC NOT NULL);
+REPLACE INTO t_sFlSj (c_eLqB11FM, c_bfhTGe, c_ESo, c_cwhqOj5, c_FDJarlf) VALUES (-874473, 509360, 'qW_2', -498399.8576069004, -241560);
+INSERT OR IGNORE INTO t_sFlSj (c_eLqB11FM, c_bfhTGe, c_ESo, c_cwhqOj5, c_FDJarlf) VALUES (715013, 958008, '0DY1f6roPo_2', -809690.9394860549, 648867), (602593, 377621, 'CbHJBw_102', 707173.6931360841, 1418176), (1534308, 2981004, 'wN_202', 930937.1406443133, 1833422);
+WITH cte_bt2 AS (SELECT 1) REPLACE INTO t_sFlSj (c_eLqB11FM, c_bfhTGe, c_ESo, c_cwhqOj5, c_FDJarlf) VALUES (-4105, 206675, 'gNR5c9uqaD_2', 467095.8729362667, 708918), (616497, 1123746, '7795IqV_102', 115424.2269635559, 408061), (1621994, 2108994, 'aEObwVXdQ_202', 888855.2010487798, 2643104);
+DELETE FROM t_sFlSj WHERE c_bfhTGe <= NULL;
+ALTER TABLE t_sFlSj ADD COLUMN c_B6RI1 NUMERIC;
+BEGIN TRANSACTION;
+INSERT OR REPLACE INTO t_sFlSj (c_eLqB11FM, c_bfhTGe, c_ESo, c_cwhqOj5, c_FDJarlf) VALUES (357705, -372997, 'mU_2', -316335.48675864656, 969643), (1697670, 841734, 'bMQgnR_102', 584698.1155685412, 399873), (1048241, 1289004, 'EXrbDHYEnHbTVOPyQQe_202', 631957.4336692807, 2820312);
+COMMIT;
+CREATE INDEX IF NOT EXISTS idx_9ARt9 ON t_sFlSj(c_cwhqOj5, c_FDJarlf);
+SELECT (c_eLqB11FM << CASE WHEN t_sFlSj.c_eLqB11FM THEN NULL WHEN t_sFlSj.c_ESo THEN t_sFlSj.c_bfhTGe WHEN t_sFlSj.c_ESo THEN t_sFlSj.c_ESo END), *, *, * FROM t_sFlSj UNION SELECT DISTINCT CASE c_cwhqOj5 WHEN t_sFlSj.c_ESo THEN c_eLqB11FM WHEN (t_sFlSj.c_cwhqOj5 == t_sFlSj.c_ESo) THEN ~ t_sFlSj.c_bfhTGe ELSE (t_sFlSj.c_cwhqOj5 >= t_sFlSj.c_bfhTGe) END, *, c_eLqB11FM FROM t_sFlSj WHERE GLOB(t_sFlSj.c_ESo) LIMIT 9;
+SELECT COUNT(*) FROM t_sFlSj;
+
+--- v3.26.0 ---
+OUT:
+10
+
+ERR:
+Parse error near line 12: wrong number of arguments to function GLOB()
+  j.c_bfhTGe) END, *, c_eLqB11FM FROM t_sFlSj WHERE GLOB(t_sFlSj.c_ESo) LIMIT 9;
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+10
+
+ERR:
+Parse error near line 12: wrong number of arguments to function GLOB()
+  j.c_bfhTGe) END, *, c_eLqB11FM FROM t_sFlSj WHERE GLOB(t_sFlSj.c_ESo) LIMIT 9;
+                                      error here ---^
+

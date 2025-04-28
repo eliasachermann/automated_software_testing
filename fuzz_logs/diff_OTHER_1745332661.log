@@ -1,0 +1,46 @@
+SQL:
+PRAGMA stats;
+CREATE TEMP TABLE IF NOT EXISTS t_5NWPIpKdw5 (c_0tjj9Npf TEXT COLLATE NOCASE CHECK (length(c_0tjj9Npf) > 0), c_KpuuRbf TEXT PRIMARY KEY, c_EsFebKE TEXT, c_Yg0C7ukUQX INTEGER NOT NULL CHECK (c_Yg0C7ukUQX >= 0), c_IkdH55 INTEGER CHECK (c_IkdH55 >= 0), c_j3gHjm INTEGER, c_5B82NMQluU INTEGER DEFAULT -187443, c_O3avgESR REAL UNIQUE, c_19ljvQ REAL DEFAULT NULL CHECK (c_19ljvQ >= 0), UNIQUE (c_IkdH55, c_19ljvQ));
+REPLACE INTO t_5NWPIpKdw5 (c_0tjj9Npf, c_KpuuRbf, c_EsFebKE, c_Yg0C7ukUQX, c_IkdH55, c_j3gHjm, c_5B82NMQluU, c_O3avgESR, c_19ljvQ) VALUES ('Q3Jhaale8ym_0', 'aU3_1', 'Fw2bQ_2', 349585, 674108, -712673, -222586, 232217.114382572, 140676.57211486087), ('nmaOMgtsWLnkEKxJB_100', 'XXGymFF7_101', '9_102', 1849413, 1756177, 1229766, 116508, -451935.73295967083, -204984.6096334575);
+INSERT OR FAIL INTO t_5NWPIpKdw5 (c_0tjj9Npf, c_KpuuRbf, c_EsFebKE, c_Yg0C7ukUQX, c_IkdH55, c_j3gHjm, c_5B82NMQluU, c_O3avgESR, c_19ljvQ) VALUES ('HT0rkFiydmSW4Cb8Af_0', 'F72NedUWqsPOJWQ1aJI_1', 'OSKGkgneVK9n6_2', -377515, -493958, 163146, 648893, 436028.97465343727, 714066.4489515326);
+INSERT OR FAIL INTO t_5NWPIpKdw5 (c_0tjj9Npf, c_KpuuRbf, c_EsFebKE, c_Yg0C7ukUQX, c_IkdH55, c_j3gHjm, c_5B82NMQluU, c_O3avgESR, c_19ljvQ) VALUES ('rbIGLzCdrOPlmr_0', 'uYlN_1', 'F5bmjXeu0kMkqL_2', 573619, 934473, 199921, 906237, 987003.443466522, 2061.6144610937918), ('wJARe_100', 'OObzm1QOhkyJq0MC_101', 'TcZLX35vGhe_102', 1904488, 368957, 1987115, 1028551, -221504.78001240583, 497579.8228333732);
+REPLACE INTO t_5NWPIpKdw5 (c_0tjj9Npf, c_KpuuRbf, c_EsFebKE, c_Yg0C7ukUQX, c_IkdH55, c_j3gHjm, c_5B82NMQluU, c_O3avgESR, c_19ljvQ) VALUES ('cuhc4xK92g5rLjo_0', '3exNO3bKqL_1', 'GfbtsDs5JNuoNvst7K_2', -459595, -536045, 791109, -901041, -381153.3849007947, 254306.05061254022);
+REPLACE INTO t_5NWPIpKdw5 (c_0tjj9Npf, c_KpuuRbf, c_EsFebKE, c_Yg0C7ukUQX, c_IkdH55, c_j3gHjm, c_5B82NMQluU, c_O3avgESR, c_19ljvQ) VALUES ('2EVC8ZbchKEcBADRPKpp_0', 'p0G0lztNCVRon_1', 'wxrw8Tylh0nOll9OlY_2', -464386, -765312, 470013, -572847, 389649.0861609229, 93794.7796571299), ('NG_100', 'K_101', 'cLPoJOCZaG_102', 1459615, 149434, 839723, 1538955, 842236.5962681547, -577573.4388248805), ('ONa_200', 'uwd_201', 'm3A_202', 2109128, 2193909, 2055922, 2755486, 617.0369141078554, -635076.6489251785);
+BEGIN TRANSACTION;
+UPDATE OR REPLACE t_5NWPIpKdw5 SET c_5B82NMQluU = 896116, c_19ljvQ = -276872.2666854309, c_j3gHjm = -386827 WHERE c_O3avgESR IS NOT NULL;
+INSERT OR REPLACE INTO t_5NWPIpKdw5 (c_0tjj9Npf, c_KpuuRbf, c_EsFebKE, c_Yg0C7ukUQX, c_IkdH55, c_j3gHjm, c_5B82NMQluU, c_O3avgESR, c_19ljvQ) VALUES ('oxwgzbk1Z8XtPm3_0', 'YQY_1', 'usm_2', 843120, 106218, 377230, 315471, 828690.1457342831, 549318.7319322736);
+COMMIT;
+ALTER TABLE t_5NWPIpKdw5 ADD COLUMN c_fIXEmHTL REAL;
+ALTER TABLE t_5NWPIpKdw5 ADD COLUMN c_8a3 NUMERIC;
+SELECT *, c_IkdH55, t_5NWPIpKdw5.c_0tjj9Npf, NOT MATCH(t_5NWPIpKdw5.c_19ljvQ, t_5NWPIpKdw5.c_EsFebKE, t_5NWPIpKdw5.c_KpuuRbf), EXISTS (SELECT 1 FROM t_5NWPIpKdw5 LIMIT 1) AS alias_ST4 FROM t_5NWPIpKdw5 GROUP BY c_Yg0C7ukUQX HAVING NOT (FALSE GLOB t_5NWPIpKdw5.c_EsFebKE);
+SELECT COUNT(*) FROM t_5NWPIpKdw5;
+
+--- v3.26.0 ---
+OUT:
+3
+
+ERR:
+Runtime error near line 3: CHECK constraint failed: c_19ljvQ >= 0 (19)
+Runtime error near line 4: CHECK constraint failed: c_Yg0C7ukUQX >= 0 (19)
+Runtime error near line 6: CHECK constraint failed: c_Yg0C7ukUQX >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_Yg0C7ukUQX >= 0 (19)
+Runtime error near line 9: CHECK constraint failed: c_19ljvQ >= 0 (19)
+Parse error near line 14: wrong number of arguments to function MATCH()
+  SELECT *, c_IkdH55, t_5NWPIpKdw5.c_0tjj9Npf, NOT MATCH(t_5NWPIpKdw5.c_19ljvQ, 
+                                     error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+3
+
+ERR:
+Runtime error near line 3: CHECK constraint failed: c_19ljvQ >= 0 (19)
+Runtime error near line 4: CHECK constraint failed: c_Yg0C7ukUQX >= 0 (19)
+Runtime error near line 6: CHECK constraint failed: c_Yg0C7ukUQX >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_Yg0C7ukUQX >= 0 (19)
+Runtime error near line 9: CHECK constraint failed: c_19ljvQ >= 0 (19)
+Parse error near line 14: wrong number of arguments to function MATCH()
+  SELECT *, c_IkdH55, t_5NWPIpKdw5.c_0tjj9Npf, NOT MATCH(t_5NWPIpKdw5.c_19ljvQ, 
+                                     error here ---^
+

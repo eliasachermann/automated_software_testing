@@ -1,0 +1,39 @@
+SQL:
+CREATE TABLE t_eD8 (c_xGlJ TEXT, c_eOpip6X496 NUMERIC DEFAULT -204785, PRIMARY KEY (c_eOpip6X496));
+CREATE TABLE t_09w8 (c_jUC INTEGER DEFAULT 933882, c_XoC INTEGER, c_vTahtvW NUMERIC DEFAULT -837967 CHECK (c_vTahtvW >= 0), c_4Y4rmbbFe INTEGER UNIQUE DEFAULT 563916, c_ne66 INTEGER, c_zODG3i INTEGER CHECK (c_zODG3i >= 0), c_CDUNDy REAL, c_inHDr4 INTEGER, c_HO6 REAL);
+CREATE TABLE t_3Kn4 (c_vEb REAL NOT NULL, c_RQdA INTEGER, UNIQUE (c_RQdA));
+INSERT OR REPLACE INTO t_eD8 (c_xGlJ, c_eOpip6X496) SELECT NULL, -950225;
+INSERT OR IGNORE INTO t_09w8 (c_jUC, c_XoC, c_vTahtvW, c_4Y4rmbbFe, c_ne66, c_zODG3i, c_CDUNDy, c_inHDr4, c_HO6) VALUES (382660, 538840, -275653, -200662, -913143, 461351, -991085.3660327651, -813402, -863437.0858033483);
+INSERT OR REPLACE INTO t_09w8 (c_jUC, c_XoC, c_vTahtvW, c_4Y4rmbbFe, c_ne66, c_zODG3i, c_CDUNDy, c_inHDr4, c_HO6) VALUES (921961, 914801, 685597, 233528, 1008273, -225970, 832397.7778208312, -339173, -936004.837623129), (360058, 145242, 1942324, 1367832, 214712, 927886, 35328.24019240192, 1676612, 101995.64809484337);
+INSERT OR IGNORE INTO t_3Kn4 (c_vEb, c_RQdA) SELECT 544558.4417830836, 674622;
+REPLACE INTO t_3Kn4 (c_vEb, c_RQdA) SELECT NULL, -258245;
+WITH cte_9wl AS (SELECT 1) INSERT OR REPLACE INTO t_3Kn4 (c_vEb, c_RQdA) SELECT 597404.9550455031, NULL;
+INSERT OR FAIL INTO t_3Kn4 (c_vEb, c_RQdA) VALUES (-782872.9870155738, 900464), (-194727.54634619935, 19251), (835965.1471205871, 1699537);
+ALTER TABLE t_3Kn4 ADD COLUMN c_IAtKBWotCK INTEGER;
+WITH cte_jFc AS (SELECT * FROM t_09w8 LIMIT 10) SELECT * FROM t_eD8 WHERE + + t_09w8.c_jUC;
+WITH cte_qTo AS (SELECT * FROM t_09w8 LIMIT 10) SELECT * FROM cte_qTo;
+SELECT COUNT(*) FROM t_eD8;
+
+--- v3.26.0 ---
+OUT:
+1
+
+ERR:
+Runtime error near line 6: CHECK constraint failed: c_zODG3i >= 0 (19)
+Runtime error near line 8: NOT NULL constraint failed: t_3Kn4.c_vEb (19)
+Parse error near line 12: no such column: t_09w8.c_jUC
+  OM t_09w8 LIMIT 10) SELECT * FROM t_eD8 WHERE + + t_09w8.c_jUC;
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+1
+
+ERR:
+Runtime error near line 6: CHECK constraint failed: c_zODG3i >= 0 (19)
+Runtime error near line 8: NOT NULL constraint failed: t_3Kn4.c_vEb (19)
+Parse error near line 12: no such column: t_09w8.c_jUC
+  OM t_09w8 LIMIT 10) SELECT * FROM t_eD8 WHERE + + t_09w8.c_jUC;
+                                      error here ---^
+

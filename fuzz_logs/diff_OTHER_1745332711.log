@@ -1,0 +1,52 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_PouSqR5 (c_hsoDnLlI INTEGER DEFAULT -862871, c_A7C90bFSY INTEGER, c_mSeKQtXE7a INTEGER, c_dYYh3RXK REAL NOT NULL, c_4CD658 TEXT, c_rkfIvif INTEGER PRIMARY KEY AUTOINCREMENT, c_U2l INTEGER, c_cgt5 NUMERIC NOT NULL);
+CREATE TABLE IF NOT EXISTS t_4ibu (c_eAt NUMERIC NOT NULL, c_XcvL TEXT, c_Xh8W TEXT, c_VKZz4BYwet INTEGER, c_gF5RBSXs REAL UNIQUE DEFAULT 504892.1732630639, c_iYhP TEXT DEFAULT 'xnwUL6N', PRIMARY KEY (c_eAt, c_XcvL, c_VKZz4BYwet));
+CREATE TABLE IF NOT EXISTS t_77PIqjfnw (c_Aq0x2TIY TEXT, c_3JHmNWkYd NUMERIC, c_q4RMsNP REAL UNIQUE, c_t4ItZ5xSa TEXT PRIMARY KEY, c_2IN REAL, c_EaLGTST3tb REAL PRIMARY KEY UNIQUE);
+INSERT OR IGNORE INTO t_PouSqR5 (c_hsoDnLlI, c_A7C90bFSY, c_mSeKQtXE7a, c_dYYh3RXK, c_4CD658, c_rkfIvif, c_U2l, c_cgt5) VALUES (-433444, 26373, -698075, 459408.8338966451, 'J926njj4YkcYxv_4', 486405, 675086, 556084), (1498268, 1757367, 1153521, 162964.41977793048, 'aJObdvh1l0MF_104', 478042, 527401, 1394865), (1612245, 2209805, 1237194, 109073.11285928101, 'm65tM3sgwHE3rZaEE9E_204', 2455511, 1686152, 1439946);
+WITH cte_Uei AS (SELECT 1) INSERT OR ABORT INTO t_PouSqR5 (c_hsoDnLlI, c_A7C90bFSY, c_mSeKQtXE7a, c_dYYh3RXK, c_4CD658, c_rkfIvif, c_U2l, c_cgt5) VALUES (-464321, 823219, 221980, 465057.22618231014, 'SCkNemo5hIzwWH4yrfi_4', 484112, 655803, 714645);
+INSERT OR ABORT INTO t_PouSqR5 (c_hsoDnLlI, c_A7C90bFSY, c_mSeKQtXE7a, c_dYYh3RXK, c_4CD658, c_rkfIvif, c_U2l, c_cgt5) VALUES (-153978, 175547, 609225, 629883.9996028384, 'O6KgRowus8iS504U7FZ_4', -831670, -575428, 938542);
+WITH cte_v9t AS (SELECT 1) INSERT INTO t_PouSqR5 (c_hsoDnLlI, c_A7C90bFSY, c_mSeKQtXE7a, c_dYYh3RXK, c_4CD658, c_rkfIvif, c_U2l, c_cgt5) VALUES (782396, -111079, 240689, 592806.8429710083, 'k1ZYs8xxF5KrquV_4', -824186, -218860, -479670);
+REPLACE INTO t_PouSqR5 (c_hsoDnLlI, c_A7C90bFSY, c_mSeKQtXE7a, c_dYYh3RXK, c_4CD658, c_rkfIvif, c_U2l, c_cgt5) SELECT 800728, -643483, 913168, 570108.8488901677, '3CA6d2MLXDBXehHlgHfP', -48326, NULL, 147364;
+INSERT OR REPLACE INTO t_4ibu (c_eAt, c_XcvL, c_Xh8W, c_VKZz4BYwet, c_gF5RBSXs, c_iYhP) VALUES (-843054, 'DqXSZeIe9GTuUN_1', 'SPbpLe7F4Nd9r_2', -441576, 168257.23802754492, 'diUkeK_5'), (615844, 'CYOnxdyyKMeu8vKd8G_101', 'zsrts_102', 892700, -794782.4646578182, 'K3y7RCX5n_105');
+INSERT OR IGNORE INTO t_4ibu (c_eAt, c_XcvL, c_Xh8W, c_VKZz4BYwet, c_gF5RBSXs, c_iYhP) VALUES (890087, 'elkQ5fqaYScGEIv_1', 'Z9lBJzxZ4_2', 416744, -422498.0581767992, 'ZvqrG3FxtIR0_5'), (150299, 'N4UKkur4_101', 'Ug_102', 232304, 480476.46457592584, 'axdQIL_105');
+INSERT OR REPLACE INTO t_77PIqjfnw (c_Aq0x2TIY, c_3JHmNWkYd, c_q4RMsNP, c_t4ItZ5xSa, c_2IN, c_EaLGTST3tb) SELECT 'S', -505644, -902214.8688565547, '4ZgMDwPg19kKj9O', -541824.4602887281, 866535.2519077477;
+INSERT OR ABORT INTO t_77PIqjfnw (c_Aq0x2TIY, c_3JHmNWkYd, c_q4RMsNP, c_t4ItZ5xSa, c_2IN, c_EaLGTST3tb) SELECT NULL, NULL, -862102.0774452824, 'p', -44553.225115797366, NULL;
+INSERT OR REPLACE INTO t_77PIqjfnw (c_Aq0x2TIY, c_3JHmNWkYd, c_q4RMsNP, c_t4ItZ5xSa, c_2IN, c_EaLGTST3tb) SELECT '6kUdRHb0qoDqH1cS6q', -765277, -549744.9763362166, 'dPDINScea6', 916873.9523566433, 249413.2062444829;
+INSERT OR REPLACE INTO t_77PIqjfnw (c_Aq0x2TIY, c_3JHmNWkYd, c_q4RMsNP, c_t4ItZ5xSa, c_2IN, c_EaLGTST3tb) SELECT NULL, -810116, -127650.17207692587, '1z2', 28818.265538365347, 459840.5433359628;
+ALTER TABLE t_PouSqR5 ADD COLUMN c_vFf7PqJE INTEGER;
+SELECT * FROM t_4ibu WHERE LTRIM(- t_PouSqR5.c_cgt5, CASE t_4ibu.c_XcvL WHEN t_77PIqjfnw.c_t4ItZ5xSa THEN NULL WHEN NULL THEN t_77PIqjfnw.c_2IN WHEN t_4ibu.c_Xh8W THEN t_4ibu.c_iYhP END) ORDER BY c_t4ItZ5xSa;
+WITH cte_8qa AS (SELECT 1) UPDATE OR IGNORE t_PouSqR5 SET c_dYYh3RXK = -513721.6831145268 WHERE c_4CD658 IS NOT NULL;
+ALTER TABLE t_77PIqjfnw ADD COLUMN c_0gVL INTEGER;
+SELECT COUNT(*) FROM t_77PIqjfnw;
+
+--- v3.26.0 ---
+OUT:
+
+ERR:
+Parse error near line 3: table "t_77PIqjfnw" has more than one primary key
+Parse error near line 11: no such table: t_77PIqjfnw
+Parse error near line 12: no such table: t_77PIqjfnw
+Parse error near line 13: no such table: t_77PIqjfnw
+Parse error near line 14: no such table: t_77PIqjfnw
+Parse error near line 16: no such column: t_PouSqR5.c_cgt5
+  SELECT * FROM t_4ibu WHERE LTRIM(- t_PouSqR5.c_cgt5, CASE t_4ibu.c_XcvL WHEN t
+                       error here ---^
+Parse error near line 18: no such table: t_77PIqjfnw
+Parse error near line 19: no such table: t_77PIqjfnw
+
+
+--- v3.39.4 ---
+OUT:
+
+ERR:
+Parse error near line 3: table "t_77PIqjfnw" has more than one primary key
+Parse error near line 11: no such table: t_77PIqjfnw
+Parse error near line 12: no such table: t_77PIqjfnw
+Parse error near line 13: no such table: t_77PIqjfnw
+Parse error near line 14: no such table: t_77PIqjfnw
+Parse error near line 16: no such column: t_PouSqR5.c_cgt5
+  SELECT * FROM t_4ibu WHERE LTRIM(- t_PouSqR5.c_cgt5, CASE t_4ibu.c_XcvL WHEN t
+                       error here ---^
+Parse error near line 18: no such table: t_77PIqjfnw
+Parse error near line 19: no such table: t_77PIqjfnw
+

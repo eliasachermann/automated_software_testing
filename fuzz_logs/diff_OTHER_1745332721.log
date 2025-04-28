@@ -1,0 +1,55 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_n9x2jwt (c_oPtepQRH TEXT, c_QUmyTOZ NUMERIC DEFAULT -574960 CHECK (c_QUmyTOZ >= 0), c_PN0gCfA NUMERIC NOT NULL DEFAULT -625200, c_bf05fY1Av REAL, c_S2umZlp04u NUMERIC, c_SZnRUDNAi REAL, c_67C6v0I345 NUMERIC);
+CREATE TABLE t_JAZURQ (c_4wcChzg REAL PRIMARY KEY, c_HIT507BO NUMERIC PRIMARY KEY NOT NULL, c_Pe9ZYxg INTEGER UNIQUE CHECK (c_Pe9ZYxg >= 0), c_HKVzUkQcTN INTEGER, c_TZW3J TEXT CHECK (length(c_TZW3J) > 0), c_fWObxeX INTEGER PRIMARY KEY DEFAULT -565901, c_jl9 TEXT, c_agBdXC66l3 REAL);
+CREATE TABLE t_biD9Iqm (c_Duxz1I1cR TEXT UNIQUE, c_ekERojwu REAL NOT NULL CHECK (c_ekERojwu >= 0), c_ZAQFEJD TEXT DEFAULT 'oBd3mXV54M3qyi5', c_VNiP NUMERIC, c_gPrV INTEGER PRIMARY KEY DEFAULT -611279);
+INSERT OR IGNORE INTO t_n9x2jwt (c_oPtepQRH, c_QUmyTOZ, c_PN0gCfA, c_bf05fY1Av, c_S2umZlp04u, c_SZnRUDNAi, c_67C6v0I345) VALUES ('UIRXWnZ_0', 210264, 592058, 402411.254890464, 935549, 132752.0777264596, 254466), ('4hdD3aHvd3DYNEyCH_100', 816717, 187745, -849976.2854586187, 884112, -28833.73887178523, 1082381), ('f8iL7ZkKZhz_200', 1600394, 2781218, 54716.76689307345, 1145996, 14263.050832757843, 1427825);
+INSERT OR IGNORE INTO t_n9x2jwt (c_oPtepQRH, c_QUmyTOZ, c_PN0gCfA, c_bf05fY1Av, c_S2umZlp04u, c_SZnRUDNAi, c_67C6v0I345) VALUES ('TS_0', 577422, 210302, -979850.488346524, 943278, -114511.39555479458, 213570), ('UZrsS3n_100', 19328, 1201348, 125502.51288965112, 411871, -432209.1560607051, 251781), ('P_200', 2686203, 2928483, -261433.8760408596, 1963899, 749977.6263957229, 2870046);
+INSERT OR IGNORE INTO t_JAZURQ (c_4wcChzg, c_HIT507BO, c_Pe9ZYxg, c_HKVzUkQcTN, c_TZW3J, c_fWObxeX, c_jl9, c_agBdXC66l3) VALUES (-462648.1366958502, 867516, -170905, 878337, 'fX_4', 591074, 'x_6', -93048.26365236414);
+WITH cte_SGJ AS (SELECT 1) REPLACE INTO t_JAZURQ (c_4wcChzg, c_HIT507BO, c_Pe9ZYxg, c_HKVzUkQcTN, c_TZW3J, c_fWObxeX, c_jl9, c_agBdXC66l3) VALUES (11133.072323014494, -634926, 733482, 289481, '2Kv9uBeM0MAIUeDs1mtR_4', 437043, 'Gb4EXbPGxur3I1Pi_6', 997719.85519732);
+INSERT INTO t_biD9Iqm (c_Duxz1I1cR, c_ekERojwu, c_ZAQFEJD, c_VNiP, c_gPrV) VALUES ('kW2oiI9P2v_0', -785990.6912333104, 'DIiGAw7MxWSJhJYF6X8_2', 302226, -420597);
+INSERT OR REPLACE INTO t_biD9Iqm (c_Duxz1I1cR, c_ekERojwu, c_ZAQFEJD, c_VNiP, c_gPrV) SELECT 'k5QyZHxj7cRL3xBu', 213906.45155869378, 'yZS6DKjC9M8kdPEgll', -624933, 778167;
+INSERT OR IGNORE INTO t_biD9Iqm (c_Duxz1I1cR, c_ekERojwu, c_ZAQFEJD, c_VNiP, c_gPrV) SELECT NULL, -379763.3334647787, NULL, 458469, 228451;
+BEGIN TRANSACTION;
+INSERT INTO t_n9x2jwt (c_oPtepQRH, c_QUmyTOZ, c_PN0gCfA, c_bf05fY1Av, c_S2umZlp04u, c_SZnRUDNAi, c_67C6v0I345) VALUES ('nnaQg2r_0', -148712, 636172, 620519.5108954092, 418000, 367989.34282726375, -31874);
+COMMIT;
+UPDATE OR ABORT t_biD9Iqm SET c_VNiP = NULL, c_ekERojwu = NULL, c_ZAQFEJD = 'Xf4H5OMOXjYyhKciTf' WHERE c_ZAQFEJD IS NOT NULL;
+SELECT *, *, *, c_ZAQFEJD FROM t_n9x2jwt GROUP BY c_ZAQFEJD, c_gPrV, c_Duxz1I1cR HAVING PRINTF(CASE WHEN t_biD9Iqm.c_ZAQFEJD THEN t_biD9Iqm.c_VNiP WHEN t_biD9Iqm.c_ZAQFEJD THEN x'47DDB294' END) ORDER BY c_QUmyTOZ;
+WITH cte_n2R AS (SELECT * FROM t_biD9Iqm LIMIT 10) SELECT * FROM cte_n2R;
+DELETE FROM t_JAZURQ WHERE c_jl9 >= 'OWZ4c';
+SELECT COUNT(*) FROM t_n9x2jwt;
+
+--- v3.26.0 ---
+OUT:
+k5QyZHxj7cRL3xBu|213906.451558694|yZS6DKjC9M8kdPEgll|-624933|778167
+6
+
+ERR:
+Parse error near line 2: table "t_JAZURQ" has more than one primary key
+Parse error near line 6: no such table: t_JAZURQ
+Parse error near line 7: no such table: t_JAZURQ
+Runtime error near line 8: CHECK constraint failed: c_ekERojwu >= 0 (19)
+Runtime error near line 12: CHECK constraint failed: c_QUmyTOZ >= 0 (19)
+Runtime error near line 14: NOT NULL constraint failed: t_biD9Iqm.c_ekERojwu (19)
+Parse error near line 15: no such column: c_ZAQFEJD
+  SELECT *, *, *, c_ZAQFEJD FROM t_n9x2jwt GROUP BY c_ZAQFEJD, c_gPrV, c_Duxz1I1
+                  ^--- error here
+Parse error near line 17: no such table: t_JAZURQ
+
+
+--- v3.39.4 ---
+OUT:
+k5QyZHxj7cRL3xBu|213906.451558694|yZS6DKjC9M8kdPEgll|-624933|778167
+6
+
+ERR:
+Parse error near line 2: table "t_JAZURQ" has more than one primary key
+Parse error near line 6: no such table: t_JAZURQ
+Parse error near line 7: no such table: t_JAZURQ
+Runtime error near line 8: CHECK constraint failed: c_ekERojwu >= 0 (19)
+Runtime error near line 12: CHECK constraint failed: c_QUmyTOZ >= 0 (19)
+Runtime error near line 14: NOT NULL constraint failed: t_biD9Iqm.c_ekERojwu (19)
+Parse error near line 15: no such column: c_ZAQFEJD
+  SELECT *, *, *, c_ZAQFEJD FROM t_n9x2jwt GROUP BY c_ZAQFEJD, c_gPrV, c_Duxz1I1
+                  ^--- error here
+Parse error near line 17: no such table: t_JAZURQ
+

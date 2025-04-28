@@ -1,0 +1,51 @@
+SQL:
+PRAGMA temp_store;
+CREATE TABLE IF NOT EXISTS t_TtguPbgikA (c_fKv NUMERIC UNIQUE, c_FTceg7 INTEGER DEFAULT 930834, c_nemyS NUMERIC NOT NULL DEFAULT -920899, c_ppW REAL UNIQUE, c_JBwYwqf NUMERIC DEFAULT -662332, c_WMWVQ6Iw TEXT PRIMARY KEY, c_cseaU7 INTEGER, c_KMXz INTEGER, c_D1CWiwvf TEXT CHECK (length(c_D1CWiwvf) > 0));
+CREATE TABLE IF NOT EXISTS t_OL8tEaq (c_ankbuqwl NUMERIC UNIQUE, UNIQUE (c_ankbuqwl));
+INSERT INTO t_TtguPbgikA (c_fKv, c_FTceg7, c_nemyS, c_ppW, c_JBwYwqf, c_WMWVQ6Iw, c_cseaU7, c_KMXz, c_D1CWiwvf) VALUES (444385, 216984, -668351, 585088.3833054085, -540050, 'FYUdQioABKJPgdKS_5', 509506, 446938, 'NTX8_8');
+INSERT OR ABORT INTO t_TtguPbgikA (c_fKv, c_FTceg7, c_nemyS, c_ppW, c_JBwYwqf, c_WMWVQ6Iw, c_cseaU7, c_KMXz, c_D1CWiwvf) VALUES (-364596, 584550, 1017597, 227095.02874161513, 154300, 'vOVw5sO1W7EU5_5', 601587, 715540, 'fMPr3l6ldEvuMlhMZT_8');
+INSERT OR IGNORE INTO t_TtguPbgikA (c_fKv, c_FTceg7, c_nemyS, c_ppW, c_JBwYwqf, c_WMWVQ6Iw, c_cseaU7, c_KMXz, c_D1CWiwvf) VALUES (392165, 220050, -891836, -38535.33916398778, -198705, 'vxkjhRAh654D_5', 140236, -32740, 'RbTYI5rmfQDCzFzN0bG3_8'), (982168, 236216, 670886, 682289.3563104037, 1192289, 'WDj9b949yW_105', 971054, 247228, 'yGkQWfpTHC_108');
+INSERT INTO t_OL8tEaq (c_ankbuqwl) VALUES (-688315), (286685);
+INSERT OR ABORT INTO t_OL8tEaq (c_ankbuqwl) VALUES (-612051), (705026);
+REPLACE INTO t_OL8tEaq (c_ankbuqwl) VALUES (548791), (464925);
+INSERT OR IGNORE INTO t_OL8tEaq (c_ankbuqwl) VALUES (-328710);
+ALTER TABLE t_TtguPbgikA ADD COLUMN c_73dMioI TEXT;
+SELECT DISTINCT CASE CASE t_OL8tEaq.c_ankbuqwl WHEN t_TtguPbgikA.c_KMXz THEN t_OL8tEaq.c_ankbuqwl WHEN x'2698E6BE' THEN t_OL8tEaq.c_ankbuqwl END WHEN CASE 'UY9FwobM69P4Li' WHEN FALSE THEN t_OL8tEaq.c_ankbuqwl WHEN t_OL8tEaq.c_ankbuqwl THEN t_TtguPbgikA.c_D1CWiwvf ELSE TRUE END THEN UNLIKELY('7pBnWwCF7efhSdZ', t_TtguPbgikA.c_FTceg7) WHEN (t_OL8tEaq.c_ankbuqwl * t_TtguPbgikA.c_JBwYwqf) THEN (t_TtguPbgikA.c_nemyS AND t_OL8tEaq.c_ankbuqwl) WHEN 'XQ6snCzw' THEN - t_TtguPbgikA.c_FTceg7 END AS alias_zL9, * FROM t_OL8tEaq JOIN t_TtguPbgikA ON 1=1 WHERE CASE WHEN (t_OL8tEaq.c_ankbuqwl AND t_TtguPbgikA.c_JBwYwqf) THEN c_ankbuqwl WHEN CASE t_OL8tEaq.c_ankbuqwl WHEN t_OL8tEaq.c_ankbuqwl THEN t_TtguPbgikA.c_KMXz WHEN t_TtguPbgikA.c_nemyS THEN t_OL8tEaq.c_ankbuqwl ELSE FALSE END THEN (t_TtguPbgikA.c_nemyS - t_OL8tEaq.c_ankbuqwl) WHEN CASE t_OL8tEaq.c_ankbuqwl WHEN t_OL8tEaq.c_ankbuqwl THEN FALSE WHEN t_OL8tEaq.c_ankbuqwl THEN 'jiDdZhvxHrE0MKsT6gye' ELSE t_TtguPbgikA.c_JBwYwqf END THEN 'Li' ELSE t_OL8tEaq.c_ankbuqwl END GROUP BY c_ankbuqwl;
+WITH cte_KZ6 AS (SELECT * FROM t_OL8tEaq LIMIT 10) SELECT * FROM cte_KZ6;
+SELECT COUNT(*) FROM t_TtguPbgikA;
+
+--- v3.26.0 ---
+OUT:
+0
+-688315
+286685
+-612051
+705026
+548791
+464925
+-328710
+4
+
+ERR:
+Parse error near line 12: wrong number of arguments to function UNLIKELY()
+  l THEN t_TtguPbgikA.c_D1CWiwvf ELSE TRUE END THEN UNLIKELY('7pBnWwCF7efhSdZ', 
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+0
+-688315
+286685
+-612051
+705026
+548791
+464925
+-328710
+4
+
+ERR:
+Parse error near line 12: wrong number of arguments to function UNLIKELY()
+  l THEN t_TtguPbgikA.c_D1CWiwvf ELSE TRUE END THEN UNLIKELY('7pBnWwCF7efhSdZ', 
+                                      error here ---^
+

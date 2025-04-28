@@ -1,0 +1,33 @@
+SQL:
+CREATE TABLE t_Ti95RK (c_cnf5 INTEGER, c_bAfQkg NUMERIC PRIMARY KEY, c_9fgRYlrZx TEXT);
+CREATE TABLE t_Eh9u (c_T6G REAL NOT NULL, c_gzie REAL, PRIMARY KEY (c_T6G, c_gzie), UNIQUE (c_gzie, c_T6G));
+CREATE TABLE IF NOT EXISTS t_sOqWobjHq (c_M9K2hiuIP INTEGER PRIMARY KEY AUTOINCREMENT, c_2Xo2tKewix TEXT CHECK (length(c_2Xo2tKewix) > 0), c_Kzwg0GNXOn INTEGER NOT NULL, c_ZGCdGgA REAL, c_8y4IT6vL REAL DEFAULT -991672.3641592164, c_h6SK REAL, c_Oji8QaHQ13 REAL CHECK (c_Oji8QaHQ13 >= 0), c_60QLbEpn REAL, UNIQUE (c_60QLbEpn, c_ZGCdGgA));
+REPLACE INTO t_Ti95RK (c_cnf5, c_bAfQkg, c_9fgRYlrZx) VALUES (-827402, 590724, 'JGlkW0YYunUPJAEW_2');
+INSERT OR IGNORE INTO t_Ti95RK (c_cnf5, c_bAfQkg, c_9fgRYlrZx) VALUES (325345, -534380, 'gsi7Y_2');
+INSERT OR FAIL INTO t_Eh9u (c_T6G, c_gzie) VALUES (897358.9480026888, 110483.63502820837);
+INSERT OR IGNORE INTO t_sOqWobjHq (c_M9K2hiuIP, c_2Xo2tKewix, c_Kzwg0GNXOn, c_ZGCdGgA, c_8y4IT6vL, c_h6SK, c_Oji8QaHQ13, c_60QLbEpn) VALUES (-817320, '6DEmmUj_1', -52195, -572409.3114956577, -216642.75339934742, -729983.2355096546, 714138.263352073, 297023.15773702343);
+SELECT t_Ti95RK.*, (CASE WHEN t_sOqWobjHq.c_60QLbEpn THEN t_sOqWobjHq.c_ZGCdGgA WHEN t_Eh9u.c_gzie THEN t_sOqWobjHq.c_8y4IT6vL WHEN t_Eh9u.c_gzie THEN x'C1' ELSE t_Eh9u.c_gzie END GLOB (t_Ti95RK.c_bAfQkg GLOB t_sOqWobjHq.c_2Xo2tKewix)) AS alias_sMo, t_sOqWobjHq.c_8y4IT6vL, t_Eh9u.* FROM t_sOqWobjHq NATURAL LEFT JOIN t_Ti95RK WHERE 'lIwtvt' ORDER BY c_60QLbEpn LIMIT 52, 10;
+SELECT *, *, c_Oji8QaHQ13, + t_Eh9u.c_gzie AS alias_C2n FROM t_Ti95RK JOIN t_sOqWobjHq ON t_Ti95RK.c_bAfQkg = t_sOqWobjHq.c_8y4IT6vL WHERE (CASE t_Ti95RK.c_9fgRYlrZx WHEN t_sOqWobjHq.c_8y4IT6vL THEN t_Ti95RK.c_cnf5 END <= (t_Ti95RK.c_bAfQkg & t_sOqWobjHq.c_h6SK));
+SELECT COUNT(*) FROM t_Eh9u;
+
+--- v3.26.0 ---
+OUT:
+1
+
+ERR:
+Parse error near line 8: no such table: t_Eh9u
+Parse error near line 9: no such column: t_Eh9u.c_gzie
+  SELECT *, *, c_Oji8QaHQ13, + t_Eh9u.c_gzie AS alias_C2n FROM t_Ti95RK JOIN t_s
+                 error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+1
+
+ERR:
+Parse error near line 8: no such table: t_Eh9u
+Parse error near line 9: no such column: t_Eh9u.c_gzie
+  SELECT *, *, c_Oji8QaHQ13, + t_Eh9u.c_gzie AS alias_C2n FROM t_Ti95RK JOIN t_s
+                 error here ---^
+

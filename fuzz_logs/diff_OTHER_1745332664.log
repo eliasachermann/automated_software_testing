@@ -1,0 +1,30 @@
+SQL:
+PRAGMA recursive_triggers;
+CREATE TABLE IF NOT EXISTS t_qAWBIG9j (c_d4hvnlv6l TEXT NOT NULL);
+INSERT INTO t_qAWBIG9j (c_d4hvnlv6l) VALUES ('wypAmBBsHHO2tPpp_0'), ('wH_100'), ('w_200');
+INSERT OR FAIL INTO t_qAWBIG9j (c_d4hvnlv6l) VALUES ('TLNDs5M_0');
+UPDATE OR REPLACE t_qAWBIG9j SET c_d4hvnlv6l = '9vAXkC1flbeyRx' WHERE c_d4hvnlv6l = 'ovnK';
+WITH cte_hGv AS (SELECT * FROM t_qAWBIG9j LIMIT 10) SELECT DISTINCT (+ t_qAWBIG9j.c_d4hvnlv6l << SUM(x'49C144', t_qAWBIG9j.c_d4hvnlv6l, NULL)) AS alias_uiL, * FROM t_qAWBIG9j WHERE t_qAWBIG9j.c_d4hvnlv6l GROUP BY c_d4hvnlv6l ORDER BY c_d4hvnlv6l;
+SELECT COUNT(*) FROM t_qAWBIG9j;
+
+--- v3.26.0 ---
+OUT:
+0
+4
+
+ERR:
+Parse error near line 6: wrong number of arguments to function SUM()
+   10) SELECT DISTINCT (+ t_qAWBIG9j.c_d4hvnlv6l << SUM(x'49C144', t_qAWBIG9j.c_
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+0
+4
+
+ERR:
+Parse error near line 6: wrong number of arguments to function SUM()
+   10) SELECT DISTINCT (+ t_qAWBIG9j.c_d4hvnlv6l << SUM(x'49C144', t_qAWBIG9j.c_
+                                      error here ---^
+

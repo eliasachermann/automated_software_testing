@@ -1,0 +1,58 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_IDFOfIZ (c_EbfswE1 INTEGER, c_E2irY NUMERIC, c_0W9 NUMERIC, PRIMARY KEY (c_0W9), UNIQUE (c_0W9, c_E2irY));
+CREATE TABLE t_XFdF8Df (c_dfDVa1NPel REAL UNIQUE CHECK (c_dfDVa1NPel >= 0), c_wwuvfvU56q REAL, c_BDh NUMERIC, c_jcKMoTwiL6 NUMERIC, FOREIGN KEY (c_jcKMoTwiL6) REFERENCES t_Gefdp(c_scKa7));
+CREATE TABLE IF NOT EXISTS t_nBRDxRgL7 (c_N3B NUMERIC UNIQUE DEFAULT -790061, c_BaluDZmA INTEGER, c_gFyTs0e9L REAL PRIMARY KEY, c_Q0ct9qAii NUMERIC CHECK (c_Q0ct9qAii >= 0), c_qbY INTEGER DEFAULT NULL, c_4P4vVze9Ad NUMERIC CHECK (c_4P4vVze9Ad >= 0), c_M4ZbZ INTEGER, c_3qaYuzw2YD INTEGER PRIMARY KEY);
+INSERT OR ABORT INTO t_IDFOfIZ (c_EbfswE1, c_E2irY, c_0W9) VALUES (274819, 161020, 728417), (246351, 116427, 1388504);
+WITH cte_l4i AS (SELECT 1) INSERT INTO t_IDFOfIZ (c_EbfswE1, c_E2irY, c_0W9) VALUES (-750022, 997259, 107131);
+INSERT OR REPLACE INTO t_XFdF8Df (c_dfDVa1NPel, c_wwuvfvU56q, c_BDh, c_jcKMoTwiL6) SELECT -747549.4607135118, -823452.4948974125, -882100, 367170;
+INSERT INTO t_XFdF8Df (c_dfDVa1NPel, c_wwuvfvU56q, c_BDh, c_jcKMoTwiL6) VALUES (153478.37464293954, -875321.5902840884, -398094, -877705), (101657.48232729617, 164316.11004010332, 688417, 1442764), (348505.5728778981, -889934.7848781548, 1078665, 1271590);
+REPLACE INTO t_nBRDxRgL7 (c_N3B, c_BaluDZmA, c_gFyTs0e9L, c_Q0ct9qAii, c_qbY, c_4P4vVze9Ad, c_M4ZbZ, c_3qaYuzw2YD) VALUES (624378, 516945, -30284.971128239064, 628321, 928473, 388829, 242406, 960270), (1530860, 1240818, -189100.70411872293, 1156262, 744523, 719734, 420168, 1705068);
+INSERT OR ABORT INTO t_nBRDxRgL7 (c_N3B, c_BaluDZmA, c_gFyTs0e9L, c_Q0ct9qAii, c_qbY, c_4P4vVze9Ad, c_M4ZbZ, c_3qaYuzw2YD) VALUES (775162, 242101, 323159.4094601944, -526845, -498440, 605433, 694908, -554079), (372980, 586629, -316059.6088863228, 127471, 1087382, 339603, 231395, 1155967), (2106429, 2992891, -806908.9611049069, 1100142, 2933441, 1415563, 1697668, 2085632);
+INSERT OR IGNORE INTO t_nBRDxRgL7 (c_N3B, c_BaluDZmA, c_gFyTs0e9L, c_Q0ct9qAii, c_qbY, c_4P4vVze9Ad, c_M4ZbZ, c_3qaYuzw2YD) VALUES (-777762, -151222, -802962.1550622722, 458755, 265933, -198717, -317868, -591591), (1713083, 1839717, 959344.3546581003, 628920, 144821, 1955077, 1225153, 1634632);
+INSERT OR IGNORE INTO t_nBRDxRgL7 (c_N3B, c_BaluDZmA, c_gFyTs0e9L, c_Q0ct9qAii, c_qbY, c_4P4vVze9Ad, c_M4ZbZ, c_3qaYuzw2YD) VALUES (5037, -979056, -477469.80906017293, 726079, -241306, 762908, -380604, 613458), (1422044, 719953, -670266.8689823961, 645232, 1182612, 123052, 358652, 440718);
+WITH cte_bzb AS (SELECT * FROM t_IDFOfIZ LIMIT 10) SELECT * FROM cte_bzb;
+ALTER TABLE t_XFdF8Df ADD COLUMN c_BSBl TEXT;
+UPDATE t_IDFOfIZ SET c_EbfswE1 = -919800, c_0W9 = 205373, c_E2irY = 577562 WHERE c_E2irY < -174924;
+SELECT c_3qaYuzw2YD, - (TRUE || t_nBRDxRgL7.c_M4ZbZ) AS alias_ZJs FROM t_IDFOfIZ ORDER BY c_N3B, c_M4ZbZ LIMIT 28;
+CREATE UNIQUE INDEX idx_Z4ALJ ON t_nBRDxRgL7(c_4P4vVze9Ad, c_3qaYuzw2YD, c_N3B);
+SELECT COUNT(*) FROM t_XFdF8Df;
+
+--- v3.26.0 ---
+OUT:
+274819|161020|728417
+246351|116427|1388504
+-750022|997259|107131
+3
+
+ERR:
+Parse error near line 3: table "t_nBRDxRgL7" has more than one primary key
+Runtime error near line 6: CHECK constraint failed: c_dfDVa1NPel >= 0 (19)
+Parse error near line 8: no such table: t_nBRDxRgL7
+Parse error near line 9: no such table: t_nBRDxRgL7
+Parse error near line 10: no such table: t_nBRDxRgL7
+Parse error near line 11: no such table: t_nBRDxRgL7
+Parse error near line 15: no such column: c_3qaYuzw2YD
+  SELECT c_3qaYuzw2YD, - (TRUE || t_nBRDxRgL7.c_M4ZbZ) AS alias_ZJs FROM t_IDFOf
+         ^--- error here
+Parse error near line 16: no such table: main.t_nBRDxRgL7
+
+
+--- v3.39.4 ---
+OUT:
+274819|161020|728417
+246351|116427|1388504
+-750022|997259|107131
+3
+
+ERR:
+Parse error near line 3: table "t_nBRDxRgL7" has more than one primary key
+Runtime error near line 6: CHECK constraint failed: c_dfDVa1NPel >= 0 (19)
+Parse error near line 8: no such table: t_nBRDxRgL7
+Parse error near line 9: no such table: t_nBRDxRgL7
+Parse error near line 10: no such table: t_nBRDxRgL7
+Parse error near line 11: no such table: t_nBRDxRgL7
+Parse error near line 15: no such column: c_3qaYuzw2YD
+  SELECT c_3qaYuzw2YD, - (TRUE || t_nBRDxRgL7.c_M4ZbZ) AS alias_ZJs FROM t_IDFOf
+         ^--- error here
+Parse error near line 16: no such table: main.t_nBRDxRgL7
+

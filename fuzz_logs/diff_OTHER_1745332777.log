@@ -1,0 +1,33 @@
+SQL:
+PRAGMA reverse_unordered_selects(1);
+CREATE TABLE t_2BquL (c_NKw9RSqZ INTEGER, c_fKtfcDLNVJ INTEGER, UNIQUE (c_NKw9RSqZ, c_fKtfcDLNVJ));
+CREATE TABLE IF NOT EXISTS t_TWphJS0D (c_GfZ TEXT, c_yTSwgM NUMERIC DEFAULT NULL, c_4Dy INTEGER, c_3x5umsR INTEGER, c_43rQnwpF7 TEXT);
+CREATE TABLE IF NOT EXISTS t_eYaOnYWW (c_YJ8zrfJi TEXT, c_lnnBRDX NUMERIC);
+INSERT OR FAIL INTO t_2BquL (c_NKw9RSqZ, c_fKtfcDLNVJ) VALUES (-759006, -592991);
+INSERT OR IGNORE INTO t_2BquL (c_NKw9RSqZ, c_fKtfcDLNVJ) VALUES (-947943, -465036);
+INSERT OR ABORT INTO t_TWphJS0D (c_GfZ, c_yTSwgM, c_4Dy, c_3x5umsR, c_43rQnwpF7) VALUES ('9CQWJi4wUw_0', 843263, 75835, -123041, 'NSjkI71aIsDRTXSd5e5_4'), ('C1yioEu8IvxJbvG2qiA_100', 2000983, 1738241, 1911737, 'e0oVRiU_104'), ('voDIy43PB81kwr021l_200', 2462238, 2268030, 2268682, 'DgUx16uWOjDBulD_204');
+INSERT OR REPLACE INTO t_TWphJS0D (c_GfZ, c_yTSwgM, c_4Dy, c_3x5umsR, c_43rQnwpF7) VALUES ('rG7WDto2yUiGA4VYY_0', -949226, -84323, -861846, 'Jdqe1KwVC_4'), ('UQx28hX6x0DA22WjZlC_100', 1217328, 853245, 1678990, 'M7iwVPBybZIPhV_104');
+INSERT INTO t_eYaOnYWW (c_YJ8zrfJi, c_lnnBRDX) VALUES ('tGODTAr0_0', 437400);
+ALTER TABLE t_TWphJS0D ADD COLUMN c_CiOw REAL;
+SELECT NULL AS alias_eB6, *, t_eYaOnYWW.c_lnnBRDX AS alias_ToX, *, (NULL AND TRUE) AS alias_Nmx FROM t_2BquL LEFT OUTER JOIN t_TWphJS0D ON 1=1 GROUP BY c_3x5umsR, c_4Dy ORDER BY c_GfZ ASC;
+SELECT COUNT(*) FROM t_TWphJS0D;
+
+--- v3.26.0 ---
+OUT:
+5
+
+ERR:
+Parse error near line 11: no such column: t_eYaOnYWW.c_lnnBRDX
+  SELECT NULL AS alias_eB6, *, t_eYaOnYWW.c_lnnBRDX AS alias_ToX, *, (NULL AND T
+                 error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+5
+
+ERR:
+Parse error near line 11: no such column: t_eYaOnYWW.c_lnnBRDX
+  SELECT NULL AS alias_eB6, *, t_eYaOnYWW.c_lnnBRDX AS alias_ToX, *, (NULL AND T
+                 error here ---^
+

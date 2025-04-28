@@ -1,0 +1,31 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_4VOm1QOD (c_EYK0i24Yd TEXT COLLATE BINARY, c_ULRZ INTEGER DEFAULT NULL, c_uaOz TEXT UNIQUE, c_3dSDVDkCH INTEGER DEFAULT -271156, c_9yD4ym TEXT);
+INSERT OR ABORT INTO t_4VOm1QOD (c_EYK0i24Yd, c_ULRZ, c_uaOz, c_3dSDVDkCH, c_9yD4ym) SELECT 'HoXGiqozNHWrB0rUeMz', 203924, '8Qer', -735684, 'dTMD5Zm6fN';
+INSERT OR REPLACE INTO t_4VOm1QOD (c_EYK0i24Yd, c_ULRZ, c_uaOz, c_3dSDVDkCH, c_9yD4ym) SELECT NULL, 230011, 'gfOch5QJozYp', 768654, 'Z2eMUY';
+REPLACE INTO t_4VOm1QOD (c_EYK0i24Yd, c_ULRZ, c_uaOz, c_3dSDVDkCH, c_9yD4ym) VALUES ('2A3xZRHo_0', 831081, 'TzY34Sje13UeRwJ_2', 204380, 'I_4');
+ALTER TABLE t_4VOm1QOD ADD COLUMN c_bKNBOr TEXT;
+DELETE FROM t_4VOm1QOD WHERE c_9yD4ym >= 'IE9cO9RxT59IGNp';
+CREATE INDEX IF NOT EXISTS idx_JriyN ON t_4VOm1QOD(c_uaOz COLLATE BINARY, c_EYK0i24Yd COLLATE RTRIM);
+WITH cte_aBP AS (SELECT 1) UPDATE OR IGNORE t_4VOm1QOD SET c_EYK0i24Yd = 'T95PUygtu', c_9yD4ym = NULL, c_ULRZ = -363607 WHERE c_9yD4ym != 'Uzw8VeNDZuqzo0XdAfHx';
+WITH cte_lwD AS (SELECT * FROM t_4VOm1QOD LIMIT 10) SELECT *, c_9yD4ym FROM t_4VOm1QOD WHERE ZEROBLOB('GR5C', (t_4VOm1QOD.c_uaOz & x'37BAF624'), NOT t_4VOm1QOD.c_9yD4ym) LIMIT 48;
+SELECT COUNT(*) FROM t_4VOm1QOD;
+
+--- v3.26.0 ---
+OUT:
+0
+
+ERR:
+Parse error near line 9: wrong number of arguments to function ZEROBLOB()
+  IMIT 10) SELECT *, c_9yD4ym FROM t_4VOm1QOD WHERE ZEROBLOB('GR5C', (t_4VOm1QOD
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+0
+
+ERR:
+Parse error near line 9: wrong number of arguments to function ZEROBLOB()
+  IMIT 10) SELECT *, c_9yD4ym FROM t_4VOm1QOD WHERE ZEROBLOB('GR5C', (t_4VOm1QOD
+                                      error here ---^
+

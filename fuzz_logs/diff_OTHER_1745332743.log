@@ -1,0 +1,37 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_kB54 (c_4zr INTEGER, c_4KZuz TEXT, c_Ho8WOll INTEGER CHECK (c_Ho8WOll >= 0), c_US3otrKZ INTEGER, c_OwZZ TEXT, c_V9mSkXxcA REAL, UNIQUE (c_4zr, c_OwZZ, c_US3otrKZ));
+CREATE TABLE IF NOT EXISTS t_22LzW4YvS (c_B1TuWCmQ INTEGER, c_BUjcqNt TEXT, UNIQUE (c_BUjcqNt, c_B1TuWCmQ));
+CREATE TABLE IF NOT EXISTS t_Q5sL7 (c_AvXM REAL, c_Q43bPNTx0 TEXT CHECK (length(c_Q43bPNTx0) > 0), c_VArZT4yb REAL, c_BL3b4cLXZ NUMERIC, c_y62V3LnCJG NUMERIC, c_rTbue68EzJ NUMERIC DEFAULT 91094, c_sWCI INTEGER);
+INSERT OR REPLACE INTO t_kB54 (c_4zr, c_4KZuz, c_Ho8WOll, c_US3otrKZ, c_OwZZ, c_V9mSkXxcA) VALUES (-250232, 'm3lqy5V0eXVLS_1', -485872, 7375, 'gMBpCUaUom_4', 595833.0937491825);
+INSERT OR REPLACE INTO t_kB54 (c_4zr, c_4KZuz, c_Ho8WOll, c_US3otrKZ, c_OwZZ, c_V9mSkXxcA) VALUES (-408239, '2ufmxj4F_1', 483796, 627956, '69M3RBrPii_4', -263044.12649765005), (1615156, 'eQ1_101', 1693391, 744977, 'obzQXf31R_104', 292678.7592012875);
+INSERT INTO t_22LzW4YvS (c_B1TuWCmQ, c_BUjcqNt) VALUES (253145, 'C_1'), (855134, 'a_101');
+INSERT INTO t_22LzW4YvS (c_B1TuWCmQ, c_BUjcqNt) VALUES (285476, '47mXwqkTtXOUT_1'), (1314733, 'Y1S6PSDkfsB01t_101');
+INSERT OR FAIL INTO t_22LzW4YvS (c_B1TuWCmQ, c_BUjcqNt) VALUES (-772445, 'WeNQM4Ual9oBlZNi_1'), (1984725, 'IUi9GW8Qe1AiFDwWHjj_101'), (1667260, 'oyn_201');
+INSERT OR ABORT INTO t_22LzW4YvS (c_B1TuWCmQ, c_BUjcqNt) VALUES (151544, 'IvPUlwcucwglKWvPR9_1');
+WITH cte_b6h AS (SELECT 1) INSERT OR FAIL INTO t_22LzW4YvS (c_B1TuWCmQ, c_BUjcqNt) VALUES (-377600, 'lxRJkuE8Femv6fc2_1');
+INSERT OR REPLACE INTO t_Q5sL7 (c_AvXM, c_Q43bPNTx0, c_VArZT4yb, c_BL3b4cLXZ, c_y62V3LnCJG, c_rTbue68EzJ, c_sWCI) VALUES (13111.208607760258, 'sc4cJE_1', 111815.50019895122, 889130, 455792, 36818, 28148), (-650570.6179485624, '5r55yIqYObCoCIHcRw_101', -451107.7374376684, 1405377, 1055189, 406760, 1320917);
+SELECT c_US3otrKZ FROM t_kB54 WHERE + ('6hwItp' GLOB t_kB54.c_Ho8WOll) ORDER BY c_rTbue68EzJ ASC;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_P5y6O ON t_Q5sL7(c_BL3b4cLXZ, c_AvXM);
+SELECT COUNT(*) FROM t_22LzW4YvS;
+
+--- v3.26.0 ---
+OUT:
+9
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_Ho8WOll >= 0 (19)
+Parse error near line 12: no such column: c_rTbue68EzJ
+  WHERE + ('6hwItp' GLOB t_kB54.c_Ho8WOll) ORDER BY c_rTbue68EzJ ASC;
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+9
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_Ho8WOll >= 0 (19)
+Parse error near line 12: no such column: c_rTbue68EzJ
+  WHERE + ('6hwItp' GLOB t_kB54.c_Ho8WOll) ORDER BY c_rTbue68EzJ ASC;
+                                      error here ---^
+

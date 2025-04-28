@@ -1,0 +1,50 @@
+SQL:
+PRAGMA query_only;
+CREATE TABLE IF NOT EXISTS t_PPg (c_gyV3fXB INTEGER NOT NULL DEFAULT 599110);
+CREATE TABLE IF NOT EXISTS t_tV0g5bG (c_AFjFP REAL, c_CLlwky TEXT, c_tWJWLi TEXT, c_MV5V NUMERIC, c_xmaVc INTEGER NOT NULL, c_Fqn NUMERIC);
+INSERT OR ABORT INTO t_PPg (c_gyV3fXB) VALUES (-528271);
+REPLACE INTO t_PPg (c_gyV3fXB) VALUES (461639), (1835451);
+INSERT OR ABORT INTO t_tV0g5bG (c_AFjFP, c_CLlwky, c_tWJWLi, c_MV5V, c_xmaVc, c_Fqn) VALUES (158428.16156528448, 'ii_1', 'u6RtsW9rxexV0y_2', -804694, -382027, -410113);
+INSERT OR ABORT INTO t_tV0g5bG (c_AFjFP, c_CLlwky, c_tWJWLi, c_MV5V, c_xmaVc, c_Fqn) VALUES (400884.1203953442, '5TORrzDFeB_1', '56R_2', 132846, -35455, 912627), (-78770.26949143643, 'a3DeidcUYk_101', 'Mm243zBhO_102', 1486022, 1902053, 1436461);
+INSERT OR REPLACE INTO t_tV0g5bG (c_AFjFP, c_CLlwky, c_tWJWLi, c_MV5V, c_xmaVc, c_Fqn) VALUES (117628.08839289634, 'EJjaxM_1', 'V9Rafa_2', -690037, -102973, 391462);
+BEGIN TRANSACTION;
+REPLACE INTO t_PPg (c_gyV3fXB) VALUES (-588288), (1312487), (2636198);
+COMMIT;
+SELECT DISTINCT t_tV0g5bG.c_CLlwky, *, FALSE AS alias_6wk, *, * FROM t_PPg, t_tV0g5bG UNION SELECT DISTINCT UPPER(('eCaQJSqAtwL1' - t_PPg.c_gyV3fXB)) AS alias_B3p, c_tWJWLi AS alias_5Ha, t_PPg.c_gyV3fXB, *, t_tV0g5bG.c_CLlwky FROM t_PPg WHERE NULL GROUP BY c_gyV3fXB;
+WITH cte_eW8 AS (SELECT * FROM t_PPg LIMIT 10) SELECT * FROM cte_eW8;
+ALTER TABLE t_tV0g5bG ADD COLUMN c_koAicpa INTEGER;
+SELECT COUNT(*) FROM t_PPg;
+
+--- v3.26.0 ---
+OUT:
+0
+-528271
+461639
+1835451
+-588288
+1312487
+2636198
+6
+
+ERR:
+Parse error near line 12: no such column: c_tWJWLi
+  ('eCaQJSqAtwL1' - t_PPg.c_gyV3fXB)) AS alias_B3p, c_tWJWLi AS alias_5Ha, t_PPg
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+0
+-528271
+461639
+1835451
+-588288
+1312487
+2636198
+6
+
+ERR:
+Parse error near line 12: no such column: c_tWJWLi
+  ('eCaQJSqAtwL1' - t_PPg.c_gyV3fXB)) AS alias_B3p, c_tWJWLi AS alias_5Ha, t_PPg
+                                      error here ---^
+

@@ -1,0 +1,38 @@
+SQL:
+PRAGMA case_sensitive_like = 1;
+CREATE TEMP TABLE IF NOT EXISTS t_XxhTnCz (c_7cmP INTEGER, c_RWtP NUMERIC PRIMARY KEY NOT NULL);
+INSERT INTO t_XxhTnCz (c_7cmP, c_RWtP) VALUES (233556, -924507), (84573, 204023);
+INSERT OR FAIL INTO t_XxhTnCz (c_7cmP, c_RWtP) VALUES (-852066, 997428), (1709111, 300310);
+INSERT INTO t_XxhTnCz (c_7cmP, c_RWtP) VALUES (-629710, -480367), (1680914, 1138453), (2624987, 2282798);
+INSERT INTO t_XxhTnCz (c_7cmP, c_RWtP) VALUES (937937, -874704);
+REPLACE INTO t_XxhTnCz (c_7cmP, c_RWtP) VALUES (572683, 272028), (1971463, 231089);
+SELECT 122985, c_RWtP, CASE WHEN NOT t_XxhTnCz.c_7cmP THEN t_XxhTnCz.c_7cmP WHEN GROUP_CONCAT(t_XxhTnCz.c_RWtP, t_XxhTnCz.c_RWtP, t_XxhTnCz.c_RWtP) THEN LIKE(t_XxhTnCz.c_RWtP, t_XxhTnCz.c_7cmP, t_XxhTnCz.c_7cmP) WHEN (t_XxhTnCz.c_7cmP AND t_XxhTnCz.c_RWtP) THEN c_7cmP END, t_XxhTnCz.c_RWtP FROM t_XxhTnCz EXCEPT SELECT *, *, *, CASE WHEN NOT x'A03A' THEN (FALSE <= t_XxhTnCz.c_RWtP) WHEN (t_XxhTnCz.c_7cmP << t_XxhTnCz.c_7cmP) THEN - t_XxhTnCz.c_7cmP WHEN TRUE THEN CASE WHEN t_XxhTnCz.c_7cmP THEN t_XxhTnCz.c_7cmP WHEN t_XxhTnCz.c_7cmP THEN t_XxhTnCz.c_RWtP ELSE TRUE END ELSE LIKELY(t_XxhTnCz.c_RWtP) END, * FROM t_XxhTnCz WHERE -523407 GROUP BY c_7cmP;
+BEGIN TRANSACTION;
+UPDATE OR ABORT t_XxhTnCz SET c_RWtP = 863585 WHERE c_7cmP <= -672828;
+UPDATE t_XxhTnCz SET c_RWtP = 874816, c_7cmP = 6435 WHERE c_7cmP >= 583590;
+UPDATE OR IGNORE t_XxhTnCz SET c_7cmP = -601148 WHERE c_7cmP <= 700991;
+COMMIT;
+CREATE INDEX idx_K16qk ON t_XxhTnCz(c_RWtP ASC, c_7cmP);
+SELECT COUNT(*) FROM t_XxhTnCz;
+
+--- v3.26.0 ---
+OUT:
+10
+
+ERR:
+Parse error near line 8: wrong number of arguments to function GROUP_CONCAT()
+  N NOT t_XxhTnCz.c_7cmP THEN t_XxhTnCz.c_7cmP WHEN GROUP_CONCAT(t_XxhTnCz.c_RWt
+                                      error here ---^
+Runtime error near line 11: UNIQUE constraint failed: t_XxhTnCz.c_RWtP (19)
+
+
+--- v3.39.4 ---
+OUT:
+10
+
+ERR:
+Parse error near line 8: wrong number of arguments to function GROUP_CONCAT()
+  N NOT t_XxhTnCz.c_7cmP THEN t_XxhTnCz.c_7cmP WHEN GROUP_CONCAT(t_XxhTnCz.c_RWt
+                                      error here ---^
+Runtime error near line 11: UNIQUE constraint failed: t_XxhTnCz.c_RWtP (19)
+

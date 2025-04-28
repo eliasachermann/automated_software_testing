@@ -1,0 +1,43 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_yXZkIPDqq4 (c_cSPThKtA TEXT PRIMARY KEY, UNIQUE (c_cSPThKtA));
+CREATE TABLE IF NOT EXISTS t_qGz (c_JdvkLDKfuO NUMERIC CHECK (c_JdvkLDKfuO >= 0), c_eeCDA INTEGER, PRIMARY KEY (c_eeCDA));
+CREATE TABLE t_4mGbI (c_BZg1AR REAL, c_elpos7pe7 INTEGER PRIMARY KEY AUTOINCREMENT, c_w6PFv3uz INTEGER DEFAULT 401083, c_ODb REAL NOT NULL, c_4phusZffAW INTEGER);
+REPLACE INTO t_yXZkIPDqq4 (c_cSPThKtA) VALUES ('Z9y7K8QMBF7G0xkG_0');
+INSERT OR ABORT INTO t_yXZkIPDqq4 (c_cSPThKtA) SELECT 'broW4jQX';
+INSERT OR FAIL INTO t_qGz (c_JdvkLDKfuO, c_eeCDA) SELECT 262418, NULL;
+INSERT OR IGNORE INTO t_qGz (c_JdvkLDKfuO, c_eeCDA) VALUES (-35587, 49807);
+INSERT INTO t_qGz (c_JdvkLDKfuO, c_eeCDA) VALUES (382783, -363652), (1035787, 773263);
+INSERT INTO t_qGz (c_JdvkLDKfuO, c_eeCDA) VALUES (-873718, -570163), (1229966, 625237);
+INSERT INTO t_4mGbI (c_BZg1AR, c_elpos7pe7, c_w6PFv3uz, c_ODb, c_4phusZffAW) SELECT 85344.40489525348, -687728, -927515, -30749.226283523138, NULL;
+DELETE FROM t_yXZkIPDqq4 WHERE c_cSPThKtA > 'dqU9tE4jYDPqHH7m0O';
+UPDATE OR ROLLBACK t_yXZkIPDqq4 SET c_cSPThKtA = '4FSNANDG5UOBZHdt58Uy' WHERE c_cSPThKtA IS NULL;
+UPDATE t_qGz SET c_eeCDA = 283863 WHERE c_eeCDA < 82138;
+BEGIN TRANSACTION;
+UPDATE OR REPLACE t_yXZkIPDqq4 SET c_cSPThKtA = 'Ywro8K3l5EeBKAVnO';
+COMMIT;
+WITH cte_dgM AS (SELECT * FROM t_yXZkIPDqq4 LIMIT 10) SELECT t_qGz.* FROM t_qGz WHERE TRUE GROUP BY c_cSPThKtA HAVING c_cSPThKtA IN (SELECT 'xy7ioi7E74SOYyZB' FROM t_yXZkIPDqq4 LIMIT 5) ORDER BY c_JdvkLDKfuO DESC;
+SELECT COUNT(*) FROM t_yXZkIPDqq4;
+
+--- v3.26.0 ---
+OUT:
+1
+
+ERR:
+Runtime error near line 9: CHECK constraint failed: c_JdvkLDKfuO >= 0 (19)
+Runtime error near line 13: UNIQUE constraint failed: t_qGz.c_eeCDA (19)
+Parse error near line 17: no such column: c_cSPThKtA
+   FROM t_qGz WHERE TRUE GROUP BY c_cSPThKtA HAVING c_cSPThKtA IN (SELECT 'xy7io
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+1
+
+ERR:
+Runtime error near line 9: CHECK constraint failed: c_JdvkLDKfuO >= 0 (19)
+Runtime error near line 13: UNIQUE constraint failed: t_qGz.c_eeCDA (19)
+Parse error near line 17: no such column: c_cSPThKtA
+   FROM t_qGz WHERE TRUE GROUP BY c_cSPThKtA HAVING c_cSPThKtA IN (SELECT 'xy7io
+                                      error here ---^
+

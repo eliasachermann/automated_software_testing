@@ -1,0 +1,50 @@
+SQL:
+PRAGMA temp_store;
+CREATE TEMP TABLE IF NOT EXISTS t_TwVnmoV7w (c_KdGj0J REAL, c_w6pNMF NUMERIC);
+CREATE TABLE IF NOT EXISTS t_Z6ua (c_7qMI INTEGER UNIQUE, c_G87Ya INTEGER, PRIMARY KEY (c_G87Ya, c_7qMI), UNIQUE (c_7qMI));
+REPLACE INTO t_TwVnmoV7w (c_KdGj0J, c_w6pNMF) VALUES (971495.9887108249, -229036);
+INSERT OR REPLACE INTO t_TwVnmoV7w (c_KdGj0J, c_w6pNMF) SELECT 786952.3652623536, -393669;
+INSERT OR IGNORE INTO t_TwVnmoV7w (c_KdGj0J, c_w6pNMF) VALUES (-833900.0047475244, 222712);
+INSERT OR FAIL INTO t_TwVnmoV7w (c_KdGj0J, c_w6pNMF) VALUES (-359804.3052117956, -91531);
+INSERT OR REPLACE INTO t_TwVnmoV7w (c_KdGj0J, c_w6pNMF) VALUES (-607408.2256794169, -390265), (-444563.79077174934, 1825472);
+INSERT OR IGNORE INTO t_Z6ua (c_7qMI, c_G87Ya) VALUES (415404, 920867);
+INSERT INTO t_Z6ua (c_7qMI, c_G87Ya) VALUES (-782894, 425429), (207299, 1877584), (1367934, 2382318);
+INSERT OR ABORT INTO t_Z6ua (c_7qMI, c_G87Ya) VALUES (-149402, -478903);
+INSERT OR IGNORE INTO t_Z6ua (c_7qMI, c_G87Ya) VALUES (256568, 807312);
+INSERT OR REPLACE INTO t_Z6ua (c_7qMI, c_G87Ya) VALUES (-483342, -513211), (579546, 379644);
+UPDATE OR ROLLBACK t_Z6ua SET c_7qMI = -926700 WHERE c_G87Ya > 70315;
+SELECT c_G87Ya, LIKELY(CASE WHEN t_TwVnmoV7w.c_KdGj0J THEN t_TwVnmoV7w.c_KdGj0J ELSE t_Z6ua.c_7qMI END, (t_TwVnmoV7w.c_KdGj0J % t_Z6ua.c_7qMI), 714823) FROM t_Z6ua, t_TwVnmoV7w WHERE c_G87Ya GROUP BY c_7qMI HAVING NOT (t_Z6ua.c_7qMI IS NULL) LIMIT 31, 15;
+ALTER TABLE t_TwVnmoV7w ADD COLUMN c_LXdZQgHWu TEXT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_Z6ua SET c_G87Ya = 459949, c_7qMI = -587128 WHERE c_G87Ya > -615323;
+UPDATE OR ROLLBACK t_Z6ua SET c_G87Ya = 52812, c_7qMI = 153084 WHERE c_7qMI != 24260;
+COMMIT;
+SELECT COUNT(*) FROM t_Z6ua;
+
+--- v3.26.0 ---
+OUT:
+0
+8
+
+ERR:
+Runtime error near line 14: UNIQUE constraint failed: t_Z6ua.c_7qMI (19)
+Parse error near line 15: wrong number of arguments to function LIKELY()
+  SELECT c_G87Ya, LIKELY(CASE WHEN t_TwVnmoV7w.c_KdGj0J THEN t_TwVnmoV7w.c_KdGj0
+                  ^--- error here
+Runtime error near line 19: UNIQUE constraint failed: t_Z6ua.c_G87Ya, t_Z6ua.c_7qMI (19)
+Runtime error near line 20: cannot commit - no transaction is active
+
+
+--- v3.39.4 ---
+OUT:
+0
+8
+
+ERR:
+Runtime error near line 14: UNIQUE constraint failed: t_Z6ua.c_7qMI (19)
+Parse error near line 15: wrong number of arguments to function LIKELY()
+  SELECT c_G87Ya, LIKELY(CASE WHEN t_TwVnmoV7w.c_KdGj0J THEN t_TwVnmoV7w.c_KdGj0
+                  ^--- error here
+Runtime error near line 19: UNIQUE constraint failed: t_Z6ua.c_G87Ya, t_Z6ua.c_7qMI (19)
+Runtime error near line 20: cannot commit - no transaction is active
+

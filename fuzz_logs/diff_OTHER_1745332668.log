@@ -1,0 +1,57 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_BgQ (c_iuXxjuYPlf TEXT, c_FdZJJ0Gk REAL, c_HiOvFeE7Qw TEXT COLLATE RTRIM, c_zjO13GXtQ INTEGER, c_B0kz TEXT PRIMARY KEY DEFAULT 'W6L0');
+CREATE TABLE IF NOT EXISTS t_ZHNqTK (c_VxeKp NUMERIC);
+CREATE TABLE IF NOT EXISTS t_lU8lVqtM (c_52vxI INTEGER, c_GCp TEXT DEFAULT NULL, c_Ywvv9Zg NUMERIC CHECK (c_Ywvv9Zg >= 0), c_IFHHGkJVl NUMERIC PRIMARY KEY NOT NULL);
+REPLACE INTO t_BgQ (c_iuXxjuYPlf, c_FdZJJ0Gk, c_HiOvFeE7Qw, c_zjO13GXtQ, c_B0kz) VALUES ('XoR_0', 199425.8832128006, 'daRubaW2eS14V33x_2', 332745, '9aiDv0KQMC1H_4'), ('JUpy_100', -624167.1914891065, 'HQtLpnJ1zTj9_102', 571409, 'HyoBN_104');
+INSERT INTO t_BgQ (c_iuXxjuYPlf, c_FdZJJ0Gk, c_HiOvFeE7Qw, c_zjO13GXtQ, c_B0kz) VALUES ('Hv5s9Zzpa6D88JH5_0', -853820.309052694, '0Hbz6s_2', -5288, 'Fi10XGnB6dyFRPoZpvAs_4');
+INSERT OR IGNORE INTO t_BgQ (c_iuXxjuYPlf, c_FdZJJ0Gk, c_HiOvFeE7Qw, c_zjO13GXtQ, c_B0kz) VALUES ('9R_0', -513474.63468418305, 'ucDKBLuruisbfFoj_2', -747882, 'wWJzO25CAQ_4');
+INSERT OR ABORT INTO t_BgQ (c_iuXxjuYPlf, c_FdZJJ0Gk, c_HiOvFeE7Qw, c_zjO13GXtQ, c_B0kz) VALUES ('0OZZJbltOG5lePi76k_0', 704245.1688611358, 'fCA0Bi_2', -42923, '8gWIdyvTRjhqzkNQSyr_4'), ('uX0gdOHSEpqg977D6_100', -226871.00182473043, 'tsQqBJjdJ_102', 853997, 'Y_104'), ('X_200', 6921.985950941918, 'eeyuT_202', 2071590, '4MhhhgfpLDieKTRejU_204');
+REPLACE INTO t_ZHNqTK (c_VxeKp) SELECT -279801;
+INSERT INTO t_ZHNqTK (c_VxeKp) SELECT 986129;
+INSERT OR ABORT INTO t_ZHNqTK (c_VxeKp) VALUES (916084), (1874635);
+INSERT OR IGNORE INTO t_ZHNqTK (c_VxeKp) VALUES (-389766), (1391680), (2316309);
+INSERT INTO t_ZHNqTK (c_VxeKp) VALUES (-894092);
+REPLACE INTO t_lU8lVqtM (c_52vxI, c_GCp, c_Ywvv9Zg, c_IFHHGkJVl) VALUES (986824, 'aNjvUxM0duRYzqq3gf_1', -401238, 637718), (453116, 'pePAKVDpawFU_101', 1928955, 1652403);
+INSERT OR FAIL INTO t_lU8lVqtM (c_52vxI, c_GCp, c_Ywvv9Zg, c_IFHHGkJVl) VALUES (26368, 'vqgMvyfU_1', 979009, -487681);
+WITH cte_g0X AS (SELECT 1) INSERT OR FAIL INTO t_lU8lVqtM (c_52vxI, c_GCp, c_Ywvv9Zg, c_IFHHGkJVl) VALUES (-418391, 'yOztHYC4u4arMnyv_1', -112539, -321732), (932391, 'YIjPCYQQJ_101', 1442228, 1085490), (2807153, '60pNOxY8UqFjC2fEnetv_201', 2655988, 2280711);
+INSERT OR FAIL INTO t_lU8lVqtM (c_52vxI, c_GCp, c_Ywvv9Zg, c_IFHHGkJVl) VALUES (-359584, '8vyK5zxefiku2_1', 413610, 179329), (172894, 'xvMw6dWsHnXmSYQL_101', 1489170, 1790212);
+SELECT c_VxeKp FROM t_ZHNqTK, t_lU8lVqtM WHERE ~ (t_ZHNqTK.c_VxeKp || t_lU8lVqtM.c_52vxI) UNION SELECT DISTINCT t_ZHNqTK.c_VxeKp, t_ZHNqTK.c_VxeKp IN (SELECT t_ZHNqTK.c_VxeKp FROM t_lU8lVqtM LIMIT 5) AS alias_pb8, t_BgQ.c_B0kz FROM t_ZHNqTK NATURAL JOIN t_lU8lVqtM WHERE 'r1Qe4W' LIMIT 43, 17;
+DELETE FROM t_ZHNqTK WHERE c_VxeKp = -812420;
+WITH cte_fjT AS (SELECT * FROM t_lU8lVqtM LIMIT 10) SELECT * FROM cte_fjT;
+BEGIN TRANSACTION;
+REPLACE INTO t_BgQ (c_iuXxjuYPlf, c_FdZJJ0Gk, c_HiOvFeE7Qw, c_zjO13GXtQ, c_B0kz) VALUES ('1zrx_0', -95133.76975633204, 'tycf0K8_2', -20252, 'xFTN8Q1TULL6Fkke_4');
+UPDATE OR ABORT t_ZHNqTK SET c_VxeKp = 499992 WHERE c_VxeKp <= 712947;
+UPDATE OR ROLLBACK t_ZHNqTK SET c_VxeKp = -703892 WHERE c_VxeKp IS NOT NULL;
+COMMIT;
+ALTER TABLE t_BgQ ADD COLUMN c_LCsxTvpjU REAL;
+SELECT COUNT(*) FROM t_BgQ;
+
+--- v3.26.0 ---
+OUT:
+26368|vqgMvyfU_1|979009|-487681
+-359584|8vyK5zxefiku2_1|413610|179329
+172894|xvMw6dWsHnXmSYQL_101|1489170|1790212
+8
+
+ERR:
+Runtime error near line 13: CHECK constraint failed: c_Ywvv9Zg >= 0 (19)
+Runtime error near line 15: CHECK constraint failed: c_Ywvv9Zg >= 0 (19)
+Parse error near line 17: no such column: t_BgQ.c_B0kz
+  TK.c_VxeKp FROM t_lU8lVqtM LIMIT 5) AS alias_pb8, t_BgQ.c_B0kz FROM t_ZHNqTK N
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+26368|vqgMvyfU_1|979009|-487681
+-359584|8vyK5zxefiku2_1|413610|179329
+172894|xvMw6dWsHnXmSYQL_101|1489170|1790212
+8
+
+ERR:
+Runtime error near line 13: CHECK constraint failed: c_Ywvv9Zg >= 0 (19)
+Runtime error near line 15: CHECK constraint failed: c_Ywvv9Zg >= 0 (19)
+Parse error near line 17: no such column: t_BgQ.c_B0kz
+  TK.c_VxeKp FROM t_lU8lVqtM LIMIT 5) AS alias_pb8, t_BgQ.c_B0kz FROM t_ZHNqTK N
+                                      error here ---^
+

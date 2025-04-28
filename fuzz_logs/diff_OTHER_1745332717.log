@@ -1,0 +1,54 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_M3pnjXX (c_YFL TEXT, c_h5iC6I INTEGER DEFAULT NULL, c_h4K9HV TEXT NOT NULL, c_9HVghAt4i NUMERIC, c_UhXHpm NUMERIC, c_atCaw INTEGER CHECK (c_atCaw >= 0));
+CREATE TABLE IF NOT EXISTS t_4dos (c_SXUa INTEGER, c_gKjL6 NUMERIC UNIQUE, c_P2FZhEe NUMERIC, c_eQy REAL DEFAULT 394461.67956739664, c_4Rm NUMERIC PRIMARY KEY CHECK (c_4Rm >= 0), FOREIGN KEY (c_4Rm) REFERENCES t_GB9BN(c_SRK0w));
+INSERT INTO t_M3pnjXX (c_YFL, c_h5iC6I, c_h4K9HV, c_9HVghAt4i, c_UhXHpm, c_atCaw) SELECT '3cozjyE', -192742, '9ZxjTI0S5PMXe1SjOZSa', 406949, 840045, 973396;
+INSERT OR FAIL INTO t_M3pnjXX (c_YFL, c_h5iC6I, c_h4K9HV, c_9HVghAt4i, c_UhXHpm, c_atCaw) SELECT 'LcbVhp04X60lWquc', 20732, 'C4ywBpIFzySrPufr', 656899, -949902, -600595;
+INSERT INTO t_M3pnjXX (c_YFL, c_h5iC6I, c_h4K9HV, c_9HVghAt4i, c_UhXHpm, c_atCaw) SELECT NULL, 28370, 'mw', 860759, 179747, 883983;
+INSERT OR REPLACE INTO t_M3pnjXX (c_YFL, c_h5iC6I, c_h4K9HV, c_9HVghAt4i, c_UhXHpm, c_atCaw) VALUES ('W4MRF7GVY5V4z_0', 920381, 'CXUmjKnho_2', 453969, 86767, 612388), ('gaHrxULJZ_100', 837779, 'jrKp7_102', 1405338, 1209837, 1426071);
+INSERT OR ABORT INTO t_M3pnjXX (c_YFL, c_h5iC6I, c_h4K9HV, c_9HVghAt4i, c_UhXHpm, c_atCaw) VALUES ('H_0', 565334, 'gcCZb9KvITMqurcX9_2', 291292, -752236, -124223), ('tu5U5wBSqK8HOl_100', 131861, 'RUVW8N3L9u2VU7wgm6Q_102', 1827659, 1841391, 466178);
+WITH cte_cbd AS (SELECT 1) INSERT INTO t_4dos (c_SXUa, c_gKjL6, c_P2FZhEe, c_eQy, c_4Rm) VALUES (-786998, -95000, -364655, 508929.3291152839, -369537), (178428, 907169, 120803, -16490.558076181915, 1120795), (1968543, 1995806, 2917309, 973688.0303540986, 1462729);
+INSERT OR FAIL INTO t_4dos (c_SXUa, c_gKjL6, c_P2FZhEe, c_eQy, c_4Rm) VALUES (444159, -877196, -216604, -719194.9075685747, 495162);
+INSERT OR ABORT INTO t_4dos (c_SXUa, c_gKjL6, c_P2FZhEe, c_eQy, c_4Rm) VALUES (850832, -526251, -278153, -324616.4541635576, -61489);
+WITH cte_IsJ AS (SELECT * FROM t_M3pnjXX LIMIT 10) SELECT * FROM cte_IsJ;
+SELECT c_h4K9HV, * FROM t_4dos WHERE EXISTS (SELECT 1 FROM t_4dos LIMIT 1) GROUP BY c_P2FZhEe EXCEPT SELECT c_h4K9HV AS alias_D4c, c_gKjL6 FROM t_M3pnjXX WHERE c_P2FZhEe IN (SELECT c_gKjL6 FROM t_4dos LIMIT 5);
+BEGIN TRANSACTION;
+UPDATE t_M3pnjXX SET c_YFL = '08pCGiWH5j', c_h4K9HV = '0x7HMC9Uw6OcCo', c_atCaw = 993549 WHERE c_YFL < 'KO7sTlvBTJCdBVfDq';
+COMMIT;
+WITH cte_aYm AS (SELECT 1) UPDATE OR FAIL t_4dos SET c_SXUa = NULL, c_eQy = -595828.707909062 WHERE c_gKjL6 = -460913;
+SELECT COUNT(*) FROM t_M3pnjXX;
+
+--- v3.26.0 ---
+OUT:
+3cozjyE|-192742|9ZxjTI0S5PMXe1SjOZSa|406949|840045|973396
+|28370|mw|860759|179747|883983
+W4MRF7GVY5V4z_0|920381|CXUmjKnho_2|453969|86767|612388
+gaHrxULJZ_100|837779|jrKp7_102|1405338|1209837|1426071
+4
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_atCaw >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_atCaw >= 0 (19)
+Runtime error near line 8: CHECK constraint failed: c_4Rm >= 0 (19)
+Runtime error near line 10: CHECK constraint failed: c_4Rm >= 0 (19)
+Parse error near line 12: no such column: c_gKjL6
+  BY c_P2FZhEe EXCEPT SELECT c_h4K9HV AS alias_D4c, c_gKjL6 FROM t_M3pnjXX WHERE
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+3cozjyE|-192742|9ZxjTI0S5PMXe1SjOZSa|406949|840045|973396
+|28370|mw|860759|179747|883983
+W4MRF7GVY5V4z_0|920381|CXUmjKnho_2|453969|86767|612388
+gaHrxULJZ_100|837779|jrKp7_102|1405338|1209837|1426071
+4
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_atCaw >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_atCaw >= 0 (19)
+Runtime error near line 8: CHECK constraint failed: c_4Rm >= 0 (19)
+Runtime error near line 10: CHECK constraint failed: c_4Rm >= 0 (19)
+Parse error near line 12: no such column: c_gKjL6
+  BY c_P2FZhEe EXCEPT SELECT c_h4K9HV AS alias_D4c, c_gKjL6 FROM t_M3pnjXX WHERE
+                                      error here ---^
+

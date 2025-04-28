@@ -1,0 +1,38 @@
+SQL:
+PRAGMA ignore_check_constraints;
+CREATE TABLE IF NOT EXISTS t_hf6MfJuSb (c_Rp5W INTEGER UNIQUE, c_1JnbT TEXT DEFAULT '9GuqMfPoa71IP', c_agtd INTEGER NOT NULL, c_kUj TEXT DEFAULT '4' COLLATE NOCASE, c_d6jMKgD5 INTEGER, c_ePOd6NfK TEXT);
+CREATE TABLE t_UfP4M (c_1RVOeR REAL DEFAULT -960725.1245947073, PRIMARY KEY (c_1RVOeR)) WITHOUT ROWID;
+INSERT OR REPLACE INTO t_hf6MfJuSb (c_Rp5W, c_1JnbT, c_agtd, c_kUj, c_d6jMKgD5, c_ePOd6NfK) SELECT -804481, 'KSlhgv', -94073, 'I2f1c9j3N', NULL, 'HtDuJDtxIKZhHz3XT';
+REPLACE INTO t_hf6MfJuSb (c_Rp5W, c_1JnbT, c_agtd, c_kUj, c_d6jMKgD5, c_ePOd6NfK) VALUES (504096, 'UatI_1', -526662, '6Qccfs9lt4L0ZWhswZ_3', 319111, 'UTpEnA6aJaywZ_5');
+INSERT INTO t_hf6MfJuSb (c_Rp5W, c_1JnbT, c_agtd, c_kUj, c_d6jMKgD5, c_ePOd6NfK) VALUES (-134803, 'LkQTiYjbxi5JZmDm1_1', 1019247, '7rcNswQaCFx_3', -845633, 'cY4mZLxBxB_5');
+INSERT OR REPLACE INTO t_hf6MfJuSb (c_Rp5W, c_1JnbT, c_agtd, c_kUj, c_d6jMKgD5, c_ePOd6NfK) VALUES (-524923, 'EirajlEJN_1', -226860, 'r9mr4lcQKn3M7Rjv_3', -628535, '3k9hWGddqTLL7fUm_5'), (716802, 'MnFmRkKK1B2YDcSsJrp_101', 1588418, 'zMs01kxs3nLCkAzUeb_103', 1165409, 'sxnO9Ttyw4_105'), (2681321, 'B8T0XV8xV_201', 2805548, 'rjEJ_203', 3011610, 's0mOcUrPeu1MJy_205');
+WITH cte_pfN AS (SELECT 1) INSERT OR FAIL INTO t_hf6MfJuSb (c_Rp5W, c_1JnbT, c_agtd, c_kUj, c_d6jMKgD5, c_ePOd6NfK) VALUES (555055, 'wFC_1', -477881, '4aD8UD_3', 71963, 'wBVlxM54mgXwW_5');
+WITH cte_dWd AS (SELECT 1) INSERT OR IGNORE INTO t_UfP4M (c_1RVOeR) VALUES (-253000.28191068885), (-569516.3535207291);
+SELECT *, * FROM t_UfP4M GROUP BY c_agtd, c_Rp5W, c_kUj;
+ALTER TABLE t_hf6MfJuSb ADD COLUMN c_dAhc REAL;
+UPDATE OR ABORT t_hf6MfJuSb SET c_1JnbT = 'B1j2HfDsUltONqvpIW', c_Rp5W = -406;
+SELECT COUNT(*) FROM t_UfP4M;
+
+--- v3.26.0 ---
+OUT:
+0
+2
+
+ERR:
+Parse error near line 10: no such column: c_agtd
+  SELECT *, * FROM t_UfP4M GROUP BY c_agtd, c_Rp5W, c_kUj;
+                      error here ---^
+Runtime error near line 12: UNIQUE constraint failed: t_hf6MfJuSb.c_Rp5W (19)
+
+
+--- v3.39.4 ---
+OUT:
+0
+2
+
+ERR:
+Parse error near line 10: no such column: c_agtd
+  SELECT *, * FROM t_UfP4M GROUP BY c_agtd, c_Rp5W, c_kUj;
+                      error here ---^
+Runtime error near line 12: UNIQUE constraint failed: t_hf6MfJuSb.c_Rp5W (19)
+

@@ -1,0 +1,31 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_jguiJDs0n (c_KMxqnn NUMERIC, c_bmX INTEGER, c_vsYPp0FF7N INTEGER, c_rFggn1N TEXT, c_c5FgGoxajP NUMERIC, c_Ohf6br INTEGER PRIMARY KEY NOT NULL, c_lyGInkcTlM INTEGER NOT NULL, c_IHaLAi NUMERIC DEFAULT -163572, c_a4TVoIk6sm TEXT, c_8atjtyzy REAL);
+INSERT OR IGNORE INTO t_jguiJDs0n (c_KMxqnn, c_bmX, c_vsYPp0FF7N, c_rFggn1N, c_c5FgGoxajP, c_Ohf6br, c_lyGInkcTlM, c_IHaLAi, c_a4TVoIk6sm, c_8atjtyzy) VALUES (-434032, -107959, 300933, 'rT_3', 255858, -517744, -442193, 54984, 'OlUh0kT_8', -711326.0706211983), (1678294, 1361811, 1084771, 'qTDqK_103', 150154, 1338124, 1342811, 1336380, 'eQVc3Sp_108', 423640.4807678927), (1504613, 2581628, 2291215, 'uLmLvtTywcczlc3_203', 2953542, 2825255, 3054934, 2446187, 'oynv5bA7iPCmdTOfj_208', -662508.9765753506);
+INSERT OR ABORT INTO t_jguiJDs0n (c_KMxqnn, c_bmX, c_vsYPp0FF7N, c_rFggn1N, c_c5FgGoxajP, c_Ohf6br, c_lyGInkcTlM, c_IHaLAi, c_a4TVoIk6sm, c_8atjtyzy) SELECT -919333, 905355, -708958, '6gFxHoSXQOhxxp', -452714, -589346, 363923, -533786, 'sNx8iHJbOGX4rtG', -267590.53396371834;
+WITH cte_6CH AS (SELECT 1) REPLACE INTO t_jguiJDs0n (c_KMxqnn, c_bmX, c_vsYPp0FF7N, c_rFggn1N, c_c5FgGoxajP, c_Ohf6br, c_lyGInkcTlM, c_IHaLAi, c_a4TVoIk6sm, c_8atjtyzy) VALUES (-331234, 388231, 711601, 'X9tE_3', 697065, 588466, 327698, 499196, 'KTwfGeTLX_8', -57406.64043338364), (353018, 1535129, 1897017, 'KLtqE08dupacrlqFBEEC_103', 1544823, 669217, 937083, 1141860, 't7verHlIZ6w_108', -220464.8626839139), (1803172, 2031846, 2138569, 'VBKlcT9_203', 1969983, 2634245, 1836676, 1650874, 'YSmzWt_208', 140206.2307625201);
+INSERT OR IGNORE INTO t_jguiJDs0n (c_KMxqnn, c_bmX, c_vsYPp0FF7N, c_rFggn1N, c_c5FgGoxajP, c_Ohf6br, c_lyGInkcTlM, c_IHaLAi, c_a4TVoIk6sm, c_8atjtyzy) VALUES (839654, -668876, 435834, 'u7A8K4CYv21ZyNG2cabQ_3', 637232, -575716, -243790, -382528, 'C_8', -302138.1695249238);
+CREATE UNIQUE INDEX idx_mbymi ON t_jguiJDs0n(c_a4TVoIk6sm, c_vsYPp0FF7N, c_8atjtyzy COLLATE BINARY ASC);
+CREATE INDEX IF NOT EXISTS idx_Okfz5 ON t_jguiJDs0n(c_KMxqnn);
+DELETE FROM t_jguiJDs0n WHERE c_a4TVoIk6sm = 'e';
+SELECT *, t_jguiJDs0n.*, *, c_lyGInkcTlM FROM t_jguiJDs0n WHERE RTRIM(UNLIKELY(t_jguiJDs0n.c_c5FgGoxajP, TRUE), (t_jguiJDs0n.c_IHaLAi GLOB t_jguiJDs0n.c_bmX)) ORDER BY c_lyGInkcTlM DESC, c_IHaLAi LIMIT 87 OFFSET 3;
+SELECT COUNT(*) FROM t_jguiJDs0n;
+
+--- v3.26.0 ---
+OUT:
+8
+
+ERR:
+Parse error near line 9: wrong number of arguments to function UNLIKELY()
+  n.*, *, c_lyGInkcTlM FROM t_jguiJDs0n WHERE RTRIM(UNLIKELY(t_jguiJDs0n.c_c5FgG
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+8
+
+ERR:
+Parse error near line 9: wrong number of arguments to function UNLIKELY()
+  n.*, *, c_lyGInkcTlM FROM t_jguiJDs0n WHERE RTRIM(UNLIKELY(t_jguiJDs0n.c_c5FgG
+                                      error here ---^
+

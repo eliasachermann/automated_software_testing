@@ -1,0 +1,42 @@
+SQL:
+CREATE TABLE t_dHQm (c_KWhmsdD INTEGER PRIMARY KEY UNIQUE DEFAULT -168545 CHECK (c_KWhmsdD >= 0), c_Jk0EZhs REAL UNIQUE, c_SSHFl2 NUMERIC UNIQUE, FOREIGN KEY (c_SSHFl2) REFERENCES t_0M0Tj(c_Rb9Qn));
+CREATE TABLE t_GGbdpv (c_tnRr NUMERIC CHECK (c_tnRr >= 0), PRIMARY KEY (c_tnRr), UNIQUE (c_tnRr));
+CREATE TABLE IF NOT EXISTS t_33LTAf (c_XFjJ8hD6 TEXT, c_RGs REAL NOT NULL, c_knm5 REAL DEFAULT -710515.9371050256, c_N30Wyu NUMERIC DEFAULT -781515, c_GRGgYKF NUMERIC PRIMARY KEY, c_M96l6y4peP TEXT UNIQUE, FOREIGN KEY (c_knm5) REFERENCES t_1Js28(c_BXPjE));
+INSERT INTO t_dHQm (c_KWhmsdD, c_Jk0EZhs, c_SSHFl2) VALUES (-445558, 741107.6558906371, 419746), (571996, -486847.294786552, 345183);
+INSERT OR IGNORE INTO t_GGbdpv (c_tnRr) VALUES (951246), (1705014), (1397587);
+REPLACE INTO t_GGbdpv (c_tnRr) VALUES (-986447);
+INSERT OR REPLACE INTO t_GGbdpv (c_tnRr) VALUES (-481240), (39068);
+INSERT OR REPLACE INTO t_GGbdpv (c_tnRr) VALUES (722688);
+REPLACE INTO t_33LTAf (c_XFjJ8hD6, c_RGs, c_knm5, c_N30Wyu, c_GRGgYKF, c_M96l6y4peP) VALUES ('DunUyb1hT3w_0', 607319.2262635967, 677050.528770017, -94454, 566296, '22pmQRKpyzwccRre_5'), ('EdwTZFeHJZQ90Gg2JAAJ_100', -366271.1755780438, -599985.5488833631, 1704931, 489329, 'hG_105');
+INSERT OR ABORT INTO t_33LTAf (c_XFjJ8hD6, c_RGs, c_knm5, c_N30Wyu, c_GRGgYKF, c_M96l6y4peP) VALUES ('jogT3B3_0', -863192.34500701, -698264.4876486987, 378929, 738777, 'VBricgmoBrIZxazO_5'), ('31yhdi533RGYMMXYc_100', 66848.07971062185, 493036.9563008582, 881893, 813180, 'dDvNoluPx7zf_105');
+INSERT OR FAIL INTO t_33LTAf (c_XFjJ8hD6, c_RGs, c_knm5, c_N30Wyu, c_GRGgYKF, c_M96l6y4peP) VALUES ('zmapC_0', 859836.5034506749, -937246.3548890225, -142753, 87884, 'eyqV_5'), ('Wg_100', -886240.2400170921, -292887.1915212583, 1082328, 1403126, '50s040jyKeVyHDE6D_105'), ('4jUhIz7SWlO1IV7_200', -637891.6321948238, -203301.02264757594, 1923483, 2777498, 'O0YZTsMdI5SZdqCs_205');
+INSERT OR REPLACE INTO t_33LTAf (c_XFjJ8hD6, c_RGs, c_knm5, c_N30Wyu, c_GRGgYKF, c_M96l6y4peP) SELECT 'YbPV', -887851.6990119936, -92396.19451641582, 583083, NULL, 'wlVUcp';
+DELETE FROM t_33LTAf WHERE c_GRGgYKF IS NOT NULL;
+SELECT AVG(t_33LTAf.c_knm5, (t_GGbdpv.c_tnRr + t_dHQm.c_KWhmsdD)), *, * FROM t_33LTAf, t_GGbdpv, t_dHQm WHERE t_33LTAf.c_N30Wyu ORDER BY c_KWhmsdD DESC, c_Jk0EZhs ASC LIMIT 35;
+SELECT COUNT(*) FROM t_33LTAf;
+
+--- v3.26.0 ---
+OUT:
+1
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_KWhmsdD >= 0 (19)
+Runtime error near line 6: CHECK constraint failed: c_tnRr >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_tnRr >= 0 (19)
+Parse error near line 14: wrong number of arguments to function AVG()
+  SELECT AVG(t_33LTAf.c_knm5, (t_GGbdpv.c_tnRr + t_dHQm.c_KWhmsdD)), *, * FROM t
+         ^--- error here
+
+
+--- v3.39.4 ---
+OUT:
+1
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_KWhmsdD >= 0 (19)
+Runtime error near line 6: CHECK constraint failed: c_tnRr >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_tnRr >= 0 (19)
+Parse error near line 14: wrong number of arguments to function AVG()
+  SELECT AVG(t_33LTAf.c_knm5, (t_GGbdpv.c_tnRr + t_dHQm.c_KWhmsdD)), *, * FROM t
+         ^--- error here
+

@@ -1,0 +1,32 @@
+SQL:
+CREATE TABLE t_hj9hfiuhF4 (c_qJWi3S7 TEXT PRIMARY KEY CHECK (length(c_qJWi3S7) > 0), c_Zs8M INTEGER, c_FaHts INTEGER, c_hWVcb INTEGER CHECK (c_hWVcb >= 0), c_QFH8G3y INTEGER, c_VgrB5PIVe INTEGER UNIQUE, c_zRnmYi NUMERIC NOT NULL, c_QhepMHWZAG NUMERIC DEFAULT NULL, c_gpk NUMERIC);
+INSERT OR FAIL INTO t_hj9hfiuhF4 (c_qJWi3S7, c_Zs8M, c_FaHts, c_hWVcb, c_QFH8G3y, c_VgrB5PIVe, c_zRnmYi, c_QhepMHWZAG, c_gpk) VALUES ('add1JbSXHC6TRW152q_0', -8209, -506078, 1020496, -854390, 313257, -294720, -300612, -359995), ('3aVKCL2nzmKrkVKKROmk_100', 1417254, 487089, 1686817, 1783663, 65561, 844975, 979696, 740522);
+INSERT OR ABORT INTO t_hj9hfiuhF4 (c_qJWi3S7, c_Zs8M, c_FaHts, c_hWVcb, c_QFH8G3y, c_VgrB5PIVe, c_zRnmYi, c_QhepMHWZAG, c_gpk) VALUES ('jt_0', 118138, 353644, 50504, -258146, 292434, 238853, -786349, 770649), ('hc9013_100', 1315821, 352475, 1375431, 604301, 368561, 1124427, 1336789, 319401), ('XX5rpMC2IgIgqa_200', 1685709, 2226215, 1053512, 2553144, 2212804, 2688740, 1748510, 1864689);
+INSERT OR ABORT INTO t_hj9hfiuhF4 (c_qJWi3S7, c_Zs8M, c_FaHts, c_hWVcb, c_QFH8G3y, c_VgrB5PIVe, c_zRnmYi, c_QhepMHWZAG, c_gpk) VALUES ('0EcYVF_0', 958252, 804092, 202597, -765768, -652710, -737257, 255435, 7430), ('OmlM6OYHVmLqO_100', 1473456, 1889338, 1423774, 1013896, 923762, 1741304, 79148, 1626617);
+INSERT OR IGNORE INTO t_hj9hfiuhF4 (c_qJWi3S7, c_Zs8M, c_FaHts, c_hWVcb, c_QFH8G3y, c_VgrB5PIVe, c_zRnmYi, c_QhepMHWZAG, c_gpk) VALUES ('cH1pyO3aCEl_0', 320634, -653506, -589204, 861430, 675692, -876196, 606164, -196714), ('fgsoXLC_100', 987315, 648539, 958844, 696188, 1592305, 1624094, 227712, 682890);
+UPDATE OR REPLACE t_hj9hfiuhF4 SET c_hWVcb = -869154 WHERE c_QhepMHWZAG < -206222;
+WITH cte_teA AS (SELECT * FROM t_hj9hfiuhF4 LIMIT 10) SELECT DISTINCT CASE DATE('ago6YwM7', t_hj9hfiuhF4.c_FaHts) WHEN PRINTF(t_hj9hfiuhF4.c_zRnmYi, 'PDXHefJA') THEN CASE FALSE WHEN t_hj9hfiuhF4.c_qJWi3S7 THEN t_hj9hfiuhF4.c_QFH8G3y WHEN t_hj9hfiuhF4.c_VgrB5PIVe THEN t_hj9hfiuhF4.c_zRnmYi WHEN FALSE THEN t_hj9hfiuhF4.c_gpk END WHEN CASE t_hj9hfiuhF4.c_hWVcb WHEN t_hj9hfiuhF4.c_QhepMHWZAG THEN t_hj9hfiuhF4.c_qJWi3S7 WHEN 564416 THEN TRUE END THEN - -548854 WHEN SOUNDEX(t_hj9hfiuhF4.c_QFH8G3y) THEN c_zRnmYi ELSE CASE t_hj9hfiuhF4.c_QhepMHWZAG WHEN x'3A57' THEN TRUE WHEN '1JFup0KZSbezptQbU' THEN t_hj9hfiuhF4.c_QFH8G3y WHEN t_hj9hfiuhF4.c_qJWi3S7 THEN TRUE ELSE FALSE END END AS alias_5v9, c_QhepMHWZAG, c_QFH8G3y, c_zRnmYi FROM t_hj9hfiuhF4 WHERE CASE WHEN c_QhepMHWZAG THEN - t_hj9hfiuhF4.c_gpk WHEN LOAD_EXTENSION(t_hj9hfiuhF4.c_Zs8M, t_hj9hfiuhF4.c_VgrB5PIVe) THEN + 'sF' WHEN CASE t_hj9hfiuhF4.c_zRnmYi WHEN -717860 THEN t_hj9hfiuhF4.c_gpk WHEN t_hj9hfiuhF4.c_FaHts THEN FALSE WHEN FALSE THEN t_hj9hfiuhF4.c_QhepMHWZAG ELSE t_hj9hfiuhF4.c_hWVcb END THEN 'N' END GROUP BY c_FaHts ORDER BY c_FaHts, c_gpk ASC;
+ALTER TABLE t_hj9hfiuhF4 ADD COLUMN c_44IzsVB REAL;
+SELECT COUNT(*) FROM t_hj9hfiuhF4;
+
+--- v3.26.0 ---
+OUT:
+8
+
+ERR:
+Runtime error near line 6: CHECK constraint failed: c_hWVcb >= 0 (19)
+Parse error near line 7: no such function: SOUNDEX
+  3S7 WHEN 564416 THEN TRUE END THEN - -548854 WHEN SOUNDEX(t_hj9hfiuhF4.c_QFH8G
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+8
+
+ERR:
+Runtime error near line 6: CHECK constraint failed: c_hWVcb >= 0 (19)
+Parse error near line 7: no such function: SOUNDEX
+  3S7 WHEN 564416 THEN TRUE END THEN - -548854 WHEN SOUNDEX(t_hj9hfiuhF4.c_QFH8G
+                                      error here ---^
+

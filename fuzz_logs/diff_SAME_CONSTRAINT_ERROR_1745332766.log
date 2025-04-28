@@ -1,0 +1,34 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_szzdu (c_vqDtf3KP INTEGER, c_EJiMGMxRb TEXT, c_2uWvPwt9 NUMERIC UNIQUE, c_VXjFNdcU TEXT NOT NULL CHECK (length(c_VXjFNdcU) > 0), c_xhwMX4 TEXT CHECK (length(c_xhwMX4) > 0), c_LpC INTEGER, c_JMLA1Ej NUMERIC DEFAULT -781562, c_kgO9l9R REAL DEFAULT -17643.740505940397);
+INSERT OR REPLACE INTO t_szzdu (c_vqDtf3KP, c_EJiMGMxRb, c_2uWvPwt9, c_VXjFNdcU, c_xhwMX4, c_LpC, c_JMLA1Ej, c_kgO9l9R) VALUES (700766, 'WeD4qEOOZ_1', -854969, 've8rCqtZF2EcJSLl_3', '1rkDkrHE9Kv6RUDLCzGu_4', 979716, -46506, 451743.2613364607), (1522600, 'Yqe0DakcBD36bXAaOw5_101', 791322, '0VATNZTinuLIl6o9XLl_103', '6bE_104', 96596, 533357, 976049.8455401303), (1001885, 'O0EFCoGhPjujnqpy_201', 2210003, 'ztl7N4R2p_203', 'XgYk_204', 2663232, 1826027, -56793.1717677213);
+INSERT OR REPLACE INTO t_szzdu (c_vqDtf3KP, c_EJiMGMxRb, c_2uWvPwt9, c_VXjFNdcU, c_xhwMX4, c_LpC, c_JMLA1Ej, c_kgO9l9R) SELECT NULL, 'HxrkmqQsAYIj', 665591, NULL, '9qtb1T2PYoTctk', 784118, -740585, 843326.9699954407;
+WITH cte_H28 AS (SELECT 1) INSERT OR IGNORE INTO t_szzdu (c_vqDtf3KP, c_EJiMGMxRb, c_2uWvPwt9, c_VXjFNdcU, c_xhwMX4, c_LpC, c_JMLA1Ej, c_kgO9l9R) VALUES (616075, 'WjbnZBN60CvpPdu_1', -691900, 'Elcckqf09XYhtBzNxG6_3', 'UKOoMz_4', -388684, 562936, 425877.2833672792), (23601, 'SSuInerOmyJ_101', 570790, '1U8y_103', 'm6f16KEX5goMzcc_104', 1874608, 530707, -415200.2914134087), (1268026, '6Bnky73HtGA_201', 2170478, 'Veht4jEJBFD_203', 'BOewFn_204', 1793597, 2703459, 161326.19759113854);
+INSERT OR FAIL INTO t_szzdu (c_vqDtf3KP, c_EJiMGMxRb, c_2uWvPwt9, c_VXjFNdcU, c_xhwMX4, c_LpC, c_JMLA1Ej, c_kgO9l9R) VALUES (-181387, 'wk3TQe0_1', 276237, 'N9BJAF4cqnNUTKb_3', 'vb4yx8Hy0_4', -876273, 199480, -150818.75567804603);
+UPDATE OR ROLLBACK t_szzdu SET c_LpC = -718692, c_2uWvPwt9 = -14006, c_xhwMX4 = 'pmfXhbct2eg' WHERE c_VXjFNdcU > 'LyfgEOfAZ7OS';
+DELETE FROM t_szzdu WHERE c_EJiMGMxRb = 'K';
+SELECT t_szzdu.c_vqDtf3KP, TYPEOF(x'0A24BB46') AS alias_xNm, t_szzdu.c_xhwMX4, *, ZEROBLOB(NOT t_szzdu.c_xhwMX4) AS alias_eNM FROM t_szzdu WHERE MIN(UNICODE(-823687), CASE t_szzdu.c_EJiMGMxRb WHEN FALSE THEN NULL WHEN -596155 THEN t_szzdu.c_EJiMGMxRb ELSE t_szzdu.c_vqDtf3KP END, SQLITE_SOURCE_ID(FALSE, 'R', TRUE)) GROUP BY c_EJiMGMxRb ORDER BY c_VXjFNdcU DESC, c_LpC;
+SELECT COUNT(*) FROM t_szzdu;
+
+--- v3.26.0 ---
+OUT:
+7
+
+ERR:
+Runtime error near line 3: NOT NULL constraint failed: t_szzdu.c_VXjFNdcU (19)
+Runtime error near line 6: UNIQUE constraint failed: t_szzdu.c_2uWvPwt9 (19)
+Parse error near line 8: wrong number of arguments to function SQLITE_SOURCE_ID()
+   t_szzdu.c_EJiMGMxRb ELSE t_szzdu.c_vqDtf3KP END, SQLITE_SOURCE_ID(FALSE, 'R',
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+7
+
+ERR:
+Runtime error near line 3: NOT NULL constraint failed: t_szzdu.c_VXjFNdcU (19)
+Runtime error near line 6: UNIQUE constraint failed: t_szzdu.c_2uWvPwt9 (19)
+Parse error near line 8: wrong number of arguments to function SQLITE_SOURCE_ID()
+   t_szzdu.c_EJiMGMxRb ELSE t_szzdu.c_vqDtf3KP END, SQLITE_SOURCE_ID(FALSE, 'R',
+                                      error here ---^
+

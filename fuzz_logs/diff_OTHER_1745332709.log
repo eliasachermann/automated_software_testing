@@ -1,0 +1,40 @@
+SQL:
+CREATE TABLE t_VVVjxm (c_x0L INTEGER);
+CREATE TABLE IF NOT EXISTS t_kNwzJH0Q (c_lx2sGtPJHM REAL, c_uh1DdkG TEXT DEFAULT 'TAfTHAwGdsg8' COLLATE NOCASE);
+INSERT INTO t_VVVjxm (c_x0L) VALUES (84530), (1883751), (1088537);
+INSERT OR IGNORE INTO t_VVVjxm (c_x0L) VALUES (-349761);
+WITH cte_qTu AS (SELECT 1) INSERT OR IGNORE INTO t_VVVjxm (c_x0L) VALUES (167389);
+INSERT INTO t_VVVjxm (c_x0L) VALUES (-268017);
+INSERT OR ABORT INTO t_kNwzJH0Q (c_lx2sGtPJHM, c_uh1DdkG) VALUES (3394.252690191148, 'Ynl0CgF7yIetdN8cJOd_1');
+INSERT OR REPLACE INTO t_kNwzJH0Q (c_lx2sGtPJHM, c_uh1DdkG) VALUES (-315718.8727729925, 'AV_1'), (-730081.5602250898, 'tFcvsweqDY13ZF_101'), (447565.239266529, 'eoTfCoHvUI3_201');
+INSERT OR FAIL INTO t_kNwzJH0Q (c_lx2sGtPJHM, c_uh1DdkG) SELECT 222441.23335452355, 'c3pAMSMfhw';
+INSERT OR FAIL INTO t_kNwzJH0Q (c_lx2sGtPJHM, c_uh1DdkG) VALUES (-7921.971516740043, '3hLqQCi0w4M_1'), (208341.87013516552, 'D23i9is_101');
+UPDATE OR ROLLBACK t_VVVjxm SET c_x0L = NULL WHERE c_x0L IS NULL;
+SELECT CASE (t_kNwzJH0Q.c_lx2sGtPJHM % t_VVVjxm.c_x0L) WHEN CASE WHEN t_kNwzJH0Q.c_lx2sGtPJHM THEN t_VVVjxm.c_x0L WHEN FALSE THEN t_VVVjxm.c_x0L END THEN + t_kNwzJH0Q.c_uh1DdkG WHEN RTRIM(t_VVVjxm.c_x0L, t_kNwzJH0Q.c_lx2sGtPJHM) THEN (t_VVVjxm.c_x0L | t_VVVjxm.c_x0L) WHEN ZEROBLOB(NULL, TRUE) THEN t_VVVjxm.c_x0L END AS alias_67X, c_x0L, *, CASE WHEN NULL THEN c_uh1DdkG WHEN x'7E2399E9' THEN 'jXIMzPbZi' ELSE CASE t_VVVjxm.c_x0L WHEN t_VVVjxm.c_x0L THEN t_VVVjxm.c_x0L WHEN t_VVVjxm.c_x0L THEN t_VVVjxm.c_x0L ELSE t_VVVjxm.c_x0L END END AS alias_B39 FROM t_VVVjxm INNER JOIN t_kNwzJH0Q ON t_VVVjxm.c_x0L = t_kNwzJH0Q.c_uh1DdkG WHERE NOT (t_kNwzJH0Q.c_uh1DdkG || t_kNwzJH0Q.c_lx2sGtPJHM) ORDER BY c_uh1DdkG LIMIT 52;
+SELECT t_VVVjxm.*, t_kNwzJH0Q.c_uh1DdkG, (- '6zB13e17zF1ZaDGF' > x'7F8DCB'), c_x0L, t_kNwzJH0Q.c_lx2sGtPJHM FROM t_kNwzJH0Q, t_VVVjxm WHERE UNICODE(t_kNwzJH0Q.c_lx2sGtPJHM) UNION ALL SELECT *, *, *, CASE c_x0L WHEN t_kNwzJH0Q.c_uh1DdkG THEN c_x0L WHEN (t_VVVjxm.c_x0L / FALSE) THEN CASE WHEN '42oZ4bpVbURAuwuhXy' THEN -556715 WHEN FALSE THEN t_VVVjxm.c_x0L ELSE TRUE END ELSE (TRUE % t_VVVjxm.c_x0L) END, t_VVVjxm.c_x0L FROM t_kNwzJH0Q NATURAL LEFT JOIN t_VVVjxm WHERE NULL GROUP BY c_x0L ORDER BY c_lx2sGtPJHM, c_uh1DdkG;
+BEGIN TRANSACTION;
+INSERT OR FAIL INTO t_kNwzJH0Q (c_lx2sGtPJHM, c_uh1DdkG) VALUES (-310120.7523353009, 'FF4ZHxDrjFLehKPQ_1');
+COMMIT;
+SELECT COUNT(*) FROM t_VVVjxm;
+
+--- v3.26.0 ---
+OUT:
+6
+
+ERR:
+Parse error near line 12: wrong number of arguments to function ZEROBLOB()
+  PJHM) THEN (t_VVVjxm.c_x0L | t_VVVjxm.c_x0L) WHEN ZEROBLOB(NULL, TRUE) THEN t_
+                                      error here ---^
+Parse error near line 13: SELECTs to the left and right of UNION ALL do not have the same number of result columns
+
+
+--- v3.39.4 ---
+OUT:
+6
+
+ERR:
+Parse error near line 12: wrong number of arguments to function ZEROBLOB()
+  PJHM) THEN (t_VVVjxm.c_x0L | t_VVVjxm.c_x0L) WHEN ZEROBLOB(NULL, TRUE) THEN t_
+                                      error here ---^
+Parse error near line 13: SELECTs to the left and right of UNION ALL do not have the same number of result columns
+

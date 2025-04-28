@@ -1,0 +1,42 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_1IZCFi (c_25gu2C INTEGER);
+CREATE TABLE IF NOT EXISTS t_2iAUW6 (c_8Fa2qKRYy TEXT UNIQUE DEFAULT 'TKsOQU', c_B6K TEXT NOT NULL, c_934G TEXT NOT NULL, c_AW5 REAL NOT NULL DEFAULT 364762.8304223649, c_kUGo INTEGER);
+CREATE TABLE IF NOT EXISTS t_7Eti (c_hzD1P NUMERIC, c_ay8 REAL, c_960PHcji INTEGER, c_GX5 NUMERIC PRIMARY KEY CHECK (c_GX5 >= 0), c_sbxNc1 TEXT COLLATE NOCASE, c_3XOgrkN NUMERIC, c_lxo7K REAL CHECK (c_lxo7K >= 0), c_o9QLWPfHIi INTEGER DEFAULT NULL, c_9SQva2AgY TEXT, c_vXif NUMERIC);
+INSERT OR IGNORE INTO t_1IZCFi (c_25gu2C) VALUES (-836091), (1950869), (2444566);
+WITH cte_BwN AS (SELECT 1) REPLACE INTO t_1IZCFi (c_25gu2C) SELECT 224100;
+INSERT OR ABORT INTO t_1IZCFi (c_25gu2C) VALUES (895860), (1189094), (1293431);
+INSERT OR ABORT INTO t_2iAUW6 (c_8Fa2qKRYy, c_B6K, c_934G, c_AW5, c_kUGo) VALUES ('1mB7SyI8SGAL4yEe_0', '61N5ZnZks3THfJF3_1', 'fO4UA0AY5q8baxf_2', -707578.0551179161, 240475);
+INSERT OR FAIL INTO t_7Eti (c_hzD1P, c_ay8, c_960PHcji, c_GX5, c_sbxNc1, c_3XOgrkN, c_lxo7K, c_o9QLWPfHIi, c_9SQva2AgY, c_vXif) VALUES (-326597, -732382.0885502166, 35114, 359670, 'i0iHpvhoXH_4', 712197, -889134.0620680054, -452054, 'kijTARJuk6Q0CutInHQI_8', 139853), (640648, 934353.7945460717, 237103, 135159, 'MCnPVzfHKv6IC_104', 1355496, 948633.489000655, 1380146, '0_108', 2030295), (2418768, -302345.13359434996, 2607822, 2818033, '4CpKtChHVDnWNco6yA_204', 1994166, -358746.27539056214, 2901570, '2k_208', 1922951);
+INSERT OR IGNORE INTO t_7Eti (c_hzD1P, c_ay8, c_960PHcji, c_GX5, c_sbxNc1, c_3XOgrkN, c_lxo7K, c_o9QLWPfHIi, c_9SQva2AgY, c_vXif) SELECT -411988, 571629.9926254426, -759302, 574011, '6', 630458, -842237.580027986, -753442, '9GwNr0vly', 606747;
+WITH cte_soW AS (SELECT * FROM t_2iAUW6 LIMIT 10) SELECT x'8153' AS alias_6XK, *, *, * FROM t_1IZCFi, t_2iAUW6 WHERE UPPER(c_B6K) GROUP BY c_lxo7K, c_3XOgrkN, c_9SQva2AgY ORDER BY c_25gu2C ASC;
+SELECT c_kUGo, t_7Eti.c_ay8, t_7Eti.c_3XOgrkN, (CASE NULL WHEN x'4C14332E' THEN t_7Eti.c_9SQva2AgY ELSE t_7Eti.c_o9QLWPfHIi END != t_2iAUW6.c_B6K) AS alias_maA FROM t_7Eti, t_2iAUW6 WHERE (GLOB('I2iLQxAJv', t_2iAUW6.c_B6K, t_2iAUW6.c_AW5) == - t_7Eti.c_GX5) GROUP BY c_25gu2C UNION SELECT + + -905353 AS alias_4SA, SUM(CASE t_7Eti.c_lxo7K WHEN FALSE THEN TRUE ELSE NULL END, t_1IZCFi.c_25gu2C, - t_7Eti.c_GX5), TIME(+ x'3C', (TRUE OR t_1IZCFi.c_25gu2C), ~ t_7Eti.c_3XOgrkN) AS alias_40d, - CASE WHEN t_7Eti.c_9SQva2AgY THEN t_1IZCFi.c_25gu2C WHEN -133533 THEN t_2iAUW6.c_934G ELSE x'05' END, * FROM t_2iAUW6, t_1IZCFi WHERE t_7Eti.c_hzD1P IN (SELECT * FROM t_2iAUW6 LIMIT 5) LIMIT 67 OFFSET 15;
+UPDATE OR IGNORE t_7Eti SET c_9SQva2AgY = 'IOtPGtdi', c_960PHcji = 721451;
+SELECT COUNT(*) FROM t_1IZCFi;
+
+--- v3.26.0 ---
+OUT:
+7
+
+ERR:
+Runtime error near line 8: CHECK constraint failed: c_lxo7K >= 0 (19)
+Parse error near line 10: no such column: c_lxo7K
+  OM t_1IZCFi, t_2iAUW6 WHERE UPPER(c_B6K) GROUP BY c_lxo7K, c_3XOgrkN, c_9SQva2
+                                      error here ---^
+Parse error near line 11: wrong number of arguments to function SUM()
+  Y c_25gu2C UNION SELECT + + -905353 AS alias_4SA, SUM(CASE t_7Eti.c_lxo7K WHEN
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+7
+
+ERR:
+Runtime error near line 8: CHECK constraint failed: c_lxo7K >= 0 (19)
+Parse error near line 10: no such column: c_lxo7K
+  OM t_1IZCFi, t_2iAUW6 WHERE UPPER(c_B6K) GROUP BY c_lxo7K, c_3XOgrkN, c_9SQva2
+                                      error here ---^
+Parse error near line 11: wrong number of arguments to function SUM()
+  Y c_25gu2C UNION SELECT + + -905353 AS alias_4SA, SUM(CASE t_7Eti.c_lxo7K WHEN
+                                      error here ---^
+

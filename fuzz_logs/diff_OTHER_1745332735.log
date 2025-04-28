@@ -1,0 +1,46 @@
+SQL:
+PRAGMA ignore_check_constraints;
+CREATE TABLE IF NOT EXISTS t_CWbf (c_aP6UpjGHd9 INTEGER, c_Oau5NY4P TEXT PRIMARY KEY UNIQUE, c_8ta5oe TEXT);
+CREATE TABLE IF NOT EXISTS t_759rZY (c_Jezi REAL, c_O6APE INTEGER);
+CREATE TABLE IF NOT EXISTS t_5Th1vro0c (c_KI89lW8 TEXT NOT NULL, c_6SY REAL PRIMARY KEY CHECK (c_6SY >= 0));
+REPLACE INTO t_CWbf (c_aP6UpjGHd9, c_Oau5NY4P, c_8ta5oe) VALUES (285278, '01YI1yBjrfc_1', 'tOuMp4yovjbAJCbLU_2');
+INSERT OR FAIL INTO t_CWbf (c_aP6UpjGHd9, c_Oau5NY4P, c_8ta5oe) VALUES (181466, '008b6Mi7hzaWs_1', 'aWeqFELUrGo9_2'), (817881, '7uOGftYL2WM5N33XX9M_101', 'XjkoUJN4zSNvV_102');
+INSERT INTO t_CWbf (c_aP6UpjGHd9, c_Oau5NY4P, c_8ta5oe) VALUES (165751, 'qb_1', 'd8mMItfUN8zOKz_2'), (308396, 'x7G9FCWtMf7_101', 'o8_102'), (2569488, 'E2mljEg_201', 'yzM1_202');
+INSERT OR REPLACE INTO t_CWbf (c_aP6UpjGHd9, c_Oau5NY4P, c_8ta5oe) SELECT -183555, 'XE78wgdUSnWplE', 'tZ';
+INSERT OR ABORT INTO t_CWbf (c_aP6UpjGHd9, c_Oau5NY4P, c_8ta5oe) VALUES (150488, 'AKbYU_1', 'P_2');
+INSERT OR ABORT INTO t_759rZY (c_Jezi, c_O6APE) VALUES (987359.0290457038, 559142), (-810174.8480213245, 943578), (770774.1891301069, 2181350);
+INSERT OR IGNORE INTO t_759rZY (c_Jezi, c_O6APE) SELECT 66038.4954310772, -78737;
+INSERT OR REPLACE INTO t_5Th1vro0c (c_KI89lW8, c_6SY) VALUES ('gghBoD07YrAq_0', -397778.5618553052), ('2dKQihmP9Cr608KdSu_100', 843511.5578738081), ('9lXHRSM1_200', -928187.4399908539);
+INSERT OR REPLACE INTO t_5Th1vro0c (c_KI89lW8, c_6SY) VALUES ('sDJfehA_0', 63062.70329836616);
+WITH cte_Pwo AS (SELECT 1) INSERT INTO t_5Th1vro0c (c_KI89lW8, c_6SY) VALUES ('q4cxWvJAdgM4ctoQP_0', 334597.58668067376), ('bMzCeh0KKq_100', -643710.2853326262), ('Xqzh25Gd_200', 142835.3909562186);
+SELECT *, t_759rZY.c_Jezi, c_Jezi, NOT ~ t_759rZY.c_O6APE AS alias_p7y FROM t_CWbf NATURAL JOIN t_5Th1vro0c WHERE t_5Th1vro0c.c_6SY ORDER BY c_aP6UpjGHd9, c_Oau5NY4P LIMIT 88;
+ALTER TABLE t_CWbf ADD COLUMN c_838vU TEXT;
+CREATE INDEX IF NOT EXISTS idx_69FHk ON t_5Th1vro0c(c_6SY DESC);
+DELETE FROM t_5Th1vro0c WHERE c_KI89lW8 >= 'VnsS5GsmG4N8JunWoWE';
+SELECT COUNT(*) FROM t_5Th1vro0c;
+
+--- v3.26.0 ---
+OUT:
+0
+0
+
+ERR:
+Runtime error near line 12: CHECK constraint failed: c_6SY >= 0 (19)
+Runtime error near line 14: CHECK constraint failed: c_6SY >= 0 (19)
+Parse error near line 15: no such column: t_759rZY.c_Jezi
+  SELECT *, t_759rZY.c_Jezi, c_Jezi, NOT ~ t_759rZY.c_O6APE AS alias_p7y FROM t_
+            ^--- error here
+
+
+--- v3.39.4 ---
+OUT:
+0
+0
+
+ERR:
+Runtime error near line 12: CHECK constraint failed: c_6SY >= 0 (19)
+Runtime error near line 14: CHECK constraint failed: c_6SY >= 0 (19)
+Parse error near line 15: no such column: t_759rZY.c_Jezi
+  SELECT *, t_759rZY.c_Jezi, c_Jezi, NOT ~ t_759rZY.c_O6APE AS alias_p7y FROM t_
+            ^--- error here
+

@@ -1,0 +1,27 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_vG3XZ (c_vRLn TEXT DEFAULT 'bhS9jP0T3zuyoR', c_Vm9BS REAL NOT NULL, c_MhW9hGy TEXT UNIQUE, c_FknAAAjIRI TEXT, PRIMARY KEY (c_MhW9hGy, c_Vm9BS, c_vRLn));
+INSERT OR FAIL INTO t_vG3XZ (c_vRLn, c_Vm9BS, c_MhW9hGy, c_FknAAAjIRI) VALUES ('DTlIF9BzWK6_0', 220620.3044733652, '9P5GGaZfCDDa_2', 'TowAuxUp_3');
+INSERT OR REPLACE INTO t_vG3XZ (c_vRLn, c_Vm9BS, c_MhW9hGy, c_FknAAAjIRI) VALUES ('uS_0', 379959.3219325836, 'pcM41NU95l1IKQhk_2', 'vwEaQ_3'), ('Vsc0eJ_100', 765888.9694629961, 'oiMcv5B4In_102', '7YpKb0iRS4t_103');
+SELECT t_vG3XZ.*, (ZEROBLOB(t_vG3XZ.c_Vm9BS, t_vG3XZ.c_MhW9hGy, t_vG3XZ.c_Vm9BS) < CASE WHEN 705062 THEN t_vG3XZ.c_Vm9BS WHEN NULL THEN t_vG3XZ.c_MhW9hGy WHEN 465851 THEN t_vG3XZ.c_MhW9hGy END) AS alias_ppH, t_vG3XZ.c_Vm9BS, t_vG3XZ.* FROM t_vG3XZ WHERE c_MhW9hGy;
+CREATE UNIQUE INDEX idx_kMDEM ON t_vG3XZ(c_Vm9BS DESC);
+SELECT COUNT(*) FROM t_vG3XZ;
+
+--- v3.26.0 ---
+OUT:
+3
+
+ERR:
+Parse error near line 4: wrong number of arguments to function ZEROBLOB()
+  SELECT t_vG3XZ.*, (ZEROBLOB(t_vG3XZ.c_Vm9BS, t_vG3XZ.c_MhW9hGy, t_vG3XZ.c_Vm9B
+                     ^--- error here
+
+
+--- v3.39.4 ---
+OUT:
+3
+
+ERR:
+Parse error near line 4: wrong number of arguments to function ZEROBLOB()
+  SELECT t_vG3XZ.*, (ZEROBLOB(t_vG3XZ.c_Vm9BS, t_vG3XZ.c_MhW9hGy, t_vG3XZ.c_Vm9B
+                     ^--- error here
+

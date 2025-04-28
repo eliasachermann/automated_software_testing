@@ -1,0 +1,31 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_IpeJJNhI (c_kMs2d NUMERIC, c_Wq5 NUMERIC, c_ie1TMGXoH TEXT, c_hQPlYaI NUMERIC, c_cnQt TEXT, UNIQUE (c_hQPlYaI));
+INSERT OR ABORT INTO t_IpeJJNhI (c_kMs2d, c_Wq5, c_ie1TMGXoH, c_hQPlYaI, c_cnQt) VALUES (691419, -839185, 'Pxs_2', 803037, 'VnaniHdxTIiPTl_4'), (718743, 1014870, 'MLZV_102', 1716786, 'mba4I0465YCZ_104');
+INSERT OR ABORT INTO t_IpeJJNhI (c_kMs2d, c_Wq5, c_ie1TMGXoH, c_hQPlYaI, c_cnQt) SELECT -15492, -423028, 'C4VrFd1XYX19DR', 254909, 'P226r2PGTo5LNpu';
+INSERT OR FAIL INTO t_IpeJJNhI (c_kMs2d, c_Wq5, c_ie1TMGXoH, c_hQPlYaI, c_cnQt) VALUES (-271884, 951709, 'TFu40kkIFSCHuabcM_2', 180134, 'bP83tBAK_4');
+ALTER TABLE t_IpeJJNhI ADD COLUMN c_9zZKPCH REAL;
+BEGIN TRANSACTION;
+INSERT OR ABORT INTO t_IpeJJNhI (c_kMs2d, c_Wq5, c_ie1TMGXoH, c_hQPlYaI, c_cnQt) VALUES (-530994, -838004, 'rtghTipHbT_2', -847866, 'Xel3n5j1_4'), (783839, 1631972, 'Nn4_102', 1356805, 'RYnFFkyC8HmHabwYZM_104');
+COMMIT;
+SELECT DISTINCT (+ t_IpeJJNhI.c_kMs2d * NOT t_IpeJJNhI.c_cnQt) AS alias_vlt, TOTAL((FALSE >> TRUE), CASE 'NpWjyhdtrgnGmcTk1S' WHEN t_IpeJJNhI.c_kMs2d THEN t_IpeJJNhI.c_cnQt WHEN 'T6rlaA7ki9nIyjP9g6Zm' THEN t_IpeJJNhI.c_ie1TMGXoH WHEN t_IpeJJNhI.c_Wq5 THEN t_IpeJJNhI.c_kMs2d END, 'fdo48dNkgvKIAcWDV9jE') AS alias_DkB FROM t_IpeJJNhI WHERE x'6D5B' GROUP BY c_Wq5, c_kMs2d UNION ALL SELECT DISTINCT t_IpeJJNhI.*, t_IpeJJNhI.*, c_cnQt, * FROM t_IpeJJNhI;
+SELECT COUNT(*) FROM t_IpeJJNhI;
+
+--- v3.26.0 ---
+OUT:
+6
+
+ERR:
+Parse error near line 9: wrong number of arguments to function TOTAL()
+  hI.c_kMs2d * NOT t_IpeJJNhI.c_cnQt) AS alias_vlt, TOTAL((FALSE >> TRUE), CASE 
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+6
+
+ERR:
+Parse error near line 9: wrong number of arguments to function TOTAL()
+  hI.c_kMs2d * NOT t_IpeJJNhI.c_cnQt) AS alias_vlt, TOTAL((FALSE >> TRUE), CASE 
+                                      error here ---^
+

@@ -1,0 +1,37 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_zJ9eia (c_IsQzkXpD0O REAL UNIQUE, c_WOlKz TEXT UNIQUE, c_oux7iBd TEXT PRIMARY KEY DEFAULT 'Lt3djZwUyNrXN', c_iH3dv NUMERIC DEFAULT 653880, c_Qlc1am INTEGER, c_b7yJt8I INTEGER UNIQUE);
+CREATE TABLE t_nCmGC (c_gdVyHuv REAL UNIQUE, c_3H0nORE INTEGER NOT NULL CHECK (c_3H0nORE >= 0), c_gmuOBU4n REAL UNIQUE DEFAULT 468915.8682514869, UNIQUE (c_gdVyHuv, c_gmuOBU4n, c_3H0nORE));
+INSERT INTO t_zJ9eia (c_IsQzkXpD0O, c_WOlKz, c_oux7iBd, c_iH3dv, c_Qlc1am, c_b7yJt8I) VALUES (-221877.94452462613, 'C4zimhUPgDyLG_1', 'Ib8lj8M_2', 183249, -94160, -163724);
+INSERT INTO t_nCmGC (c_gdVyHuv, c_3H0nORE, c_gmuOBU4n) VALUES (-552830.4120068783, 995768, -4541.43645889021), (53169.81760049239, 1415845, 128712.36262025265), (517487.4804635756, 2258589, 368831.94313821406);
+INSERT INTO t_nCmGC (c_gdVyHuv, c_3H0nORE, c_gmuOBU4n) SELECT 439678.24574807845, 736415, 434598.52483045915;
+INSERT OR ABORT INTO t_nCmGC (c_gdVyHuv, c_3H0nORE, c_gmuOBU4n) VALUES (-870287.5750807651, 105626, 130279.39680666383);
+INSERT OR IGNORE INTO t_nCmGC (c_gdVyHuv, c_3H0nORE, c_gmuOBU4n) SELECT NULL, -207630, -750408.1768344883;
+INSERT OR FAIL INTO t_nCmGC (c_gdVyHuv, c_3H0nORE, c_gmuOBU4n) SELECT 861349.7533883532, -890957, 500056.934919653;
+WITH cte_IvX AS (SELECT * FROM t_zJ9eia LIMIT 10) SELECT c_iH3dv AS alias_9Gg FROM t_zJ9eia WHERE x'1B8B' GROUP BY c_gdVyHuv ORDER BY c_b7yJt8I DESC;
+ALTER TABLE t_zJ9eia ADD COLUMN c_BYDSZ0 INTEGER;
+DELETE FROM t_nCmGC WHERE c_gmuOBU4n <= -264606.1514746718;
+CREATE INDEX IF NOT EXISTS idx_6xKlb ON t_zJ9eia(c_oux7iBd);
+DELETE FROM t_zJ9eia WHERE c_IsQzkXpD0O IS NOT NULL;
+SELECT COUNT(*) FROM t_nCmGC;
+
+--- v3.26.0 ---
+OUT:
+5
+
+ERR:
+Runtime error near line 8: CHECK constraint failed: c_3H0nORE >= 0 (19)
+Parse error near line 9: no such column: c_gdVyHuv
+  AS alias_9Gg FROM t_zJ9eia WHERE x'1B8B' GROUP BY c_gdVyHuv ORDER BY c_b7yJt8I
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+5
+
+ERR:
+Runtime error near line 8: CHECK constraint failed: c_3H0nORE >= 0 (19)
+Parse error near line 9: no such column: c_gdVyHuv
+  AS alias_9Gg FROM t_zJ9eia WHERE x'1B8B' GROUP BY c_gdVyHuv ORDER BY c_b7yJt8I
+                                      error here ---^
+

@@ -1,0 +1,33 @@
+SQL:
+PRAGMA threads;
+CREATE TABLE IF NOT EXISTS t_6wrbG7Lm (c_DYQ96UZ NUMERIC UNIQUE CHECK (c_DYQ96UZ >= 0), c_4KOh INTEGER);
+INSERT OR FAIL INTO t_6wrbG7Lm (c_DYQ96UZ, c_4KOh) VALUES (-497225, 832223), (210433, 1691375), (2725644, 2556374);
+INSERT OR IGNORE INTO t_6wrbG7Lm (c_DYQ96UZ, c_4KOh) VALUES (-917677, 73115);
+UPDATE OR ABORT t_6wrbG7Lm SET c_4KOh = -725525, c_DYQ96UZ = 988913 WHERE c_4KOh < NULL;
+SELECT DISTINCT t_6wrbG7Lm.*, t_6wrbG7Lm.*, c_4KOh IN (SELECT * FROM t_6wrbG7Lm LIMIT 5) AS alias_1BT, c_4KOh, t_6wrbG7Lm.c_DYQ96UZ FROM t_6wrbG7Lm WHERE EXISTS (SELECT 1 FROM t_6wrbG7Lm LIMIT 1) EXCEPT SELECT LTRIM(- t_6wrbG7Lm.c_4KOh, SOUNDEX(TRUE, t_6wrbG7Lm.c_4KOh, t_6wrbG7Lm.c_DYQ96UZ)) AS alias_Mi4, t_6wrbG7Lm.c_DYQ96UZ, * FROM t_6wrbG7Lm ORDER BY c_4KOh;
+WITH cte_irN AS (SELECT * FROM t_6wrbG7Lm LIMIT 10) SELECT * FROM cte_irN;
+SELECT COUNT(*) FROM t_6wrbG7Lm;
+
+--- v3.26.0 ---
+OUT:
+0
+0
+
+ERR:
+Runtime error near line 3: CHECK constraint failed: c_DYQ96UZ >= 0 (19)
+Parse error near line 6: no such function: SOUNDEX
+  LIMIT 1) EXCEPT SELECT LTRIM(- t_6wrbG7Lm.c_4KOh, SOUNDEX(TRUE, t_6wrbG7Lm.c_4
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+0
+0
+
+ERR:
+Runtime error near line 3: CHECK constraint failed: c_DYQ96UZ >= 0 (19)
+Parse error near line 6: no such function: SOUNDEX
+  LIMIT 1) EXCEPT SELECT LTRIM(- t_6wrbG7Lm.c_4KOh, SOUNDEX(TRUE, t_6wrbG7Lm.c_4
+                                      error here ---^
+

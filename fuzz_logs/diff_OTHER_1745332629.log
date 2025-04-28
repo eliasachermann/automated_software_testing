@@ -1,0 +1,32 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_cUf0 (c_WSb7iwX7 TEXT COLLATE NOCASE);
+WITH cte_wVf AS (SELECT 1) INSERT OR ABORT INTO t_cUf0 (c_WSb7iwX7) VALUES ('KyxR8fPl7PghSRq91bC_0'), ('Td1N3Qdwr7ITN_100'), ('552yDS78aWg9wl9_200');
+SELECT *, CASE TRUE WHEN t_cUf0.c_WSb7iwX7 THEN SUM(FALSE, t_cUf0.c_WSb7iwX7) WHEN CASE t_cUf0.c_WSb7iwX7 WHEN t_cUf0.c_WSb7iwX7 THEN TRUE WHEN t_cUf0.c_WSb7iwX7 THEN t_cUf0.c_WSb7iwX7 WHEN TRUE THEN NULL END THEN CASE NULL WHEN t_cUf0.c_WSb7iwX7 THEN 'Y6' WHEN t_cUf0.c_WSb7iwX7 THEN x'74D1F698' WHEN t_cUf0.c_WSb7iwX7 THEN t_cUf0.c_WSb7iwX7 ELSE t_cUf0.c_WSb7iwX7 END ELSE t_cUf0.c_WSb7iwX7 END, TRUE, t_cUf0.c_WSb7iwX7 FROM t_cUf0 WHERE NULL ORDER BY c_WSb7iwX7 ASC;
+BEGIN TRANSACTION;
+UPDATE t_cUf0 SET c_WSb7iwX7 = 'jYlH2ekXCEa' WHERE c_WSb7iwX7 <= 'HigF';
+INSERT OR IGNORE INTO t_cUf0 (c_WSb7iwX7) VALUES ('5CAQnNzfU_0'), ('DkepcjzBtP_100');
+COMMIT;
+BEGIN TRANSACTION;
+INSERT INTO t_cUf0 (c_WSb7iwX7) SELECT '1Id4aotP';
+COMMIT;
+SELECT COUNT(*) FROM t_cUf0;
+
+--- v3.26.0 ---
+OUT:
+6
+
+ERR:
+Parse error near line 3: wrong number of arguments to function SUM()
+  SELECT *, CASE TRUE WHEN t_cUf0.c_WSb7iwX7 THEN SUM(FALSE, t_cUf0.c_WSb7iwX7) 
+                                    error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+6
+
+ERR:
+Parse error near line 3: wrong number of arguments to function SUM()
+  SELECT *, CASE TRUE WHEN t_cUf0.c_WSb7iwX7 THEN SUM(FALSE, t_cUf0.c_WSb7iwX7) 
+                                    error here ---^
+

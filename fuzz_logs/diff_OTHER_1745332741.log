@@ -1,0 +1,48 @@
+SQL:
+PRAGMA incremental_vacuum;
+CREATE TEMP TABLE IF NOT EXISTS t_rvgv (c_cke3 TEXT COLLATE BINARY CHECK (length(c_cke3) > 0), c_N3DKQk2Qwu TEXT, c_RcPq47 TEXT, c_PsmwVeuxkT NUMERIC, c_YL4aca4 REAL NOT NULL, c_Ldbu TEXT CHECK (length(c_Ldbu) > 0), c_NtoLL NUMERIC, c_q0sSN3 TEXT, c_KeU REAL NOT NULL, c_ZWd9G9cDl5 TEXT CHECK (length(c_ZWd9G9cDl5) > 0));
+CREATE TABLE IF NOT EXISTS t_RZ5Nz (c_woSEUbmSS NUMERIC UNIQUE DEFAULT 156180 CHECK (c_woSEUbmSS >= 0), c_Hfu TEXT NOT NULL COLLATE BINARY, c_4kTRAKC TEXT, c_4YwVLnIoJJ TEXT, c_3iVRlN REAL DEFAULT 782043.4917566322 CHECK (c_3iVRlN >= 0), c_OLf NUMERIC CHECK (c_OLf >= 0), c_FctbgiGnW REAL UNIQUE, c_0uDE TEXT DEFAULT 'R' COLLATE BINARY);
+INSERT OR ABORT INTO t_rvgv (c_cke3, c_N3DKQk2Qwu, c_RcPq47, c_PsmwVeuxkT, c_YL4aca4, c_Ldbu, c_NtoLL, c_q0sSN3, c_KeU, c_ZWd9G9cDl5) VALUES ('ixnpg1V_0', 'vH2rUQbR_1', 'jy730_2', -215559, -869677.3064329906, 'H6Ln3Hm_5', 924193, 'W6_7', 948703.2523318704, '9mUN_9');
+INSERT OR ABORT INTO t_rvgv (c_cke3, c_N3DKQk2Qwu, c_RcPq47, c_PsmwVeuxkT, c_YL4aca4, c_Ldbu, c_NtoLL, c_q0sSN3, c_KeU, c_ZWd9G9cDl5) SELECT 'xxQfUu', 'Jp9OHyYovO', 'Z1uNCXfOf', NULL, 667006.1920371074, 'Nr91z1o', 468480, 'bPs1s', -218750.5506582983, 'GElKS3S';
+INSERT OR FAIL INTO t_RZ5Nz (c_woSEUbmSS, c_Hfu, c_4kTRAKC, c_4YwVLnIoJJ, c_3iVRlN, c_OLf, c_FctbgiGnW, c_0uDE) VALUES (-562853, '7D5KEPca4ze_1', 'KF_2', 'qbT5QYCoOc_3', 838208.9615681351, -104936, -259624.6444542735, 'FnPLvu6PGqo_7'), (172968, 'bbk5jg9jiUqOvw_101', 'iWzCA5aDqh30_102', 'yQZLzdJCiiX0QZihgf_103', 140269.35513922013, 1820129, -878209.6810657016, 'QaZAElYuxTXVzH_107'), (1486142, 'VbgSysg08fz34klwo_201', 'g2cMyNCYymxAR9BxWT_202', 'VZW5GJ_203', -557164.9950734543, 1892301, 493946.3910924033, 'VlGEeSnnkR4rImNklh_207');
+INSERT INTO t_RZ5Nz (c_woSEUbmSS, c_Hfu, c_4kTRAKC, c_4YwVLnIoJJ, c_3iVRlN, c_OLf, c_FctbgiGnW, c_0uDE) SELECT 915253, 'PRMup', 'tL6KLUHuR', 'm7e601v', NULL, -141011, -912321.4386361982, 'J';
+REPLACE INTO t_RZ5Nz (c_woSEUbmSS, c_Hfu, c_4kTRAKC, c_4YwVLnIoJJ, c_3iVRlN, c_OLf, c_FctbgiGnW, c_0uDE) VALUES (-777273, 'goAfP5O8ST5WYIKZ_1', 'obcy0F6SPjwvcDOAkq_2', 'Q92nxFSdF_3', 41829.708547597285, -824299, 150361.86740297335, 'hgrZOd1j85_7');
+INSERT INTO t_RZ5Nz (c_woSEUbmSS, c_Hfu, c_4kTRAKC, c_4YwVLnIoJJ, c_3iVRlN, c_OLf, c_FctbgiGnW, c_0uDE) VALUES (-572570, 'Bj_1', 'lZ2BMpVG5Z8L_2', 'Ia3JIZIJ9x5_3', -73750.60008098045, -809903, -194886.2179619401, 'JLOe6HuoF7suhpNDA_7');
+ALTER TABLE t_rvgv ADD COLUMN c_jlz INTEGER;
+WITH cte_oQy AS (SELECT 1) UPDATE OR IGNORE t_RZ5Nz SET c_4YwVLnIoJJ = 'WySvb1h8D' WHERE c_woSEUbmSS != 253163;
+WITH cte_l6P AS (SELECT * FROM t_rvgv LIMIT 10) SELECT * FROM cte_l6P;
+SELECT c_RcPq47 AS alias_3gL, c_0uDE, *, *, CASE COUNT(FALSE, t_RZ5Nz.c_3iVRlN, t_RZ5Nz.c_woSEUbmSS) WHEN c_cke3 THEN CASE WHEN t_RZ5Nz.c_OLf THEN t_rvgv.c_q0sSN3 WHEN NULL THEN 'OdU6ynQ' WHEN t_rvgv.c_YL4aca4 THEN x'A5' ELSE t_rvgv.c_NtoLL END ELSE t_RZ5Nz.c_3iVRlN END FROM t_rvgv ORDER BY c_FctbgiGnW ASC, c_0uDE;
+UPDATE OR ABORT t_RZ5Nz SET c_4YwVLnIoJJ = 'KXe6TejqHm', c_0uDE = 'x', c_woSEUbmSS = 372196 WHERE c_4kTRAKC < 'O7VzIYgvGFetB2L8dQS';
+SELECT COUNT(*) FROM t_RZ5Nz;
+
+--- v3.26.0 ---
+OUT:
+ixnpg1V_0|vH2rUQbR_1|jy730_2|-215559|-869677.306432991|H6Ln3Hm_5|924193|W6_7|948703.25233187|9mUN_9|
+xxQfUu|Jp9OHyYovO|Z1uNCXfOf||667006.192037107|Nr91z1o|468480|bPs1s|-218750.550658298|GElKS3S|
+0
+
+ERR:
+Runtime error near line 6: CHECK constraint failed: c_woSEUbmSS >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_OLf >= 0 (19)
+Runtime error near line 8: CHECK constraint failed: c_woSEUbmSS >= 0 (19)
+Runtime error near line 9: CHECK constraint failed: c_woSEUbmSS >= 0 (19)
+Parse error near line 13: no such column: c_0uDE
+  SELECT c_RcPq47 AS alias_3gL, c_0uDE, *, *, CASE COUNT(FALSE, t_RZ5Nz.c_3iVRlN
+                  error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+ixnpg1V_0|vH2rUQbR_1|jy730_2|-215559|-869677.306432991|H6Ln3Hm_5|924193|W6_7|948703.25233187|9mUN_9|
+xxQfUu|Jp9OHyYovO|Z1uNCXfOf||667006.192037107|Nr91z1o|468480|bPs1s|-218750.550658298|GElKS3S|
+0
+
+ERR:
+Runtime error near line 6: CHECK constraint failed: c_woSEUbmSS >= 0 (19)
+Runtime error near line 7: CHECK constraint failed: c_OLf >= 0 (19)
+Runtime error near line 8: CHECK constraint failed: c_woSEUbmSS >= 0 (19)
+Runtime error near line 9: CHECK constraint failed: c_woSEUbmSS >= 0 (19)
+Parse error near line 13: no such column: c_0uDE
+  SELECT c_RcPq47 AS alias_3gL, c_0uDE, *, *, CASE COUNT(FALSE, t_RZ5Nz.c_3iVRlN
+                  error here ---^
+

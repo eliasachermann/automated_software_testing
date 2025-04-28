@@ -1,0 +1,41 @@
+SQL:
+PRAGMA fullfsync;
+CREATE TABLE IF NOT EXISTS t_9HY8gDsB (c_2lzC6Y REAL, c_AAoG2ExQB TEXT PRIMARY KEY, c_38WKiy0a6L TEXT, c_UFeWCjl REAL PRIMARY KEY, UNIQUE (c_38WKiy0a6L));
+CREATE TABLE t_bGjS (c_uOSuLJJMmx REAL NOT NULL);
+CREATE TABLE IF NOT EXISTS t_YkOY (c_9NTUwRm TEXT PRIMARY KEY COLLATE NOCASE, c_8S41F NUMERIC, c_BYkV REAL);
+INSERT OR IGNORE INTO t_9HY8gDsB (c_2lzC6Y, c_AAoG2ExQB, c_38WKiy0a6L, c_UFeWCjl) VALUES (-391400.29091227916, 'xhMvIwGEgJBEMOJXY_1', 'dqwbTWN4tCj_2', -805110.6542912356), (-904097.5163967481, 'lRgMqmDkY_101', 'Im_102', 302105.11609361647);
+INSERT INTO t_9HY8gDsB (c_2lzC6Y, c_AAoG2ExQB, c_38WKiy0a6L, c_UFeWCjl) VALUES (477406.5458370317, 'APls0g_1', 'tqJVat_2', 704956.622456802), (-517613.00268516655, 'AShKNrx7yJR_101', 'N6pQl6sIYMRLu0y4_102', 655622.2528294004);
+WITH cte_33Z AS (SELECT 1) INSERT OR ABORT INTO t_bGjS (c_uOSuLJJMmx) VALUES (-546694.0896453855), (-812303.0347129384);
+INSERT OR ABORT INTO t_YkOY (c_9NTUwRm, c_8S41F, c_BYkV) SELECT 'ERlITfwLMjz', -454191, 169232.14070972032;
+INSERT OR REPLACE INTO t_YkOY (c_9NTUwRm, c_8S41F, c_BYkV) VALUES ('xsKxLj6i_0', -165135, -552641.8196934864), ('KTkhA886fzrec6xTw_100', 1039528, -920686.886312398);
+UPDATE OR ABORT t_YkOY SET c_9NTUwRm = 'CBhUUbA', c_8S41F = 204793, c_BYkV = -299145.0100713811 WHERE c_9NTUwRm <= NULL;
+SELECT * FROM t_bGjS WHERE NOT CASE WHEN t_bGjS.c_uOSuLJJMmx THEN 'WDvRc8ihA6LzU2022hqC' WHEN t_bGjS.c_uOSuLJJMmx THEN t_YkOY.c_BYkV WHEN t_bGjS.c_uOSuLJJMmx THEN t_9HY8gDsB.c_AAoG2ExQB ELSE t_bGjS.c_uOSuLJJMmx END GROUP BY c_uOSuLJJMmx;
+SELECT COUNT(*) FROM t_bGjS;
+
+--- v3.26.0 ---
+OUT:
+0
+2
+
+ERR:
+Parse error near line 2: table "t_9HY8gDsB" has more than one primary key
+Parse error near line 5: no such table: t_9HY8gDsB
+Parse error near line 6: no such table: t_9HY8gDsB
+Parse error near line 11: no such column: t_YkOY.c_BYkV
+  vRc8ihA6LzU2022hqC' WHEN t_bGjS.c_uOSuLJJMmx THEN t_YkOY.c_BYkV WHEN t_bGjS.c_
+                                      error here ---^
+
+
+--- v3.39.4 ---
+OUT:
+0
+2
+
+ERR:
+Parse error near line 2: table "t_9HY8gDsB" has more than one primary key
+Parse error near line 5: no such table: t_9HY8gDsB
+Parse error near line 6: no such table: t_9HY8gDsB
+Parse error near line 11: no such column: t_YkOY.c_BYkV
+  vRc8ihA6LzU2022hqC' WHEN t_bGjS.c_uOSuLJJMmx THEN t_YkOY.c_BYkV WHEN t_bGjS.c_
+                                      error here ---^
+

@@ -1,0 +1,28 @@
+SQL:
+PRAGMA max_page_count;
+CREATE TEMP TABLE t_RebLajBEc (c_47Zm8w7 TEXT CHECK (length(c_47Zm8w7) > 0), c_yrCai REAL, c_tR1GIvd TEXT DEFAULT '9Cj0gBRRkmfa', c_cQ3mok1CyR INTEGER DEFAULT 233072, c_g78E1 NUMERIC DEFAULT -129249 CHECK (c_g78E1 >= 0), c_oDnpAPa4t1 INTEGER UNIQUE, c_NRwCJ NUMERIC, c_wlImkmPltI NUMERIC);
+INSERT INTO t_RebLajBEc (c_47Zm8w7, c_yrCai, c_tR1GIvd, c_cQ3mok1CyR, c_g78E1, c_oDnpAPa4t1, c_NRwCJ, c_wlImkmPltI) SELECT '9meMlT36', 757045.5853051464, 'sJq3hKGs', -561355, -428917, 607935, 260256, -26121;
+INSERT OR IGNORE INTO t_RebLajBEc (c_47Zm8w7, c_yrCai, c_tR1GIvd, c_cQ3mok1CyR, c_g78E1, c_oDnpAPa4t1, c_NRwCJ, c_wlImkmPltI) SELECT NULL, 237997.32775272778, 'jsa03mqr6a9LmI0gtJ0', -86046, -154496, 544002, 277689, -297699;
+CREATE INDEX idx_Wbkbq ON t_RebLajBEc(c_wlImkmPltI);
+DELETE FROM t_RebLajBEc WHERE c_tR1GIvd IS NULL;
+UPDATE OR FAIL t_RebLajBEc SET c_cQ3mok1CyR = 779585, c_NRwCJ = 475436;
+ALTER TABLE t_RebLajBEc ADD COLUMN c_nJtF9Q REAL;
+SELECT COUNT(*) FROM t_RebLajBEc;
+
+--- v3.26.0 ---
+OUT:
+1073741823
+0
+
+ERR:
+Runtime error near line 3: CHECK constraint failed: c_g78E1 >= 0 (19)
+
+
+--- v3.39.4 ---
+OUT:
+4294967294
+0
+
+ERR:
+Runtime error near line 3: CHECK constraint failed: c_g78E1 >= 0 (19)
+

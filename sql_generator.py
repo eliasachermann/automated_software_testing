@@ -1,20 +1,78 @@
-#!/usr/bin/env python3
-import subprocess
 import random
 import string
-import tempfile
-import re
-import argparse
-import multiprocessing as mp
-import time
-import os
-import json
-from datetime import datetime
 
-# Add this function at module level (outside any class)
 def likelihood_handler(args):
     """Special handler for LIKELIHOOD function arguments."""
     return [args[0], str(random.uniform(0.0, 1.0))]
+
+def random_string(length=1, include_special=False):
+    """Generate a random string, optionally with special characters."""
+    chars = string.ascii_letters + string.digits
+    if include_special:
+        chars += "_-$#@!%^&*()."
+    return ''.join(random.choices(chars, k=length))
+
+def random_hex_string(length):
+    """Generate a valid hexadecimal string with even length."""
+    hex_chars = "0123456789ABCDEF"
+    # Ensure even length (each byte is 2 hex chars)
+    if length % 2 != 0:
+        length += 1
+    return ''.join(random.choices(hex_chars, k=length))
+
+def random_table_name():
+    """Generate a random table name."""
+    return f"t_{random_string(random.randint(3, 10))}"
+
+def random_column_name():
+    """Generate a random column name."""
+    return f"c_{random_string(random.randint(3, 10))}"
+
+def random_int(min_val=-1000000, max_val=1000000):
+    """Generate a random integer."""
+    return random.randint(min_val, max_val)
+
+def random_float():
+    """Generate a random float."""
+    return random.uniform(-1000000, 1000000)
+
+def random_value(include_null=True, hex_limit=8, data_type=None, is_unique=False, unique_id=0):
+    """Generate a random value of various types, optionally making it more unique."""
+    if include_null and random.random() < 0.1 and not is_unique:
+        return "NULL"
+    
+    # If a specific data type is provided, generate appropriate values
+    if data_type:
+        if data_type == "INTEGER":
+            # Ensure uniqueness by using the unique_id offset for UNIQUE columns
+            offset = unique_id * 10000 if is_unique else 0
+            return str(random_int() + offset)
+        elif data_type == "REAL":
+            offset = unique_id * 10.0 if is_unique else 0
+            return str(random_float() + offset)
+        elif data_type == "TEXT":
+            # Add unique_id for uniqueness
+            unique_suffix = f"_{unique_id}" if is_unique else ""
+            return f"'{random_string(random.randint(1, 20))}{unique_suffix}'"
+        elif data_type == "NUMERIC":
+            offset = unique_id * 10000 if is_unique else 0
+            return str(random_int() + offset)
+        elif data_type == "BLOB":
+            return f"x'{random_hex_string(random.randint(2, hex_limit))}'"
+        else:
+            unique_suffix = f"_{unique_id}" if is_unique else ""
+            return f"'{random_string(random.randint(1, 20))}{unique_suffix}'"
+    
+    # Default random types if no specific type is given
+    value_types = [
+        lambda: str(random_int()),
+        lambda: str(random_float()),
+        lambda: f"'{random_string(random.randint(1, 20), include_special=False)}'",
+        lambda: f"x'{random_hex_string(random.randint(2, hex_limit))}'",  # hex blob
+        lambda: f"'{random.choice(['true', 'false'])}'",
+        lambda: f"'{random.randint(1900, 2100)}-{random.randint(1, 12):02d}-{random.randint(1, 28):02d}'"  # date
+    ]
+    return random.choice(value_types)()
 
 class SQLiteGrammar:
     """Implements the formal SQLite grammar according to the ANTLR4 specification."""
@@ -831,81 +889,15 @@ class SQLiteGrammar:
         else:
             return f"PRAGMA {pragma_name}({pragma_value});"
 
-def random_string(length=1, include_special=False):
-    """Generate a random string, optionally with special characters."""
-    chars = string.ascii_letters + string.digits
-    if include_special:
-        chars += "_-$#@!%^&*()."
-    return ''.join(random.choices(chars, k=length))
 
-def random_hex_string(length):
-    """Generate a valid hexadecimal string with even length."""
-    hex_chars = "0123456789ABCDEF"
-    # Ensure even length (each byte is 2 hex chars)
-    if length % 2 != 0:
-        length += 1
-    return ''.join(random.choices(hex_chars, k=length))
-
-def random_table_name():
-    """Generate a random table name."""
-    return f"t_{random_string(random.randint(3, 10))}"
-
-def random_column_name():
-    """Generate a random column name."""
-    return f"c_{random_string(random.randint(3, 10))}"
-
-def random_int(min_val=-1000000, max_val=1000000):
-    """Generate a random integer."""
-    return random.randint(min_val, max_val)
-
-def random_float():
-    """Generate a random float."""
-    return random.uniform(-1000000, 1000000)
-
-def random_value(include_null=True, hex_limit=8, data_type=None, is_unique=False, unique_id=0):
-    """Generate a random value of various types, optionally making it more unique."""
-    if include_null and random.random() < 0.1 and not is_unique:
-        return "NULL"
-    
-    # If a specific data type is provided, generate appropriate values
-    if data_type:
-        if data_type == "INTEGER":
-            # Ensure uniqueness by using the unique_id offset for UNIQUE columns
-            offset = unique_id * 10000 if is_unique else 0
-            return str(random_int() + offset)
-        elif data_type == "REAL":
-            offset = unique_id * 10.0 if is_unique else 0
-            return str(random_float() + offset)
-        elif data_type == "TEXT":
-            # Add unique_id for uniqueness
-            unique_suffix = f"_{unique_id}" if is_unique else ""
-            return f"'{random_string(random.randint(1, 20))}{unique_suffix}'"
-        elif data_type == "NUMERIC":
-            offset = unique_id * 10000 if is_unique else 0
-            return str(random_int() + offset)
-        elif data_type == "BLOB":
-            return f"x'{random_hex_string(random.randint(2, hex_limit))}'"
-        else:
-            unique_suffix = f"_{unique_id}" if is_unique else ""
-            return f"'{random_string(random.randint(1, 20))}{unique_suffix}'"
-    
-    # Default random types if no specific type is given
-    value_types = [
-        lambda: str(random_int()),
-        lambda: str(random_float()),
-        lambda: f"'{random_string(random.randint(1, 20), include_special=False)}'",
-        lambda: f"x'{random_hex_string(random.randint(2, hex_limit))}'",  # hex blob
-        lambda: f"'{random.choice(['true', 'false'])}'",
-        lambda: f"'{random.randint(1900, 2100)}-{random.randint(1, 12):02d}-{random.randint(1, 28):02d}'"  # date
-    ]
-    return random.choice(value_types)()
-
-def generate_test_case(grammar):
+# Function to generate a simple SQL SELECT query
+def generate_query():
     """Generate a complete test case using the formal grammar."""
     # First create tables
     num_tables = random.randint(1, 3)
     tables_info = {}
     statements = []
+    grammar = SQLiteGrammar()
     
     # Sometimes add initial PRAGMA statements
     if random.random() < 0.3:
@@ -993,230 +985,3 @@ def generate_test_case(grammar):
         statements.append("SELECT 1;")
     
     return "\n".join(statements)
-
-def classify_difference(out_old, err_old, out_new, err_new):
-    """Classify the type of difference to help with analysis."""
-    if not err_old and err_new:
-        return "NEW_ERROR"
-    elif err_old and not err_new:
-        return "OLD_ERROR"
-    elif "UNIQUE constraint failed" in err_old and "UNIQUE constraint failed" in err_new:
-        return "SAME_CONSTRAINT_ERROR"  # Not interesting
-    elif out_old != out_new:
-        return "DIFFERENT_OUTPUT"
-    else:
-        return "OTHER"
-
-def compare_results(out_old, err_old, out_new, err_new):
-    """Better detection of significant differences."""
-    # Simple string comparison
-    if out_old != out_new:
-        # Classify the output differences
-        old_lines = out_old.strip().split("\n")
-        new_lines = out_new.strip().split("\n")
-        
-        # If just whitespace differences, ignore
-        if [line.strip() for line in old_lines if line.strip()] == [line.strip() for line in new_lines if line.strip()]:
-            return False
-            
-        print("Output different!")
-        return True
-    
-    if err_old != "" and err_new == "":
-        print("Old gives error but new not!")
-        return True
-        
-    if err_old and err_new:
-        # Split error messages into lines to handle multi-line errors
-        err_old_lines = [line for line in err_old.strip().split('\n') if line.strip()]
-        err_new_lines = [line for line in err_new.strip().split('\n') if line.strip() and not "error here ---^" in line]
-        
-        # Skip context lines showing SQL with pointers
-        err_new_lines = [line for line in err_new_lines if not (line.strip() and not line.startswith("Parse error") and not line.startswith("Error:") and not line.startswith("Runtime error"))]
-        
-        # If different number of error lines after normalization, that's still interesting
-        if len(err_old_lines) != len(err_new_lines):
-            print("Different number of error lines after normalization!")
-            return True
-        
-        # Compare corresponding lines
-        for i in range(len(err_old_lines)):
-            line_old = err_old_lines[i]
-            line_new = err_new_lines[i]
-            
-            # Handle constraint failures specially
-            if (("CHECK constraint failed" in line_old and "CHECK constraint failed" in line_new) or
-                ("NOT NULL constraint failed" in line_old and "NOT NULL constraint failed" in line_new) or
-                ("UNIQUE constraint failed" in line_old and "UNIQUE constraint failed" in line_new)):
-                
-                # Extract line numbers if they exist
-                old_match = re.search(r"near line (\d+)", line_old)
-                new_match = re.search(r"near line (\d+)", line_new)
-                
-                if old_match and new_match and old_match.group(1) == new_match.group(1):
-                    # Same line number and both are constraint failures - consider equivalent
-                    continue
-            
-            # Normalize error prefixes and extract core message
-            if line_old.startswith("Error:"):
-                core_old = line_old.split("Error:", 1)[1].strip()
-            else:
-                core_old = line_old.strip()
-                
-            if line_new.startswith("Parse error"):
-                core_new = line_new.split("Parse error", 1)[1].strip()
-            elif line_new.startswith("Runtime error"):
-                core_new = line_new.split("Runtime error", 1)[1].strip()
-            else:
-                core_new = line_new.strip()
-            
-            # Compare the core error messages
-            if core_old != core_new:
-                # Further normalize by extracting just the essential part
-                parts_old = core_old.split(": ", 1)
-                essential_old = parts_old[1] if len(parts_old) > 1 else parts_old[0]
-                
-                parts_new = core_new.split(": ", 1)
-                essential_new = parts_new[1] if len(parts_new) > 1 else parts_new[0]
-                
-                # Remove error codes like (19) from the end of the message for both old and new
-                essential_old = re.sub(r'\s+\(\d+\)$', '', essential_old)
-                essential_new = re.sub(r'\s+\(\d+\)$', '', essential_new)
-                
-                # For constraint errors, further normalize by removing the specific expression details
-                if (("CHECK constraint failed" in essential_old and "CHECK constraint failed" in essential_new) or
-                    ("NOT NULL constraint failed" in essential_old and "NOT NULL constraint failed" in essential_new) or
-                    ("UNIQUE constraint failed" in essential_old and "UNIQUE constraint failed" in essential_new)):
-                    continue
-                
-                if essential_old != essential_new:
-                    print(f"Error messages different: '{essential_old}' vs '{essential_new}'")
-                    return True
-        
-        return False  # Errors are essentially the same
-    
-    return False  # No differences
-
-def run_sqlite(version_path, sql):
-    try:
-        with tempfile.NamedTemporaryFile() as tmpdb:
-            cmd = [version_path, tmpdb.name]
-            result = subprocess.run(
-                cmd, input=sql.encode(), capture_output=True, timeout=5
-            )
-            # Add error handling to prevent UTF-8 decode errors
-            stdout = result.stdout.decode(errors='replace')
-            stderr = result.stderr.decode(errors='replace')
-            return stdout, stderr
-    except Exception as e:
-        return "", str(e)
-
-def save_difference(sql, out_old, err_old, out_new, err_new, diff_type):
-    """Save a difference to a log file."""
-    timestamp = int(time.time())
-    log_dir = "fuzz_logs"
-    
-    # Create logs directory if it doesn't exist
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-    
-    filename = f"{log_dir}/diff_{diff_type}_{timestamp}.log"
-    with open(filename, "w") as f:
-        f.write(f"SQL:\n{sql}\n\n")
-        f.write(f"--- v3.26.0 ---\nOUT:\n{out_old}\nERR:\n{err_old}\n\n")
-        f.write(f"--- v3.39.4 ---\nOUT:\n{out_new}\nERR:\n{err_new}\n")
-    
-    return filename
-
-def run_single_test(i, old_sqlite, new_sqlite, grammar):        
-    sql = generate_test_case(grammar)
-    out_old, err_old = run_sqlite(old_sqlite, sql)
-    out_new, err_new = run_sqlite(new_sqlite, sql)
-    
-    if compare_results(out_old, err_old, out_new, err_new):
-        diff_type = classify_difference(out_old, err_old, out_new, err_new)
-        filename = save_difference(sql, out_old, err_old, out_new, err_new, diff_type)
-        
-        print(f"\n❗ Difference found! Type: {diff_type}, saved to {filename}")
-        return {
-            "sql": sql,
-            "old": (out_old, err_old),
-            "new": (out_new, err_new),
-            "type": diff_type,
-            "file": filename
-        }
-    return None
-
-def     run_parallel_tests(args):
-    """Run tests in parallel."""
-    print(f"Running {args.iterations} tests using {args.processes} processes")
-    print(f"Testing {args.old_sqlite} vs {args.new_sqlite}")
-    
-    start_time = time.time()
-    grammar = SQLiteGrammar()
-    
-    with mp.Pool(processes=args.processes) as pool:
-        results = pool.starmap(
-            run_single_test, 
-            [(i, args.old_sqlite, args.new_sqlite, grammar) for i in range(args.iterations)]
-        )
-    
-    # Filter out None results
-    differences = [r for r in results if r]
-    
-    end_time = time.time()
-    duration = end_time - start_time
-    
-    print(f"\nCompleted {args.iterations} tests in {duration:.2f} seconds")
-    print(f"Found {len(differences)} differences")
-    
-    # Write a summary report
-    if differences:
-        summary_file = f"fuzz_logs/summary_{int(end_time)}.json"
-        with open(summary_file, "w") as f:
-            # Create a summary without the full SQL and output to keep it smaller
-            summary = {
-                "total_tests": args.iterations,
-                "differences_found": len(differences),
-                "duration_seconds": duration,
-                "timestamp": datetime.now().isoformat(),
-                "differences": [
-                    {
-                        "type": diff["type"],
-                        "file": diff["file"]
-                    } for diff in differences
-                ]
-            }
-            json.dump(summary, f, indent=2)
-        print(f"Summary written to {summary_file}")
-    
-    return differences
-
-def parse_args():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description='SQLite Differential Fuzzer')
-    parser.add_argument('--iterations', type=int, default=10000, 
-                      help='Number of test iterations')
-    parser.add_argument('--processes', type=int, default=4,
-                      help='Number of parallel processes')
-    parser.add_argument('--old-sqlite', default='/usr/bin/sqlite3-3.26.0',
-                      help='Path to old SQLite binary')
-    parser.add_argument('--new-sqlite', default='/usr/bin/sqlite3-3.39.4',
-                      help='Path to new SQLite binary')
-    parser.add_argument('--focus', choices=['all', 'joins', 'window', 'json', 'pragmas'],
-                      default='all', help='Focus testing on specific features')
-    return parser.parse_args()
-
-def main():
-    """Main function."""
-    args = parse_args()
-    differences = run_parallel_tests(args)
-    
-    if not differences:
-        print("No differences found!")
-        
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nFuzzing stopped by user")
