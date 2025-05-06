@@ -1,0 +1,40 @@
+SQL:
+PRAGMA cell_size_check = 0;
+CREATE TABLE t_xcpijj8s (c_VFhS4pZD NUMERIC NOT NULL DEFAULT NULL, c_3P0h TEXT, c_KYXd TEXT);
+INSERT OR FAIL INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) VALUES (-322161, 'rBixXTFYr_1', 'mruN_2');
+WITH cte_1on AS (SELECT 1) INSERT OR REPLACE INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) SELECT NULL, 'MZ', 'oM37Zgud';
+INSERT OR REPLACE INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) VALUES (692538, '5fT_1', 'u_2'), (575793, 'Oojtz35lzlp4y2l_101', 'WiMXhWeUepX9JYAm_102');
+INSERT INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) VALUES (982043, 'ZDIDa2fyIKy_1', 'VB1nbhaZ_2');
+INSERT OR IGNORE INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) SELECT -204707, 'BE57DdO', NULL;
+DELETE FROM t_xcpijj8s WHERE c_VFhS4pZD IS NOT NULL;
+BEGIN TRANSACTION;
+WITH cte_Yec AS (SELECT 1) UPDATE OR FAIL t_xcpijj8s SET c_VFhS4pZD = -363193, c_3P0h = 'VSa3qoA' WHERE c_3P0h > 'EKgWD8WXYssMP4OnP8N';
+INSERT OR FAIL INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) SELECT -302503, '4DEcDnioqo16l1F', 'JjGsgX7O0dkxUtO';
+INSERT INTO t_xcpijj8s (c_VFhS4pZD, c_3P0h, c_KYXd) VALUES (-881640, 'hOsHYIdsYlm_1', 'Qh8xNkmsJmx7_2'), (1129729, 'y0QpNrPW77yYQNzQ_101', 'S9wuymxJReB_102');
+COMMIT;
+ALTER TABLE t_xcpijj8s ADD COLUMN c_CXSTa3o REAL;
+UPDATE OR REPLACE t_xcpijj8s SET c_KYXd = 'KtzrdsgkKh', c_VFhS4pZD = 195642, c_3P0h = '1XxTB' WHERE c_VFhS4pZD > 416885;
+WITH cte_Sqc AS (SELECT * FROM t_xcpijj8s LIMIT 10) SELECT * FROM cte_Sqc;
+SELECT COUNT(*) FROM t_xcpijj8s;
+
+--- v3.39.4 ---
+OUT:
+-363193|VSa3qoA|oM37Zgud|
+-302503|4DEcDnioqo16l1F|JjGsgX7O0dkxUtO|
+-881640|hOsHYIdsYlm_1|Qh8xNkmsJmx7_2|
+195642|1XxTB|KtzrdsgkKh|
+4
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+-302503|4DEcDnioqo16l1F|JjGsgX7O0dkxUtO|
+-881640|hOsHYIdsYlm_1|Qh8xNkmsJmx7_2|
+195642|1XxTB|KtzrdsgkKh|
+3
+
+ERR:
+Runtime error near line 4: NOT NULL constraint failed: t_xcpijj8s.c_VFhS4pZD (19)
+

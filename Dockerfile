@@ -2,14 +2,18 @@ FROM theosotr/sqlite3-test
 
 USER root
 
-# Install build tools
+# Install build tools + Python + pip
 RUN apt-get update && apt-get install -y \
     python3 \
+    python3-pip \
     gcc \
     g++ \
     make \
     wget \
     && rm -rf /var/lib/apt/lists/*
+
+# Install sqlglot and other useful Python packages
+RUN pip3 install sqlglot tqdm
 
 # -------------------------------------------------
 # Build and install SQLite 3.26.0 with coverage flags

@@ -32,31 +32,36 @@ def random_int(min_val=-1000000, max_val=1000000):
     """Generate a random integer."""
     return random.randint(min_val, max_val)
 
-def random_float():
+def random_float(min_val=-1000000, max_val=1000000):
     """Generate a random float."""
-    return random.uniform(-1000000, 1000000)
+    return random.uniform(min_val, max_val)
 
-def random_value(include_null=True, hex_limit=8, data_type=None, is_unique=False, unique_id=0):
+def random_value(is_not_null=True, hex_limit=8, data_type=None, is_unique=False, min=None, max=None, unique_id=0):
     """Generate a random value of various types, optionally making it more unique."""
-    if include_null and random.random() < 0.1 and not is_unique:
+    if not is_not_null and random.random() < 0.1 and not is_unique:
         return "NULL"
+    
+    if min == None:
+        min = -1000000
+    if max == None:
+        max = 1000000
     
     # If a specific data type is provided, generate appropriate values
     if data_type:
         if data_type == "INTEGER":
             # Ensure uniqueness by using the unique_id offset for UNIQUE columns
-            offset = unique_id * 10000 if is_unique else 0
-            return str(random_int() + offset)
+            offset = unique_id * 10000 if is_unique else 1
+            return str(random_int(min, max) + offset)
         elif data_type == "REAL":
-            offset = unique_id * 10.0 if is_unique else 0
-            return str(random_float() + offset)
+            offset = unique_id * 10.0 if is_unique else 1
+            return str(random_float(min, max) + offset)
         elif data_type == "TEXT":
             # Add unique_id for uniqueness
             unique_suffix = f"_{unique_id}" if is_unique else ""
             return f"'{random_string(random.randint(1, 20))}{unique_suffix}'"
         elif data_type == "NUMERIC":
-            offset = unique_id * 10000 if is_unique else 0
-            return str(random_int() + offset)
+            offset = unique_id * 10000 if is_unique else 1
+            return str(random_int(min, max) + offset)
         elif data_type == "BLOB":
             return f"x'{random_hex_string(random.randint(2, hex_limit))}'"
         else:
@@ -144,11 +149,12 @@ class SQLiteGrammar:
             "foreign_key_list", "foreign_keys", "freelist_count", "fullfsync", 
             "ignore_check_constraints", "incremental_vacuum", "integrity_check", 
             "journal_mode", "journal_size_limit", "locking_mode", 
-            "max_page_count", "mmap_size", "page_count", "page_size", "parser_trace", 
+            "mmap_size", "page_count", "page_size", "parser_trace", 
             "query_only", "quick_check", "read_uncommitted", "recursive_triggers", 
             "reverse_unordered_selects", "secure_delete", 
             "shrink_memory", "stats", "synchronous", "table_info", 
             "temp_store", "threads", "wal_autocheckpoint", "wal_checkpoint"
+            # removed "max_page_count"
         ]
 
         self.function_requirements = {
@@ -377,6 +383,22 @@ class SQLiteGrammar:
         result_col_generator = random.choice(options)
         return result_col_generator()
     
+    def generate_subquery_select(self, tables_info):
+        """Generate a subquery for use in SELECT."""
+        # Pick a random table to base the subquery on
+        table = random.choice(list(tables_info.keys()))
+        
+        # Pick a random column from the table for the subquery
+        column = random.choice(tables_info[table]["columns"])
+        
+        # Randomly decide the type of subquery (aggregate)
+        subquery_type = random.choice(["COUNT", "SUM", "AVG", "MAX", "MIN"])
+        
+        # Generate the subquery
+        subquery = f"{subquery_type}({column}) FROM {table} WHERE {self.generate_expr(0, tables_info, 2)}"
+        
+        return subquery
+
     def generate_select_core(self, tables_info, include_order_by=True, include_limit=True):
         """Generate a SELECT core statement following the formal grammar."""
         if not tables_info:
@@ -514,9 +536,9 @@ class SQLiteGrammar:
     
     def generate_select_stmt(self, tables_info):
         """Generate a complete SELECT statement."""
-        # Add optional WITH clause
+        # Add optional WITH clause TODO
         with_clause = ""
-        if random.random() < 0.2 and tables_info:
+        if random.random() < 0 and tables_info:
             cte_name = f"cte_{random_string(3)}"
             table = random.choice(list(tables_info.keys()))
             with_clause = f"WITH {cte_name} AS (SELECT * FROM {table} LIMIT 10) "
@@ -577,13 +599,33 @@ class SQLiteGrammar:
                         compound = compound.replace(f" LIMIT {limit}", f" LIMIT {limit}, {offset}")
         
         return f"{with_clause}{select_core}{compound}"
-    
-    def generate_insert_stmt(self, table_name, column_names, column_types=None):
+
+    def generate_conflict_clause(self):
+
+        if random.random() < 0.5:
+            return ""
+        else:
+            query = "ON CONFLICT "
+            choice = random.random()
+            if choice < 0.2:
+                query += "ROLLBACK "
+            elif choice < 0.4:
+                query += "ABORT "
+            elif choice < 0.6:
+                query += "FAIL "
+            elif choice < 0.8:
+                query += "IGNORE "
+            else:
+                query += "REPLACE "
+            return query
+
+    def generate_insert_stmt(self, table_name, column_names, column_types=None, column_constraints=None):
         """Generate an INSERT statement according to the formal grammar."""
         if not column_names:
             return f"-- Skipping INSERT for {table_name}: no columns"
         
         column_types = column_types or {}
+        column_constraints = column_constraints or {}
         
         # Optional WITH clause
         with_clause = ""
@@ -614,8 +656,8 @@ class SQLiteGrammar:
                 values = []
                 for idx, col in enumerate(column_names):
                     col_type = column_types.get(col)
-                    values.append(random_value(include_null=True, data_type=col_type, is_unique=True, unique_id=i*100+idx))
-                
+                    col_constraint = column_constraints.get(col)
+                    values.append(random_value(is_not_null=col_constraint["is_not_null"], data_type=col_type, is_unique=col_constraint["is_unique"], min=col_constraint["min"], max=col_constraint["max"], unique_id=i*100+idx))
                 rows.append(f"({', '.join(values)})")
             
             values_clause = f"VALUES {', '.join(rows)}"
@@ -627,8 +669,8 @@ class SQLiteGrammar:
             select_cols = []
             for col in column_names:
                 col_type = column_types.get(col)
-                select_cols.append(random_value(include_null=True, data_type=col_type))
-            
+                col_constraint = column_constraints.get(col)
+                select_cols.append(random_value(is_not_null=col_constraint["is_not_null"], data_type=col_type, is_unique=col_constraint["is_unique"], min=col_constraint["min"], max=col_constraint["max"]))
             select_clause = f"SELECT {', '.join(select_cols)}"
             
             return f"{with_clause}{insert_variant} {table_name} {col_list} {select_clause}"
@@ -719,91 +761,158 @@ class SQLiteGrammar:
         
         return f"{with_clause}{delete_clause}{where_clause}"
     
-    def generate_create_table_stmt(self, table_name=None):
+    def generate_create_table_stmt(self, table_counter, table_name=None):
         """Generate a CREATE TABLE statement according to the formal grammar."""
-        table = table_name if table_name else f"t_{random_string(random.randint(3, 10))}"
+        grammar = SQLiteGrammar()
+        query = "CREATE "
+
+        # if choice < 0.33:
+        #     query += "TEMP "
+        # elif choice > 0.66:
+        #     query += "TEMPORARY "
         
-        # Temporary table?
-        temp = "TEMP " if random.random() < 0.1 else ""
+        query += "TABLE "
         
         # EXISTS clause
-        if_not_exists = "IF NOT EXISTS " if random.random() < 0.7 else ""
-        
-        # Generate columns
-        num_columns = random.randint(1, 10)
-        columns = []
+        query += "IF NOT EXISTS " if random.random() < 0.7 else ""
+
+        # TODO add possible: schema-name . 
+
+        # table_name
+        table_name = table_name if table_name else f"t_{table_counter}"
+        query += table_name + " "
         column_names = []
         column_types = {}
-        
-        for _ in range(num_columns):
-            col_name = f"c_{random_string(random.randint(3, 10))}"
-            column_names.append(col_name)
+        column_constraints = {}
+        primary_key_already_set = False
+
+        if random.random() < 1:
+            query += "( "
+            # add columns
+            num_columns = random.randint(1, 10)
+            for column in range(num_columns):
+                if column > 0:
+                    query += ", "
+                col_name = f"c_{column}"
+                column_names.append(col_name)
+                
+                # possible type
+                # if random.random() < 0.99:
+                # Generate data type (not same as docs type-name)
+                data_type = random.choice(self.data_types)
+                column_types[col_name] = data_type
+
+                save_constraint = {
+                        "is_pk": False,
+                        "is_not_null": False,
+                        "is_unique": False,
+                        "min": None,
+                        "max": None,
+                    }
+
+                query += f"{col_name} {data_type} "
+
+                # column constraint
+                n_col_constraints = random.randint(0, 3)
+                
+                column_constraint = ""
+
+                auto_increment_set = False
+                conflict_clause = ""
+
+                # PRIMARY KEY
+                if random.random() < 0.1:
+                    if random.random() < 0.1 and not primary_key_already_set:
+                        column_constraint += "PRIMARY KEY "
+                        primary_key_already_set = True
+                        save_constraint["is_pk"] = True
+                        if random.random() < 0.33:
+                            column_constraint += "ASC "
+                        elif random.random() > 0.66:
+                            column_constraint += "DESC "
+                        # conflict clause
+                        # column_constraint += grammar.generate_conflict_clause()
+                        elif random.random() < 0.3 and data_type == "INTEGER":
+                            column_constraint += ("AUTOINCREMENT ")
+                            auto_increment_set = True
+                # NOT NULL
+                if random.random() < 0.1 and not auto_increment_set:
+                    column_constraint += "NOT NULL "
+                    save_constraint["is_not_null"] = True
+                    #column_constraint += grammar.generate_conflict_clause()
+                # UNIQUE
+                if random.random() < 0.1 and not auto_increment_set:
+                    column_constraint += "UNIQUE "
+                    save_constraint["is_unique"]= True
+                    #column_constraint += grammar.generate_conflict_clause()
+                # CHECK
+                if random.random() < 0.1 and not auto_increment_set and data_type in ["INTEGER", "REAL", "NUMERIC"] :
+                    column_constraint += "CHECK ("
+                    check_expr = f"{col_name} >= 0" if data_type in ["INTEGER", "REAL", "NUMERIC"] else "" #f"length({col_name}) > 0"    
+                    save_constraint["min"]= 0                 
+                    column_constraint += check_expr + ") "
+                # DEFAULT
+                if random.random() < 0.1 and not auto_increment_set:
+                    default_val = random_value(data_type=data_type) #(expr) or literal or signed number
+                    column_constraint += f"DEFAULT {default_val} "
+                # COLLATE
+                if random.random() < 0.1 and not auto_increment_set:
+                    collation = random.choice(["BINARY", "NOCASE", "RTRIM"])
+                    column_constraint += "COLLATE " + collation + " "
+                    
+                # foreign-key-clause 
+                # GENERATED ALWAYS
+                if column_constraint != "" and random.random() < 0.5:
+                    query += "CONSTRAINT " + f"c_{random_string(random.randint(3, 10))} "
+                query += column_constraint
+
+                column_constraints[col_name] = save_constraint
+
+            # add table constraints
+            if random.random() < 0.5:
+                query += ", "
+                table_constraint = f"CONSTRAINT c_{random_string(random.randint(3, 10))} "
+                query += table_constraint
+
+            if random.random() < 0.25 and not primary_key_already_set:
+                query += ", "
+                query += "PRIMARY KEY ( "
+                n_cols = random.randint(1, min(2, len(column_names)))  # pick 1 or 2 columns
+                chosen_cols = random.sample(column_names, n_cols)
+                query += ", ".join(chosen_cols) + ") "
+                conflict_clause = grammar.generate_conflict_clause()
+                query += conflict_clause
+                for col in chosen_cols:
+                    column_constraints[col]["is_pk"] = True
             
-            # Generate data type
-            data_type = random.choice(self.data_types)
-            column_types[col_name] = data_type
+            if random.random() < 0.25:
+                query += ", "
+                query += "UNIQUE ( "
+                n_cols = random.randint(1, min(2, len(column_names)))  # pick 1 or 2 columns
+                chosen_cols = random.sample(column_names, n_cols)
+                query += ", ".join(chosen_cols) + ") "
+                if conflict_clause == "":
+                    query += grammar.generate_conflict_clause()
+                for col in chosen_cols:
+                    column_constraints[col]["is_unique"] = True
+
+            if random.random() < 0.25:
+                query += ", "
+                query += "CHECK ("
+                chosen_cols = random.choice(column_names)
+                query += f"{chosen_cols} IS NOT NULL"  # simple check expression => expr
+                query += ") "
+                column_constraints[chosen_cols]["is_not_null"] = True
             
-            # Generate constraints
-            constraints = []
-            
-            # PRIMARY KEY
-            if random.random() < 0.1:
-                constraints.append("PRIMARY KEY")
-                if random.random() < 0.3 and data_type == "INTEGER":
-                    constraints.append("AUTOINCREMENT")
-            
-            # NOT NULL / UNIQUE
-            if random.random() < 0.2:
-                constraints.append(random.choice(["NOT NULL", "UNIQUE"]))
-            
-            # DEFAULT
-            if random.random() < 0.2:
-                default_val = random_value(data_type=data_type)
-                constraints.append(f"DEFAULT {default_val}")
-            
-            # COLLATE
-            if random.random() < 0.1 and data_type == "TEXT":
-                collation = random.choice(["BINARY", "NOCASE", "RTRIM"])
-                constraints.append(f"COLLATE {collation}")
-            
-            # CHECK
-            if random.random() < 0.1:
-                check_expr = f"{col_name} >= 0" if data_type in ["INTEGER", "REAL", "NUMERIC"] else f"length({col_name}) > 0"
-                constraints.append(f"CHECK ({check_expr})")
-            
-            # Combine column definition
-            column_def = f"{col_name} {data_type}" + ("" if not constraints else f" {' '.join(constraints)}")
-            columns.append(column_def)
-        
-        # Table constraints
-        table_constraints = []
-        
-        # PRIMARY KEY constraint
-        if random.random() < 0.2 and not any("PRIMARY KEY" in col for col in columns):
-            chosen_cols = random.sample(column_names, min(random.randint(1, 3), len(column_names)))
-            table_constraints.append(f"PRIMARY KEY ({', '.join(chosen_cols)})")
-        
-        # UNIQUE constraint
-        if random.random() < 0.2:
-            chosen_cols = random.sample(column_names, min(random.randint(1, 3), len(column_names)))
-            table_constraints.append(f"UNIQUE ({', '.join(chosen_cols)})")
-        
-        # FOREIGN KEY constraint
-        if random.random() < 0.1 and column_names:
-            col = random.choice(column_names)
-            ref_table = f"t_{random_string(5)}"
-            ref_col = f"c_{random_string(5)}"
-            table_constraints.append(f"FOREIGN KEY ({col}) REFERENCES {ref_table}({ref_col})")
-        
-        # Combine all parts
-        all_defs = columns + table_constraints
-        create_table = f"CREATE {temp}TABLE {if_not_exists}{table} ({', '.join(all_defs)})"
-        
-        # WITHOUT ROWID
-        if random.random() < 0.1 and any("PRIMARY KEY" in col for col in columns + table_constraints):
-            create_table += " WITHOUT ROWID"
-        
-        return table, column_names, column_types, create_table
+            # TODO FOREIGN KEY
+
+            query += ") "
+            # TODO add table-options
+        else:
+            # TODO AS select-stmt
+            query += ""
+
+        return table_name, column_names, column_types, column_constraints, query
     
     def generate_create_index_stmt(self, table_name, column_names):
         """Generate a CREATE INDEX statement according to the formal grammar."""
@@ -891,44 +1000,44 @@ class SQLiteGrammar:
 
 
 # Function to generate a simple SQL SELECT query
-def generate_query():
+def generate_query(tables_info):
     """Generate a complete test case using the formal grammar."""
-    # First create tables
-    num_tables = random.randint(1, 3)
-    tables_info = {}
-    statements = []
+
     grammar = SQLiteGrammar()
+    statements = []
+    # First create tables
+    if tables_info == {}:
+        for i in range(5):
+            table_name, column_names, column_types, column_constraints, query = grammar.generate_create_table_stmt(i)
+            statements.append(query + ";")
+            tables_info[table_name] = {"columns": column_names, "types": column_types, "constraints": column_constraints}
+        # Insert data
+        for table_name, table_data in tables_info.items():
+            column_names = table_data["columns"]
+            column_types = table_data["types"]
+            column_constraints = table_data["constraints"]
+            num_rows = random.randint(1, 5)
+            for _ in range(num_rows):
+                insert_stmt = grammar.generate_insert_stmt(table_name, column_names, column_types, column_constraints)
+                statements.append(insert_stmt + ";")
+
     
     # Sometimes add initial PRAGMA statements
     if random.random() < 0.3:
         statements.append(grammar.generate_pragma_stmt())
-    
-    # Create tables
-    for _ in range(num_tables):
-        table_name, column_names, column_types, create_stmt = grammar.generate_create_table_stmt()
-        statements.append(create_stmt + ";")
-        tables_info[table_name] = {"columns": column_names, "types": column_types}
-    
-    # Insert data
-    for table_name, table_data in tables_info.items():
-        column_names = table_data["columns"]
-        column_types = table_data["types"]
-        num_rows = random.randint(1, 5)
-        for _ in range(num_rows):
-            insert_stmt = grammar.generate_insert_stmt(table_name, column_names, column_types)
-            statements.append(insert_stmt + ";")
     
     # Generate various statement types
     num_queries = random.randint(2, 5) 
     
     for _ in range(num_queries):
         stmt_type = random.choice([
-            "SELECT", "UPDATE", "DELETE", "CREATE INDEX", "PRAGMA", 
-            "ALTER", "WITH", "TRANSACTION"
+            "SELECT", # "UPDATE", "DELETE", "CREATE INDEX", "PRAGMA", 
+            # "ALTER", "WITH", "TRANSACTION"
         ])
         
         if stmt_type == "SELECT":
             statements.append(grammar.generate_select_stmt(tables_info) + ";")
+
         elif stmt_type == "UPDATE" and tables_info:
             table_name = random.choice(list(tables_info.keys()))
             column_names = tables_info[table_name]["columns"]
@@ -984,4 +1093,4 @@ def generate_query():
     else:
         statements.append("SELECT 1;")
     
-    return "\n".join(statements)
+    return "\n".join(statements), tables_info

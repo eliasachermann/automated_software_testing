@@ -1,0 +1,43 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_Q05 (c_SZzTCiH5Fi NUMERIC DEFAULT -690088, FOREIGN KEY (c_SZzTCiH5Fi) REFERENCES t_WFOVf(c_00cWx));
+CREATE TABLE IF NOT EXISTS t_RXzVpk (c_0FhkJcfK NUMERIC PRIMARY KEY, c_nfAf57HoR TEXT DEFAULT NULL CHECK (length(c_nfAf57HoR) > 0), c_XoxNtQfEs TEXT PRIMARY KEY NOT NULL, c_oYAW0zL TEXT UNIQUE, c_XKsACH5B INTEGER, c_yLlsePaeKq REAL) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_4XFYrt (c_xLTK1pgMx INTEGER, c_xZIRq INTEGER, c_wcbRsTL TEXT, c_Mng739o TEXT, c_5qXO1r INTEGER DEFAULT -426272, c_RhcSkoN REAL DEFAULT -481758.90714916034, PRIMARY KEY (c_xLTK1pgMx, c_RhcSkoN));
+INSERT OR ABORT INTO t_Q05 (c_SZzTCiH5Fi) VALUES (924891), (273305);
+INSERT INTO t_Q05 (c_SZzTCiH5Fi) VALUES (970696);
+INSERT INTO t_RXzVpk (c_0FhkJcfK, c_nfAf57HoR, c_XoxNtQfEs, c_oYAW0zL, c_XKsACH5B, c_yLlsePaeKq) SELECT 191648, 'ywC2', NULL, 'rG8', 116500, 165480.92512442218;
+INSERT OR ABORT INTO t_RXzVpk (c_0FhkJcfK, c_nfAf57HoR, c_XoxNtQfEs, c_oYAW0zL, c_XKsACH5B, c_yLlsePaeKq) VALUES (-964285, 'JgGyeaV_1', 'FoYYXMbY5xavBLA_2', 'CGQMcZCiKd0uVnGrwdv_3', -515845, 569711.111589496), (1060651, 'GXSWoEZ6PU_101', '4xjDnYx_102', '8_103', 83036, -645987.9310304518);
+REPLACE INTO t_RXzVpk (c_0FhkJcfK, c_nfAf57HoR, c_XoxNtQfEs, c_oYAW0zL, c_XKsACH5B, c_yLlsePaeKq) SELECT NULL, '0U', '3', 'QsulMdVCFJvLx', 864802, 376258.7833634182;
+INSERT OR ABORT INTO t_4XFYrt (c_xLTK1pgMx, c_xZIRq, c_wcbRsTL, c_Mng739o, c_5qXO1r, c_RhcSkoN) VALUES (679881, 201135, 'HixI_2', 'BidAZmPSWaUHTdHH_3', -734860, 877266.603476991), (251844, 1559405, 'xw6CcoiHeidcC5zgNF_102', 'puNJXbrtrRBRHZv_103', 203887, -932477.8522516894), (2457934, 1803105, 'Q4YmaIHP4zqCnirj_202', 'yZHcAWH_203', 1611598, 257925.97560022282);
+SELECT t_RXzVpk.c_yLlsePaeKq, *, t_Q05.*, CASE WHEN NOT t_Q05.c_SZzTCiH5Fi THEN NOT t_Q05.c_SZzTCiH5Fi END AS alias_yRQ, EXISTS (SELECT 1 FROM t_4XFYrt LIMIT 1) AS alias_BiJ FROM t_4XFYrt WHERE (ROUND(t_Q05.c_SZzTCiH5Fi, t_4XFYrt.c_5qXO1r) < NOT t_RXzVpk.c_0FhkJcfK) UNION SELECT DISTINCT t_RXzVpk.c_nfAf57HoR, t_Q05.c_SZzTCiH5Fi, TRUE, t_RXzVpk.* FROM t_Q05 JOIN t_4XFYrt ON 1=1 WHERE (DATETIME(t_Q05.c_SZzTCiH5Fi, t_RXzVpk.c_XoxNtQfEs, t_4XFYrt.c_wcbRsTL) / CASE t_Q05.c_SZzTCiH5Fi WHEN t_4XFYrt.c_Mng739o THEN t_Q05.c_SZzTCiH5Fi WHEN t_RXzVpk.c_XKsACH5B THEN t_RXzVpk.c_XKsACH5B WHEN TRUE THEN t_Q05.c_SZzTCiH5Fi ELSE t_Q05.c_SZzTCiH5Fi END) ORDER BY c_SZzTCiH5Fi DESC;
+ALTER TABLE t_4XFYrt ADD COLUMN c_ztzMntfC NUMERIC;
+PRAGMA threads;;
+SELECT *, c_SZzTCiH5Fi, *, *, - c_SZzTCiH5Fi AS alias_Srw FROM t_Q05, t_RXzVpk, t_4XFYrt GROUP BY c_XKsACH5B, c_oYAW0zL, c_nfAf57HoR;
+SELECT COUNT(*) FROM t_4XFYrt;
+
+--- v3.39.4 ---
+OUT:
+0
+3
+
+ERR:
+Error: near line 2: table "t_RXzVpk" has more than one primary key
+Error: near line 6: no such table: t_RXzVpk
+Error: near line 7: no such table: t_RXzVpk
+Error: near line 8: no such table: t_RXzVpk
+Error: near line 10: no such table: t_Q05
+Error: near line 13: no such table: t_RXzVpk
+
+
+--- v3.49.1 ---
+OUT:
+0
+3
+
+ERR:
+Parse error near line 2: table "t_RXzVpk" has more than one primary key
+Parse error near line 6: no such table: t_RXzVpk
+Parse error near line 7: no such table: t_RXzVpk
+Parse error near line 8: no such table: t_RXzVpk
+Parse error near line 10: no such table: t_RXzVpk
+Parse error near line 13: no such table: t_RXzVpk
+

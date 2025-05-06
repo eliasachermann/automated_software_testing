@@ -11,6 +11,8 @@ import os
 import json
 from datetime import datetime
 
+counter = 0
+
 # Add this function at module level (outside any class)
 def likelihood_handler(args):
     """Special handler for LIKELIHOOD function arguments."""
@@ -1008,6 +1010,10 @@ def classify_difference(out_old, err_old, out_new, err_new):
         return "OTHER"
 
 def compare_results(out_old, err_old, out_new, err_new):
+    global counter
+    if err_new or err_old:
+        counter += 1
+
     """Better detection of significant differences."""
     # Simple string comparison
     if out_old != out_new:
@@ -1123,8 +1129,8 @@ def save_difference(sql, out_old, err_old, out_new, err_new, diff_type):
     filename = f"{log_dir}/diff_{diff_type}_{timestamp}.log"
     with open(filename, "w") as f:
         f.write(f"SQL:\n{sql}\n\n")
-        f.write(f"--- v3.26.0 ---\nOUT:\n{out_old}\nERR:\n{err_old}\n\n")
-        f.write(f"--- v3.39.4 ---\nOUT:\n{out_new}\nERR:\n{err_new}\n")
+        f.write(f"--- v3.39.4 ---\nOUT:\n{out_old}\nERR:\n{err_old}\n\n")
+        f.write(f"--- v3.49.1 ---\nOUT:\n{out_new}\nERR:\n{err_new}\n")
     
     return filename
 
@@ -1209,8 +1215,11 @@ def parse_args():
 
 def main():
     """Main function."""
+    global counter
     args = parse_args()
     differences = run_parallel_tests(args)
+
+    print("Invalid queries" + str(counter))
     
     if not differences:
         print("No differences found!")

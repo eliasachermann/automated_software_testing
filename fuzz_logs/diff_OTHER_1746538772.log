@@ -1,0 +1,33 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_EsiULt2z (c_fAnGQo NUMERIC DEFAULT -673097, c_znO REAL CHECK (c_znO >= 0), c_Ca8e31UXv NUMERIC DEFAULT 744306, c_e9h9Bpd TEXT, c_4xV INTEGER, PRIMARY KEY (c_znO));
+CREATE TABLE IF NOT EXISTS t_qtN (c_imYVn INTEGER, c_PVoLM TEXT, c_DF8u65 REAL CHECK (c_DF8u65 >= 0), c_1Gd NUMERIC, PRIMARY KEY (c_imYVn));
+INSERT OR ABORT INTO t_EsiULt2z (c_fAnGQo, c_znO, c_Ca8e31UXv, c_e9h9Bpd, c_4xV) VALUES (-97526, 217805.32018378447, -470788, 'zIVaKmQDYcH_3', -859481);
+REPLACE INTO t_qtN (c_imYVn, c_PVoLM, c_DF8u65, c_1Gd) VALUES (-724423, 'sxeb2W0cnL_1', -749466.2681978813, 1020665), (1479763, '3kjQeS3e8D4USUubt_101', -557474.2836278547, 81021), (1608059, 'ZkH_201', 190828.47019103006, 1044085);
+CREATE INDEX idx_XGYjk ON t_EsiULt2z(c_4xV ASC);
+PRAGMA read_uncommitted;;
+CREATE INDEX IF NOT EXISTS idx_WC3wM ON t_EsiULt2z(c_Ca8e31UXv COLLATE RTRIM DESC);
+SELECT c_1Gd IN (SELECT * FROM t_qtN LIMIT 5), t_qtN.*, LIKELIHOOD(TIME(t_EsiULt2z.c_4xV, t_EsiULt2z.c_fAnGQo), 0.8906375581506522), c_znO, t_qtN.* FROM t_qtN NATURAL LEFT JOIN t_EsiULt2z WHERE QUOTE(MIN(t_qtN.c_PVoLM)) GROUP BY c_e9h9Bpd, c_znO ORDER BY c_DF8u65;
+UPDATE OR IGNORE t_EsiULt2z SET c_fAnGQo = 351729, c_Ca8e31UXv = 139244 WHERE c_Ca8e31UXv = -235392;
+SELECT COUNT(*) FROM t_qtN;
+
+--- v3.39.4 ---
+OUT:
+0
+0
+
+ERR:
+Error: near line 4: CHECK constraint failed: t_qtN
+Error: near line 8: sub-select returns 4 columns - expected 1
+
+
+--- v3.49.1 ---
+OUT:
+0
+0
+
+ERR:
+Runtime error near line 4: CHECK constraint failed: c_DF8u65 >= 0 (19)
+Parse error near line 8: misuse of aggregate: MIN()
+  OM t_qtN NATURAL LEFT JOIN t_EsiULt2z WHERE QUOTE(MIN(t_qtN.c_PVoLM)) GROUP BY
+                                      error here ---^
+

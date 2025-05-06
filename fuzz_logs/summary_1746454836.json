@@ -1,0 +1,164 @@
+{
+  "total_tests": 50000,
+  "differences_found": 39,
+  "duration_seconds": 2336.181965827942,
+  "timestamp": "2025-05-05T14:20:36.559939",
+  "differences": [
+    {
+      "type": "NEW_ERROR",
+      "file": "fuzz_logs/diff_NEW_ERROR_1746452518.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746452572.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746452752.log"
+    },
+    {
+      "type": "SAME_CONSTRAINT_ERROR",
+      "file": "fuzz_logs/diff_SAME_CONSTRAINT_ERROR_1746452867.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746452946.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746452950.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746452843.log"
+    },
+    {
+      "type": "SAME_CONSTRAINT_ERROR",
+      "file": "fuzz_logs/diff_SAME_CONSTRAINT_ERROR_1746452780.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453599.log"
+    },
+    {
+      "type": "NEW_ERROR",
+      "file": "fuzz_logs/diff_NEW_ERROR_1746453656.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453360.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453552.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453589.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453663.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453161.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453187.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453254.log"
+    },
+    {
+      "type": "NEW_ERROR",
+      "file": "fuzz_logs/diff_NEW_ERROR_1746453443.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453139.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453538.log"
+    },
+    {
+      "type": "SAME_CONSTRAINT_ERROR",
+      "file": "fuzz_logs/diff_SAME_CONSTRAINT_ERROR_1746453591.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453706.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453785.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746454103.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746453899.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453959.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746454122.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746453949.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746454249.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746454372.log"
+    },
+    {
+      "type": "NEW_ERROR",
+      "file": "fuzz_logs/diff_NEW_ERROR_1746454660.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746454702.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746454384.log"
+    },
+    {
+      "type": "NEW_ERROR",
+      "file": "fuzz_logs/diff_NEW_ERROR_1746454412.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746454421.log"
+    },
+    {
+      "type": "DIFFERENT_OUTPUT",
+      "file": "fuzz_logs/diff_DIFFERENT_OUTPUT_1746454424.log"
+    },
+    {
+      "type": "NEW_ERROR",
+      "file": "fuzz_logs/diff_NEW_ERROR_1746454754.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746454578.log"
+    },
+    {
+      "type": "OTHER",
+      "file": "fuzz_logs/diff_OTHER_1746454748.log"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ class BugDetector:
 
     def is_bug(self, buggy_success, buggy_output, buggy_error,
                      oracle_success, oracle_output, oracle_error):
+        
         # Case 1: Both succeed, but outputs differ → Bug
         if buggy_success and oracle_success:
             return buggy_output.strip() != oracle_output.strip()
@@ -23,7 +24,8 @@ class BugDetector:
         # Case 3: Both fail
         if not buggy_success and not oracle_success:
             # Check if error messages are different
-            return False  # buggy_error.strip() != oracle_error.strip()
+            #return True
+            return False
 
         # No bug detected
         return False
@@ -50,6 +52,10 @@ class BugDetector:
                 'oracle_error': oracle_error
             }
             self.logger.log_bug(bug_info)
+
+        if oracle_success:
+            return True
+        return False
 
     def close(self):
         """

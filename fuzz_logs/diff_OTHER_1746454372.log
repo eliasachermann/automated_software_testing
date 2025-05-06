@@ -1,0 +1,44 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_FqwBuCg5 (c_AKnJBXN NUMERIC);
+CREATE TEMP TABLE IF NOT EXISTS t_1Ukzaz (c_JRX NUMERIC CHECK (c_JRX >= 0), c_gMPMxY8Y5 TEXT UNIQUE DEFAULT 'BmKUeHPcpTNudN0s', c_Sv3sgR NUMERIC, c_VaRmegq INTEGER NOT NULL DEFAULT NULL);
+WITH cte_FMg AS (SELECT 1) INSERT INTO t_FqwBuCg5 (c_AKnJBXN) VALUES (394715);
+REPLACE INTO t_FqwBuCg5 (c_AKnJBXN) VALUES (955239), (436369);
+INSERT INTO t_FqwBuCg5 (c_AKnJBXN) SELECT 68191;
+REPLACE INTO t_1Ukzaz (c_JRX, c_gMPMxY8Y5, c_Sv3sgR, c_VaRmegq) SELECT -205325, 'nO5HRUmm7WyJTxr', 853312, NULL;
+INSERT OR FAIL INTO t_1Ukzaz (c_JRX, c_gMPMxY8Y5, c_Sv3sgR, c_VaRmegq) SELECT 857503, 'V6t1OHBjIVcvZT', -893977, -911619;
+INSERT OR REPLACE INTO t_1Ukzaz (c_JRX, c_gMPMxY8Y5, c_Sv3sgR, c_VaRmegq) VALUES (-84099, 'rdZKOPv7wyBk_1', 647651, -402348);
+BEGIN TRANSACTION;
+INSERT OR FAIL INTO t_1Ukzaz (c_JRX, c_gMPMxY8Y5, c_Sv3sgR, c_VaRmegq) VALUES (-481289, 'o45_1', 938826, -935361), (1002779, 'vjh1gzzD_101', 1532216, 52475);
+UPDATE t_FqwBuCg5 SET c_AKnJBXN = -234898 WHERE c_AKnJBXN IS NULL;
+UPDATE OR FAIL t_FqwBuCg5 SET c_AKnJBXN = 54668 WHERE c_AKnJBXN >= -462147;
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR REPLACE t_FqwBuCg5 SET c_AKnJBXN = -925479 WHERE c_AKnJBXN > -354317;
+INSERT OR ABORT INTO t_1Ukzaz (c_JRX, c_gMPMxY8Y5, c_Sv3sgR, c_VaRmegq) SELECT -804420, NULL, NULL, 24887;
+COMMIT;
+WITH cte_3St AS (SELECT * FROM t_1Ukzaz LIMIT 10) SELECT * FROM cte_3St;
+SELECT COUNT(*) FROM t_FqwBuCg5;
+
+--- v3.39.4 ---
+OUT:
+857503|V6t1OHBjIVcvZT|-893977|-911619
+4
+
+ERR:
+Error: near line 6: CHECK constraint failed: t_1Ukzaz
+Error: near line 8: CHECK constraint failed: t_1Ukzaz
+Error: near line 10: CHECK constraint failed: t_1Ukzaz
+Error: near line 16: CHECK constraint failed: t_1Ukzaz
+
+
+--- v3.49.1 ---
+OUT:
+857503|V6t1OHBjIVcvZT|-893977|-911619
+4
+
+ERR:
+Runtime error near line 6: NOT NULL constraint failed: t_1Ukzaz.c_VaRmegq (19)
+Runtime error near line 8: CHECK constraint failed: c_JRX >= 0 (19)
+Runtime error near line 10: CHECK constraint failed: c_JRX >= 0 (19)
+Runtime error near line 16: CHECK constraint failed: c_JRX >= 0 (19)
+

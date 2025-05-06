@@ -1,0 +1,35 @@
+SQL:
+CREATE TABLE t_b8w (c_PMugdXwWpz REAL, c_qWaB3M INTEGER, c_ZbESG7LPZu INTEGER DEFAULT 797499, c_NaKrvgbN4s INTEGER DEFAULT 391785, c_EcLMriW INTEGER NOT NULL, c_wtbSN TEXT COLLATE NOCASE);
+CREATE TABLE IF NOT EXISTS t_7xqmN6D (c_6rs2i5ZlTj REAL, c_Dd9q1JX TEXT UNIQUE DEFAULT 'FQib5', c_0wM TEXT CHECK (length(c_0wM) > 0), c_JJTcn24y TEXT);
+CREATE TABLE IF NOT EXISTS t_zTvuoipF (c_A3ykGV REAL CHECK (c_A3ykGV >= 0), c_eMj1gu TEXT, c_941Gf6zly REAL, c_xVnUz NUMERIC, c_en2 REAL, c_RG4gsjZNx REAL PRIMARY KEY UNIQUE, c_wGbbu INTEGER, c_SP1ePqf9 INTEGER, c_JrbgM TEXT, c_WgFLJ9 REAL NOT NULL CHECK (c_WgFLJ9 >= 0));
+INSERT INTO t_b8w (c_PMugdXwWpz, c_qWaB3M, c_ZbESG7LPZu, c_NaKrvgbN4s, c_EcLMriW, c_wtbSN) SELECT -294213.83168938407, -36756, 30566, -423053, 562070, 'Ie7hxYq';
+INSERT OR REPLACE INTO t_7xqmN6D (c_6rs2i5ZlTj, c_Dd9q1JX, c_0wM, c_JJTcn24y) VALUES (353846.84567754646, 'rtCeO9DRdvNBM_1', 'Vwbxh9_2', 'uXGqEjXkcEysHe3XzcRn_3'), (695759.4835162084, '9w2qd8dGrzEU7Kowka_101', 'G1mJRHQFcWyTirhHXb_102', 'T50EBJR8Z0bl40yk_103'), (-30743.588897531386, 'O3JpWaWjQz9h5KJ_201', '7KQwgvuJyRdb_202', 'hAJhPzEXKM8RiLIr0_203');
+INSERT OR FAIL INTO t_7xqmN6D (c_6rs2i5ZlTj, c_Dd9q1JX, c_0wM, c_JJTcn24y) VALUES (-679774.3147807291, 'XmEq26hEBj_1', 'bU7I39RoEjmWala1u9IY_2', 'WX8I_3'), (191806.13352231518, 'COdoFQ67DiUZCh_101', '1dfgwt_102', 'Nd3tdQJjCIHfAT_103');
+INSERT OR REPLACE INTO t_7xqmN6D (c_6rs2i5ZlTj, c_Dd9q1JX, c_0wM, c_JJTcn24y) VALUES (618521.5515566873, '6py0OfY_1', 'fd2J8gVUyBNH_2', 'MnyUTPxVfeEzauWR5b1_3');
+INSERT OR IGNORE INTO t_zTvuoipF (c_A3ykGV, c_eMj1gu, c_941Gf6zly, c_xVnUz, c_en2, c_RG4gsjZNx, c_wGbbu, c_SP1ePqf9, c_JrbgM, c_WgFLJ9) SELECT 450140.36303896946, 'UeI0sdeP', -707072.7539040167, 417911, -983646.5952839552, -477925.6875018718, -528145, 377203, 'x8nctu3Nnrff', -574507.6507291233;
+REPLACE INTO t_zTvuoipF (c_A3ykGV, c_eMj1gu, c_941Gf6zly, c_xVnUz, c_en2, c_RG4gsjZNx, c_wGbbu, c_SP1ePqf9, c_JrbgM, c_WgFLJ9) VALUES (-82938.5505956763, 'coNyojZTfJiB_1', -164386.5184461727, 314658, -745327.6688729842, 927908.7145637881, 211817, -482016, 't5dV8Wghnj0NL41_8', -461840.7945123528);
+PRAGMA integrity_check;;
+DELETE FROM t_b8w WHERE c_qWaB3M IS NOT NULL;
+SELECT *, t_7xqmN6D.*, c_ZbESG7LPZu, c_qWaB3M FROM t_zTvuoipF JOIN t_b8w ON t_zTvuoipF.c_eMj1gu = t_b8w.c_EcLMriW WHERE NOT (t_zTvuoipF.c_941Gf6zly GLOB t_zTvuoipF.c_941Gf6zly) GROUP BY c_RG4gsjZNx EXCEPT SELECT c_6rs2i5ZlTj, *, t_b8w.*, EXISTS (SELECT 1 FROM t_b8w LIMIT 1) AS alias_aiy, * FROM t_zTvuoipF WHERE c_wGbbu IN (SELECT c_qWaB3M FROM t_b8w LIMIT 5) ORDER BY c_SP1ePqf9 ASC, c_WgFLJ9 ASC;
+SELECT (CASE WHEN t_zTvuoipF.c_eMj1gu THEN t_zTvuoipF.c_wGbbu WHEN -106881 THEN 225888 WHEN t_7xqmN6D.c_JJTcn24y THEN x'FC160D26' END LIKE - t_zTvuoipF.c_RG4gsjZNx), CASE WHEN '9KvkLTwqp' THEN t_zTvuoipF.c_941Gf6zly WHEN LOWER(t_b8w.c_qWaB3M) THEN (t_b8w.c_ZbESG7LPZu != t_7xqmN6D.c_Dd9q1JX) ELSE 'eWjxc75V4d3P' END, *, * FROM t_b8w, t_7xqmN6D, t_zTvuoipF WHERE c_qWaB3M ORDER BY c_Dd9q1JX;
+SELECT COUNT(*) FROM t_7xqmN6D;
+
+--- v3.39.4 ---
+OUT:
+ok
+6
+
+ERR:
+Error: near line 9: CHECK constraint failed: t_zTvuoipF
+Error: near line 12: no such table: t_7xqmN6D
+
+
+--- v3.49.1 ---
+OUT:
+ok
+6
+
+ERR:
+Runtime error near line 9: CHECK constraint failed: c_A3ykGV >= 0 (19)
+Parse error near line 12: no such table: t_b8w
+
