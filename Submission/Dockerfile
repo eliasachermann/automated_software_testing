@@ -34,6 +34,8 @@ WORKDIR /app
 
 COPY fuzzer.py /app/
 
-RUN sed -i '1s;^;#!/usr/bin/env python3\n;' /app/fuzzer.py && \
-    chmod +x /app/fuzzer.py && \
-    cp /app/fuzzer.py /bin/test-db
+RUN echo '#!/bin/sh\ncd /app\nexec python3 /app/fuzzer.py "$@"' > /bin/test-db && \
+    chmod +x /bin/test-db
+
+
+WORKDIR /app

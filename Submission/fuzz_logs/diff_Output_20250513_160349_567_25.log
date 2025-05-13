@@ -1,0 +1,124 @@
+SQL:
+PRAGMA wal_autocheckpoint;
+CREATE TABLE IF NOT EXISTS t_5RWAJX (c_zgIsyvSPF TEXT DEFAULT 'R08kScEmR' COLLATE NOCASE, c_1Cy8bTh1e TEXT DEFAULT 'pu8Z8');
+CREATE TABLE t_0ExAZI (c_9zhbXcwy2J TEXT, UNIQUE (c_9zhbXcwy2J));
+CREATE TEMP TABLE t_JiZLWgcYn1 (c_Qx0A6H REAL, c_cWa REAL, c_x5Afb REAL DEFAULT 705292.1163);
+INSERT OR REPLACE INTO t_5RWAJX (c_zgIsyvSPF, c_1Cy8bTh1e) VALUES ('nAWhG0I8_2228', 'OJxDGsYoAz0wyN_2328'), ('gOR98J_12228', 'biPUya8gTvYwyC4NhaC_12328');
+WITH cte_N9s AS (SELECT 1) INSERT OR IGNORE INTO t_5RWAJX (c_zgIsyvSPF, c_1Cy8bTh1e) SELECT 'dGs1c_2228', 'UGgU1F_2328';
+INSERT OR IGNORE INTO t_5RWAJX (c_zgIsyvSPF, c_1Cy8bTh1e) VALUES ('0GqxQ21iy_2228', 'Xy1cxmlJ0Z3F_2328'), ('Si8S5Aw51NpWQi_12228', 'Tcvjwl1MTpmHxIjivo3_12328');
+INSERT OR REPLACE INTO t_0ExAZI (c_9zhbXcwy2J) VALUES ('UwrG3XYcj_2228');
+INSERT OR REPLACE INTO t_0ExAZI (c_9zhbXcwy2J) SELECT 'xQus_2228';
+INSERT OR IGNORE INTO t_0ExAZI (c_9zhbXcwy2J) SELECT '7p5K_2228';
+INSERT OR IGNORE INTO t_JiZLWgcYn1 (c_Qx0A6H, c_cWa, c_x5Afb) VALUES (-145766.27, 308291.438, -914907.1);
+INSERT OR REPLACE INTO t_JiZLWgcYn1 (c_Qx0A6H, c_cWa, c_x5Afb) SELECT 717078.2, -943910.158, -125890.99179999999;
+REPLACE INTO t_JiZLWgcYn1 (c_Qx0A6H, c_cWa, c_x5Afb) VALUES (531517.8, -757108.16, -292797.78), (-381388.71271, 136707.76861, 1095101.9300000002);
+
+
+BEGIN TRANSACTION;
+INSERT OR REPLACE INTO t_5RWAJX (c_zgIsyvSPF, c_1Cy8bTh1e) VALUES ('yQNMVjeuqPnx2_2228', 'kDPODmj4898_2328'), ('j_12228', 'glrVnJT8Q_12328');
+COMMIT;
+
+                SELECT c_1Cy8bTh1e, c_zgIsyvSPF,
+                    ROW_NUMBER() OVER (PARTITION BY c_zgIsyvSPF) as row_num,
+                    RANK() OVER (PARTITION BY c_zgIsyvSPF ORDER BY c_1Cy8bTh1e) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_zgIsyvSPF ORDER BY c_1Cy8bTh1e) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_1Cy8bTh1e) IN ('integer','real') THEN c_1Cy8bTh1e ELSE 0 END) 
+                        OVER (PARTITION BY c_zgIsyvSPF ORDER BY c_1Cy8bTh1e 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_1Cy8bTh1e) IN ('integer','real') THEN c_1Cy8bTh1e ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_zgIsyvSPF ORDER BY c_1Cy8bTh1e) as prev_value,
+                    LEAD(CASE WHEN typeof(c_1Cy8bTh1e) IN ('integer','real') THEN c_1Cy8bTh1e ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_zgIsyvSPF ORDER BY c_1Cy8bTh1e) as next_value
+                FROM t_5RWAJX
+                ORDER BY c_zgIsyvSPF, c_1Cy8bTh1e
+                LIMIT 20;
+                
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_JiZLWgcYn1
+            LIMIT 1;
+            
+SELECT t_JiZLWgcYn1.c_x5Afb as t_JiZLWgcYn1_val, t_5RWAJX.c_1Cy8bTh1e as t_5RWAJX_val, t_0ExAZI.c_9zhbXcwy2J as t_0ExAZI_val
+FROM t_JiZLWgcYn1
+LEFT OUTER JOIN t_5RWAJX ON t_JiZLWgcYn1.ROWID = t_5RWAJX.ROWID
+INNER JOIN t_0ExAZI ON t_JiZLWgcYn1.ROWID = t_0ExAZI.ROWID
+WHERE t_JiZLWgcYn1.c_cWa IS NOT NULL
+ORDER BY t_JiZLWgcYn1.c_x5Afb
+LIMIT 20;
+SELECT t_5RWAJX.c_1Cy8bTh1e, t_5RWAJX.c_zgIsyvSPF, LOWER(t_5RWAJX.c_zgIsyvSPF) AS computed_c_zgIsyvSPF FROM t_5RWAJX ORDER BY t_5RWAJX.c_zgIsyvSPF DESC LIMIT 10;
+SELECT t_0ExAZI.c_9zhbXcwy2J, LOWER(t_0ExAZI.c_9zhbXcwy2J) AS computed_c_9zhbXcwy2J FROM t_0ExAZI ORDER BY t_0ExAZI.c_9zhbXcwy2J DESC LIMIT 10;
+SELECT t_JiZLWgcYn1.c_x5Afb, t_JiZLWgcYn1.c_cWa, t_JiZLWgcYn1.c_Qx0A6H, UPPER(t_JiZLWgcYn1.c_Qx0A6H) AS computed_c_Qx0A6H FROM t_JiZLWgcYn1 ORDER BY t_JiZLWgcYn1.c_Qx0A6H DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1000
+Xy1cxmlJ0Z3F_2328|0GqxQ21iy_2228|1|1|1|0|0|0
+Tcvjwl1MTpmHxIjivo3_12328|Si8S5Aw51NpWQi_12228|1|1|1|0|0|0
+UGgU1F_2328|dGs1c_2228|1|1|1|0|0|0
+biPUya8gTvYwyC4NhaC_12328|gOR98J_12228|1|1|1|0|0|0
+glrVnJT8Q_12328|j_12228|1|1|1|0|0|0
+OJxDGsYoAz0wyN_2328|nAWhG0I8_2228|1|1|1|0|0|0
+kDPODmj4898_2328|yQNMVjeuqPnx2_2228|1|1|1|0|0|0
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+-914907.1|OJxDGsYoAz0wyN_2328|UwrG3XYcj_2228
+-292797.78|UGgU1F_2328|7p5K_2228
+-125890.9918|biPUya8gTvYwyC4NhaC_12328|xQus_2228
+kDPODmj4898_2328|yQNMVjeuqPnx2_2228|yqnmvjeuqpnx2_2228
+Tcvjwl1MTpmHxIjivo3_12328|Si8S5Aw51NpWQi_12228|si8s5aw51npwqi_12228
+OJxDGsYoAz0wyN_2328|nAWhG0I8_2228|nawhg0i8_2228
+glrVnJT8Q_12328|j_12228|j_12228
+biPUya8gTvYwyC4NhaC_12328|gOR98J_12228|gor98j_12228
+UGgU1F_2328|dGs1c_2228|dgs1c_2228
+Xy1cxmlJ0Z3F_2328|0GqxQ21iy_2228|0gqxq21iy_2228
+xQus_2228|xqus_2228
+UwrG3XYcj_2228|uwrg3xycj_2228
+7p5K_2228|7p5k_2228
+-125890.9918|-943910.158|717078.2|717078.2
+-292797.78|-757108.16|531517.8|531517.8
+-914907.1|308291.438|-145766.27|-145766.27
+1095101.93|136707.76861|-381388.71271|-381388.71271
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1000
+Xy1cxmlJ0Z3F_2328|0GqxQ21iy_2228|1|1|1|0|0|0
+UGgU1F_2328|dGs1c_2228|1|1|1|0|0|0
+biPUya8gTvYwyC4NhaC_12328|gOR98J_12228|1|1|1|0|0|0
+glrVnJT8Q_12328|j_12228|1|1|1|0|0|0
+OJxDGsYoAz0wyN_2328|nAWhG0I8_2228|1|1|1|0|0|0
+Tcvjwl1MTpmHxIjivo3_12328|Si8S5Aw51NpWQi_12228|1|1|1|0|0|0
+kDPODmj4898_2328|yQNMVjeuqPnx2_2228|1|1|1|0|0|0
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+-914907.1|OJxDGsYoAz0wyN_2328|UwrG3XYcj_2228
+-292797.78|UGgU1F_2328|7p5K_2228
+-125890.9918|biPUya8gTvYwyC4NhaC_12328|xQus_2228
+kDPODmj4898_2328|yQNMVjeuqPnx2_2228|yqnmvjeuqpnx2_2228
+Tcvjwl1MTpmHxIjivo3_12328|Si8S5Aw51NpWQi_12228|si8s5aw51npwqi_12228
+OJxDGsYoAz0wyN_2328|nAWhG0I8_2228|nawhg0i8_2228
+glrVnJT8Q_12328|j_12228|j_12228
+biPUya8gTvYwyC4NhaC_12328|gOR98J_12228|gor98j_12228
+UGgU1F_2328|dGs1c_2228|dgs1c_2228
+Xy1cxmlJ0Z3F_2328|0GqxQ21iy_2228|0gqxq21iy_2228
+xQus_2228|xqus_2228
+UwrG3XYcj_2228|uwrg3xycj_2228
+7p5K_2228|7p5k_2228
+-125890.9918|-943910.158|717078.2|717078.2
+-292797.78|-757108.16|531517.8|531517.8
+-914907.1|308291.438|-145766.27|-145766.27
+1095101.93|136707.76861|-381388.71271|-381388.71271
+
+ERR:
+

@@ -1,0 +1,91 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_cSD975UhI (c_3Kaj NUMERIC DEFAULT 84142, c_bKP NUMERIC, c_F5rh INTEGER PRIMARY KEY DEFAULT 849032, c_cVeU0 NUMERIC, c_MKMqhrX8tH TEXT, c_8VCVF TEXT, c_z0cJL NUMERIC, c_XK6eX REAL, c_iyyOGPjAxk INTEGER, c_vAy4 REAL);
+REPLACE INTO t_cSD975UhI (c_3Kaj, c_bKP, c_F5rh, c_cVeU0, c_MKMqhrX8tH, c_8VCVF, c_z0cJL, c_XK6eX, c_iyyOGPjAxk, c_vAy4) VALUES (24586646, 27395702, 28407478, 28868851, 'zc2sQlFNPLtf8bSTTG_2945', 'DjcLsaqp6_3045', 30974288, -860078.9804, 32733688, 447407.4), (124554158, 126437051, 127220967, 129313581, 'KaOnDVQBU06Mx_12945', '36CErodu_13045', 130670764, 409612.3, 133324655, 576577.0);
+REPLACE INTO t_cSD975UhI (c_3Kaj, c_bKP, c_F5rh, c_cVeU0, c_MKMqhrX8tH, c_8VCVF, c_z0cJL, c_XK6eX, c_iyyOGPjAxk, c_vAy4) VALUES (24725309, 26114105, 27442396, 28571756, 'C71q9qUcq_2945', 'AXVD_3045', 31412064, -226165.94, 33870005, 595438.0728), (126073694, 126488757, 127341541, 128474517, '72QiH9dg_12945', 'yS_13045', 132051641, -647160.20038, 132745824, -542563.08862);
+BEGIN TRANSACTION;
+INSERT OR REPLACE INTO t_cSD975UhI (c_3Kaj, c_bKP, c_F5rh, c_cVeU0, c_MKMqhrX8tH, c_8VCVF, c_z0cJL, c_XK6eX, c_iyyOGPjAxk, c_vAy4) VALUES (25135340, 27259132, 27895242, 27802538, 'SdjP6Am_2945', 'YhZY78QaDUlZmf_3045', 31168070, 887860.4, 34367041, -539324.475);
+INSERT OR REPLACE INTO t_cSD975UhI (c_3Kaj, c_bKP, c_F5rh, c_cVeU0, c_MKMqhrX8tH, c_8VCVF, c_z0cJL, c_XK6eX, c_iyyOGPjAxk, c_vAy4) VALUES (24828337, 27181896, 28401854, 29401501, 'qd_2945', 'FhjWXz5GsldcKAeFlPIv_3045', 31210478, -165663.8, 32685712, 262944.0), (126250956, 126673997, 127511958, 128720767, 'gjQXnXPv8FtnxTu0_12945', 'Su9ZacTGy6kfXq_13045', 130949259, 110695.560095, 133152298, -649416.640724);
+REPLACE INTO t_cSD975UhI (c_3Kaj, c_bKP, c_F5rh, c_cVeU0, c_MKMqhrX8tH, c_8VCVF, c_z0cJL, c_XK6eX, c_iyyOGPjAxk, c_vAy4) SELECT 25843704, 27294322, 28118185, 27776233, 'XpLK8D6UlMF7i5WipA_2945', 'bYP943qechbGo_3045', 32052010, 77431.96710000001, 33653236, -933843.550456;
+COMMIT;
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_cSD975UhI
+            LIMIT 1;
+            
+SELECT t_cSD975UhI.c_8VCVF, ABS(t_cSD975UhI.c_8VCVF) AS computed_c_8VCVF FROM t_cSD975UhI ORDER BY t_cSD975UhI.c_8VCVF ASC LIMIT 10;
+SELECT t_cSD975UhI.c_bKP, EXISTS (SELECT 1 FROM t_cSD975UhI LIMIT 1) AS alias_nvc FROM t_cSD975UhI WHERE TRUE GROUP BY c_bKP ORDER BY 2 DESC LIMIT 94;
+SELECT t_cSD975UhI.c_z0cJL, t_cSD975UhI.c_8VCVF, t_cSD975UhI.c_bKP, t_cSD975UhI.c_MKMqhrX8tH, LENGTH(t_cSD975UhI.c_z0cJL) AS computed_c_z0cJL FROM t_cSD975UhI ORDER BY t_cSD975UhI.c_z0cJL DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+36CErodu_13045|36.0
+AXVD_3045|0.0
+DjcLsaqp6_3045|0.0
+FhjWXz5GsldcKAeFlPIv_3045|0.0
+Su9ZacTGy6kfXq_13045|0.0
+YhZY78QaDUlZmf_3045|0.0
+bYP943qechbGo_3045|0.0
+yS_13045|0.0
+26114105|1
+27181896|1
+27259132|1
+27294322|1
+27395702|1
+126437051|1
+126488757|1
+126673997|1
+132051641|yS_13045|126488757|72QiH9dg_12945|9
+130949259|Su9ZacTGy6kfXq_13045|126673997|gjQXnXPv8FtnxTu0_12945|9
+130670764|36CErodu_13045|126437051|KaOnDVQBU06Mx_12945|9
+32052010|bYP943qechbGo_3045|27294322|XpLK8D6UlMF7i5WipA_2945|8
+31412064|AXVD_3045|26114105|C71q9qUcq_2945|8
+31210478|FhjWXz5GsldcKAeFlPIv_3045|27181896|qd_2945|8
+31168070|YhZY78QaDUlZmf_3045|27259132|SdjP6Am_2945|8
+30974288|DjcLsaqp6_3045|27395702|zc2sQlFNPLtf8bSTTG_2945|8
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+36CErodu_13045|36.0
+AXVD_3045|0.0
+DjcLsaqp6_3045|0.0
+FhjWXz5GsldcKAeFlPIv_3045|0.0
+Su9ZacTGy6kfXq_13045|0.0
+YhZY78QaDUlZmf_3045|0.0
+bYP943qechbGo_3045|0.0
+yS_13045|0.0
+126673997|1
+126488757|1
+126437051|1
+27395702|1
+27294322|1
+27259132|1
+27181896|1
+26114105|1
+132051641|yS_13045|126488757|72QiH9dg_12945|9
+130949259|Su9ZacTGy6kfXq_13045|126673997|gjQXnXPv8FtnxTu0_12945|9
+130670764|36CErodu_13045|126437051|KaOnDVQBU06Mx_12945|9
+32052010|bYP943qechbGo_3045|27294322|XpLK8D6UlMF7i5WipA_2945|8
+31412064|AXVD_3045|26114105|C71q9qUcq_2945|8
+31210478|FhjWXz5GsldcKAeFlPIv_3045|27181896|qd_2945|8
+31168070|YhZY78QaDUlZmf_3045|27259132|SdjP6Am_2945|8
+30974288|DjcLsaqp6_3045|27395702|zc2sQlFNPLtf8bSTTG_2945|8
+
+ERR:
+

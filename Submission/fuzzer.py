@@ -5,7 +5,6 @@ import tempfile
 import subprocess
 from sql_statement_generator import generate_test_case as gen_sql
 import os
-from coverage import get_coverage, clean_gcov_data
 import random
 from sql_statement_mutator import mutate_sql_statement
 
@@ -203,9 +202,7 @@ def parse_args():
 def main():
     args = parse_args()
 
-    clean_gcov_data()
     differences = run_parallel_tests(args)
-    get_coverage(args.iterations)
 
     if not differences:
         print("No differences found!")
@@ -215,5 +212,4 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        get_coverage(-1)
         print("\nFuzzing stopped by user")
