@@ -28,7 +28,7 @@ def plot_general_stats(stats, output_dir):
     plt.tight_layout()
     
     # Save the figure
-    plt.savefig(Path(output_dir) / 'query_overview.png')
+    plt.savefig(Path(output_dir) / 'query_overview.pdf')
     plt.close()
 
 def plot_top_clauses(stats, output_dir, top_n=None):
@@ -68,7 +68,7 @@ def plot_top_clauses(stats, output_dir, top_n=None):
                 f'{width}', ha='left', va='center')
     
     # Set titles and labels
-    ax.set_title(f'All SQL Clauses by Frequency ({len(selected_clauses)} non-zero clauses)')
+    ax.set_title('Total Frequency of SQL clauses over 10000 queries')
     ax.set_xlabel('Frequency')
     
     # Set x-axis limits to reduce horizontal space
@@ -82,7 +82,7 @@ def plot_top_clauses(stats, output_dir, top_n=None):
     plt.tight_layout(pad=1.0)  # Reduced padding
     
     # Save the figure
-    plt.savefig(Path(output_dir) / 'clause_frequency.png')
+    plt.savefig(Path(output_dir) / 'clause_frequency.pdf')
     plt.close(fig)
 
 def plot_clause_per_query(stats, output_dir):
@@ -109,7 +109,7 @@ def plot_clause_per_query(stats, output_dir):
     
     # Create horizontal bar chart
     fig, ax = plt.subplots(figsize=(12, fig_height))
-    bars = ax.barh(y_pos, plot_frequencies, color='orange')
+    bars = ax.barh(y_pos, plot_frequencies, color='skyblue')
     
     # Set y-ticks and labels
     ax.set_yticks(y_pos)
@@ -128,7 +128,7 @@ def plot_clause_per_query(stats, output_dir):
                 format_str, ha='left', va='center')
     
     # Set titles and labels
-    ax.set_title('Average SQL Clause Occurrences Per Query')
+    ax.set_title('Average Frequency of SQL clauses per query over 10000 queries')
     ax.set_xlabel('Occurrences per Query')
     
     # Set x-axis limits
@@ -145,7 +145,7 @@ def plot_clause_per_query(stats, output_dir):
     plt.tight_layout(pad=1.0)
     
     # Save the figure
-    plt.savefig(Path(output_dir) / 'clause_per_query.png')
+    plt.savefig(Path(output_dir) / 'clause_per_query.pdf')
     plt.close(fig)
 
 def main():
