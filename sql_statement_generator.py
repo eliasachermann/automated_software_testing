@@ -397,19 +397,17 @@ class SQLiteGrammar:
         return f"{insert_variant} {table_name} DEFAULT VALUES;"
 
     def get_tie_breaker(self, table_name, tables_info=None):
-        """Return appropriate tie-breaking column reference for a table"""
         if not tables_info or table_name not in tables_info:
             return "rowid"
             
         is_without_rowid = tables_info[table_name].get("without_rowid", False)
         
         if is_without_rowid:
-            # For WITHOUT ROWID tables, use the first column as tie-breaker
             if tables_info[table_name]["columns"]:
                 return f"{table_name}.{tables_info[table_name]['columns'][0]}"
-            return "1"  # Fallback if no columns
+            return "1" 
         else:
-            return f"{table_name}.rowid"  # Regular tables use rowid
+            return f"{table_name}.rowid" 
 
     def generate_create_table_stmt(self, table_name=None):
         table = (
@@ -589,10 +587,8 @@ class SQLiteGrammar:
         elif query_style == 1:
             if query_style == 1:
                 if columns and len(columns) > 0:
-                    # Handle WITHOUT ROWID tables by using their first column instead of ROWID
                     id_column = "ROWID"
                     if is_without_rowid:
-                        # Use the first column as identifier for WITHOUT ROWID tables
                         id_column = columns[0]
 
                     return f"""
@@ -651,12 +647,11 @@ class SQLiteGrammar:
                 col1 = random.choice(columns)
                 col2 = random.choice(columns) if len(columns) > 1 else col1
 
-                # Handle WITHOUT ROWID tables
                 id_column = "ROWID"
                 if is_without_rowid:
                     id_column = columns[
                         0
-                    ]  # Use the first column for WITHOUT ROWID tables
+                    ]
 
                 return f"""
                 WITH row_json AS (
@@ -706,7 +701,6 @@ class SQLiteGrammar:
 
     def generate_subquery_madness(self, tables_info):
         if random.random() < 0.99:
-            # Existing code for regular subquery madness
             if not tables_info or len(tables_info) < 1:
                 return "SELECT 1;"
 
@@ -764,25 +758,19 @@ class SQLiteGrammar:
 
             values_expr = self.generate_values_expr(rows=1, cols=1)
 
-            # Generate window clause using positional references (1) instead of column names
             window_clause_type = random.randint(0, 5)
 
             if window_clause_type == 0:
-                # Empty OVER() clause
                 window_clause = "OVER()"
             elif window_clause_type == 1:
-                # PARTITION BY clause using position
                 window_clause = "OVER(PARTITION BY 1)"
             elif window_clause_type == 2:
-                # ORDER BY clause with stable ordering using position
                 direction = "ASC" if random.random() < 0.5 else "DESC"
                 window_clause = f"OVER(ORDER BY 1 {direction})"
             elif window_clause_type == 3:
-                # Combined PARTITION BY and ORDER BY with position
                 direction = "ASC" if random.random() < 0.5 else "DESC"
                 window_clause = f"OVER(PARTITION BY 1 ORDER BY 1 {direction})"
             elif window_clause_type == 4:
-                # Window frame with position
                 direction = "ASC" if random.random() < 0.5 else "DESC"
                 frame_options = [
                     "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
@@ -793,7 +781,6 @@ class SQLiteGrammar:
                 frame = random.choice(frame_options)
                 window_clause = f"OVER(ORDER BY 1 {direction} {frame})"
             else:
-                # RANGE or GROUPS window frame with position
                 direction = "ASC" if random.random() < 0.5 else "DESC"
                 frame_type = random.choice(["RANGE", "GROUPS"])
                 frame_options = [
@@ -1514,66 +1501,53 @@ class SQLiteGrammar:
         return f"{with_clause}{delete_clause}{where_clause}"
 
     def generate_alter_table_stmt(self, tables_info):
-        """Generate ALTER TABLE statements with proper updates to tables_info."""
         if not tables_info:
             return None, tables_info
 
-        # Choose a table to alter
         table_name = random.choice(list(tables_info.keys()))
         table_data = tables_info[table_name]
 
-        # Choose the ALTER TABLE operation
         op_type = random.choice(["RENAME TABLE", "RENAME COLUMN", "ADD COLUMN"])
 
-        # Create a copy of tables_info to modify
         updated_tables_info = {k: v.copy() for k, v in tables_info.items()}
 
         if op_type == "RENAME TABLE":
             new_table_name = f"t_{random_string(random.randint(3, 10))}"
 
-            # Update the tables_info structure
             updated_tables_info[new_table_name] = updated_tables_info.pop(table_name)
 
-            # Generate the ALTER TABLE statement
             return (
                 f"ALTER TABLE {table_name} RENAME TO {new_table_name};",
                 updated_tables_info,
             )
 
         elif op_type == "RENAME COLUMN" and table_data.get("columns"):
-            # Choose a column to rename
             if not table_data["columns"]:
                 return None, tables_info
 
             col_name = random.choice(table_data["columns"])
             new_col_name = f"c_{random_string(random.randint(3, 10))}"
 
-            # Update the column list
             column_index = updated_tables_info[table_name]["columns"].index(col_name)
             updated_tables_info[table_name]["columns"][column_index] = new_col_name
 
-            # Update the column types dictionary
             if "types" in updated_tables_info[table_name]:
                 if col_name in updated_tables_info[table_name]["types"]:
                     updated_tables_info[table_name]["types"][new_col_name] = (
                         updated_tables_info[table_name]["types"].pop(col_name)
                     )
 
-            # Generate the ALTER TABLE statement
             return (
                 f"ALTER TABLE {table_name} RENAME COLUMN {col_name} TO {new_col_name};",
                 updated_tables_info,
             )
 
         elif op_type == "ADD COLUMN":
-            # Generate new column
             new_col_name = f"c_{random_string(random.randint(3, 10))}"
             data_type = random.choice(self.data_types)
 
-            # Prepare constraints
             constraints = []
 
-            # SQLite doesn't allow adding NOT NULL columns without DEFAULT
             if random.random() < 0.3:
                 constraints.append(f"DEFAULT {random_value(data_type=data_type)}")
 
@@ -1585,12 +1559,10 @@ class SQLiteGrammar:
                 "" if not constraints else f" {' '.join(constraints)}"
             )
 
-            # Update the tables_info structure
             updated_tables_info[table_name]["columns"].append(new_col_name)
             if "types" in updated_tables_info[table_name]:
                 updated_tables_info[table_name]["types"][new_col_name] = data_type
 
-            # Generate the ALTER TABLE statement
             return (
                 f"ALTER TABLE {table_name} ADD COLUMN {column_def};",
                 updated_tables_info,
@@ -2086,7 +2058,6 @@ def generate_test_case():
                 col1 = random.choice(columns)
                 col2 = random.choice(columns)
 
-                # Add stable ordering with multiple tie-breakers
                 statements.append(f"""
                 SELECT DISTINCT {table_name}.{col1},
                     COUNT(*) OVER (PARTITION BY {table_name}.{col2}) as window_count,

@@ -1,5 +1,4 @@
 import argparse
-import json
 import multiprocessing as mp
 import time
 import tempfile
@@ -7,8 +6,6 @@ import subprocess
 from sql_statement_generator import generate_test_case as gen_sql
 import os
 from coverage import get_coverage, clean_gcov_data
-from sql_statement_mutator import mutate_sql_statement
-import random
 
 
 def check_muatation(out_old, err_old, out_new, err_new):
@@ -19,7 +16,6 @@ def check_muatation(out_old, err_old, out_new, err_new):
     return False, "No Difference"
 
 def compare_results(out_old, err_old, out_new, err_new):
-    # return True, "Test"
     if out_old != out_new:
         return True, "Output"
     if err_old != "" and err_new == "":
@@ -32,7 +28,6 @@ def compare_results(out_old, err_old, out_new, err_new):
 def save_difference(
     sql, sql_old, sql_new, out_old, err_old, out_new, err_new, diff_type
 ):
-    """Save a difference to a log file."""
     timestamp = time.time()
     formatted_timestamp = time.strftime("%Y%m%d_%H%M%S", time.localtime(timestamp))
     ms = int((timestamp - int(timestamp)) * 1000)
@@ -41,7 +36,6 @@ def save_difference(
     timestamp = f"{timestamp}_{pid}"
     log_dir = "fuzz_logs"
 
-    # Create logs directory if it doesn't exist
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
 
@@ -62,19 +56,16 @@ def run_tests(old_sqlite, new_sqlite):
             tempfile.NamedTemporaryFile() as tmpdb,
             tempfile.NamedTemporaryFile() as tmpdb2,
         ):
-            # Run the old SQLite version
             cmd = [old_sqlite, tmpdb.name]
             result_old = subprocess.run(
                 cmd, input=sql.encode(), capture_output=True, timeout=15
             )
 
-            # Run the new SQLite version
             cmd = [new_sqlite, tmpdb2.name]
             result_new = subprocess.run(
                 cmd, input=sql.encode(), capture_output=True, timeout=15
             )
 
-            # Add error handling to prevent UTF-8 decode errors
             out_old = result_old.stdout.decode(errors="replace")
             err_old = result_old.stderr.decode(errors="replace")
             out_new = result_new.stdout.decode(errors="replace")
@@ -166,7 +157,6 @@ def run_tests(old_sqlite, new_sqlite):
 
 
 def run_parallel_tests(args):
-    """Run tests in parallel."""
     print(f"Running {int(args.iterations)} tests using {args.processes} processes")
     print(f"Testing {args.old_sqlite} vs {args.new_sqlite}")
 
@@ -178,7 +168,6 @@ def run_parallel_tests(args):
             [(args.old_sqlite, args.new_sqlite) for i in range(args.iterations)],
         )
 
-    # Filter out None results
     differences = [r for r in results if r]
 
     end_time = time.time()
@@ -190,7 +179,6 @@ def run_parallel_tests(args):
 
 
 def parse_args():
-    """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="SQLite Differential Fuzzer")
     parser.add_argument(
         "--iterations", type=int, default=10000, help="Number of test iterations"
@@ -212,7 +200,6 @@ def parse_args():
 
 
 def main():
-    """Main function."""
     args = parse_args()
 
     clean_gcov_data()
