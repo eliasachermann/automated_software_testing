@@ -1,0 +1,5 @@
+Expected result:
+74134102|74134102
+
+Actual result:
+74134101|74134102

@@ -1,0 +1,112 @@
+CREATE TABLE IF NOT EXISTS t_MYKmOUk3G (c_HfSQRbwSg REAL, c_CUC NUMERIC, c_89U NUMERIC DEFAULT -655472, c_OpuDH9Ilm INTEGER PRIMARY KEY);
+CREATE TABLE t_UAzAI (c_0M9GWfEBE REAL, c_fLn4isIlCl NUMERIC, c_4MwuTwU8 TEXT, c_up5IkwHde TEXT, c_z6Z TEXT PRIMARY KEY, c_p6t5OR TEXT);
+REPLACE INTO t_MYKmOUk3G (c_HfSQRbwSg, c_CUC, c_89U, c_OpuDH9Ilm) VALUES (340915.9, 53613229, 55304661, 55049342);
+INSERT OR REPLACE INTO t_MYKmOUk3G (c_HfSQRbwSg, c_CUC, c_89U, c_OpuDH9Ilm) VALUES (1000519.08, 54738489, 54693474, 55903448);
+REPLACE INTO t_MYKmOUk3G (c_HfSQRbwSg, c_CUC, c_89U, c_OpuDH9Ilm) VALUES (1041704.09265, 54214750, 55004937, 55048076);
+INSERT OR IGNORE INTO t_MYKmOUk3G (c_HfSQRbwSg, c_CUC, c_89U, c_OpuDH9Ilm) SELECT -475614.14489999996, 53138465, 54252187, 56431104;
+REPLACE INTO t_MYKmOUk3G (c_HfSQRbwSg, c_CUC, c_89U, c_OpuDH9Ilm) SELECT 239474.0184, 54886327, 55012011, 55744349;
+INSERT OR REPLACE INTO t_UAzAI (c_0M9GWfEBE, c_fLn4isIlCl, c_4MwuTwU8, c_up5IkwHde, c_z6Z, c_p6t5OR) VALUES (-485682.483, 54653179, 'eAVQ7nAaIHVuGXWc_5490', '4fuHF0dZ_5590', 'GUpahsxWSUz5_5690', 'qQ6WtmKFxjWg_5790');
+INSERT OR REPLACE INTO t_UAzAI (c_0M9GWfEBE, c_fLn4isIlCl, c_4MwuTwU8, c_up5IkwHde, c_z6Z, c_p6t5OR) VALUES (-341264.784777, 54066692, 'iZ8iRPTX2cY6R_5490', 'TaOuqarEvPCL3E_5590', '3ZgQdg_5690', '2uszErgrcfxU_5790'), (-589994.695, 153014133, 'Fhs5lt_15490', 'v5PCR1hAMdkOAI_15590', 'ABz1skqYSA2hyEU911W_15690', '2U51cKeIQm3XVDfseGz_15790');
+INSERT OR REPLACE INTO t_UAzAI (c_0M9GWfEBE, c_fLn4isIlCl, c_4MwuTwU8, c_up5IkwHde, c_z6Z, c_p6t5OR) VALUES (-6520.767910000002, 53316913, 'vhvJKqEF3XDN37fZ_5490', 'd9C5T5gtTJKvm73hnT9N_5590', 'I1Y_5690', 'T4et6dWf7mkEKy4_5790');
+INSERT OR REPLACE INTO t_UAzAI (c_0M9GWfEBE, c_fLn4isIlCl, c_4MwuTwU8, c_up5IkwHde, c_z6Z, c_p6t5OR) VALUES (-848939.4775, 52968352, 'OSwFMbTjPj_5490', 'NZfnYTooXyY4Q8wizU_5590', '80_5690', 'VjV_5790');
+
+WITH RECURSIVE counter(n) AS (
+SELECT MIN(CASE WHEN typeof(c_HfSQRbwSg) IN ('integer','real') THEN c_HfSQRbwSg ELSE 0 END) FROM t_MYKmOUk3G
+UNION ALL
+SELECT n+1 FROM counter 
+WHERE n < (SELECT MIN(100,MAX(CASE WHEN typeof(c_HfSQRbwSg) IN ('integer','real') THEN c_HfSQRbwSg ELSE 10 END)) FROM t_MYKmOUk3G)
+)
+SELECT n, COUNT(*) AS count_matches 
+FROM counter 
+LEFT JOIN t_MYKmOUk3G ON counter.n = CASE WHEN typeof(c_HfSQRbwSg) IN ('integer','real') THEN c_HfSQRbwSg ELSE NULL END
+GROUP BY n
+ORDER BY n
+LIMIT 20;
+
+
+SELECT 
+    t1.c_HfSQRbwSg,
+    (SELECT COUNT(*) FROM t_MYKmOUk3G t2 WHERE t2.c_HfSQRbwSg = t1.c_HfSQRbwSg) as same_value_count,
+    CASE WHEN EXISTS(SELECT 1 FROM t_MYKmOUk3G t3 WHERE t3.c_HfSQRbwSg > t1.c_HfSQRbwSg LIMIT 1) 
+        THEN 'Not Max' ELSE 'Max' END as is_max_value,
+    (SELECT COUNT(*) FROM (
+        SELECT DISTINCT c_HfSQRbwSg FROM t_MYKmOUk3G
+    )) as distinct_values_count
+FROM t_MYKmOUk3G t1
+WHERE t1.c_HfSQRbwSg IN (
+    SELECT c_HfSQRbwSg 
+    FROM t_MYKmOUk3G 
+    WHERE typeof(c_HfSQRbwSg) NOT IN ('null')
+    GROUP BY c_HfSQRbwSg
+    HAVING COUNT(*) > 0
+)
+ORDER BY (SELECT COUNT(*) FROM t_MYKmOUk3G t4 WHERE t4.c_HfSQRbwSg = t1.c_HfSQRbwSg) DESC
+LIMIT 10;
+    
+SELECT *, c_OpuDH9Ilm, c_0M9GWfEBE IN (SELECT t_UAzAI.c_up5IkwHde FROM t_UAzAI LIMIT 5) AS alias_Yzx, c_89U, t_UAzAI.* FROM t_UAzAI, t_MYKmOUk3G WHERE SUBSTR((t_UAzAI.c_0M9GWfEBE < t_UAzAI.c_4MwuTwU8), HEX(t_MYKmOUk3G.c_OpuDH9Ilm)) ORDER BY 1 LIMIT 8;
+
+SELECT DISTINCT t_MYKmOUk3G.c_HfSQRbwSg,
+    COUNT(*) OVER (PARTITION BY t_MYKmOUk3G.c_HfSQRbwSg) as window_count,
+    RANK() OVER (ORDER BY CASE WHEN typeof(t_MYKmOUk3G.c_HfSQRbwSg) IN ('null') THEN 0 
+                            ELSE t_MYKmOUk3G.c_HfSQRbwSg END DESC) as rank_val,
+    CASE WHEN t_MYKmOUk3G.c_HfSQRbwSg IS NULL THEN 'Unknown' ELSE 'Known' END as status
+FROM t_MYKmOUk3G
+WHERE t_MYKmOUk3G.c_HfSQRbwSg IS NOT NULL
+GROUP BY t_MYKmOUk3G.c_HfSQRbwSg, t_MYKmOUk3G.c_HfSQRbwSg
+HAVING COUNT(*) > 0
+ORDER BY window_count DESC
+LIMIT 20;
+
+SELECT t_MYKmOUk3G.c_HfSQRbwSg,
+    t_MYKmOUk3G.c_HfSQRbwSg,
+    SUM(CASE WHEN typeof(t_MYKmOUk3G.c_HfSQRbwSg) IN ('integer', 'real', 'numeric') THEN t_MYKmOUk3G.c_HfSQRbwSg ELSE 0 END) 
+        OVER (PARTITION BY t_MYKmOUk3G.c_HfSQRbwSg) as window_total
+FROM t_MYKmOUk3G
+GROUP BY t_MYKmOUk3G.c_HfSQRbwSg, t_MYKmOUk3G.c_HfSQRbwSg
+HAVING SUM(CASE WHEN typeof(t_MYKmOUk3G.c_HfSQRbwSg) IN ('integer', 'real', 'numeric') THEN t_MYKmOUk3G.c_HfSQRbwSg ELSE 0 END) > 0
+ORDER BY window_total DESC
+LIMIT 10;
+
+SELECT DISTINCT t_MYKmOUk3G.c_OpuDH9Ilm,
+    COUNT(*) OVER (PARTITION BY t_MYKmOUk3G.c_HfSQRbwSg) as window_count,
+    RANK() OVER (ORDER BY CASE WHEN typeof(t_MYKmOUk3G.c_OpuDH9Ilm) IN ('null') THEN 0 
+                            ELSE t_MYKmOUk3G.c_OpuDH9Ilm END DESC) as rank_val,
+    CASE WHEN t_MYKmOUk3G.c_OpuDH9Ilm IS NULL THEN 'Unknown' ELSE 'Known' END as status
+FROM t_MYKmOUk3G
+WHERE t_MYKmOUk3G.c_OpuDH9Ilm IS NOT NULL
+GROUP BY t_MYKmOUk3G.c_OpuDH9Ilm, t_MYKmOUk3G.c_HfSQRbwSg
+HAVING COUNT(*) > 0
+ORDER BY window_count DESC
+LIMIT 20;
+
+SELECT t_MYKmOUk3G.c_OpuDH9Ilm,
+    t_MYKmOUk3G.c_HfSQRbwSg,
+    SUM(CASE WHEN typeof(t_MYKmOUk3G.c_OpuDH9Ilm) IN ('integer', 'real', 'numeric') THEN t_MYKmOUk3G.c_OpuDH9Ilm ELSE 0 END) 
+        OVER (PARTITION BY t_MYKmOUk3G.c_HfSQRbwSg) as window_total
+FROM t_MYKmOUk3G
+GROUP BY t_MYKmOUk3G.c_OpuDH9Ilm, t_MYKmOUk3G.c_HfSQRbwSg
+HAVING SUM(CASE WHEN typeof(t_MYKmOUk3G.c_OpuDH9Ilm) IN ('integer', 'real', 'numeric') THEN t_MYKmOUk3G.c_OpuDH9Ilm ELSE 0 END) > 0
+ORDER BY window_total DESC
+LIMIT 10;
+
+SELECT DISTINCT t_UAzAI.c_0M9GWfEBE,
+    COUNT(*) OVER (PARTITION BY t_UAzAI.c_4MwuTwU8) as window_count,
+    RANK() OVER (ORDER BY CASE WHEN typeof(t_UAzAI.c_0M9GWfEBE) IN ('null') THEN 0 
+                            ELSE t_UAzAI.c_0M9GWfEBE END DESC) as rank_val,
+    CASE WHEN t_UAzAI.c_0M9GWfEBE IS NULL THEN 'Unknown' ELSE 'Known' END as status
+FROM t_UAzAI
+WHERE t_UAzAI.c_0M9GWfEBE IS NOT NULL
+GROUP BY t_UAzAI.c_0M9GWfEBE, t_UAzAI.c_4MwuTwU8
+HAVING COUNT(*) > 0
+ORDER BY window_count DESC
+LIMIT 20;
+
+SELECT t_UAzAI.c_0M9GWfEBE,
+    t_UAzAI.c_4MwuTwU8,
+    SUM(CASE WHEN typeof(t_UAzAI.c_0M9GWfEBE) IN ('integer', 'real', 'numeric') THEN t_UAzAI.c_0M9GWfEBE ELSE 0 END) 
+        OVER (PARTITION BY t_UAzAI.c_4MwuTwU8) as window_total
+FROM t_UAzAI
+GROUP BY t_UAzAI.c_0M9GWfEBE, t_UAzAI.c_4MwuTwU8
+HAVING SUM(CASE WHEN typeof(t_UAzAI.c_0M9GWfEBE) IN ('integer', 'real', 'numeric') THEN t_UAzAI.c_0M9GWfEBE ELSE 0 END) > 0
+ORDER BY window_total DESC
+LIMIT 10;

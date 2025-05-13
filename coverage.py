@@ -31,4 +31,4 @@ def get_coverage(iteration):
                 break
 
     else:
-        print("Lines executed:0% of 55028")
+        print("Lines executed:0%")

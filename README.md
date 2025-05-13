@@ -7,9 +7,14 @@ python3 fuzznew.py --iterations 5000 --processes 8  --old-sqlite /usr/bin/sqlite
 Docker
 
 Build image from dockerfile:
-docker build --platform linux/amd64 -t sqlite-fuzz-env .
+
 
 Run Container:
 docker run --platform linux/amd64 -it \
   -v $(pwd):/app \
   sqlite-fuzz-env
+
+
+
+sudo docker build --platform linux/amd64 -t sqlite-fuzz-env .
+sudo docker run -it -v $(pwd):/app  sqlite-fuzz-env
