@@ -1,0 +1,172 @@
+SQL:
+PRAGMA read_uncommitted;
+CREATE TABLE IF NOT EXISTS t_Fpt (c_bwHQH9WzX TEXT DEFAULT 'Egn01N8PIF', c_d5bxzX REAL, c_gb0J REAL, c_PL1 NUMERIC DEFAULT 24102, c_w00Q0F1PFA REAL, c_rTNO3cO NUMERIC);
+CREATE TABLE t_cS2 (c_ySJam6n INTEGER PRIMARY KEY) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_asMOqMYS (c_cW5HGwA REAL, c_G8uFKvBJ TEXT DEFAULT 'hZB7NM3ncGCBSHHc3oKb', c_NTa0wMhXN INTEGER DEFAULT -478335, c_eiGrk INTEGER, c_jmz2GR NUMERIC, c_fv4R TEXT, c_lPsLltUw REAL DEFAULT 402600.5825);
+CREATE TABLE IF NOT EXISTS t_Pz9retBGM (c_cmqAuxEs INTEGER, PRIMARY KEY (c_cmqAuxEs), UNIQUE (c_cmqAuxEs));
+INSERT OR REPLACE INTO t_Fpt (c_bwHQH9WzX, c_d5bxzX, c_gb0J, c_PL1, c_w00Q0F1PFA, c_rTNO3cO) SELECT 'JMhaAuyU_8686', 554024.157917, 976945.324936, 89751627, 327853.0222, 91011860;
+INSERT OR REPLACE INTO t_cS2 (c_ySJam6n) VALUES (87803133), (187162980);
+INSERT OR IGNORE INTO t_cS2 (c_ySJam6n) VALUES (86254684);
+REPLACE INTO t_cS2 (c_ySJam6n) VALUES (86368814);
+INSERT OR REPLACE INTO t_asMOqMYS (c_cW5HGwA, c_G8uFKvBJ, c_NTa0wMhXN, c_eiGrk, c_jmz2GR, c_fv4R, c_lPsLltUw) VALUES (-723282.6, 'u0L5l_8786', 88942373, 90756914, 89894509, 'myBLaS_9186', -545701.29);
+REPLACE INTO t_asMOqMYS (c_cW5HGwA, c_G8uFKvBJ, c_NTa0wMhXN, c_eiGrk, c_jmz2GR, c_fv4R, c_lPsLltUw) VALUES (-437861.9277, 'wz_8786', 89620110, 90723210, 91596516, '26WK5kQqudvMgohp1_9186', -858861.563);
+INSERT OR IGNORE INTO t_asMOqMYS (c_cW5HGwA, c_G8uFKvBJ, c_NTa0wMhXN, c_eiGrk, c_jmz2GR, c_fv4R, c_lPsLltUw) VALUES (148722.83768, 'S_8786', 88833023, 89500279, 90797916, 'uGVvwhPhe1Bd7pswvDqL_9186', -136203.467);
+INSERT OR REPLACE INTO t_asMOqMYS (c_cW5HGwA, c_G8uFKvBJ, c_NTa0wMhXN, c_eiGrk, c_jmz2GR, c_fv4R, c_lPsLltUw) SELECT -623585.6888, 'GW2t1O2gm5UzMXYmd_8786', 89660421, 89166463, 90260516, 'JrW2_9186', 175995.046054;
+REPLACE INTO t_Pz9retBGM (c_cmqAuxEs) VALUES (86752628), (186659881);
+REPLACE INTO t_Pz9retBGM (c_cmqAuxEs) VALUES (87127396);
+INSERT OR IGNORE INTO t_Pz9retBGM (c_cmqAuxEs) VALUES (85946144);
+WITH cte_bwX AS (SELECT 1) REPLACE INTO t_Pz9retBGM (c_cmqAuxEs) VALUES (86432032);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_Pz9retBGM SET c_cmqAuxEs = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_Pz9retBGM);
+UPDATE OR IGNORE t_Pz9retBGM SET c_cmqAuxEs = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_Pz9retBGM);
+COMMIT;
+BEGIN TRANSACTION;
+REPLACE INTO t_Pz9retBGM (c_cmqAuxEs) VALUES (87339398), (186823160);
+UPDATE OR IGNORE t_Pz9retBGM SET c_cmqAuxEs = -498 WHERE ROWID = (SELECT MIN(ROWID) FROM t_Pz9retBGM);
+COMMIT;
+
+                WITH RECURSIVE counter(n) AS (
+                    SELECT MIN(CASE WHEN typeof(c_cmqAuxEs) IN ('integer','real') THEN c_cmqAuxEs ELSE 0 END) FROM t_Pz9retBGM
+                    UNION ALL
+                    SELECT n+1 FROM counter 
+                    WHERE n < (SELECT MIN(100,MAX(CASE WHEN typeof(c_cmqAuxEs) IN ('integer','real') THEN c_cmqAuxEs ELSE 10 END)) FROM t_Pz9retBGM)
+                    AND n < 100
+                ) 
+                SELECT n, COUNT(*) AS count_matches 
+                FROM counter 
+                LEFT JOIN t_Pz9retBGM ON counter.n = CASE WHEN typeof(c_cmqAuxEs) IN ('integer','real') THEN c_cmqAuxEs ELSE NULL END
+                GROUP BY n
+                ORDER BY n
+                LIMIT 20;
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_asMOqMYS
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_cmqAuxEs,
+                        (SELECT COUNT(*) FROM t_Pz9retBGM t2 WHERE t2.c_cmqAuxEs = t1.c_cmqAuxEs) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_Pz9retBGM t3 WHERE t3.c_cmqAuxEs > t1.c_cmqAuxEs LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_cmqAuxEs FROM t_Pz9retBGM
+                        )) as distinct_values_count
+                    FROM t_Pz9retBGM t1
+                    WHERE t1.c_cmqAuxEs IN (
+                        SELECT c_cmqAuxEs 
+                        FROM t_Pz9retBGM 
+                        WHERE typeof(c_cmqAuxEs) NOT IN ('null')
+                        GROUP BY c_cmqAuxEs
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_Pz9retBGM t4 WHERE t4.c_cmqAuxEs = t1.c_cmqAuxEs) DESC
+                    LIMIT 10;
+                    
+SELECT t_Fpt.c_gb0J as t_Fpt_val, t_Pz9retBGM.c_cmqAuxEs as t_Pz9retBGM_val, t_asMOqMYS.c_NTa0wMhXN as t_asMOqMYS_val
+FROM t_Fpt
+LEFT JOIN t_Pz9retBGM ON t_Fpt.ROWID = t_Pz9retBGM.ROWID
+LEFT OUTER JOIN t_asMOqMYS ON t_Fpt.ROWID = t_asMOqMYS.ROWID
+ORDER BY t_Fpt.c_gb0J
+LIMIT 20;
+SELECT t_Pz9retBGM.c_cmqAuxEs FROM t_Pz9retBGM ORDER BY t_Pz9retBGM.c_cmqAuxEs DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+0
+-498|1
+-497|1
+-496|1
+-495|1
+-494|1
+-493|1
+-492|1
+-491|1
+-490|1
+-489|1
+-488|1
+-487|1
+-486|1
+-485|1
+-484|1
+-483|1
+-482|1
+-481|1
+-480|1
+-479|1
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+-498|1|Not Max|7
+86432032|1|Not Max|7
+86752628|1|Not Max|7
+87127396|1|Not Max|7
+87339398|1|Not Max|7
+186659881|1|Not Max|7
+186823160|1|Max|7
+976945.324936||88942373
+186823160
+186659881
+87339398
+87127396
+86752628
+86432032
+-498
+
+ERR:
+Error: near line 19: datatype mismatch
+Error: near line 20: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+0
+-498|1
+-497|1
+-496|1
+-495|1
+-494|1
+-493|1
+-492|1
+-491|1
+-490|1
+-489|1
+-488|1
+-487|1
+-486|1
+-485|1
+-484|1
+-483|1
+-482|1
+-481|1
+-480|1
+-479|1
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+-498|1|Not Max|7
+86432032|1|Not Max|7
+86752628|1|Not Max|7
+87127396|1|Not Max|7
+87339398|1|Not Max|7
+186659881|1|Not Max|7
+186823160|1|Max|7
+976945.324936||88942373
+186823160
+186659881
+87339398
+87127396
+86752628
+86432032
+-498
+
+ERR:
+Runtime error near line 19: datatype mismatch (20)
+Runtime error near line 20: datatype mismatch (20)
+

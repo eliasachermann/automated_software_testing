@@ -6,7 +6,8 @@ import subprocess
 from sql_statement_generator import generate_test_case as gen_sql
 import os
 from coverage import get_coverage, clean_gcov_data
-
+import random
+from sql_statement_mutator import mutate_sql_statement
 
 def check_muatation(out_old, err_old, out_new, err_new):
     if out_old != out_new:
@@ -104,56 +105,56 @@ def run_tests(old_sqlite, new_sqlite):
             "sql": sql,
         }
     
-    # if random.random() < 0.1:
-    #     sql = mutate_sql_statement(sql)
-    #     try:
-    #         with (
-    #             tempfile.NamedTemporaryFile() as tmpdb,
-    #             tempfile.NamedTemporaryFile() as tmpdb2,
-    #         ):
-    #             # Run the old SQLite version
-    #             cmd = [old_sqlite, tmpdb.name]
-    #             result_old = subprocess.run(
-    #                 cmd, input=sql.encode(), capture_output=True, timeout=5
-    #             )
+    if random.random() < 0.1:
+        sql = mutate_sql_statement(sql)
+        try:
+            with (
+                tempfile.NamedTemporaryFile() as tmpdb,
+                tempfile.NamedTemporaryFile() as tmpdb2,
+            ):
+                # Run the old SQLite version
+                cmd = [old_sqlite, tmpdb.name]
+                result_old = subprocess.run(
+                    cmd, input=sql.encode(), capture_output=True, timeout=5
+                )
 
-    #             # Run the new SQLite version
-    #             cmd = [new_sqlite, tmpdb2.name]
-    #             result_new = subprocess.run(
-    #                 cmd, input=sql.encode(), capture_output=True, timeout=5
-    #             )
+                # Run the new SQLite version
+                cmd = [new_sqlite, tmpdb2.name]
+                result_new = subprocess.run(
+                    cmd, input=sql.encode(), capture_output=True, timeout=5
+                )
 
-    #             # Add error handling to prevent UTF-8 decode errors
-    #             out_old = result_old.stdout.decode(errors="replace")
-    #             err_old = result_old.stderr.decode(errors="replace")
-    #             out_new = result_new.stdout.decode(errors="replace")
-    #             err_new = result_new.stderr.decode(errors="replace")
+                # Add error handling to prevent UTF-8 decode errors
+                out_old = result_old.stdout.decode(errors="replace")
+                err_old = result_old.stderr.decode(errors="replace")
+                out_new = result_new.stdout.decode(errors="replace")
+                err_new = result_new.stderr.decode(errors="replace")
 
-    #             result, diff_type = check_muatation(out_old, err_old, out_new, err_new)
+                result, diff_type = check_muatation(out_old, err_old, out_new, err_new)
 
-    #             if result:
-    #                 filename = save_difference(
-    #                     sql,
-    #                     old_sqlite,
-    #                     new_sqlite,
-    #                     out_old,
-    #                     err_old,
-    #                     out_new,
-    #                     err_new,
-    #                     diff_type,
-    #                 )
+                if result:
+                    filename = save_difference(
+                        sql,
+                        old_sqlite,
+                        new_sqlite,
+                        out_old,
+                        err_old,
+                        out_new,
+                        err_new,
+                        diff_type,
+                    )
 
-    #                 print(f"\n❗ Difference found! Type: {diff_type}, saved to {filename}")
-    #                 return {
-    #                     "sql": sql,
-    #                     "old": (out_old, err_old),
-    #                     "new": (out_new, err_new),
-    #                     "type": diff_type,
-    #                     "file": filename,
-    #                 }
+                    print(f"\n❗ Difference found! Type: {diff_type}, saved to {filename}")
+                    return {
+                        "sql": sql,
+                        "old": (out_old, err_old),
+                        "new": (out_new, err_new),
+                        "type": diff_type,
+                        "file": filename,
+                    }
 
-    #     except Exception as e:
-    #         return
+        except Exception as e:
+            return
 
 
 def run_parallel_tests(args):

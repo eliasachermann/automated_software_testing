@@ -1,0 +1,62 @@
+SQL:
+CREATE TABLE t_MRd0 (c_gCQ3zfX TEXT DEFAULT '8yxO', c_0wif1hW98 NUMERIC DEFAULT 975459, c_tIbDbgHU TEXT PRIMARY KEY COLLATE RTRIM, c_WNJbA2FxTQ NUMERIC, c_58nfU7E TEXT, c_T9Nk INTEGER, c_SEhf REAL, c_aholxCL TEXT);
+CREATE TABLE IF NOT EXISTS t_KHGAGm (c_JujoXN TEXT PRIMARY KEY, c_ytoS NUMERIC, c_wLJ REAL, c_eSwGmE NUMERIC, c_1ctQ61YY5 INTEGER DEFAULT NULL, c_Uaor REAL, c_jgSX1moC REAL, c_g5EeCB6T9 REAL);
+CREATE TABLE IF NOT EXISTS t_ZmR (c_lO8IPgI INTEGER, c_QeK INTEGER PRIMARY KEY, c_boBaq REAL, c_p6T7 REAL DEFAULT 943941.4371, c_TjH2JmJ REAL, c_8gaJzfcRc TEXT, c_dhByW9BYk NUMERIC DEFAULT NULL, c_xvok REAL DEFAULT -505461.35, UNIQUE (c_boBaq, c_QeK, c_lO8IPgI));
+INSERT OR IGNORE INTO t_MRd0 (c_gCQ3zfX, c_0wif1hW98, c_tIbDbgHU, c_WNJbA2FxTQ, c_58nfU7E, c_T9Nk, c_SEhf, c_aholxCL) VALUES ('p_9215', 92995130, 'Nes3Bb_9415', 94898407, '0UNhu4Vt2qL6xzad_9615', 96876697, -901655.1, 'fIwf4Pe5PjQ0SLkTV_9915'), ('rJwMgFPRLj_19215', 193113395, 'WKK3KgulFamg1nXe2C_19415', 194380007, 'KXZCdtWv0fNHhA_19615', 197214770, 286276.55, 'cSg0tLLaCwA_19915');
+REPLACE INTO t_MRd0 (c_gCQ3zfX, c_0wif1hW98, c_tIbDbgHU, c_WNJbA2FxTQ, c_58nfU7E, c_T9Nk, c_SEhf, c_aholxCL) SELECT '6NEENLxkSC0163jM_9215', 93087285, '1Q_9415', 95374910, '4xhbodKw_9615', 97197942, 256008.3, 'EpDgJ3ovW8_9915';
+WITH cte_MrA AS (SELECT 1) REPLACE INTO t_MRd0 (c_gCQ3zfX, c_0wif1hW98, c_tIbDbgHU, c_WNJbA2FxTQ, c_58nfU7E, c_T9Nk, c_SEhf, c_aholxCL) VALUES ('RAB33f3pDoFVpK5nClfS_9215', 92622218, 'plZnqSjmfL7eJebCLGeu_9415', 95067949, 'uVZ3WSBBdEDk_9615', 96326380, 646552.324, 'tqtfM2ttaIYNGkI_9915');
+REPLACE INTO t_KHGAGm (c_JujoXN, c_ytoS, c_wLJ, c_eSwGmE, c_1ctQ61YY5, c_Uaor, c_jgSX1moC, c_g5EeCB6T9) VALUES ('U_9215', 92276296, 453985.635, 95792600, 95603899, 797111.02766, 610162.2738399999, 508286.77057);
+INSERT OR REPLACE INTO t_KHGAGm (c_JujoXN, c_ytoS, c_wLJ, c_eSwGmE, c_1ctQ61YY5, c_Uaor, c_jgSX1moC, c_g5EeCB6T9) VALUES ('5Z_9215', 93542645, 288615.724037, 95526321, 95852285, -536663.46564, 840011.840861, 311363.61), ('TPIgwfAd_19215', 193939932, 746309.0327, 195794562, 196744021, 1069287.5699999998, -238670.0, 328575.395296);
+INSERT OR REPLACE INTO t_KHGAGm (c_JujoXN, c_ytoS, c_wLJ, c_eSwGmE, c_1ctQ61YY5, c_Uaor, c_jgSX1moC, c_g5EeCB6T9) VALUES ('aVb_9215', 92541243, -377290.617, 95627186, 95935299, -515414.33770000003, -678276.89028, -321387.194649);
+REPLACE INTO t_KHGAGm (c_JujoXN, c_ytoS, c_wLJ, c_eSwGmE, c_1ctQ61YY5, c_Uaor, c_jgSX1moC, c_g5EeCB6T9) VALUES ('aKrqdFtfT8PTa_9215', 94040475, -873433.23652, 95171136, 95431340, -243510.85681899998, -557370.250835, 562287.9), ('ADIGM39wp_19215', 193228232, 351117.22017, 194374415, 195319107, 1134173.122, -488805.00292999996, 971998.898);
+WITH cte_ZMc AS (SELECT 1) INSERT OR IGNORE INTO t_KHGAGm (c_JujoXN, c_ytoS, c_wLJ, c_eSwGmE, c_1ctQ61YY5, c_Uaor, c_jgSX1moC, c_g5EeCB6T9) VALUES ('1sx4c_9215', 92230912, -839910.793048, 95472440, 96986455, -103431.79999999999, -558896.2816, 72376.9504);
+WITH cte_u0Y AS (SELECT 1) INSERT OR IGNORE INTO t_ZmR (c_lO8IPgI, c_QeK, c_boBaq, c_p6T7, c_TjH2JmJ, c_8gaJzfcRc, c_dhByW9BYk, c_xvok) VALUES (92506033, 93169817, 883835.48861, -725362.441148, 459349.80706, 'LAtI89a_9715', 98124166, 307960.08496999997);
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_MRd0
+            LIMIT 1;
+            
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_Z) 
+                WHERE col_Z IN (
+                    SELECT (NTH_VALUE(1, 1) OVER(ORDER BY 1 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)) FROM (VALUES (x'0C5D'))
+                )
+            );
+SELECT t_ZmR.c_dhByW9BYk, t_ZmR.c_QeK, t_ZmR.c_lO8IPgI, t_ZmR.c_8gaJzfcRc, t_ZmR.c_xvok FROM t_ZmR ORDER BY t_ZmR.c_QeK DESC LIMIT 10;
+SELECT t_ZmR.c_TjH2JmJ, t_ZmR.c_xvok, t_ZmR.c_p6T7, t_ZmR.c_boBaq, t_ZmR.c_QeK, LOWER(t_ZmR.c_boBaq) AS computed_c_boBaq FROM t_ZmR LIMIT 10;
+SELECT t_KHGAGm.c_g5EeCB6T9, LENGTH(t_KHGAGm.c_g5EeCB6T9) AS computed_c_g5EeCB6T9 FROM t_KHGAGm LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+1
+98124166|93169817|92506033|LAtI89a_9715|307960.08497
+459349.80706|307960.08497|-725362.441148|883835.48861|93169817|883835.48861
+508286.77057|12
+311363.61|9
+328575.395296|13
+-321387.194649|14
+562287.9|8
+971998.898|10
+72376.9504|10
+
+ERR:
+

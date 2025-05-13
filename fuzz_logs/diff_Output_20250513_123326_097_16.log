@@ -1,0 +1,132 @@
+SQL:
+PRAGMA busy_timeout;
+CREATE TABLE IF NOT EXISTS t_sRXQCMNEi (c_cB9gvIEj TEXT COLLATE RTRIM, c_dYnp TEXT, c_qbrITi NUMERIC DEFAULT 184377, c_7iSK4 REAL DEFAULT -214808.6002, c_KRFjvLjHlm INTEGER, UNIQUE (c_KRFjvLjHlm, c_qbrITi));
+CREATE TABLE IF NOT EXISTS t_UVM8ItH (c_7OrvzX5YSR NUMERIC DEFAULT 709465, c_G8aIm TEXT DEFAULT 'K4oRHqv9cZXNFlua' COLLATE NOCASE, c_aMhDjexwA NUMERIC DEFAULT 462953, UNIQUE (c_7OrvzX5YSR, c_G8aIm, c_aMhDjexwA));
+CREATE TABLE t_VNXayj (c_x1S NUMERIC DEFAULT -828027, c_HCk88A REAL DEFAULT 847352.3, c_wbodC7C7 TEXT, c_lexgM734h TEXT PRIMARY KEY DEFAULT NULL, c_WkhZv0O NUMERIC, c_JhNYk5l INTEGER, c_rxocWHD TEXT, c_sBnUrIRXhc REAL DEFAULT -582098.8, c_A6lJ3WQ REAL);
+CREATE TEMP TABLE IF NOT EXISTS t_T8OA1zRW3 (c_aavPlWIqG TEXT, c_7SUE INTEGER PRIMARY KEY AUTOINCREMENT, c_xgZIsTyKsJ TEXT, c_eQU REAL DEFAULT -414806.0, c_QLOR NUMERIC DEFAULT NULL, c_IYy6b REAL, c_EeyT1j REAL);
+
+                CREATE TRIGGER trg_to0Lj
+                BEFORE DELETE ON t_sRXQCMNEi
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_sRXQCMNEi) > 1000;
+                END;
+
+                CREATE TRIGGER trg_koZuP
+                BEFORE DELETE ON t_UVM8ItH
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_UVM8ItH) > 1000;
+                END;
+
+                CREATE TRIGGER trg_tvRcq
+                BEFORE UPDATE ON t_VNXayj
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_VNXayj) > 1000;
+                END;
+INSERT OR REPLACE INTO t_sRXQCMNEi (c_cB9gvIEj, c_dYnp, c_qbrITi, c_7iSK4, c_KRFjvLjHlm) SELECT 'BWP_9604', 'N80_9704', 97798300, 789410.55637, 99876482;
+INSERT OR IGNORE INTO t_sRXQCMNEi (c_cB9gvIEj, c_dYnp, c_qbrITi, c_7iSK4, c_KRFjvLjHlm) SELECT 'rMzRX_9604', 'Rcv_9704', 98617777, 273520.57999999996, 99912054;
+REPLACE INTO t_sRXQCMNEi (c_cB9gvIEj, c_dYnp, c_qbrITi, c_7iSK4, c_KRFjvLjHlm) VALUES ('nqBuacmMeehS0wZHC3G_9604', '6of58tyhvNP5MLCT_9704', 97820512, 644751.6958, 99403402), ('NH1SF88QMzeT56w5_19604', 'xeJLI7bEvyLpjFBE_19704', 197109757, 988754.96999, 200472249);
+INSERT OR IGNORE INTO t_sRXQCMNEi (c_cB9gvIEj, c_dYnp, c_qbrITi, c_7iSK4, c_KRFjvLjHlm) VALUES ('g0Uo_9604', 'wfj_9704', 98571926, 863067.437399, 100834248), ('tbEHsFu4gnC_19604', 'VWHQcSa_19704', 198596083, 736656.0, 199128963);
+INSERT OR IGNORE INTO t_UVM8ItH (c_7OrvzX5YSR, c_G8aIm, c_aMhDjexwA) VALUES (95891150, 'lgBy_9704', 97545021), (195972618, 'RI5PdEBuroGQQ_19704', 198723674);
+INSERT OR IGNORE INTO t_UVM8ItH (c_7OrvzX5YSR, c_G8aIm, c_aMhDjexwA) SELECT 95675672, '5jX0OFTT_9704', 97261472;
+REPLACE INTO t_UVM8ItH (c_7OrvzX5YSR, c_G8aIm, c_aMhDjexwA) VALUES (96916034, 'ZnptxF_9704', 98328806), (196595577, 'LLqC_19704', 197099635);
+REPLACE INTO t_UVM8ItH (c_7OrvzX5YSR, c_G8aIm, c_aMhDjexwA) SELECT 96981179, 'ALr8r72_9704', 97150495;
+WITH cte_AT4 AS (SELECT 1) INSERT OR REPLACE INTO t_VNXayj (c_x1S, c_HCk88A, c_wbodC7C7, c_lexgM734h, c_WkhZv0O, c_JhNYk5l, c_rxocWHD, c_sBnUrIRXhc, c_A6lJ3WQ) SELECT 96442926, -594177.5, '2mz53LXAd8m0Z4_9804', 'OYis6sopkKXCZtFZPo_9904', 100198928, 101713964, '4leuh7d7_10204', 112067.540429, 869452.7069;
+REPLACE INTO t_VNXayj (c_x1S, c_HCk88A, c_wbodC7C7, c_lexgM734h, c_WkhZv0O, c_JhNYk5l, c_rxocWHD, c_sBnUrIRXhc, c_A6lJ3WQ) VALUES (96763174, -173932.09999999998, 'yrK4DYY_9804', 'gNmg_9904', 100536082, 101933289, 'BV_10204', -895669.34705, 530882.7263110001), (196332812, -399390.26, 'sZAPhfi_19804', 'BasAosLCRss_19904', 200229470, 201436286, 'PN0GF02bar_20204', -431012.0, -558809.43);
+INSERT OR REPLACE INTO t_VNXayj (c_x1S, c_HCk88A, c_wbodC7C7, c_lexgM734h, c_WkhZv0O, c_JhNYk5l, c_rxocWHD, c_sBnUrIRXhc, c_A6lJ3WQ) VALUES (95254387, 295093.3, '2dSheYipcAhQpwP_9804', 'KHWeVdaXINNJhG_9904', 99844660, 101521633, 'UtqfgqF8FJmzArvcm_10204', 995252.32, 557736.7065999999);
+REPLACE INTO t_T8OA1zRW3 (c_aavPlWIqG, c_7SUE, c_xgZIsTyKsJ, c_eQU, c_QLOR, c_IYy6b, c_EeyT1j) VALUES ('sOQepNHwH_9604', 96435613, 'qsj27wAY7M9ImCxLv_9804', -174647.50699999998, 100503570, 245751.133, -46604.02634000001), ('aEubiDI4tXBPpwhqV_19604', 197949717, '1MREvDeYMMxp5_19804', 538507.05, 199623134, -358908.417, -748788.79209);
+INSERT OR REPLACE INTO t_T8OA1zRW3 (c_aavPlWIqG, c_7SUE, c_xgZIsTyKsJ, c_eQU, c_QLOR, c_IYy6b, c_EeyT1j) VALUES ('CZGif5_9604', 96850010, 'pclofZp_9804', -224545.25079999998, 99438394, 593742.083, -503507.97), ('pxItRLeJu_19604', 197046509, 'kwjSqnTmkkRSX_19804', 437245.2212, 199242956, -124614.47395299998, -290875.535);
+REPLACE INTO t_T8OA1zRW3 (c_aavPlWIqG, c_7SUE, c_xgZIsTyKsJ, c_eQU, c_QLOR, c_IYy6b, c_EeyT1j) SELECT '2LWzQek8vRtLeoVurN2_9604', 97294901, 'UXU87gOCe0l_9804', -548258.23581, 99739306, 250068.9, -476816.63714;
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_T8OA1zRW3 (c_aavPlWIqG, c_7SUE, c_xgZIsTyKsJ, c_eQU, c_QLOR, c_IYy6b, c_EeyT1j) VALUES ('rTdH8shpP651M_9604', 96712424, 'vrNcUGtnYZCKOGNm_9804', 1029615.551, 100159314, 1043266.512808, -150133.49), ('LECEXglMTU7gG_19604', 197188857, 'vOxh30_19804', -544947.30824, 199972425, -151310.07609, 980673.577);
+COMMIT;
+
+                SELECT c_wbodC7C7, c_WkhZv0O,
+                    ROW_NUMBER() OVER (PARTITION BY c_WkhZv0O) as row_num,
+                    RANK() OVER (PARTITION BY c_WkhZv0O ORDER BY c_wbodC7C7) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_WkhZv0O ORDER BY c_wbodC7C7) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_wbodC7C7) IN ('integer','real') THEN c_wbodC7C7 ELSE 0 END) 
+                        OVER (PARTITION BY c_WkhZv0O ORDER BY c_wbodC7C7 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_wbodC7C7) IN ('integer','real') THEN c_wbodC7C7 ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_WkhZv0O ORDER BY c_wbodC7C7) as prev_value,
+                    LEAD(CASE WHEN typeof(c_wbodC7C7) IN ('integer','real') THEN c_wbodC7C7 ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_WkhZv0O ORDER BY c_wbodC7C7) as next_value
+                FROM t_VNXayj
+                ORDER BY c_WkhZv0O, c_wbodC7C7
+                LIMIT 20;
+                
+SELECT t_UVM8ItH.c_G8aIm, LOWER(t_UVM8ItH.c_G8aIm) AS computed_c_G8aIm FROM t_UVM8ItH ORDER BY t_UVM8ItH.c_G8aIm ASC LIMIT 10;
+
+                SELECT DISTINCT t_UVM8ItH.c_G8aIm,
+                    COUNT(*) OVER (PARTITION BY t_UVM8ItH.c_7OrvzX5YSR) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_UVM8ItH.c_G8aIm) IN ('null') THEN 0 
+                            ELSE t_UVM8ItH.c_G8aIm END DESC,
+                            t_UVM8ItH.c_7OrvzX5YSR ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_UVM8ItH.c_G8aIm IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_UVM8ItH
+                WHERE t_UVM8ItH.c_G8aIm IS NOT NULL
+                GROUP BY t_UVM8ItH.c_G8aIm, t_UVM8ItH.c_7OrvzX5YSR
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_UVM8ItH.c_G8aIm ASC, t_UVM8ItH.c_7OrvzX5YSR ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_UVM8ItH.c_G8aIm,
+                    t_UVM8ItH.c_7OrvzX5YSR,
+                    SUM(CASE WHEN typeof(t_UVM8ItH.c_G8aIm) IN ('integer', 'real', 'numeric') THEN t_UVM8ItH.c_G8aIm ELSE 0 END) 
+                        OVER (PARTITION BY t_UVM8ItH.c_7OrvzX5YSR ORDER BY t_UVM8ItH.c_G8aIm ASC) as window_total
+                FROM t_UVM8ItH
+                GROUP BY t_UVM8ItH.c_G8aIm, t_UVM8ItH.c_7OrvzX5YSR
+                HAVING SUM(CASE WHEN typeof(t_UVM8ItH.c_G8aIm) IN ('integer', 'real', 'numeric') THEN t_UVM8ItH.c_G8aIm ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_UVM8ItH.c_G8aIm ASC, t_UVM8ItH.c_7OrvzX5YSR ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+0
+2dSheYipcAhQpwP_9804|99844660|1|1|1|0|0|0
+2mz53LXAd8m0Z4_9804|100198928|1|1|1|0|0|0
+yrK4DYY_9804|100536082|1|1|1|0|0|0
+sZAPhfi_19804|200229470|1|1|1|0|0|0
+5jX0OFTT_9704|5jx0oftt_9704
+ALr8r72_9704|alr8r72_9704
+lgBy_9704|lgby_9704
+LLqC_19704|llqc_19704
+RI5PdEBuroGQQ_19704|ri5pdeburogqq_19704
+ZnptxF_9704|znptxf_9704
+5jX0OFTT_9704|1|6|Known
+ALr8r72_9704|1|5|Known
+LLqC_19704|1|4|Known
+RI5PdEBuroGQQ_19704|1|3|Known
+ZnptxF_9704|1|2|Known
+lgBy_9704|1|1|Known
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+0
+2dSheYipcAhQpwP_9804|99844660|1|1|1|0|0|0
+2mz53LXAd8m0Z4_9804|100198928|1|1|1|0|0|0
+yrK4DYY_9804|100536082|1|1|1|0|0|0
+sZAPhfi_19804|200229470|1|1|1|0|0|0
+5jX0OFTT_9704|5jx0oftt_9704
+ALr8r72_9704|alr8r72_9704
+lgBy_9704|lgby_9704
+LLqC_19704|llqc_19704
+RI5PdEBuroGQQ_19704|ri5pdeburogqq_19704
+ZnptxF_9704|znptxf_9704
+5jX0OFTT_9704|1|6|Known
+ALr8r72_9704|1|5|Known
+lgBy_9704|1|1|Known
+LLqC_19704|1|4|Known
+RI5PdEBuroGQQ_19704|1|3|Known
+ZnptxF_9704|1|2|Known
+
+ERR:
+

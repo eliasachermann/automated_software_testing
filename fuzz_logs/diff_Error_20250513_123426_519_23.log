@@ -1,0 +1,97 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_rT9a3m (c_3hOjkxAN INTEGER DEFAULT -411072, c_ZPgnnKRnPE NUMERIC, PRIMARY KEY (c_3hOjkxAN));
+REPLACE INTO t_rT9a3m (c_3hOjkxAN, c_ZPgnnKRnPE) VALUES (97007528, 98288965);
+WITH cte_kTo AS (SELECT 1) INSERT OR IGNORE INTO t_rT9a3m (c_3hOjkxAN, c_ZPgnnKRnPE) VALUES (97349079, 96919329);
+INSERT OR REPLACE INTO t_rT9a3m (c_3hOjkxAN, c_ZPgnnKRnPE) VALUES (96601564, 96903712);
+INSERT OR REPLACE INTO t_rT9a3m (c_3hOjkxAN, c_ZPgnnKRnPE) SELECT 97082676, 97503378;
+REPLACE INTO t_rT9a3m (c_3hOjkxAN, c_ZPgnnKRnPE) VALUES (97451077, 97554900);
+INSERT OR FAIL INTO t_rT9a3m DEFAULT VALUES;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_rT9a3m SET c_3hOjkxAN = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_rT9a3m);
+UPDATE OR IGNORE t_rT9a3m SET c_3hOjkxAN = 689 WHERE ROWID = (SELECT MIN(ROWID) FROM t_rT9a3m);
+WITH cte_iAU AS (SELECT 1) INSERT OR REPLACE INTO t_rT9a3m (c_3hOjkxAN, c_ZPgnnKRnPE) VALUES (97045502, 98585550), (197266840, 196775168);
+COMMIT;
+
+                    SELECT 
+                        t1.c_3hOjkxAN,
+                        (SELECT COUNT(*) FROM t_rT9a3m t2 WHERE t2.c_3hOjkxAN = t1.c_3hOjkxAN) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_rT9a3m t3 WHERE t3.c_3hOjkxAN > t1.c_3hOjkxAN LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_3hOjkxAN FROM t_rT9a3m
+                        )) as distinct_values_count
+                    FROM t_rT9a3m t1
+                    WHERE t1.c_3hOjkxAN IN (
+                        SELECT c_3hOjkxAN 
+                        FROM t_rT9a3m 
+                        WHERE typeof(c_3hOjkxAN) NOT IN ('null')
+                        GROUP BY c_3hOjkxAN
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_rT9a3m t4 WHERE t4.c_3hOjkxAN = t1.c_3hOjkxAN) DESC
+                    LIMIT 10;
+                    
+SELECT t_rT9a3m.c_ZPgnnKRnPE, t_rT9a3m.c_3hOjkxAN FROM t_rT9a3m LIMIT 10;
+SELECT t_rT9a3m.c_ZPgnnKRnPE FROM t_rT9a3m ORDER BY t_rT9a3m.c_ZPgnnKRnPE DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+689|1|Not Max|8
+97007528|1|Not Max|8
+97045502|1|Not Max|8
+97082676|1|Not Max|8
+97349079|1|Not Max|8
+97451077|1|Not Max|8
+97451078|1|Not Max|8
+197266840|1|Max|8
+96903712|689
+98288965|97007528
+98585550|97045502
+97503378|97082676
+96919329|97349079
+97554900|97451077
+|97451078
+196775168|197266840
+196775168
+98585550
+98288965
+97554900
+97503378
+96919329
+96903712
+
+
+ERR:
+Error: near line 9: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+689|1|Not Max|8
+97007528|1|Not Max|8
+97045502|1|Not Max|8
+97082676|1|Not Max|8
+97349079|1|Not Max|8
+97451077|1|Not Max|8
+97451078|1|Not Max|8
+197266840|1|Max|8
+96903712|689
+98288965|97007528
+98585550|97045502
+97503378|97082676
+96919329|97349079
+97554900|97451077
+|97451078
+196775168|197266840
+196775168
+98585550
+98288965
+97554900
+97503378
+96919329
+96903712
+
+
+ERR:
+Runtime error near line 9: datatype mismatch (20)
+

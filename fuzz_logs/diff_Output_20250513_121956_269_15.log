@@ -1,0 +1,76 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_c2zyg (c_LG8 TEXT PRIMARY KEY, c_38FoT INTEGER, c_ZCZ4tTkHY REAL DEFAULT 233373.7421, c_qtgm NUMERIC, c_f4T7CG TEXT DEFAULT 'yB0KOyqMsX', c_pWaN7qKV INTEGER DEFAULT -585811, c_VViCeto TEXT DEFAULT 'Xu3DV', UNIQUE (c_VViCeto, c_qtgm, c_ZCZ4tTkHY)) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_fPET1bi (c_rifJ NUMERIC PRIMARY KEY, UNIQUE (c_rifJ));
+ALTER TABLE t_fPET1bi RENAME TO t_vBRwhyoP;
+ALTER TABLE t_vBRwhyoP ADD COLUMN c_n6n REAL DEFAULT 388515.88113;
+ALTER TABLE t_vBRwhyoP RENAME COLUMN c_rifJ TO c_Uh5WetYr;
+REPLACE INTO t_c2zyg (c_LG8, c_38FoT, c_ZCZ4tTkHY, c_qtgm, c_f4T7CG, c_pWaN7qKV, c_VViCeto) SELECT 'uaLoDnZfOLKF6EV9x_8795', 88318859, 1048969.9170829998, 91406294, '1v8j3I1YwVhwS_9195', 93560162, 'foSXcQLhkD_9395';
+INSERT OR REPLACE INTO t_c2zyg (c_LG8, c_38FoT, c_ZCZ4tTkHY, c_qtgm, c_f4T7CG, c_pWaN7qKV, c_VViCeto) VALUES ('sVWRz3o99tkV_8795', 89522933, -867863.72696, 91849822, '3azEOZ6WoneGvO_9195', 92222064, 'gXafhmANopJm_9395');
+INSERT OR IGNORE INTO t_c2zyg (c_LG8, c_38FoT, c_ZCZ4tTkHY, c_qtgm, c_f4T7CG, c_pWaN7qKV, c_VViCeto) SELECT 'XesVTknrpT2y3lTA4wg_8795', 88994723, 301757.7, 91059858, 'J6_9195', 93136179, 'x2xFD4Z8APbb_9395';
+REPLACE INTO t_c2zyg (c_LG8, c_38FoT, c_ZCZ4tTkHY, c_qtgm, c_f4T7CG, c_pWaN7qKV, c_VViCeto) VALUES ('NPUjUT_8795', 89816681, -667207.7, 91492109, 'rKPi_9195', 92547359, 'TKwRoA5MwrW42ix5_9395'), ('Ms_18795', 188516004, -260127.90000000002, 191415921, 'oirRZcKYs0I5osSFB_19195', 192199047, 'Ul7RUUbvqr0J7oeD_19395');
+WITH cte_LHj AS (SELECT 1) INSERT OR REPLACE INTO t_c2zyg (c_LG8, c_38FoT, c_ZCZ4tTkHY, c_qtgm, c_f4T7CG, c_pWaN7qKV, c_VViCeto) VALUES ('yezKXm3c255ug_8795', 89741233, -563438.3707, 91193893, 'fXjr8KhbYHXHwj_9195', 93776319, 'mE8zfH2w_9395');
+INSERT OR IGNORE INTO t_vBRwhyoP (c_Uh5WetYr, c_n6n) SELECT 87175630, 1046689.03;
+INSERT OR ABORT INTO t_vBRwhyoP DEFAULT VALUES;
+
+                    SELECT 
+                        t1.c_f4T7CG,
+                        (SELECT COUNT(*) FROM t_c2zyg t2 WHERE t2.c_f4T7CG = t1.c_f4T7CG) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_c2zyg t3 WHERE t3.c_f4T7CG > t1.c_f4T7CG LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_f4T7CG FROM t_c2zyg
+                        )) as distinct_values_count
+                    FROM t_c2zyg t1
+                    WHERE t1.c_f4T7CG IN (
+                        SELECT c_f4T7CG 
+                        FROM t_c2zyg 
+                        WHERE typeof(c_f4T7CG) NOT IN ('null')
+                        GROUP BY c_f4T7CG
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_c2zyg t4 WHERE t4.c_f4T7CG = t1.c_f4T7CG) DESC
+                    LIMIT 10;
+                    
+SELECT t_vBRwhyoP.c_Uh5WetYr, t_vBRwhyoP.c_n6n FROM t_vBRwhyoP ORDER BY t_vBRwhyoP.c_Uh5WetYr DESC LIMIT 10;
+SELECT c_n6n FROM t_c2zyg, t_vBRwhyoP WHERE ~ NULL UNION ALL SELECT t_vBRwhyoP.c_n6n FROM t_vBRwhyoP, t_c2zyg GROUP BY c_pWaN7qKV, c_ZCZ4tTkHY ORDER BY 1 ASC;
+
+--- v3.26.0 ---
+OUT:
+oirRZcKYs0I5osSFB_19195|1|Not Max|6
+rKPi_9195|1|Max|6
+J6_9195|1|Not Max|6
+3azEOZ6WoneGvO_9195|1|Not Max|6
+1v8j3I1YwVhwS_9195|1|Not Max|6
+fXjr8KhbYHXHwj_9195|1|Not Max|6
+388515.88113
+388515.88113
+388515.88113
+388515.88113
+388515.88113
+388515.88113
+
+ERR:
+Error: near line 5: no such column: c_rifJ
+Error: near line 11: table t_vBRwhyoP has no column named c_Uh5WetYr
+Error: near line 33: no such column: t_vBRwhyoP.c_Uh5WetYr
+
+
+--- v3.49.1 ---
+OUT:
+oirRZcKYs0I5osSFB_19195|1|Not Max|6
+rKPi_9195|1|Max|6
+J6_9195|1|Not Max|6
+3azEOZ6WoneGvO_9195|1|Not Max|6
+1v8j3I1YwVhwS_9195|1|Not Max|6
+fXjr8KhbYHXHwj_9195|1|Not Max|6
+87175630|1046689.03
+|388515.88113
+1046689.03
+1046689.03
+1046689.03
+1046689.03
+1046689.03
+1046689.03
+
+ERR:
+

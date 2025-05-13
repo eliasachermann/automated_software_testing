@@ -1,0 +1,110 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_733h (c_HvmRFj4W8 INTEGER, c_GqBkb2RMv TEXT, c_mmhJZ2rYp NUMERIC DEFAULT -980824, c_F7cZ0F6C REAL, c_lpenWTv NUMERIC, c_8igx9esL7M TEXT DEFAULT '1QitjBFx7K', c_AtLVr INTEGER PRIMARY KEY AUTOINCREMENT, c_h9X REAL, c_hIR REAL, c_2D8LdzM INTEGER);
+CREATE TABLE IF NOT EXISTS t_qEkwNl (c_458 INTEGER DEFAULT 498110, c_6gIps INTEGER PRIMARY KEY AUTOINCREMENT, c_4VtME REAL, c_8FW INTEGER DEFAULT 525809, c_XbShWAqK REAL, c_PL5J REAL, c_SOAS1Mh INTEGER, c_8P49I5c REAL, FOREIGN KEY (c_6gIps) REFERENCES t_QVtdM(c_G0QJS));
+REPLACE INTO t_733h (c_HvmRFj4W8, c_GqBkb2RMv, c_mmhJZ2rYp, c_F7cZ0F6C, c_lpenWTv, c_8igx9esL7M, c_AtLVr, c_h9X, c_hIR, c_2D8LdzM) VALUES (95637613, 'm3byZjIrwb_9709', 98178868, -807807.66526, 99527379, 'P_10109', 101208688, 35329.212, -467529.48899999994, 105370155), (196909653, 'R20lwvb1oAjrdbVUZN6_19709', 197597933, -519921.40599999996, 201082041, 'M_20109', 202443930, 523361.03, 868532.472, 204852326);
+REPLACE INTO t_733h (c_HvmRFj4W8, c_GqBkb2RMv, c_mmhJZ2rYp, c_F7cZ0F6C, c_lpenWTv, c_8igx9esL7M, c_AtLVr, c_h9X, c_hIR, c_2D8LdzM) VALUES (96319993, 'tj3G_9709', 97891075, 627238.280693, 99791992, 'XIUmT3k4NGFT1u6A_10109', 101861682, 813280.8, 922112.82898, 105369822);
+WITH cte_LTt AS (SELECT 1) REPLACE INTO t_733h (c_HvmRFj4W8, c_GqBkb2RMv, c_mmhJZ2rYp, c_F7cZ0F6C, c_lpenWTv, c_8igx9esL7M, c_AtLVr, c_h9X, c_hIR, c_2D8LdzM) SELECT 95248774, 'i6YvpMgm1wdZ6l_9709', 98388917, -664959.4438, 99714911, 'LZZ9cJRZ_10109', 102996218, -478151.58999999997, -683309.6764, 105262790;
+REPLACE INTO t_733h (c_HvmRFj4W8, c_GqBkb2RMv, c_mmhJZ2rYp, c_F7cZ0F6C, c_lpenWTv, c_8igx9esL7M, c_AtLVr, c_h9X, c_hIR, c_2D8LdzM) VALUES (96544320, 'iQZN0usOallv6AnN_9709', 97452427, 933105.144949, 99503563, 'zD0DVncbQvfghfWu_10109', 102041961, -587026.544, -63104.880000000005, 106048988);
+INSERT OR REPLACE INTO t_733h (c_HvmRFj4W8, c_GqBkb2RMv, c_mmhJZ2rYp, c_F7cZ0F6C, c_lpenWTv, c_8igx9esL7M, c_AtLVr, c_h9X, c_hIR, c_2D8LdzM) VALUES (95975205, 'JvHSkHMSPh2oDUaI_9709', 98231582, 686850.628, 99695619, 'DzQ6mecxSZvb0v67YMd_10109', 102046939, -882628.32, -258184.93423, 105289174);
+REPLACE INTO t_qEkwNl (c_458, c_6gIps, c_4VtME, c_8FW, c_XbShWAqK, c_PL5J, c_SOAS1Mh, c_8P49I5c) SELECT 96987492, 97321835, -574564.846, 98857933, -182628.09999999998, 121413.27906, 101719915, -204744.81128000002;
+REPLACE INTO t_qEkwNl (c_458, c_6gIps, c_4VtME, c_8FW, c_XbShWAqK, c_PL5J, c_SOAS1Mh, c_8P49I5c) VALUES (97028099, 97323069, -487018.62, 99557266, 48049.0, -297302.123, 102105557, -540574.2), (196541810, 197336760, 598818.340797, 198347455, -676269.87, 798206.86194, 202402620, 40387.09);
+INSERT OR FAIL INTO t_733h DEFAULT VALUES;
+
+
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_qEkwNl SET c_6gIps = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_qEkwNl);
+UPDATE OR IGNORE t_qEkwNl SET c_XbShWAqK = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_qEkwNl);
+INSERT OR IGNORE INTO t_qEkwNl (c_458, c_6gIps, c_4VtME, c_8FW, c_XbShWAqK, c_PL5J, c_SOAS1Mh, c_8P49I5c) SELECT 95669059, 97828696, 292229.2, 99971466, -242691.77555000002, 1062847.327, 102050923, 16959.498739999995;
+COMMIT;
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_733h
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_XbShWAqK,
+                        (SELECT COUNT(*) FROM t_qEkwNl t2 WHERE t2.c_XbShWAqK = t1.c_XbShWAqK) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_qEkwNl t3 WHERE t3.c_XbShWAqK > t1.c_XbShWAqK LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_XbShWAqK FROM t_qEkwNl
+                        )) as distinct_values_count
+                    FROM t_qEkwNl t1
+                    WHERE t1.c_XbShWAqK IN (
+                        SELECT c_XbShWAqK 
+                        FROM t_qEkwNl 
+                        WHERE typeof(c_XbShWAqK) NOT IN ('null')
+                        GROUP BY c_XbShWAqK
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_qEkwNl t4 WHERE t4.c_XbShWAqK = t1.c_XbShWAqK) DESC
+                    LIMIT 10;
+                    
+SELECT t_qEkwNl.c_XbShWAqK, t_qEkwNl.c_8FW, TYPEOF(t_qEkwNl.c_XbShWAqK) AS computed_c_XbShWAqK FROM t_qEkwNl ORDER BY t_qEkwNl.c_8FW DESC LIMIT 10;
+SELECT t_qEkwNl.c_XbShWAqK, LENGTH(t_qEkwNl.c_XbShWAqK) AS computed_c_XbShWAqK FROM t_qEkwNl ORDER BY t_qEkwNl.c_XbShWAqK DESC LIMIT 10;
+SELECT t_733h.c_AtLVr, t_733h.c_GqBkb2RMv, t_733h.c_HvmRFj4W8, t_733h.c_2D8LdzM, t_733h.c_h9X, TYPEOF(t_733h.c_GqBkb2RMv) AS computed_c_GqBkb2RMv FROM t_733h ORDER BY t_733h.c_h9X DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+48049.0|1|Max|4
+-242691.77555|1|Not Max|4
+-676269.87|1|Not Max|4
+-676269.87|198347455|real
+-242691.77555|99971466|real
+48049.0|99557266|real
+|98857933|null
+48049.0|7
+-242691.77555|13
+-676269.87|10
+|
+101861682|tj3G_9709|96319993|105369822|813280.8|text
+202443930|R20lwvb1oAjrdbVUZN6_19709|196909653|204852326|523361.03|text
+101208688|m3byZjIrwb_9709|95637613|105370155|35329.212|text
+102996218|i6YvpMgm1wdZ6l_9709|95248774|105262790|-478151.59|text
+102041961|iQZN0usOallv6AnN_9709|96544320|106048988|-587026.544|text
+102046939|JvHSkHMSPh2oDUaI_9709|95975205|105289174|-882628.32|text
+202443931|||||null
+
+ERR:
+Error: near line 14: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+48049.0|1|Max|4
+-242691.77555|1|Not Max|4
+-676269.87|1|Not Max|4
+-676269.87|198347455|real
+-242691.77555|99971466|real
+48049.0|99557266|real
+|98857933|null
+48049.0|7
+-242691.77555|13
+-676269.87|10
+|
+101861682|tj3G_9709|96319993|105369822|813280.8|text
+202443930|R20lwvb1oAjrdbVUZN6_19709|196909653|204852326|523361.03|text
+101208688|m3byZjIrwb_9709|95637613|105370155|35329.212|text
+102996218|i6YvpMgm1wdZ6l_9709|95248774|105262790|-478151.59|text
+102041961|iQZN0usOallv6AnN_9709|96544320|106048988|-587026.544|text
+102046939|JvHSkHMSPh2oDUaI_9709|95975205|105289174|-882628.32|text
+202443931|||||null
+
+ERR:
+Runtime error near line 14: datatype mismatch (20)
+

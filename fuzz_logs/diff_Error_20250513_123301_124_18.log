@@ -1,0 +1,81 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_dN6NYuB (c_WZFwNNI NUMERIC, c_Cd6 INTEGER, c_nxVz TEXT, c_NNGpW NUMERIC PRIMARY KEY, c_CmDBFC7uV REAL, c_e2t842crES TEXT);
+CREATE TABLE IF NOT EXISTS t_RS6OlSm9St (c_TtjA TEXT DEFAULT 'JZP0viFyDSQqow24', c_0zkCh NUMERIC, c_Mi3knkiDAa INTEGER PRIMARY KEY, c_1JtnMQFr TEXT, c_xVpLvleo REAL);
+CREATE TEMP TABLE IF NOT EXISTS t_os0UNDjHA (c_zX1QiyFKjt REAL DEFAULT 272337.1542);
+CREATE TABLE IF NOT EXISTS t_BMU9sjIC7X (c_wVT4lUQ0JD INTEGER PRIMARY KEY, c_ulIMR NUMERIC DEFAULT 689946, c_lidvu07P1 TEXT DEFAULT 'IqgJv', c_R8z REAL);
+CREATE TEMP TABLE t_K9NWW9DDZG (c_CUHqlb TEXT, c_jj5bT TEXT, c_mjl3WFO INTEGER DEFAULT NULL, c_KBGuw INTEGER, c_y8l2bBiJc INTEGER, c_YqQBhUMkpw TEXT, c_nbZLSw INTEGER, c_T7cfud7C NUMERIC, c_ODruc REAL, UNIQUE (c_T7cfud7C));
+INSERT OR IGNORE INTO t_dN6NYuB (c_WZFwNNI, c_Cd6, c_nxVz, c_NNGpW, c_CmDBFC7uV, c_e2t842crES) VALUES (96400858, 96503160, 'fJm_9780', 99402714, -326745.406932, 'Zpfg80Of5Dg9X8fYBx9_10080');
+INSERT OR IGNORE INTO t_RS6OlSm9St (c_TtjA, c_0zkCh, c_Mi3knkiDAa, c_1JtnMQFr, c_xVpLvleo) SELECT 'UwYMjseXfcq8esMBPD7W_9580', 96410455, 97780088, 'LfafqUjjS_9880', -146710.43813;
+INSERT OR REPLACE INTO t_RS6OlSm9St (c_TtjA, c_0zkCh, c_Mi3knkiDAa, c_1JtnMQFr, c_xVpLvleo) VALUES ('HbrIoMXOnzVLZqgf1BH_9580', 96894561, 98384376, 'jLSnZChp98PLJsiAPm_9880', 812815.3264);
+INSERT OR REPLACE INTO t_RS6OlSm9St (c_TtjA, c_0zkCh, c_Mi3knkiDAa, c_1JtnMQFr, c_xVpLvleo) VALUES ('TUIZgEs75Q1UI7utK_9580', 97262513, 98768688, 'NecN37aLtshF7qIRLqH1_9880', 942562.26213);
+REPLACE INTO t_RS6OlSm9St (c_TtjA, c_0zkCh, c_Mi3knkiDAa, c_1JtnMQFr, c_xVpLvleo) VALUES ('wTyL2ycF_9580', 97336466, 97578735, 'dJ6YXkqyZT5EQ2F_9880', 190557.9), ('wLtsHiMLy_19580', 196300057, 196929364, 'h6WH7L0Y62YkbbY5_19880', -186857.049);
+INSERT OR IGNORE INTO t_os0UNDjHA (c_zX1QiyFKjt) VALUES (-440414.392);
+INSERT OR REPLACE INTO t_os0UNDjHA (c_zX1QiyFKjt) SELECT -798949.851;
+WITH cte_S6L AS (SELECT 1) INSERT OR IGNORE INTO t_BMU9sjIC7X (c_wVT4lUQ0JD, c_ulIMR, c_lidvu07P1, c_R8z) VALUES (96780728, 96905806, 'lf_9780', -565638.146002);
+INSERT OR REPLACE INTO t_BMU9sjIC7X (c_wVT4lUQ0JD, c_ulIMR, c_lidvu07P1, c_R8z) SELECT 96746877, 97296425, 'YBLbXJyHdp8k7_9780', 325424.9;
+INSERT OR IGNORE INTO t_K9NWW9DDZG (c_CUHqlb, c_jj5bT, c_mjl3WFO, c_KBGuw, c_y8l2bBiJc, c_YqQBhUMkpw, c_nbZLSw, c_T7cfud7C, c_ODruc) VALUES ('aHLqVOJ_9580', 'C7QhmsjdVy2Q2EPU8VJ_9680', 98443688, 97893107, 98912160, 'zUGi2iPY3pdkjkQn3_10080', 102532003, 102244914, 677089.81037);
+INSERT OR IGNORE INTO t_K9NWW9DDZG (c_CUHqlb, c_jj5bT, c_mjl3WFO, c_KBGuw, c_y8l2bBiJc, c_YqQBhUMkpw, c_nbZLSw, c_T7cfud7C, c_ODruc) VALUES ('dH90caXlsKBTPJ_9580', 'hb6jUrXQhJFXmpO_9680', 98488200, 98084625, 100353554, 'hqzmFcME_10080', 102288922, 102639669, -17135.149300000005), ('9CIpvXvFL_19580', 'wAHgdb50Mk7li8Mdt_19680', 197862329, 198204851, 200072050, 'XPvAcWG_20080', 200985808, 203699398, 1114660.1);
+REPLACE INTO t_K9NWW9DDZG (c_CUHqlb, c_jj5bT, c_mjl3WFO, c_KBGuw, c_y8l2bBiJc, c_YqQBhUMkpw, c_nbZLSw, c_T7cfud7C, c_ODruc) VALUES ('3DYW_9580', 'UqIOxBontaE6_9680', 96840206, 98579173, 99880334, 'Qzh1UD5iPVBxUyYt0_10080', 101405565, 102057205, -392700.33), ('iUS2jNc_19580', '2VUnOSeVg_19680', 196869145, 198952779, 200433549, '2kzEb_20080', 202784086, 202548928, -360853.079467);
+INSERT OR IGNORE INTO t_K9NWW9DDZG (c_CUHqlb, c_jj5bT, c_mjl3WFO, c_KBGuw, c_y8l2bBiJc, c_YqQBhUMkpw, c_nbZLSw, c_T7cfud7C, c_ODruc) VALUES ('32obchLBRPQc_9580', 'O54XVNsr_9680', 97014944, 99201107, 100683159, 'GXvwJV0_10080', 101271043, 103753685, -722588.297237), ('GyXGSx3Az2RUyowAaj2J_19580', 'ER6O_19680', 197564404, 199735884, 200047285, 'Gsuas_20080', 200803782, 203444946, 453116.57999999996);
+
+
+
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_K9NWW9DDZG LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_RS6OlSm9St SET c_Mi3knkiDAa = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_RS6OlSm9St);
+COMMIT;
+
+                    SELECT 
+                        t1.c_nxVz,
+                        (SELECT COUNT(*) FROM t_dN6NYuB t2 WHERE t2.c_nxVz = t1.c_nxVz) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_dN6NYuB t3 WHERE t3.c_nxVz > t1.c_nxVz LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_nxVz FROM t_dN6NYuB
+                        )) as distinct_values_count
+                    FROM t_dN6NYuB t1
+                    WHERE t1.c_nxVz IN (
+                        SELECT c_nxVz 
+                        FROM t_dN6NYuB 
+                        WHERE typeof(c_nxVz) NOT IN ('null')
+                        GROUP BY c_nxVz
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_dN6NYuB t4 WHERE t4.c_nxVz = t1.c_nxVz) DESC
+                    LIMIT 10;
+                    
+SELECT t_BMU9sjIC7X.c_ulIMR, t_BMU9sjIC7X.c_R8z, t_BMU9sjIC7X.c_wVT4lUQ0JD, TYPEOF(t_BMU9sjIC7X.c_ulIMR) AS computed_c_ulIMR FROM t_BMU9sjIC7X LIMIT 10;
+SELECT t_BMU9sjIC7X.c_ulIMR, t_BMU9sjIC7X.c_R8z, t_BMU9sjIC7X.c_lidvu07P1, t_BMU9sjIC7X.c_wVT4lUQ0JD, UPPER(t_BMU9sjIC7X.c_ulIMR) AS computed_c_ulIMR FROM t_BMU9sjIC7X LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+fJm_9780|1|Max|1
+97296425|325424.9|96746877|integer
+96905806|-565638.146002|96780728|integer
+97296425|325424.9|YBLbXJyHdp8k7_9780|96746877|97296425
+96905806|-565638.146002|lf_9780|96780728|96905806
+
+ERR:
+Error: near line 31: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+fJm_9780|1|Max|1
+97296425|325424.9|96746877|integer
+96905806|-565638.146002|96780728|integer
+97296425|325424.9|YBLbXJyHdp8k7_9780|96746877|97296425
+96905806|-565638.146002|lf_9780|96780728|96905806
+
+ERR:
+Runtime error near line 31: datatype mismatch (20)
+

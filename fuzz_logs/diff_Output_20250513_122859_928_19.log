@@ -1,0 +1,90 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_vYQ (c_CkDs3T NUMERIC, c_ViLr INTEGER, PRIMARY KEY (c_ViLr, c_CkDs3T), UNIQUE (c_ViLr, c_CkDs3T));
+CREATE TABLE IF NOT EXISTS t_ty1hiqxP (c_F9mHGlK INTEGER);
+ALTER TABLE t_vYQ RENAME COLUMN c_ViLr TO c_9Qoh;
+INSERT OR REPLACE INTO t_vYQ (c_CkDs3T, c_9Qoh) VALUES (93517067, 94866252);
+REPLACE INTO t_vYQ (c_CkDs3T, c_9Qoh) VALUES (93565900, 94451048), (192853695, 193767111);
+WITH cte_nRd AS (SELECT 1) INSERT OR REPLACE INTO t_vYQ (c_CkDs3T, c_9Qoh) VALUES (92952501, 95234906);
+INSERT OR REPLACE INTO t_vYQ (c_CkDs3T, c_9Qoh) VALUES (94013056, 95377636), (192657725, 195116852);
+REPLACE INTO t_vYQ (c_CkDs3T, c_9Qoh) VALUES (93309722, 93778249);
+INSERT OR IGNORE INTO t_ty1hiqxP (c_F9mHGlK) VALUES (93697034), (194041318);
+REPLACE INTO t_ty1hiqxP (c_F9mHGlK) SELECT 93928342;
+
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_vYQ
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_F9mHGlK,
+                        (SELECT COUNT(*) FROM t_ty1hiqxP t2 WHERE t2.c_F9mHGlK = t1.c_F9mHGlK) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_ty1hiqxP t3 WHERE t3.c_F9mHGlK > t1.c_F9mHGlK LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_F9mHGlK FROM t_ty1hiqxP
+                        )) as distinct_values_count
+                    FROM t_ty1hiqxP t1
+                    WHERE t1.c_F9mHGlK IN (
+                        SELECT c_F9mHGlK 
+                        FROM t_ty1hiqxP 
+                        WHERE typeof(c_F9mHGlK) NOT IN ('null')
+                        GROUP BY c_F9mHGlK
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_ty1hiqxP t4 WHERE t4.c_F9mHGlK = t1.c_F9mHGlK) DESC
+                    LIMIT 10;
+                    
+SELECT t_vYQ.c_9Qoh, t_vYQ.c_CkDs3T, ABS(t_vYQ.c_CkDs3T) AS computed_c_CkDs3T FROM t_vYQ ORDER BY t_vYQ.c_9Qoh DESC LIMIT 10;
+SELECT t_ty1hiqxP.c_F9mHGlK FROM t_ty1hiqxP ORDER BY t_ty1hiqxP.c_F9mHGlK DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+93697034|1|Not Max|3
+194041318|1|Max|3
+93928342|1|Not Max|3
+194041318
+93928342
+93697034
+
+ERR:
+Error: near line 3: no such column: c_ViLr
+Error: near line 4: table t_vYQ has no column named c_9Qoh
+Error: near line 5: table t_vYQ has no column named c_9Qoh
+Error: near line 6: table t_vYQ has no column named c_9Qoh
+Error: near line 7: table t_vYQ has no column named c_9Qoh
+Error: near line 8: table t_vYQ has no column named c_9Qoh
+Error: near line 49: no such column: t_vYQ.c_9Qoh
+
+
+--- v3.49.1 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+93697034|1|Not Max|3
+194041318|1|Max|3
+93928342|1|Not Max|3
+195116852|192657725|192657725
+193767111|192853695|192853695
+95377636|94013056|94013056
+95234906|92952501|92952501
+94866252|93517067|93517067
+94451048|93565900|93565900
+93778249|93309722|93309722
+194041318
+93928342
+93697034
+
+ERR:
+

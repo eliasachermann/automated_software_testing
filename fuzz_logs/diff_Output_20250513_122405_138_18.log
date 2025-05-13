@@ -1,0 +1,61 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_Bzpw (c_jnxQBw NUMERIC PRIMARY KEY, UNIQUE (c_jnxQBw));
+ALTER TABLE t_Bzpw ADD COLUMN c_4Ti7 NUMERIC;
+ALTER TABLE t_Bzpw RENAME COLUMN c_4Ti7 TO c_fKh;
+ALTER TABLE t_Bzpw RENAME COLUMN c_jnxQBw TO c_eLtX;
+INSERT OR IGNORE INTO t_Bzpw (c_eLtX, c_fKh) VALUES (89942962, 91621716);
+REPLACE INTO t_Bzpw (c_eLtX, c_fKh) SELECT 90264690, 91933186;
+REPLACE INTO t_Bzpw (c_eLtX, c_fKh) VALUES (89935601, 90634861);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_Bzpw SET c_fKh = 577 WHERE ROWID = (SELECT MIN(ROWID) FROM t_Bzpw);
+REPLACE INTO t_Bzpw (c_eLtX, c_fKh) VALUES (90891237, 91240889);
+INSERT OR REPLACE INTO t_Bzpw (c_eLtX, c_fKh) VALUES (91309383, 91353065), (191259161, 190958499);
+COMMIT;
+
+                SELECT c_eLtX, c_fKh,
+                    ROW_NUMBER() OVER (PARTITION BY c_fKh) as row_num,
+                    RANK() OVER (PARTITION BY c_fKh ORDER BY c_eLtX) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_fKh ORDER BY c_eLtX) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_eLtX) IN ('integer','real') THEN c_eLtX ELSE 0 END) 
+                        OVER (PARTITION BY c_fKh ORDER BY c_eLtX 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_eLtX) IN ('integer','real') THEN c_eLtX ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_fKh ORDER BY c_eLtX) as prev_value,
+                    LEAD(CASE WHEN typeof(c_eLtX) IN ('integer','real') THEN c_eLtX ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_fKh ORDER BY c_eLtX) as next_value
+                FROM t_Bzpw
+                ORDER BY c_fKh, c_eLtX
+                LIMIT 20;
+                
+SELECT t_Bzpw.c_fKh, t_Bzpw.* FROM t_Bzpw WHERE NOT x'E0CA' ORDER BY 1 DESC;
+
+--- v3.26.0 ---
+OUT:
+
+ERR:
+Error: near line 4: no such column: c_jnxQBw
+Error: near line 5: table t_Bzpw has no column named c_eLtX
+Error: near line 6: table t_Bzpw has no column named c_eLtX
+Error: near line 7: table t_Bzpw has no column named c_eLtX
+Error: near line 10: table t_Bzpw has no column named c_eLtX
+Error: near line 11: table t_Bzpw has no column named c_eLtX
+Error: near line 14: no such column: c_eLtX
+
+
+--- v3.49.1 ---
+OUT:
+89942962|577|1|1|1|89942962|0|0
+89935601|90634861|1|1|1|89935601|0|0
+90891237|91240889|1|1|1|90891237|0|0
+91309383|91353065|1|1|1|91309383|0|0
+90264690|91933186|1|1|1|90264690|0|0
+191259161|190958499|1|1|1|191259161|0|0
+190958499|191259161|190958499
+91933186|90264690|91933186
+91353065|91309383|91353065
+91240889|90891237|91240889
+90634861|89935601|90634861
+577|89942962|577
+
+ERR:
+

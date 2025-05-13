@@ -1,0 +1,97 @@
+SQL:
+PRAGMA ignore_check_constraints;
+CREATE TABLE IF NOT EXISTS t_VqA7 (c_LvPcP6K TEXT, c_IaiPd INTEGER, c_zq2kzIfVRP TEXT, c_0kLCjlz3C TEXT DEFAULT '1Ns24CJ5BpDu2cLtam', c_KRfEwWgvH NUMERIC, c_ovYTT1X5 TEXT PRIMARY KEY, c_VGph3dLOC2 TEXT);
+CREATE TABLE IF NOT EXISTS t_fKW (c_uwdWMRWRrv NUMERIC PRIMARY KEY, c_6PdP TEXT, c_5kn3c INTEGER, c_I2vCB REAL, c_s3PRb NUMERIC);
+CREATE TABLE t_5BruMx (c_LYJPG2yhB INTEGER PRIMARY KEY, c_pbaF NUMERIC, c_0CMxLr TEXT, c_yRxHyM2cze TEXT);
+CREATE TABLE IF NOT EXISTS t_1VLYHib (c_fc5 INTEGER DEFAULT -824405, PRIMARY KEY (c_fc5));
+CREATE TABLE IF NOT EXISTS t_KHF (c_L6ikYg9 INTEGER, c_xmpE5bwml7 NUMERIC, c_73iWWSuWr TEXT COLLATE RTRIM, c_c8b REAL DEFAULT -632001.8, c_ha1KB4A TEXT PRIMARY KEY);
+INSERT OR REPLACE INTO t_VqA7 (c_LvPcP6K, c_IaiPd, c_zq2kzIfVRP, c_0kLCjlz3C, c_KRfEwWgvH, c_ovYTT1X5, c_VGph3dLOC2) VALUES ('If389uT4ot2HDpZB_9184', 92113802, 'ot7pArna0wD2NsuMAaCI_9384', 'rQF8W7HMcO8JKke_9484', 96460350, 'RGtyOl0CHJF_9684', 'wOhydu5ZXiI_9784');
+REPLACE INTO t_VqA7 (c_LvPcP6K, c_IaiPd, c_zq2kzIfVRP, c_0kLCjlz3C, c_KRfEwWgvH, c_ovYTT1X5, c_VGph3dLOC2) VALUES ('1qwMGSP8_9184', 92966686, 'q3XqlnqsW_9384', 'cxWvhVvP1HACknG_9484', 95231018, 'l16tXtNrsEKRvibNef_9684', '2BuhQkzX5_9784'), ('nUVcOymt3WMeRo8eMsK6_19184', 192543735, 'k8xQe5bF_19384', 'gF_19484', 195762381, 'l_19684', 'bYt12eiNhqNE2oP_19784');
+INSERT OR IGNORE INTO t_VqA7 (c_LvPcP6K, c_IaiPd, c_zq2kzIfVRP, c_0kLCjlz3C, c_KRfEwWgvH, c_ovYTT1X5, c_VGph3dLOC2) VALUES ('HskS_9184', 93799139, 'PR_9384', 'L62IWgMCQGC_9484', 95695622, 'TJwvAy8kN54omp9G6q_9684', 'qq5f89k_9784'), ('0NfC8XWmPNQxh_19184', 192918779, 'cX_19384', 'ce4bi83tHBlei_19484', 194978470, 'mOLbfql338gcFy4jlks4_19684', 'b8MPZ52fUyOjVDX7zGG_19784');
+REPLACE INTO t_VqA7 (c_LvPcP6K, c_IaiPd, c_zq2kzIfVRP, c_0kLCjlz3C, c_KRfEwWgvH, c_ovYTT1X5, c_VGph3dLOC2) VALUES ('d2B_9184', 93330463, 'dQB2UaTNBVmrO0l3_9384', 'ps4il_9484', 94902215, 'd9bUvCVNRvkZcx2zM_9684', 'UKZ7LwZtTU5zC2y9LA6_9784');
+INSERT OR REPLACE INTO t_VqA7 (c_LvPcP6K, c_IaiPd, c_zq2kzIfVRP, c_0kLCjlz3C, c_KRfEwWgvH, c_ovYTT1X5, c_VGph3dLOC2) VALUES ('ufHzlGeHGBOehJ08G_9184', 92002875, 'cyuNSE_9384', '4dbdXXW_9484', 96472025, 'acT_9684', 'KZW4w_9784');
+INSERT OR REPLACE INTO t_fKW (c_uwdWMRWRrv, c_6PdP, c_5kn3c, c_I2vCB, c_s3PRb) VALUES (92806919, 'YGC1S1SCG1tr4T3HOX_9284', 94790481, 1052022.97, 96457917), (191487105, '1WjqYlpKkj_19284', 194710219, -219548.34000000003, 195780205);
+INSERT OR REPLACE INTO t_5BruMx (c_LYJPG2yhB, c_pbaF, c_0CMxLr, c_yRxHyM2cze) VALUES (90991016, 92938199, 'PVUo_9384', 'TjOzqAAsEuiytikmqD_9484');
+INSERT OR REPLACE INTO t_5BruMx (c_LYJPG2yhB, c_pbaF, c_0CMxLr, c_yRxHyM2cze) SELECT 91181625, 93832607, 'wVe32Jxqnt0QHs_9384', '3gnUaeptZGvJ0V68mzel_9484';
+INSERT OR REPLACE INTO t_5BruMx (c_LYJPG2yhB, c_pbaF, c_0CMxLr, c_yRxHyM2cze) VALUES (92368816, 92649969, 'Ii7QRlW_9384', 'ZPwC6z10zAYNnMZ_9484'), (191660795, 193836293, 'uta5JJTVhUK7_19384', 'O8anX8ED0MntO1dXEkp_19484');
+INSERT OR REPLACE INTO t_1VLYHib (c_fc5) VALUES (92432020);
+REPLACE INTO t_1VLYHib (c_fc5) VALUES (92579182);
+REPLACE INTO t_KHF (c_L6ikYg9, c_xmpE5bwml7, c_73iWWSuWr, c_c8b, c_ha1KB4A) SELECT 92184663, 93302745, 'iKVc3YIKK8GrAJUxy_9384', 1083928.67, 'k967jcK3aCJAXF9_9584';
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_fKW LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_1VLYHib SET c_fc5 = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_1VLYHib);
+UPDATE OR IGNORE t_1VLYHib SET c_fc5 = -276 WHERE ROWID = (SELECT MIN(ROWID) FROM t_1VLYHib);
+COMMIT;
+SELECT t_1VLYHib.c_fc5 FROM t_1VLYHib ORDER BY t_1VLYHib.c_fc5 ASC LIMIT 10;
+
+                SELECT DISTINCT t_5BruMx.c_pbaF,
+                    COUNT(*) OVER (PARTITION BY t_5BruMx.c_0CMxLr) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_5BruMx.c_pbaF) IN ('null') THEN 0 
+                            ELSE t_5BruMx.c_pbaF END DESC,
+                            t_5BruMx.c_0CMxLr ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_5BruMx.c_pbaF IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_5BruMx
+                WHERE t_5BruMx.c_pbaF IS NOT NULL
+                GROUP BY t_5BruMx.c_pbaF, t_5BruMx.c_0CMxLr
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_5BruMx.c_pbaF ASC, t_5BruMx.c_0CMxLr ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_5BruMx.c_pbaF,
+                    t_5BruMx.c_0CMxLr,
+                    SUM(CASE WHEN typeof(t_5BruMx.c_pbaF) IN ('integer', 'real', 'numeric') THEN t_5BruMx.c_pbaF ELSE 0 END) 
+                        OVER (PARTITION BY t_5BruMx.c_0CMxLr ORDER BY t_5BruMx.c_pbaF ASC) as window_total
+                FROM t_5BruMx
+                GROUP BY t_5BruMx.c_pbaF, t_5BruMx.c_0CMxLr
+                HAVING SUM(CASE WHEN typeof(t_5BruMx.c_pbaF) IN ('integer', 'real', 'numeric') THEN t_5BruMx.c_pbaF ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_5BruMx.c_pbaF ASC, t_5BruMx.c_0CMxLr ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+0
+1|array|[1,2,3]|{"key":"value"}
+-276
+92579182
+92649969|1|4|Known
+92938199|1|3|Known
+93832607|1|2|Known
+193836293|1|1|Known
+193836293|uta5JJTVhUK7_19384|193836293
+93832607|wVe32Jxqnt0QHs_9384|93832607
+92938199|PVUo_9384|92938199
+92649969|Ii7QRlW_9384|92649969
+
+ERR:
+Error: near line 27: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+0
+1|array|[1,2,3]|{"key":"value"}
+-276
+92579182
+92649969|1|4|Known
+92938199|1|3|Known
+93832607|1|2|Known
+193836293|1|1|Known
+193836293|uta5JJTVhUK7_19384|193836293
+93832607|wVe32Jxqnt0QHs_9384|93832607
+92938199|PVUo_9384|92938199
+92649969|Ii7QRlW_9384|92649969
+
+ERR:
+Runtime error near line 27: datatype mismatch (20)
+

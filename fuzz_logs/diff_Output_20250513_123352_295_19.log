@@ -1,0 +1,65 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_BA8N6 (c_CixAI1S INTEGER, PRIMARY KEY (c_CixAI1S)) WITHOUT ROWID;
+ALTER TABLE t_BA8N6 RENAME COLUMN c_CixAI1S TO c_lQeRP7;
+
+                CREATE TRIGGER trg_4TvTm
+                BEFORE INSERT ON t_BA8N6
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_BA8N6) > 1000;
+                END;
+INSERT OR REPLACE INTO t_BA8N6 (c_lQeRP7) VALUES (96753924), (195438355);
+SELECT * FROM t_BA8N6;
+SELECT t_BA8N6.c_lQeRP7, TYPEOF(t_BA8N6.c_lQeRP7) AS computed_c_lQeRP7 FROM t_BA8N6 ORDER BY t_BA8N6.c_lQeRP7 DESC LIMIT 10;
+
+                SELECT DISTINCT t_BA8N6.c_lQeRP7,
+                    COUNT(*) OVER (PARTITION BY t_BA8N6.c_lQeRP7) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_BA8N6.c_lQeRP7) IN ('null') THEN 0 
+                            ELSE t_BA8N6.c_lQeRP7 END DESC,
+                            t_BA8N6.c_lQeRP7 ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_BA8N6.c_lQeRP7 IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_BA8N6
+                WHERE t_BA8N6.c_lQeRP7 IS NOT NULL
+                GROUP BY t_BA8N6.c_lQeRP7, t_BA8N6.c_lQeRP7
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_BA8N6.c_lQeRP7 ASC, t_BA8N6.c_lQeRP7 ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_BA8N6.c_lQeRP7,
+                    t_BA8N6.c_lQeRP7,
+                    SUM(CASE WHEN typeof(t_BA8N6.c_lQeRP7) IN ('integer', 'real', 'numeric') THEN t_BA8N6.c_lQeRP7 ELSE 0 END) 
+                        OVER (PARTITION BY t_BA8N6.c_lQeRP7 ORDER BY t_BA8N6.c_lQeRP7 ASC) as window_total
+                FROM t_BA8N6
+                GROUP BY t_BA8N6.c_lQeRP7, t_BA8N6.c_lQeRP7
+                HAVING SUM(CASE WHEN typeof(t_BA8N6.c_lQeRP7) IN ('integer', 'real', 'numeric') THEN t_BA8N6.c_lQeRP7 ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_BA8N6.c_lQeRP7 ASC, t_BA8N6.c_lQeRP7 ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+
+ERR:
+Error: near line 2: no such column: c_CixAI1S
+Error: near line 9: table t_BA8N6 has no column named c_lQeRP7
+Error: near line 11: no such column: t_BA8N6.c_lQeRP7
+Error: near line 13: no such column: t_BA8N6.c_lQeRP7
+Error: near line 30: no such column: t_BA8N6.c_lQeRP7
+
+
+--- v3.49.1 ---
+OUT:
+96753924
+195438355
+195438355|integer
+96753924|integer
+96753924|1|2|Known
+195438355|1|1|Known
+195438355|195438355|195438355
+96753924|96753924|96753924
+
+ERR:
+

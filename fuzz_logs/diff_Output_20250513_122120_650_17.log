@@ -1,0 +1,86 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_Kt8uEZb (c_CNbAi6a NUMERIC, PRIMARY KEY (c_CNbAi6a), UNIQUE (c_CNbAi6a));
+CREATE TABLE IF NOT EXISTS t_pTCW (c_cPmHE53 INTEGER PRIMARY KEY AUTOINCREMENT, c_wYqU INTEGER);
+ALTER TABLE t_pTCW ADD COLUMN c_4kieI7k0s TEXT DEFAULT 'GPP9qYu8';
+ALTER TABLE t_Kt8uEZb RENAME COLUMN c_CNbAi6a TO c_CO0CG9qT;
+ALTER TABLE t_Kt8uEZb RENAME TO t_Ty5I7BJM;
+INSERT OR IGNORE INTO t_pTCW (c_cPmHE53, c_wYqU, c_4kieI7k0s) VALUES (89446998, 90416250, 'VTzGab_9079'), (188366882, 189941986, 'vJXs6Ls_19079');
+WITH cte_wZw AS (SELECT 1) INSERT OR IGNORE INTO t_Ty5I7BJM (c_CO0CG9qT) VALUES (89719319);
+REPLACE INTO t_Ty5I7BJM (c_CO0CG9qT) VALUES (89401850), (188008546);
+INSERT OR REPLACE INTO t_Ty5I7BJM (c_CO0CG9qT) VALUES (88886240), (189460554);
+INSERT OR IGNORE INTO t_Ty5I7BJM (c_CO0CG9qT) VALUES (88211700);
+
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_pTCW SET c_4kieI7k0s = 'pl06h_1747138879' WHERE ROWID = (SELECT MIN(ROWID) FROM t_pTCW);
+INSERT OR REPLACE INTO t_pTCW (c_cPmHE53, c_wYqU, c_4kieI7k0s) VALUES (88367755, 89255096, 'bkAoOZt2t_9079'), (188157503, 189664968, '3_19079');
+UPDATE OR IGNORE t_pTCW SET c_wYqU = -827 WHERE ROWID = (SELECT MIN(ROWID) FROM t_pTCW);
+COMMIT;
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_pTCW
+            LIMIT 1;
+            
+SELECT t_Ty5I7BJM.c_CO0CG9qT as t_Ty5I7BJM_val, t_pTCW.c_cPmHE53 as t_pTCW_val
+FROM t_Ty5I7BJM
+LEFT OUTER JOIN t_pTCW ON t_Ty5I7BJM.ROWID = t_pTCW.ROWID
+WHERE t_Ty5I7BJM.c_CO0CG9qT IS NOT NULL
+ORDER BY t_Ty5I7BJM.c_CO0CG9qT
+LIMIT 20;
+SELECT t_pTCW.c_cPmHE53, t_pTCW.c_wYqU FROM t_pTCW ORDER BY t_pTCW.c_wYqU DESC LIMIT 10;
+WITH cte_key AS (SELECT * FROM t_Ty5I7BJM LIMIT 10) SELECT CASE WHEN + t_Ty5I7BJM.c_CO0CG9qT THEN c_cPmHE53 WHEN -870669 THEN CASE WHEN t_Ty5I7BJM.c_CO0CG9qT THEN '24kfSAC2836izKUSk3F' WHEN t_Ty5I7BJM.c_CO0CG9qT THEN NULL ELSE x'1BFED881' END WHEN + 213873 THEN CASE t_Ty5I7BJM.c_CO0CG9qT WHEN t_Ty5I7BJM.c_CO0CG9qT THEN t_Ty5I7BJM.c_CO0CG9qT ELSE t_Ty5I7BJM.c_CO0CG9qT END ELSE ~ TRUE END AS alias_XgK, c_CO0CG9qT, CASE CASE t_Ty5I7BJM.c_CO0CG9qT WHEN t_Ty5I7BJM.c_CO0CG9qT THEN 'Iyqbevj9yzAUBPhpkcrY' ELSE t_Ty5I7BJM.c_CO0CG9qT END WHEN FALSE THEN (t_pTCW.c_wYqU IS t_pTCW.c_wYqU) WHEN t_pTCW.c_wYqU THEN - NULL WHEN (FALSE != 'fzER6x7X7D6sJFSJmA') THEN NOT x'07' END AS alias_94G, c_cPmHE53, c_wYqU IN (SELECT t_Ty5I7BJM.c_CO0CG9qT FROM t_Ty5I7BJM LIMIT 5) FROM t_Ty5I7BJM, t_pTCW WHERE (DATETIME(NULL) + NULL) ORDER BY 1;
+SELECT t_pTCW.c_wYqU, t_pTCW.c_4kieI7k0s, t_pTCW.c_cPmHE53, UPPER(t_pTCW.c_4kieI7k0s) AS computed_c_4kieI7k0s FROM t_pTCW ORDER BY t_pTCW.c_wYqU ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+188366882|189941986
+188157503|189664968
+89446998|90416250
+88367755|-827
+-827|bkAoOZt2t_9079|88367755|BKAOOZT2T_9079
+90416250|pl06h_1747138879|89446998|PL06H_1747138879
+189664968|3_19079|188157503|3_19079
+189941986|vJXs6Ls_19079|188366882|VJXS6LS_19079
+
+ERR:
+Error: near line 4: no such column: c_CNbAi6a
+Error: near line 7: table t_Ty5I7BJM has no column named c_CO0CG9qT
+Error: near line 8: table t_Ty5I7BJM has no column named c_CO0CG9qT
+Error: near line 9: table t_Ty5I7BJM has no column named c_CO0CG9qT
+Error: near line 10: table t_Ty5I7BJM has no column named c_CO0CG9qT
+Error: near line 34: no such column: t_Ty5I7BJM.c_CO0CG9qT
+Error: near line 41: no such column: t_Ty5I7BJM.c_CO0CG9qT
+
+
+--- v3.49.1 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+88211700|
+88886240|
+89401850|
+89719319|
+188008546|
+189460554|
+188366882|189941986
+188157503|189664968
+89446998|90416250
+88367755|-827
+-827|bkAoOZt2t_9079|88367755|BKAOOZT2T_9079
+90416250|pl06h_1747138879|89446998|PL06H_1747138879
+189664968|3_19079|188157503|3_19079
+189941986|vJXs6Ls_19079|188366882|VJXS6LS_19079
+
+ERR:
+

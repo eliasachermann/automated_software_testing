@@ -1,0 +1,126 @@
+SQL:
+CREATE TABLE t_I4xkBg4kN (c_aR90T INTEGER PRIMARY KEY AUTOINCREMENT, c_ceq3OBCQ INTEGER, c_2ZC NUMERIC DEFAULT NULL);
+CREATE TABLE t_Cn1vLoI (c_SE0HR NUMERIC, c_Qd3hLjpH INTEGER, c_JxE REAL DEFAULT 521288.4962);
+CREATE TABLE IF NOT EXISTS t_nquwLa7 (c_PJ1i TEXT COLLATE RTRIM, c_Sf3 TEXT, c_qBUx REAL, c_PvXchDHMup NUMERIC PRIMARY KEY DEFAULT 480317, c_JRoHWcCY REAL, c_82lA0sa INTEGER DEFAULT -989827, c_rXV REAL);
+CREATE TABLE IF NOT EXISTS t_j25GB (c_9jMU6J TEXT, c_cnBTkzlw NUMERIC, c_qITxV TEXT, c_7h1e INTEGER DEFAULT NULL, c_cfMKzP REAL, c_oyAysZW5 INTEGER PRIMARY KEY AUTOINCREMENT, c_723dsfxxAL REAL, c_PNR NUMERIC DEFAULT 97005, FOREIGN KEY (c_cfMKzP) REFERENCES t_h9LaE(c_rSe3X));
+REPLACE INTO t_I4xkBg4kN (c_aR90T, c_ceq3OBCQ, c_2ZC) SELECT 87997629, 88081168, 89450505;
+REPLACE INTO t_I4xkBg4kN (c_aR90T, c_ceq3OBCQ, c_2ZC) SELECT 87810277, 87563934, 89636373;
+INSERT OR REPLACE INTO t_I4xkBg4kN (c_aR90T, c_ceq3OBCQ, c_2ZC) VALUES (87049850, 89023269, 88915928);
+INSERT OR REPLACE INTO t_I4xkBg4kN (c_aR90T, c_ceq3OBCQ, c_2ZC) VALUES (87302794, 88312776, 89053820);
+WITH cte_dPj AS (SELECT 1) INSERT OR IGNORE INTO t_I4xkBg4kN (c_aR90T, c_ceq3OBCQ, c_2ZC) VALUES (88281108, 89108221, 88964029);
+REPLACE INTO t_Cn1vLoI (c_SE0HR, c_Qd3hLjpH, c_JxE) SELECT 87004333, 88665644, 50874.104;
+WITH cte_0uE AS (SELECT 1) INSERT OR REPLACE INTO t_Cn1vLoI (c_SE0HR, c_Qd3hLjpH, c_JxE) VALUES (88329599, 87942473, 38775.502);
+INSERT OR IGNORE INTO t_Cn1vLoI (c_SE0HR, c_Qd3hLjpH, c_JxE) VALUES (88282387, 87967143, -343132.7);
+INSERT OR IGNORE INTO t_nquwLa7 (c_PJ1i, c_Sf3, c_qBUx, c_PvXchDHMup, c_JRoHWcCY, c_82lA0sa, c_rXV) VALUES ('ASmjkDQmPtx_8743', 'LOHUR_8843', -384098.278, 89929141, 860708.841389, 92351101, 275052.56443);
+INSERT OR IGNORE INTO t_j25GB (c_9jMU6J, c_cnBTkzlw, c_qITxV, c_7h1e, c_cfMKzP, c_oyAysZW5, c_723dsfxxAL, c_PNR) VALUES ('vl62o3_8743', 89410031, 'HUjDmJP_8943', 89802103, -96646.02116, 92642932, 388834.37847, 93820876), ('LvvjsjjG4g_18743', 188658192, 'Z8mAaSefaFw1oXAk_18943', 189996720, 794070.13, 193103469, -783884.15, 194522804);
+
+                SELECT c_Qd3hLjpH, c_JxE,
+                    ROW_NUMBER() OVER (PARTITION BY c_JxE) as row_num,
+                    RANK() OVER (PARTITION BY c_JxE ORDER BY c_Qd3hLjpH) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_JxE ORDER BY c_Qd3hLjpH) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_Qd3hLjpH) IN ('integer','real') THEN c_Qd3hLjpH ELSE 0 END) 
+                        OVER (PARTITION BY c_JxE ORDER BY c_Qd3hLjpH 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_Qd3hLjpH) IN ('integer','real') THEN c_Qd3hLjpH ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_JxE ORDER BY c_Qd3hLjpH) as prev_value,
+                    LEAD(CASE WHEN typeof(c_Qd3hLjpH) IN ('integer','real') THEN c_Qd3hLjpH ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_JxE ORDER BY c_Qd3hLjpH) as next_value
+                FROM t_Cn1vLoI
+                ORDER BY c_JxE, c_Qd3hLjpH
+                LIMIT 20;
+                
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_I4xkBg4kN
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_9jMU6J,
+                        (SELECT COUNT(*) FROM t_j25GB t2 WHERE t2.c_9jMU6J = t1.c_9jMU6J) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_j25GB t3 WHERE t3.c_9jMU6J > t1.c_9jMU6J LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_9jMU6J FROM t_j25GB
+                        )) as distinct_values_count
+                    FROM t_j25GB t1
+                    WHERE t1.c_9jMU6J IN (
+                        SELECT c_9jMU6J 
+                        FROM t_j25GB 
+                        WHERE typeof(c_9jMU6J) NOT IN ('null')
+                        GROUP BY c_9jMU6J
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_j25GB t4 WHERE t4.c_9jMU6J = t1.c_9jMU6J) DESC
+                    LIMIT 10;
+                    
+SELECT t_j25GB.c_9jMU6J as t_j25GB_val, t_nquwLa7.c_JRoHWcCY as t_nquwLa7_val, t_Cn1vLoI.c_SE0HR as t_Cn1vLoI_val
+FROM t_j25GB
+INNER JOIN t_nquwLa7 ON t_j25GB.ROWID = t_nquwLa7.ROWID
+LEFT JOIN t_Cn1vLoI ON t_j25GB.ROWID = t_Cn1vLoI.ROWID
+WHERE t_Cn1vLoI.c_SE0HR IS NOT NULL
+ORDER BY t_j25GB.c_9jMU6J
+LIMIT 20;
+WITH cte_wOn AS (SELECT * FROM t_I4xkBg4kN LIMIT 10) SELECT c_Qd3hLjpH FROM t_j25GB, t_Cn1vLoI ORDER BY 1 LIMIT 6;
+SELECT * FROM t_I4xkBg4kN, t_Cn1vLoI WHERE EXISTS (SELECT 1 FROM t_I4xkBg4kN LIMIT 1) GROUP BY c_Qd3hLjpH ORDER BY 1 DESC LIMIT 45;
+SELECT t_Cn1vLoI.c_JxE, t_Cn1vLoI.c_Qd3hLjpH, LOWER(t_Cn1vLoI.c_JxE) AS computed_c_JxE FROM t_Cn1vLoI ORDER BY t_Cn1vLoI.c_JxE ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+87967143|-343132.7|1|1|1|87967143|0|0
+87942473|38775.502|1|1|1|87942473|0|0
+88665644|50874.104|1|1|1|88665644|0|0
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+vl62o3_8743|1|Max|2
+LvvjsjjG4g_18743|1|Not Max|2
+87942473
+87942473
+87967143
+87967143
+88665644
+88665644
+87049850|89023269|88915928|88329599|87942473|38775.502
+87049850|89023269|88915928|88282387|87967143|-343132.7
+87049850|89023269|88915928|87004333|88665644|50874.104
+-343132.7|87967143|-343132.7
+38775.502|87942473|38775.502
+50874.104|88665644|50874.104
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+87967143|-343132.7|1|1|1|87967143|0|0
+87942473|38775.502|1|1|1|87942473|0|0
+88665644|50874.104|1|1|1|88665644|0|0
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+vl62o3_8743|1|Max|2
+LvvjsjjG4g_18743|1|Not Max|2
+87942473
+87942473
+87967143
+87967143
+88665644
+88665644
+87049850|89023269|88915928|87004333|88665644|50874.104
+87049850|89023269|88915928|88282387|87967143|-343132.7
+87049850|89023269|88915928|88329599|87942473|38775.502
+-343132.7|87967143|-343132.7
+38775.502|87942473|38775.502
+50874.104|88665644|50874.104
+
+ERR:
+

@@ -1,0 +1,127 @@
+SQL:
+PRAGMA count_changes;
+CREATE TABLE IF NOT EXISTS t_rE2 (c_NxuJdDat1 TEXT DEFAULT 'JG7djQjDV5qui2o', c_ms1nl1M NUMERIC, c_FJIkPlak NUMERIC, c_jqDcX6tv INTEGER PRIMARY KEY);
+CREATE TABLE IF NOT EXISTS t_HH2SU (c_64vpehU INTEGER, c_6uNwb NUMERIC);
+CREATE TABLE IF NOT EXISTS t_XPu (c_qOTA5q TEXT);
+CREATE TABLE IF NOT EXISTS t_y9QzFJvHv (c_aLffcG9 INTEGER, c_XvsGVVd NUMERIC, c_H9xy INTEGER, c_4jT9m2dcV INTEGER DEFAULT -607312, c_NtDM0vLZt TEXT PRIMARY KEY, c_MZM REAL, UNIQUE (c_XvsGVVd, c_MZM)) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_BLjI1f (c_kUIrg6ALp TEXT DEFAULT NULL, c_eKgN REAL, c_3ccJH INTEGER DEFAULT 354931, c_j95rUUY TEXT DEFAULT 'sSjQiTxsoDf6', c_kBi REAL, c_oYG53gQIF4 INTEGER PRIMARY KEY AUTOINCREMENT, c_Gi4 INTEGER, UNIQUE (c_Gi4, c_oYG53gQIF4, c_eKgN), FOREIGN KEY (c_oYG53gQIF4) REFERENCES t_qhT0O(c_8UJ9Y));
+ALTER TABLE t_rE2 ADD COLUMN c_9yHSxN6sj TEXT DEFAULT 'DS';
+ALTER TABLE t_rE2 RENAME COLUMN c_jqDcX6tv TO c_V1E81WAou;
+ALTER TABLE t_BLjI1f RENAME COLUMN c_eKgN TO c_J40fEetU;
+INSERT OR REPLACE INTO t_rE2 (c_NxuJdDat1, c_ms1nl1M, c_FJIkPlak, c_V1E81WAou, c_9yHSxN6sj) VALUES ('75IPcebK26C95Lq82WZ_9706', 97331809, 98810440, 100885442, 'vmraIXo_10106');
+INSERT OR REPLACE INTO t_rE2 (c_NxuJdDat1, c_ms1nl1M, c_FJIkPlak, c_V1E81WAou, c_9yHSxN6sj) SELECT 'X_9706', 97319934, 98205713, 99976042, 'o_10106';
+INSERT OR IGNORE INTO t_rE2 (c_NxuJdDat1, c_ms1nl1M, c_FJIkPlak, c_V1E81WAou, c_9yHSxN6sj) SELECT 'VmD5axyalyR_9706', 97125471, 99673379, 99629780, 'ss3l72sDSaGNJ_10106';
+INSERT OR REPLACE INTO t_HH2SU (c_64vpehU, c_6uNwb) VALUES (96876416, 98902056), (197884975, 197264201);
+REPLACE INTO t_HH2SU (c_64vpehU, c_6uNwb) SELECT 96616924, 97317157;
+INSERT OR REPLACE INTO t_HH2SU (c_64vpehU, c_6uNwb) VALUES (97143579, 97445362), (197552362, 197552919);
+REPLACE INTO t_XPu (c_qOTA5q) VALUES ('aVVk3bfkBgKOJ_9706');
+INSERT OR IGNORE INTO t_XPu (c_qOTA5q) VALUES ('7KlFN_9706'), ('f6VM2L_19706');
+INSERT OR REPLACE INTO t_XPu (c_qOTA5q) SELECT 'euEWBgtoBrUABRvR1_9706';
+REPLACE INTO t_XPu (c_qOTA5q) VALUES ('dBl_9706');
+WITH cte_ecy AS (SELECT 1) INSERT OR IGNORE INTO t_y9QzFJvHv (c_aLffcG9, c_XvsGVVd, c_H9xy, c_4jT9m2dcV, c_NtDM0vLZt, c_MZM) VALUES (96155069, 98597992, 98504668, 99352786, 'cQeZHS_10106', -540716.72), (197482036, 198151575, 199678431, 199539103, '1Qyi6wM7U1_20106', 999079.611987);
+INSERT OR REPLACE INTO t_BLjI1f (c_kUIrg6ALp, c_J40fEetU, c_3ccJH, c_j95rUUY, c_kBi, c_oYG53gQIF4, c_Gi4) VALUES ('W0VRmgZxQ_9706', 1070404.6381, 98117258, '7AEePHVXhdS3dS9x_10006', 874193.14101, 101070210, 103268440), ('gYOKB4sTI57IesA_19706', 551861.8400000001, 200010449, 'cekE9GBym4UJh6qhUwh_20006', 1074336.1, 202048614, 203288330);
+REPLACE INTO t_BLjI1f (c_kUIrg6ALp, c_J40fEetU, c_3ccJH, c_j95rUUY, c_kBi, c_oYG53gQIF4, c_Gi4) VALUES ('g6UGC5g_9706', 492712.596, 98425043, 'Unrm1zhK_10006', 795758.97, 102057854, 103712630), ('l_19706', -184278.96750000003, 199334268, 'oU0EPcHoXaXsvuv0_20006', -448466.61100000003, 203028024, 203582930);
+INSERT INTO t_XPu DEFAULT VALUES;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_BLjI1f SET c_oYG53gQIF4 = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_BLjI1f);
+INSERT OR REPLACE INTO t_BLjI1f (c_kUIrg6ALp, c_J40fEetU, c_3ccJH, c_j95rUUY, c_kBi, c_oYG53gQIF4, c_Gi4) SELECT 'siKWA5FlAhcVeXJNS1K5_9706', 1029118.246293, 99559446, 'fqaBiO_10006', 619793.9, 101499276, 103947520;
+INSERT OR REPLACE INTO t_BLjI1f (c_kUIrg6ALp, c_J40fEetU, c_3ccJH, c_j95rUUY, c_kBi, c_oYG53gQIF4, c_Gi4) VALUES ('9rLka8fPcd_9706', 498800.0, 99761486, 'kBQgHacOg_10006', 117077.412, 101621071, 103898709), ('EG0utofW0PICmq_19706', 177635.70671, 199641549, 'YNRNXYBfZyB_20006', 723334.6741470001, 201232643, 202110536);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_BLjI1f SET c_j95rUUY = 'HImKf_1747139706' WHERE ROWID = (SELECT MIN(ROWID) FROM t_BLjI1f);
+UPDATE OR IGNORE t_BLjI1f SET c_J40fEetU = 781 WHERE ROWID = (SELECT MIN(ROWID) FROM t_BLjI1f);
+INSERT OR REPLACE INTO t_BLjI1f (c_kUIrg6ALp, c_J40fEetU, c_3ccJH, c_j95rUUY, c_kBi, c_oYG53gQIF4, c_Gi4) VALUES ('gp_9706', -204348.947, 99389822, 'AoM0YWStNwW_10006', 783270.67873, 101419614, 102439390);
+COMMIT;
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_BLjI1f
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+
+                    SELECT 
+                        t1.c_aLffcG9,
+                        (SELECT COUNT(*) FROM t_y9QzFJvHv t2 WHERE t2.c_aLffcG9 = t1.c_aLffcG9) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_y9QzFJvHv t3 WHERE t3.c_aLffcG9 > t1.c_aLffcG9 LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_aLffcG9 FROM t_y9QzFJvHv
+                        )) as distinct_values_count
+                    FROM t_y9QzFJvHv t1
+                    WHERE t1.c_aLffcG9 IN (
+                        SELECT c_aLffcG9 
+                        FROM t_y9QzFJvHv 
+                        WHERE typeof(c_aLffcG9) NOT IN ('null')
+                        GROUP BY c_aLffcG9
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_y9QzFJvHv t4 WHERE t4.c_aLffcG9 = t1.c_aLffcG9) DESC
+                    LIMIT 10;
+                    
+SELECT t_XPu.c_qOTA5q FROM t_XPu ORDER BY t_XPu.c_qOTA5q ASC LIMIT 10;
+SELECT t_rE2.c_V1E81WAou, t_rE2.c_FJIkPlak, t_rE2.c_NxuJdDat1, TYPEOF(t_rE2.c_NxuJdDat1) AS computed_c_NxuJdDat1 FROM t_rE2 ORDER BY t_rE2.c_V1E81WAou DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+0
+101070210|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+101419614|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+101499276|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+101621071|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+102057854|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+201232643|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+202048614|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+203028024|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+197482036|1|Max|2
+96155069|1|Not Max|2
+
+7KlFN_9706
+aVVk3bfkBgKOJ_9706
+dBl_9706
+euEWBgtoBrUABRvR1_9706
+f6VM2L_19706
+100885442|98810440|75IPcebK26C95Lq82WZ_9706|text
+99976042|98205713|X_9706|text
+99629780|99673379|VmD5axyalyR_9706|text
+
+ERR:
+Error: near line 25: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+0
+101070210|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+101419614|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+101499276|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+101621071|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+102057854|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+201232643|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+202048614|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+203028024|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"101419614":"text","101070210":"text","102057854":"text","101621071":"text","101499276":"text","201232643":"text","202048614":"text","203028024":"text"}
+197482036|1|Max|2
+96155069|1|Not Max|2
+
+7KlFN_9706
+aVVk3bfkBgKOJ_9706
+dBl_9706
+euEWBgtoBrUABRvR1_9706
+f6VM2L_19706
+100885442|98810440|75IPcebK26C95Lq82WZ_9706|text
+99976042|98205713|X_9706|text
+99629780|99673379|VmD5axyalyR_9706|text
+
+ERR:
+Runtime error near line 25: datatype mismatch (20)
+

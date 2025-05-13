@@ -1,0 +1,155 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_6UeJayEVZT (c_dDcYG NUMERIC, c_kOmJjxqo INTEGER, c_ez1A4HV TEXT, c_N0PAhrtxE NUMERIC, c_5VMDaS REAL, c_EPBEnVoCE REAL, c_dxv INTEGER, c_SIC4 REAL DEFAULT -352433.16, c_bI8SkaP INTEGER DEFAULT -916776, c_PmgQT NUMERIC DEFAULT -762532, PRIMARY KEY (c_ez1A4HV, c_SIC4));
+CREATE TABLE IF NOT EXISTS t_MnjZO4e (c_nsNx NUMERIC);
+CREATE TABLE IF NOT EXISTS t_hL0l8ACO (c_8X7 REAL, c_0PYDKNJlae REAL, c_0UKh4I INTEGER PRIMARY KEY AUTOINCREMENT, c_eb6v8t0Z3U REAL, c_r7kiv9L6X TEXT, c_9rRqs9nrz REAL DEFAULT NULL);
+CREATE TABLE IF NOT EXISTS t_v5p1dKQfgP (c_Lib10 INTEGER, c_pOY9LN3 REAL DEFAULT -939461.863216, c_dCbcoNPRTX INTEGER, c_8nly REAL DEFAULT NULL, c_DKB8ln REAL, c_tRUZBH0vJ INTEGER DEFAULT -899748, c_c9bArN REAL, c_pfi4s8 REAL DEFAULT 198347.0, c_lYoz0 NUMERIC);
+CREATE TABLE t_hOFtcMkxo (c_dgay NUMERIC, c_aYW3 REAL, c_GbF NUMERIC, c_NcmIBqh NUMERIC, c_cFWGjBIW7 INTEGER DEFAULT 460035, c_GanDWV NUMERIC, c_SBs INTEGER);
+INSERT OR IGNORE INTO t_6UeJayEVZT (c_dDcYG, c_kOmJjxqo, c_ez1A4HV, c_N0PAhrtxE, c_5VMDaS, c_EPBEnVoCE, c_dxv, c_SIC4, c_bI8SkaP, c_PmgQT) VALUES (93370078, 93732538, 'POlFjq9oFsYylTJ2DC_9518', 95641672, 448777.567581, 387688.04256, 98354837, -782032.683652, 100789463, 102164280);
+REPLACE INTO t_6UeJayEVZT (c_dDcYG, c_kOmJjxqo, c_ez1A4HV, c_N0PAhrtxE, c_5VMDaS, c_EPBEnVoCE, c_dxv, c_SIC4, c_bI8SkaP, c_PmgQT) VALUES (93348652, 94544986, 'IUm3Tqv0DHBE1B5_9518', 95948988, -63456.510100000014, 235868.974, 99931225, 241384.34983, 101532266, 101532163);
+INSERT OR REPLACE INTO t_6UeJayEVZT (c_dDcYG, c_kOmJjxqo, c_ez1A4HV, c_N0PAhrtxE, c_5VMDaS, c_EPBEnVoCE, c_dxv, c_SIC4, c_bI8SkaP, c_PmgQT) VALUES (92864679, 93307681, '9mKdOZ0pTmfSt9L_9518', 95963071, 420583.504, 912216.724, 99575505, 129141.3, 100394985, 102432941), (192617687, 193445374, 'zkN7rUW6cWb0TAl5E_19518', 195709174, 355190.31, 174676.9285, 199554635, 779254.0, 200526737, 202391115);
+INSERT OR REPLACE INTO t_6UeJayEVZT (c_dDcYG, c_kOmJjxqo, c_ez1A4HV, c_N0PAhrtxE, c_5VMDaS, c_EPBEnVoCE, c_dxv, c_SIC4, c_bI8SkaP, c_PmgQT) VALUES (93569042, 94562462, 'Zx72lXKuUod3homlFki7_9518', 95318880, -495706.77, -597222.1446, 98689306, 14853.62371, 100878584, 102602844);
+REPLACE INTO t_MnjZO4e (c_nsNx) VALUES (93108932), (192850113);
+INSERT OR REPLACE INTO t_MnjZO4e (c_nsNx) VALUES (93090039);
+REPLACE INTO t_MnjZO4e (c_nsNx) VALUES (93360670);
+INSERT OR IGNORE INTO t_MnjZO4e (c_nsNx) VALUES (92363883);
+INSERT OR IGNORE INTO t_MnjZO4e (c_nsNx) SELECT 92975449;
+INSERT OR IGNORE INTO t_hL0l8ACO (c_8X7, c_0PYDKNJlae, c_0UKh4I, c_eb6v8t0Z3U, c_r7kiv9L6X, c_9rRqs9nrz) VALUES (909884.9, 1067112.146, 94284631, -780037.97, 'onsZAEVVO779D_9718', 597808.3859999999);
+WITH cte_B7w AS (SELECT 1) INSERT OR REPLACE INTO t_hL0l8ACO (c_8X7, c_0PYDKNJlae, c_0UKh4I, c_eb6v8t0Z3U, c_r7kiv9L6X, c_9rRqs9nrz) VALUES (-233006.06, 24602.688299999994, 95879917, -165887.3925, 'N2Grx4JcBJj4v7Z0XXDP_9718', 1070897.9), (295499.91000000003, 402859.35, 194671619, -395958.14697400003, '7VOzJ26y_19718', 129945.44);
+INSERT OR REPLACE INTO t_hL0l8ACO (c_8X7, c_0PYDKNJlae, c_0UKh4I, c_eb6v8t0Z3U, c_r7kiv9L6X, c_9rRqs9nrz) VALUES (417867.101, 667786.47, 95623367, -800198.7309, 'MPQi6l3IZ_9718', 399777.6);
+REPLACE INTO t_hL0l8ACO (c_8X7, c_0PYDKNJlae, c_0UKh4I, c_eb6v8t0Z3U, c_r7kiv9L6X, c_9rRqs9nrz) VALUES (571860.4937, -738665.42, 95554065, -266713.67, 'crmg0cuONI_9718', 681635.1), (624282.8470000001, 867304.16149, 195429002, -719.7969999999914, 'GdQDk2tb1WwL_19718', 793662.22021);
+REPLACE INTO t_v5p1dKQfgP (c_Lib10, c_pOY9LN3, c_dCbcoNPRTX, c_8nly, c_DKB8ln, c_tRUZBH0vJ, c_c9bArN, c_pfi4s8, c_lYoz0) SELECT 93369159, 657136.6, 95627877, -149826.7492, -482888.00953599997, 97379382, -139070.498975, 242432.39, 102121657;
+INSERT OR IGNORE INTO t_v5p1dKQfgP (c_Lib10, c_pOY9LN3, c_dCbcoNPRTX, c_8nly, c_DKB8ln, c_tRUZBH0vJ, c_c9bArN, c_pfi4s8, c_lYoz0) SELECT 94109200, -31207.5, 94260109, -344776.2036, 98827.8, 97320474, -284174.478356, 276102.8, 101952596;
+WITH cte_29M AS (SELECT 1) REPLACE INTO t_v5p1dKQfgP (c_Lib10, c_pOY9LN3, c_dCbcoNPRTX, c_8nly, c_DKB8ln, c_tRUZBH0vJ, c_c9bArN, c_pfi4s8, c_lYoz0) VALUES (93266343, 977544.17121, 94316475, -157885.78554, 790333.515, 97510527, -547147.738818, -176909.09999999998, 100288449), (193697838, 506764.2891, 195529698, 983184.3, -775412.86, 198058214, -209099.40000000002, 723766.9099999999, 201466130);
+WITH cte_Reg AS (SELECT 1) INSERT OR REPLACE INTO t_v5p1dKQfgP (c_Lib10, c_pOY9LN3, c_dCbcoNPRTX, c_8nly, c_DKB8ln, c_tRUZBH0vJ, c_c9bArN, c_pfi4s8, c_lYoz0) VALUES (93217303, -609370.9999, 94622891, -708264.3, 345964.743608, 97258985, -746468.418432, -78509.769, 102041601), (193550445, -688071.441, 194900829, 1141868.5899999999, 201166.144, 198388010, 1095426.4, -501142.64, 200959502);
+INSERT OR IGNORE INTO t_hOFtcMkxo (c_dgay, c_aYW3, c_GbF, c_NcmIBqh, c_cFWGjBIW7, c_GanDWV, c_SBs) VALUES (93119908, 80185.553, 94407123, 95401677, 96617368, 98894400, 98901074), (192899371, -559038.4581, 194827192, 195629357, 197318001, 198560831, 200134002);
+INSERT OR ABORT INTO t_v5p1dKQfgP DEFAULT VALUES;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_hOFtcMkxo LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_hL0l8ACO SET c_0UKh4I = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_hL0l8ACO);
+INSERT OR REPLACE INTO t_hL0l8ACO (c_8X7, c_0PYDKNJlae, c_0UKh4I, c_eb6v8t0Z3U, c_r7kiv9L6X, c_9rRqs9nrz) VALUES (-401171.97549, 1039713.027717, 94280268, 153689.77180699998, 'wN7Z_9718', 4755.87977);
+INSERT OR IGNORE INTO t_hL0l8ACO (c_8X7, c_0PYDKNJlae, c_0UKh4I, c_eb6v8t0Z3U, c_r7kiv9L6X, c_9rRqs9nrz) VALUES (553828.3, 268962.68559999997, 95835373, -426854.324, 'jeUWTO7aNZ6_9718', -457169.66099999996);
+COMMIT;
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_MnjZO4e
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+SELECT t_hL0l8ACO.c_0PYDKNJlae as t_hL0l8ACO_val, t_MnjZO4e.c_nsNx as t_MnjZO4e_val, t_6UeJayEVZT.c_ez1A4HV as t_6UeJayEVZT_val
+FROM t_hL0l8ACO
+LEFT JOIN t_MnjZO4e ON t_hL0l8ACO.ROWID = t_MnjZO4e.ROWID
+LEFT JOIN t_6UeJayEVZT ON t_hL0l8ACO.ROWID = t_6UeJayEVZT.ROWID
+WHERE t_6UeJayEVZT.c_N0PAhrtxE IS NOT NULL
+ORDER BY t_hL0l8ACO.c_0PYDKNJlae
+LIMIT 20;
+WITH cte_qbO AS (SELECT * FROM t_v5p1dKQfgP LIMIT 10) SELECT *, t_hOFtcMkxo.c_dgay, t_hOFtcMkxo.c_aYW3, NULL AS alias_6PB, * FROM t_hOFtcMkxo JOIN t_MnjZO4e ON 1=1 CROSS JOIN t_6UeJayEVZT ORDER BY 1 LIMIT 83, 8;
+SELECT t_hL0l8ACO.c_0UKh4I FROM t_hL0l8ACO LIMIT 10;
+
+                SELECT DISTINCT t_6UeJayEVZT.c_N0PAhrtxE,
+                    COUNT(*) OVER (PARTITION BY t_6UeJayEVZT.c_PmgQT) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_6UeJayEVZT.c_N0PAhrtxE) IN ('null') THEN 0 
+                            ELSE t_6UeJayEVZT.c_N0PAhrtxE END DESC,
+                            t_6UeJayEVZT.c_PmgQT ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_6UeJayEVZT.c_N0PAhrtxE IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_6UeJayEVZT
+                WHERE t_6UeJayEVZT.c_N0PAhrtxE IS NOT NULL
+                GROUP BY t_6UeJayEVZT.c_N0PAhrtxE, t_6UeJayEVZT.c_PmgQT
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_6UeJayEVZT.c_N0PAhrtxE ASC, t_6UeJayEVZT.c_PmgQT ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_6UeJayEVZT.c_N0PAhrtxE,
+                    t_6UeJayEVZT.c_PmgQT,
+                    SUM(CASE WHEN typeof(t_6UeJayEVZT.c_N0PAhrtxE) IN ('integer', 'real', 'numeric') THEN t_6UeJayEVZT.c_N0PAhrtxE ELSE 0 END) 
+                        OVER (PARTITION BY t_6UeJayEVZT.c_PmgQT ORDER BY t_6UeJayEVZT.c_N0PAhrtxE ASC) as window_total
+                FROM t_6UeJayEVZT
+                GROUP BY t_6UeJayEVZT.c_N0PAhrtxE, t_6UeJayEVZT.c_PmgQT
+                HAVING SUM(CASE WHEN typeof(t_6UeJayEVZT.c_N0PAhrtxE) IN ('integer', 'real', 'numeric') THEN t_6UeJayEVZT.c_N0PAhrtxE ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_6UeJayEVZT.c_N0PAhrtxE ASC, t_6UeJayEVZT.c_PmgQT ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+2|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+3|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+4|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+5|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+6|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+94280268
+94284631
+95554065
+95623367
+95835373
+95879917
+194671619
+195429002
+95318880|1|5|Known
+95641672|1|4|Known
+95948988|1|3|Known
+95963071|1|2|Known
+195709174|1|1|Known
+195709174|202391115|195709174
+95963071|102432941|95963071
+95948988|101532163|95948988
+95641672|102164280|95641672
+95318880|102602844|95318880
+
+ERR:
+Error: near line 33: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+2|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+3|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+4|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+5|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+6|1|text|[3,4,5]|6|1.0|[1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text"}
+94280268
+94284631
+95554065
+95623367
+95835373
+95879917
+194671619
+195429002
+95318880|1|5|Known
+95641672|1|4|Known
+95948988|1|3|Known
+95963071|1|2|Known
+195709174|1|1|Known
+195709174|202391115|195709174
+95963071|102432941|95963071
+95948988|101532163|95948988
+95641672|102164280|95641672
+95318880|102602844|95318880
+
+ERR:
+Runtime error near line 33: datatype mismatch (20)
+

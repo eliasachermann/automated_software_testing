@@ -1,0 +1,53 @@
+SQL:
+PRAGMA count_changes;
+CREATE TABLE IF NOT EXISTS t_LQh7eCUjpa (c_mnbwChn INTEGER, PRIMARY KEY (c_mnbwChn), UNIQUE (c_mnbwChn));
+REPLACE INTO t_LQh7eCUjpa (c_mnbwChn) VALUES (93544489), (193116021);
+REPLACE INTO t_LQh7eCUjpa (c_mnbwChn) VALUES (93646058);
+INSERT OR REPLACE INTO t_LQh7eCUjpa (c_mnbwChn) VALUES (91822102), (193710244);
+INSERT OR IGNORE INTO t_LQh7eCUjpa (c_mnbwChn) SELECT 93146022;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_LQh7eCUjpa LIMIT 1;
+            
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_0) 
+                WHERE col_0 IN (
+                    SELECT (ROW_NUMBER() OVER()) FROM (VALUES (NULL))
+                )
+            );
+WITH cte_CUH AS (SELECT * FROM t_LQh7eCUjpa LIMIT 10) SELECT EXISTS (SELECT 1 FROM t_LQh7eCUjpa LIMIT 1) AS alias_K06, c_mnbwChn, c_mnbwChn FROM t_LQh7eCUjpa INTERSECT SELECT t_LQh7eCUjpa.c_mnbwChn, t_LQh7eCUjpa.c_mnbwChn, c_mnbwChn FROM t_LQh7eCUjpa WHERE CASE ~ t_LQh7eCUjpa.c_mnbwChn WHEN t_LQh7eCUjpa.c_mnbwChn THEN CASE 'AXI0HApBkd' WHEN t_LQh7eCUjpa.c_mnbwChn THEN FALSE END WHEN (t_LQh7eCUjpa.c_mnbwChn OR TRUE) THEN (t_LQh7eCUjpa.c_mnbwChn % t_LQh7eCUjpa.c_mnbwChn) WHEN ~ t_LQh7eCUjpa.c_mnbwChn THEN NOT t_LQh7eCUjpa.c_mnbwChn ELSE t_LQh7eCUjpa.c_mnbwChn END GROUP BY c_mnbwChn ORDER BY 2 ASC;
+SELECT t_LQh7eCUjpa.c_mnbwChn FROM t_LQh7eCUjpa LIMIT 10;
+SELECT t_LQh7eCUjpa.c_mnbwChn FROM t_LQh7eCUjpa LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+0
+1|array|[1,2,3]|{"key":"value"}
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+0
+1|array|[1,2,3]|{"key":"value"}
+1
+91822102
+93146022
+93544489
+93646058
+193116021
+193710244
+91822102
+93146022
+93544489
+93646058
+193116021
+193710244
+
+ERR:
+

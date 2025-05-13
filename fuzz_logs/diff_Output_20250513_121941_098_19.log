@@ -1,0 +1,97 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_NHAXl9iI0O (c_0IvZo INTEGER, c_Qqsu NUMERIC, c_TvfRhKb4M REAL, c_5b2EOLJS TEXT, c_K1FLabmGd INTEGER, c_qEGxbU2Dfj REAL, c_YJC REAL, c_6QmV4oI4 REAL, c_DT5caB TEXT, c_EBqX8IqG38 INTEGER);
+WITH cte_U9X AS (SELECT 1) INSERT OR REPLACE INTO t_NHAXl9iI0O (c_0IvZo, c_Qqsu, c_TvfRhKb4M, c_5b2EOLJS, c_K1FLabmGd, c_qEGxbU2Dfj, c_YJC, c_6QmV4oI4, c_DT5caB, c_EBqX8IqG38) SELECT 86995065, 87957612, 709534.28428, 'vOBku6g4c24ulhOtS_9080', 91023962, -111418.70000000001, 902267.602, 145073.7391, 'WgdAMGND8CqIlp_9580', 96783450;
+INSERT OR IGNORE INTO t_NHAXl9iI0O (c_0IvZo, c_Qqsu, c_TvfRhKb4M, c_5b2EOLJS, c_K1FLabmGd, c_qEGxbU2Dfj, c_YJC, c_6QmV4oI4, c_DT5caB, c_EBqX8IqG38) VALUES (87172264, 89341129, -354863.16359, 'jhDelSYM11dpyGXBr9_9080', 92224173, 697993.7, 503975.9, -394871.832, 'gtT6tddb9sTP_9580', 96498154);
+REPLACE INTO t_NHAXl9iI0O (c_0IvZo, c_Qqsu, c_TvfRhKb4M, c_5b2EOLJS, c_K1FLabmGd, c_qEGxbU2Dfj, c_YJC, c_6QmV4oI4, c_DT5caB, c_EBqX8IqG38) VALUES (88452571, 88718798, -724724.1, 'IwsXgic_9080', 91582407, -275006.91733, -476739.31999999995, 784426.815063, '3tY0MJS8KD1sZVgCIBwH_9580', 97102371);
+REPLACE INTO t_NHAXl9iI0O (c_0IvZo, c_Qqsu, c_TvfRhKb4M, c_5b2EOLJS, c_K1FLabmGd, c_qEGxbU2Dfj, c_YJC, c_6QmV4oI4, c_DT5caB, c_EBqX8IqG38) VALUES (88528453, 89786557, 175831.8209, 'TTklZC0C00tAUL1D_9080', 91757749, 8290.100000000006, 1088546.07904, 831441.0, 'mJ_9580', 96423068);
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_NHAXl9iI0O LIMIT 1;
+            
+
+                SELECT c_Qqsu, c_0IvZo,
+                    ROW_NUMBER() OVER (PARTITION BY c_0IvZo) as row_num,
+                    RANK() OVER (PARTITION BY c_0IvZo ORDER BY c_Qqsu) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_0IvZo ORDER BY c_Qqsu) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_Qqsu) IN ('integer','real') THEN c_Qqsu ELSE 0 END) 
+                        OVER (PARTITION BY c_0IvZo ORDER BY c_Qqsu 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_Qqsu) IN ('integer','real') THEN c_Qqsu ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_0IvZo ORDER BY c_Qqsu) as prev_value,
+                    LEAD(CASE WHEN typeof(c_Qqsu) IN ('integer','real') THEN c_Qqsu ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_0IvZo ORDER BY c_Qqsu) as next_value
+                FROM t_NHAXl9iI0O
+                ORDER BY c_0IvZo, c_Qqsu
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_YJC,
+                        (SELECT COUNT(*) FROM t_NHAXl9iI0O t2 WHERE t2.c_YJC = t1.c_YJC) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_NHAXl9iI0O t3 WHERE t3.c_YJC > t1.c_YJC LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_YJC FROM t_NHAXl9iI0O
+                        )) as distinct_values_count
+                    FROM t_NHAXl9iI0O t1
+                    WHERE t1.c_YJC IN (
+                        SELECT c_YJC 
+                        FROM t_NHAXl9iI0O 
+                        WHERE typeof(c_YJC) NOT IN ('null')
+                        GROUP BY c_YJC
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_NHAXl9iI0O t4 WHERE t4.c_YJC = t1.c_YJC) DESC
+                    LIMIT 10;
+                    
+SELECT (PRINTF(t_NHAXl9iI0O.c_DT5caB, t_NHAXl9iI0O.c_EBqX8IqG38, t_NHAXl9iI0O.c_TvfRhKb4M) / ~ -291251) AS alias_rqj, t_NHAXl9iI0O.c_YJC, CASE WHEN t_NHAXl9iI0O.c_TvfRhKb4M THEN c_YJC WHEN c_TvfRhKb4M THEN LOWER(t_NHAXl9iI0O.c_K1FLabmGd) ELSE TRUE END, FALSE AS alias_Wfk FROM t_NHAXl9iI0O WHERE EXISTS (SELECT 1 FROM t_NHAXl9iI0O LIMIT 1) ORDER BY 1 LIMIT 99;
+SELECT t_NHAXl9iI0O.c_qEGxbU2Dfj, LENGTH(t_NHAXl9iI0O.c_qEGxbU2Dfj) AS computed_c_qEGxbU2Dfj FROM t_NHAXl9iI0O ORDER BY t_NHAXl9iI0O.c_qEGxbU2Dfj DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+87957612|86995065|1|1|1|87957612|0|0
+89341129|87172264|1|1|1|89341129|0|0
+88718798|88452571|1|1|1|88718798|0|0
+89786557|88528453|1|1|1|89786557|0|0
+902267.602|1|Not Max|4
+503975.9|1|Not Max|4
+-476739.32|1|Not Max|4
+1088546.07904|1|Max|4
+0|902267.602|902267.602|0
+0|503975.9|503975.9|0
+0|1088546.07904|1088546.07904|0
+1.03004291845494e-05|-476739.32|-476739.32|0
+697993.7|8
+8290.10000000001|16
+-111418.7|9
+-275006.91733|13
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+87957612|86995065|1|1|1|87957612|0|0
+89341129|87172264|1|1|1|89341129|0|0
+88718798|88452571|1|1|1|88718798|0|0
+89786557|88528453|1|1|1|89786557|0|0
+902267.602|1|Not Max|4
+503975.9|1|Not Max|4
+-476739.32|1|Not Max|4
+1088546.07904|1|Max|4
+0|902267.602|902267.602|0
+0|503975.9|503975.9|0
+0|-476739.32|-476739.32|0
+0|1088546.07904|1088546.07904|0
+697993.7|8
+8290.10000000001|16
+-111418.7|9
+-275006.91733|13
+
+ERR:
+

@@ -1,0 +1,95 @@
+SQL:
+CREATE TEMP TABLE t_olFp (c_CaaG1sjT INTEGER PRIMARY KEY, c_SDKlHw NUMERIC);
+
+                CREATE TRIGGER trg_9oNGY
+                AFTER INSERT ON t_olFp
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_olFp) > 1000;
+                END;
+INSERT OR IGNORE INTO t_olFp (c_CaaG1sjT, c_SDKlHw) VALUES (86408662, 87533158), (186378591, 187490312);
+INSERT OR REPLACE INTO t_olFp (c_CaaG1sjT, c_SDKlHw) VALUES (86975165, 88609315), (187346539, 188604153);
+INSERT OR IGNORE INTO t_olFp (c_CaaG1sjT, c_SDKlHw) VALUES (87884564, 87031741);
+INSERT OR REPLACE INTO t_olFp (c_CaaG1sjT, c_SDKlHw) VALUES (86562596, 87981441);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_olFp SET c_CaaG1sjT = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_olFp);
+UPDATE OR IGNORE t_olFp SET c_CaaG1sjT = 796 WHERE ROWID = (SELECT MIN(ROWID) FROM t_olFp);
+COMMIT;
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_olFp (c_CaaG1sjT, c_SDKlHw) VALUES (87864351, 88079959), (186491414, 187538854);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_olFp SET c_CaaG1sjT = -443 WHERE ROWID = (SELECT MIN(ROWID) FROM t_olFp);
+UPDATE OR IGNORE t_olFp SET c_SDKlHw = 648 WHERE ROWID = (SELECT MIN(ROWID) FROM t_olFp);
+INSERT OR IGNORE INTO t_olFp (c_CaaG1sjT, c_SDKlHw) VALUES (86487021, 87749714);
+COMMIT;
+
+                    SELECT 
+                        t1.c_SDKlHw,
+                        (SELECT COUNT(*) FROM t_olFp t2 WHERE t2.c_SDKlHw = t1.c_SDKlHw) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_olFp t3 WHERE t3.c_SDKlHw > t1.c_SDKlHw LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_SDKlHw FROM t_olFp
+                        )) as distinct_values_count
+                    FROM t_olFp t1
+                    WHERE t1.c_SDKlHw IN (
+                        SELECT c_SDKlHw 
+                        FROM t_olFp 
+                        WHERE typeof(c_SDKlHw) NOT IN ('null')
+                        GROUP BY c_SDKlHw
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_olFp t4 WHERE t4.c_SDKlHw = t1.c_SDKlHw) DESC
+                    LIMIT 10;
+                    
+SELECT t_olFp.c_CaaG1sjT, t_olFp.c_SDKlHw, ABS(t_olFp.c_CaaG1sjT) AS computed_c_CaaG1sjT FROM t_olFp LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+648|1|Not Max|9
+87749714|1|Not Max|9
+87981441|1|Not Max|9
+88609315|1|Not Max|9
+88079959|1|Not Max|9
+87031741|1|Not Max|9
+187490312|1|Not Max|9
+187538854|1|Not Max|9
+188604153|1|Max|9
+-443|648|443
+86487021|87749714|86487021
+86562596|87981441|86562596
+86975165|88609315|86975165
+87864351|88079959|87864351
+87884564|87031741|87884564
+186378591|187490312|186378591
+186491414|187538854|186491414
+187346539|188604153|187346539
+
+ERR:
+Error: near line 13: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+648|1|Not Max|9
+87749714|1|Not Max|9
+87981441|1|Not Max|9
+88609315|1|Not Max|9
+88079959|1|Not Max|9
+87031741|1|Not Max|9
+187490312|1|Not Max|9
+187538854|1|Not Max|9
+188604153|1|Max|9
+-443|648|443
+86487021|87749714|86487021
+86562596|87981441|86562596
+86975165|88609315|86975165
+87864351|88079959|87864351
+87884564|87031741|87884564
+186378591|187490312|186378591
+186491414|187538854|186491414
+187346539|188604153|187346539
+
+ERR:
+Runtime error near line 13: datatype mismatch (20)
+

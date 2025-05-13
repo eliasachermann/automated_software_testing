@@ -1,0 +1,76 @@
+SQL:
+CREATE TEMP TABLE t_Nm21n3O (c_uvS REAL, PRIMARY KEY (c_uvS), FOREIGN KEY (c_uvS) REFERENCES t_RpGNX(c_uygrL)) WITHOUT ROWID;
+INSERT OR REPLACE INTO t_Nm21n3O (c_uvS) VALUES (-319846.00269);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_Nm21n3O SET c_uvS = NULL WHERE c_uvS IS NOT NULL;
+UPDATE OR IGNORE t_Nm21n3O SET c_uvS = -477 WHERE c_uvS IS NOT NULL;
+REPLACE INTO t_Nm21n3O (c_uvS) VALUES (972770.8), (-387841.30000000005);
+COMMIT;
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_Nm21n3O (c_uvS) VALUES (592823.90559);
+UPDATE OR IGNORE t_Nm21n3O SET c_uvS = 746 WHERE c_uvS IS NOT NULL;
+UPDATE OR IGNORE t_Nm21n3O SET c_uvS = NULL WHERE c_uvS IS NOT NULL;
+COMMIT;
+BEGIN TRANSACTION;
+INSERT OR REPLACE INTO t_Nm21n3O (c_uvS) VALUES (1085538.7476), (-284978.0692);
+COMMIT;
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_Nm21n3O
+            LIMIT 1;
+            
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_K) 
+                WHERE col_K IN (
+                    SELECT (DENSE_RANK() OVER(ORDER BY 1 ASC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)) FROM (VALUES (FALSE))
+                )
+            );
+SELECT t_Nm21n3O.c_uvS, LOWER(t_Nm21n3O.c_uvS) AS computed_c_uvS FROM t_Nm21n3O ORDER BY t_Nm21n3O.c_uvS DESC LIMIT 10;
+SELECT t_Nm21n3O.c_uvS FROM t_Nm21n3O ORDER BY t_Nm21n3O.c_uvS ASC LIMIT 10;
+SELECT DISTINCT ((t_Nm21n3O.c_uvS >> t_Nm21n3O.c_uvS) & - t_Nm21n3O.c_uvS) AS alias_GLJ, t_Nm21n3O.* FROM t_Nm21n3O ORDER BY 1 LIMIT 32;
+
+--- v3.26.0 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+1
+1085538.7476|1085538.7476
+972770.8|972770.8
+592823.90559|592823.90559
+746.0|746.0
+-477.0|-477.0
+-284978.0692|-284978.0692
+-284978.0692
+-477.0
+746.0
+592823.90559
+972770.8
+1085538.7476
+0|-284978.0692
+0|-477.0
+0|746.0
+0|592823.90559
+0|972770.8
+0|1085538.7476
+
+ERR:
+

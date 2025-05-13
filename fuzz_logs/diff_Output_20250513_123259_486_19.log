@@ -1,0 +1,105 @@
+SQL:
+PRAGMA defer_foreign_keys;
+CREATE TABLE IF NOT EXISTS t_QgI6SM2QB (c_JY0PX INTEGER, PRIMARY KEY (c_JY0PX));
+CREATE TABLE IF NOT EXISTS t_tPBEwI (c_gOzqYc REAL, c_j11wbA NUMERIC DEFAULT NULL, c_o07fEqmQ NUMERIC PRIMARY KEY, c_7G3smDEXc TEXT);
+CREATE TEMP TABLE IF NOT EXISTS t_J6ExT2QkYb (c_cc0 REAL DEFAULT 84567.2, c_pjJLONfx NUMERIC, c_Qf4imI1bXK NUMERIC, c_P5Pxcl NUMERIC, c_a2qQ TEXT, c_sxuyuIXq INTEGER, c_g4vep1 INTEGER, c_VDCJkgo5r TEXT, c_8hSJE REAL, c_4S0xF INTEGER DEFAULT -18301);
+CREATE TEMP TABLE IF NOT EXISTS t_DV4baovf (c_R9Ps819 REAL, c_nvo4cvK TEXT PRIMARY KEY, c_Xs2gp TEXT, c_LbhfC REAL, c_UPxB REAL, c_kX8ea INTEGER, c_ZyUOWM TEXT, c_cRj5nj6Bo NUMERIC);
+ALTER TABLE t_DV4baovf RENAME COLUMN c_LbhfC TO c_48Ggg6y6C;
+ALTER TABLE t_tPBEwI RENAME COLUMN c_o07fEqmQ TO c_xRA;
+ALTER TABLE t_QgI6SM2QB RENAME TO t_BkU4C;
+INSERT OR IGNORE INTO t_tPBEwI (c_gOzqYc, c_j11wbA, c_xRA, c_7G3smDEXc) SELECT 29498.788073000003, 96793627, 97966401, '2Aef0uv6L7nHcmylQ_9878';
+REPLACE INTO t_tPBEwI (c_gOzqYc, c_j11wbA, c_xRA, c_7G3smDEXc) VALUES (-450792.985, 97604765, 98772910, '0OWzOR_9878'), (401380.417, 196768888, 197917443, 'lnz6hjvluKq8I5LY_19878');
+REPLACE INTO t_J6ExT2QkYb (c_cc0, c_pjJLONfx, c_Qf4imI1bXK, c_P5Pxcl, c_a2qQ, c_sxuyuIXq, c_g4vep1, c_VDCJkgo5r, c_8hSJE, c_4S0xF) SELECT -266369.99, 95968973, 98604351, 99441845, 'nJEgR0ycK4RgquyI_9978', 100853176, 101775574, 'HhqXT10ZE_10278', -431462.20466499997, 105001117;
+INSERT OR REPLACE INTO t_J6ExT2QkYb (c_cc0, c_pjJLONfx, c_Qf4imI1bXK, c_P5Pxcl, c_a2qQ, c_sxuyuIXq, c_g4vep1, c_VDCJkgo5r, c_8hSJE, c_4S0xF) VALUES (753525.3, 96316185, 98381308, 99045191, 'hFaqHxExtb_9978', 101246229, 102381153, 'NYClrbPOZLg8jLHQRNxW_10278', 391863.86, 104394437);
+INSERT OR IGNORE INTO t_J6ExT2QkYb (c_cc0, c_pjJLONfx, c_Qf4imI1bXK, c_P5Pxcl, c_a2qQ, c_sxuyuIXq, c_g4vep1, c_VDCJkgo5r, c_8hSJE, c_4S0xF) VALUES (550040.25, 95935373, 97945082, 98225604, 'BtcCjrOMidKU8fDQO_9978', 101284153, 101289678, '4RzgazsgNNzj_10278', -39678.976200000005, 105663832);
+INSERT OR IGNORE INTO t_DV4baovf (c_R9Ps819, c_nvo4cvK, c_Xs2gp, c_48Ggg6y6C, c_UPxB, c_kX8ea, c_ZyUOWM, c_cRj5nj6Bo) VALUES (74716.501, 'h_9678', 'kH1qsn_9778', 321247.33999999997, -803303.88694, 101052241, 'jyn0RnIcg_10178', 103052698), (-743932.7497, 'C5F6Xd_19678', 'AULvCOXskdWXB_19778', 586955.4474, 933220.3643, 200393190, 'NoBGs7gG_20178', 202430094);
+INSERT OR IGNORE INTO t_BkU4C (c_JY0PX) VALUES (95136758), (195577748);
+INSERT OR IGNORE INTO t_BkU4C (c_JY0PX) VALUES (95629050), (195945431);
+INSERT OR REPLACE INTO t_BkU4C (c_JY0PX) SELECT 95235799;
+INSERT INTO t_J6ExT2QkYb DEFAULT VALUES;
+INSERT OR REPLACE INTO t_BkU4C DEFAULT VALUES;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_tPBEwI LIMIT 1;
+            
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_DV4baovf
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_j11wbA,
+                        (SELECT COUNT(*) FROM t_tPBEwI t2 WHERE t2.c_j11wbA = t1.c_j11wbA) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_tPBEwI t3 WHERE t3.c_j11wbA > t1.c_j11wbA LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_j11wbA FROM t_tPBEwI
+                        )) as distinct_values_count
+                    FROM t_tPBEwI t1
+                    WHERE t1.c_j11wbA IN (
+                        SELECT c_j11wbA 
+                        FROM t_tPBEwI 
+                        WHERE typeof(c_j11wbA) NOT IN ('null')
+                        GROUP BY c_j11wbA
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_tPBEwI t4 WHERE t4.c_j11wbA = t1.c_j11wbA) DESC
+                    LIMIT 10;
+                    
+SELECT t_DV4baovf.c_nvo4cvK as t_DV4baovf_val, t_BkU4C.c_JY0PX as t_BkU4C_val, t_J6ExT2QkYb.c_sxuyuIXq as t_J6ExT2QkYb_val
+FROM t_DV4baovf
+LEFT OUTER JOIN t_BkU4C ON t_DV4baovf.ROWID = t_BkU4C.ROWID
+LEFT OUTER JOIN t_J6ExT2QkYb ON t_DV4baovf.ROWID = t_J6ExT2QkYb.ROWID
+WHERE t_DV4baovf.c_kX8ea IS NOT NULL
+ORDER BY t_DV4baovf.c_nvo4cvK
+LIMIT 20;
+SELECT t_BkU4C.c_JY0PX, CASE CASE WHEN t_J6ExT2QkYb.c_VDCJkgo5r THEN t_BkU4C.c_JY0PX ELSE x'671B' END WHEN -916051 THEN CASE t_J6ExT2QkYb.c_P5Pxcl WHEN t_J6ExT2QkYb.c_cc0 THEN TRUE WHEN t_BkU4C.c_JY0PX THEN 577586 WHEN t_BkU4C.c_JY0PX THEN t_DV4baovf.c_ZyUOWM ELSE t_DV4baovf.c_R9Ps819 END WHEN (-618204 >> 692536) THEN (t_DV4baovf.c_ZyUOWM IS t_J6ExT2QkYb.c_sxuyuIXq) ELSE TRUE END AS alias_b1t FROM t_J6ExT2QkYb, t_DV4baovf, t_BkU4C INTERSECT SELECT t_J6ExT2QkYb.c_Qf4imI1bXK, (TRUE * (TRUE | t_DV4baovf.c_UPxB)) FROM t_J6ExT2QkYb NATURAL JOIN t_tPBEwI NATURAL JOIN t_DV4baovf WHERE FALSE ORDER BY 2 DESC LIMIT 87;
+SELECT t_tPBEwI.*, t_DV4baovf.c_UPxB, *, EXISTS (SELECT 1 FROM t_DV4baovf LIMIT 1) AS alias_LdX FROM t_DV4baovf NATURAL LEFT JOIN t_tPBEwI GROUP BY c_48Ggg6y6C HAVING c_Xs2gp IN (SELECT t_DV4baovf.c_Xs2gp FROM t_DV4baovf LIMIT 5) ORDER BY 4 DESC;
+
+--- v3.26.0 ---
+OUT:
+0
+1|array|[1,2,3]|{"key":"value"}
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+96793627|1|Not Max|3
+97604765|1|Not Max|3
+196768888|1|Max|3
+C5F6Xd_19678||101246229
+h_9678||100853176
+29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|-803303.88694|74716.501|h_9678|kH1qsn_9778|321247.34|-803303.88694|101052241|jyn0RnIcg_10178|103052698|29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|1
+29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|933220.3643|-743932.7497|C5F6Xd_19678|AULvCOXskdWXB_19778|586955.4474|933220.3643|200393190|NoBGs7gG_20178|202430094|29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|1
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+0
+1|array|[1,2,3]|{"key":"value"}
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+96793627|1|Not Max|3
+97604765|1|Not Max|3
+196768888|1|Max|3
+C5F6Xd_19678||101246229
+h_9678||100853176
+29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|933220.3643|-743932.7497|C5F6Xd_19678|AULvCOXskdWXB_19778|586955.4474|933220.3643|200393190|NoBGs7gG_20178|202430094|29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|1
+29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|-803303.88694|74716.501|h_9678|kH1qsn_9778|321247.34|-803303.88694|101052241|jyn0RnIcg_10178|103052698|29498.788073|96793627|97966401|2Aef0uv6L7nHcmylQ_9878|1
+
+ERR:
+

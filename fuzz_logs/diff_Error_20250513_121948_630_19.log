@@ -1,0 +1,123 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_CeLfs (c_0ZNLPfMXs TEXT, c_6Y3u REAL, c_I6G2 REAL, c_1Z3Pwtvl NUMERIC, c_CW7hGJ INTEGER PRIMARY KEY, c_15yIo NUMERIC, c_Vy5nQ TEXT DEFAULT 'oPtr', c_B80ym REAL DEFAULT 75375.34067, UNIQUE (c_I6G2, c_B80ym));
+CREATE TABLE IF NOT EXISTS t_B5XgQ (c_yRigtWfD7 TEXT, c_JWorP INTEGER, c_2WrO2wQ47 TEXT, c_KVk NUMERIC PRIMARY KEY, FOREIGN KEY (c_KVk) REFERENCES t_biXfO(c_dp1dG));
+
+                CREATE TRIGGER trg_iwn5f
+                BEFORE DELETE ON t_CeLfs
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_CeLfs) > 1000;
+                END;
+
+                CREATE TRIGGER trg_sxr2U
+                AFTER UPDATE OF c_yRigtWfD7, c_JWorP ON t_B5XgQ
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_B5XgQ) > 1000;
+                END;
+INSERT OR IGNORE INTO t_CeLfs (c_0ZNLPfMXs, c_6Y3u, c_I6G2, c_1Z3Pwtvl, c_CW7hGJ, c_15yIo, c_Vy5nQ, c_B80ym) VALUES ('WiPnuLyTOH6trF87Wp0d_8787', 542117.9099999999, -147217.1, 91823035, 91537341, 93848789, 'TtC6BvX0SAtHBUDBDFfG_9387', -521281.9872);
+INSERT OR IGNORE INTO t_B5XgQ (c_yRigtWfD7, c_JWorP, c_2WrO2wQ47, c_KVk) VALUES ('QKcU8lVyP8hmL8G_8787', 89200712, '0M6QxaWnQIfS0Ae5mO_8987', 91283378);
+REPLACE INTO t_B5XgQ (c_yRigtWfD7, c_JWorP, c_2WrO2wQ47, c_KVk) SELECT 'wPCmMSnV3Wxsz_8787', 89747563, 'S2zUuLeWfByshn2ltN8E_8987', 91732923;
+WITH cte_g3Y AS (SELECT 1) INSERT OR IGNORE INTO t_B5XgQ (c_yRigtWfD7, c_JWorP, c_2WrO2wQ47, c_KVk) VALUES ('b9Hy0j_8787', 88875406, 'eEBT6Q7lQZo7Ri4nXRR_8987', 90455273), ('W0P7_18787', 188411499, 'RTXYLMS_18987', 191055054);
+REPLACE INTO t_B5XgQ (c_yRigtWfD7, c_JWorP, c_2WrO2wQ47, c_KVk) SELECT 'HzZclCZIeJnedrD7G02S_8787', 88490232, '9lHEasu5csjQi_8987', 90403930;
+REPLACE INTO t_B5XgQ (c_yRigtWfD7, c_JWorP, c_2WrO2wQ47, c_KVk) VALUES ('UyNtRFqM3ezY_8787', 88867621, '5CX1YYBVDxn4gAv9m_8987', 90900723), ('dN00qU_18787', 189443972, 'BcLT6I3Z_18987', 191139234);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_CeLfs SET c_CW7hGJ = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_CeLfs);
+INSERT OR REPLACE INTO t_CeLfs (c_0ZNLPfMXs, c_6Y3u, c_I6G2, c_1Z3Pwtvl, c_CW7hGJ, c_15yIo, c_Vy5nQ, c_B80ym) VALUES ('NpJeyoPUrT9DMdWX_8787', 933076.904176, -369991.14475, 90960217, 92803151, 92696361, 'lIP8KxUwzUdJ_9387', 1000547.5539), ('usw0Vs3Eu6f7ky3LKeYM_18787', 685296.0, 649415.4, 190738745, 190883878, 193038407, 'KYCMO8jy_19387', -526267.1718);
+REPLACE INTO t_CeLfs (c_0ZNLPfMXs, c_6Y3u, c_I6G2, c_1Z3Pwtvl, c_CW7hGJ, c_15yIo, c_Vy5nQ, c_B80ym) VALUES ('CWZwhO_8787', -340860.5964, -280279.5578, 91032429, 92250594, 92301395, 'QfNagcSGGSnOb093_9387', -683303.32021), ('IXOmvI9DExzIR9_18787', 691021.586, 248177.3086, 190543892, 192399548, 193084156, 'OnYbAd_19387', -690920.57354);
+COMMIT;
+
+                    SELECT 
+                        t1.c_Vy5nQ,
+                        (SELECT COUNT(*) FROM t_CeLfs t2 WHERE t2.c_Vy5nQ = t1.c_Vy5nQ) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_CeLfs t3 WHERE t3.c_Vy5nQ > t1.c_Vy5nQ LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_Vy5nQ FROM t_CeLfs
+                        )) as distinct_values_count
+                    FROM t_CeLfs t1
+                    WHERE t1.c_Vy5nQ IN (
+                        SELECT c_Vy5nQ 
+                        FROM t_CeLfs 
+                        WHERE typeof(c_Vy5nQ) NOT IN ('null')
+                        GROUP BY c_Vy5nQ
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_CeLfs t4 WHERE t4.c_Vy5nQ = t1.c_Vy5nQ) DESC
+                    LIMIT 10;
+                    
+SELECT t_B5XgQ.c_2WrO2wQ47, t_B5XgQ.c_KVk FROM t_B5XgQ LIMIT 10;
+
+                SELECT DISTINCT t_CeLfs.c_Vy5nQ,
+                    COUNT(*) OVER (PARTITION BY t_CeLfs.c_Vy5nQ) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_CeLfs.c_Vy5nQ) IN ('null') THEN 0 
+                            ELSE t_CeLfs.c_Vy5nQ END DESC,
+                            t_CeLfs.c_Vy5nQ ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_CeLfs.c_Vy5nQ IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_CeLfs
+                WHERE t_CeLfs.c_Vy5nQ IS NOT NULL
+                GROUP BY t_CeLfs.c_Vy5nQ, t_CeLfs.c_Vy5nQ
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_CeLfs.c_Vy5nQ ASC, t_CeLfs.c_Vy5nQ ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_CeLfs.c_Vy5nQ,
+                    t_CeLfs.c_Vy5nQ,
+                    SUM(CASE WHEN typeof(t_CeLfs.c_Vy5nQ) IN ('integer', 'real', 'numeric') THEN t_CeLfs.c_Vy5nQ ELSE 0 END) 
+                        OVER (PARTITION BY t_CeLfs.c_Vy5nQ ORDER BY t_CeLfs.c_Vy5nQ ASC) as window_total
+                FROM t_CeLfs
+                GROUP BY t_CeLfs.c_Vy5nQ, t_CeLfs.c_Vy5nQ
+                HAVING SUM(CASE WHEN typeof(t_CeLfs.c_Vy5nQ) IN ('integer', 'real', 'numeric') THEN t_CeLfs.c_Vy5nQ ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_CeLfs.c_Vy5nQ ASC, t_CeLfs.c_Vy5nQ ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+TtC6BvX0SAtHBUDBDFfG_9387|1|Not Max|5
+QfNagcSGGSnOb093_9387|1|Not Max|5
+lIP8KxUwzUdJ_9387|1|Max|5
+KYCMO8jy_19387|1|Not Max|5
+OnYbAd_19387|1|Not Max|5
+0M6QxaWnQIfS0Ae5mO_8987|91283378
+S2zUuLeWfByshn2ltN8E_8987|91732923
+eEBT6Q7lQZo7Ri4nXRR_8987|90455273
+RTXYLMS_18987|191055054
+9lHEasu5csjQi_8987|90403930
+5CX1YYBVDxn4gAv9m_8987|90900723
+BcLT6I3Z_18987|191139234
+KYCMO8jy_19387|1|5|Known
+OnYbAd_19387|1|4|Known
+QfNagcSGGSnOb093_9387|1|3|Known
+TtC6BvX0SAtHBUDBDFfG_9387|1|2|Known
+lIP8KxUwzUdJ_9387|1|1|Known
+
+ERR:
+Error: near line 22: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+TtC6BvX0SAtHBUDBDFfG_9387|1|Not Max|5
+QfNagcSGGSnOb093_9387|1|Not Max|5
+lIP8KxUwzUdJ_9387|1|Max|5
+KYCMO8jy_19387|1|Not Max|5
+OnYbAd_19387|1|Not Max|5
+0M6QxaWnQIfS0Ae5mO_8987|91283378
+S2zUuLeWfByshn2ltN8E_8987|91732923
+eEBT6Q7lQZo7Ri4nXRR_8987|90455273
+RTXYLMS_18987|191055054
+9lHEasu5csjQi_8987|90403930
+5CX1YYBVDxn4gAv9m_8987|90900723
+BcLT6I3Z_18987|191139234
+KYCMO8jy_19387|1|5|Known
+OnYbAd_19387|1|4|Known
+QfNagcSGGSnOb093_9387|1|3|Known
+TtC6BvX0SAtHBUDBDFfG_9387|1|2|Known
+lIP8KxUwzUdJ_9387|1|1|Known
+
+ERR:
+Runtime error near line 22: datatype mismatch (20)
+

@@ -1,0 +1,130 @@
+SQL:
+CREATE TEMP TABLE t_IiX (c_P3J4 REAL, PRIMARY KEY (c_P3J4), UNIQUE (c_P3J4));
+ALTER TABLE t_IiX ADD COLUMN c_dEKK INTEGER;
+ALTER TABLE t_IiX RENAME COLUMN c_P3J4 TO c_Lu88Qa;
+INSERT OR REPLACE INTO t_IiX (c_Lu88Qa, c_dEKK) VALUES (-904623.54, 92568189);
+INSERT OR REPLACE INTO t_IiX (c_Lu88Qa, c_dEKK) VALUES (-852996.493844, 94463355), (-425908.30000000005, 193210063);
+INSERT OR REPLACE INTO t_IiX (c_Lu88Qa, c_dEKK) VALUES (511446.690102, 93958548);
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_IiX LIMIT 1;
+            
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_IiX (c_Lu88Qa, c_dEKK) SELECT 37002.16422, 93494998;
+INSERT OR REPLACE INTO t_IiX (c_Lu88Qa, c_dEKK) VALUES (-403075.92, 92626993), (-418412.69999999995, 193804278);
+COMMIT;
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_dEKK,
+                        'col2', c_Lu88Qa
+                    ) as row_data
+                    FROM t_IiX
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_dEKK,
+                        (SELECT COUNT(*) FROM t_IiX t2 WHERE t2.c_dEKK = t1.c_dEKK) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_IiX t3 WHERE t3.c_dEKK > t1.c_dEKK LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_dEKK FROM t_IiX
+                        )) as distinct_values_count
+                    FROM t_IiX t1
+                    WHERE t1.c_dEKK IN (
+                        SELECT c_dEKK 
+                        FROM t_IiX 
+                        WHERE typeof(c_dEKK) NOT IN ('null')
+                        GROUP BY c_dEKK
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_IiX t4 WHERE t4.c_dEKK = t1.c_dEKK) DESC
+                    LIMIT 10;
+                    
+SELECT t_IiX.c_dEKK, t_IiX.c_Lu88Qa, LOWER(t_IiX.c_dEKK) AS computed_c_dEKK FROM t_IiX ORDER BY t_IiX.c_Lu88Qa ASC LIMIT 10;
+SELECT t_IiX.c_Lu88Qa, t_IiX.c_dEKK, ABS(t_IiX.c_Lu88Qa) AS computed_c_Lu88Qa FROM t_IiX ORDER BY t_IiX.c_Lu88Qa ASC LIMIT 10;
+SELECT t_IiX.c_dEKK, t_IiX.c_Lu88Qa FROM t_IiX ORDER BY t_IiX.c_dEKK ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+
+ERR:
+Error: near line 3: no such column: c_P3J4
+Error: near line 4: table t_IiX has no column named c_Lu88Qa
+Error: near line 5: table t_IiX has no column named c_Lu88Qa
+Error: near line 6: table t_IiX has no column named c_Lu88Qa
+Error: near line 15: table t_IiX has no column named c_Lu88Qa
+Error: near line 16: table t_IiX has no column named c_Lu88Qa
+Error: near line 19: no such column: c_Lu88Qa
+Error: near line 61: no such column: t_IiX.c_Lu88Qa
+Error: near line 62: no such column: t_IiX.c_Lu88Qa
+Error: near line 63: no such column: t_IiX.c_Lu88Qa
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|{"id":1,"col1":92568189,"col2":-904623.54}|92568189|-904623.54|["{\"id\":1,\"col1\":92568189,\"col2\":-904623.54}"]|object|col1|92568189|integer
+1|{"id":1,"col1":92568189,"col2":-904623.54}|92568189|-904623.54|["{\"id\":1,\"col1\":92568189,\"col2\":-904623.54}"]|object|col2|-904623.54|real
+1|{"id":1,"col1":92568189,"col2":-904623.54}|92568189|-904623.54|["{\"id\":1,\"col1\":92568189,\"col2\":-904623.54}"]|object|id|1|integer
+2|{"id":2,"col1":94463355,"col2":-852996.493844}|94463355|-852996.493844|["{\"id\":2,\"col1\":94463355,\"col2\":-852996.493844}"]|object|col1|94463355|integer
+2|{"id":2,"col1":94463355,"col2":-852996.493844}|94463355|-852996.493844|["{\"id\":2,\"col1\":94463355,\"col2\":-852996.493844}"]|object|col2|-852996.493844|real
+2|{"id":2,"col1":94463355,"col2":-852996.493844}|94463355|-852996.493844|["{\"id\":2,\"col1\":94463355,\"col2\":-852996.493844}"]|object|id|2|integer
+3|{"id":3,"col1":193210063,"col2":-425908.3}|193210063|-425908.3|["{\"id\":3,\"col1\":193210063,\"col2\":-425908.3}"]|object|col1|193210063|integer
+3|{"id":3,"col1":193210063,"col2":-425908.3}|193210063|-425908.3|["{\"id\":3,\"col1\":193210063,\"col2\":-425908.3}"]|object|col2|-425908.3|real
+3|{"id":3,"col1":193210063,"col2":-425908.3}|193210063|-425908.3|["{\"id\":3,\"col1\":193210063,\"col2\":-425908.3}"]|object|id|3|integer
+4|{"id":4,"col1":93958548,"col2":511446.690102}|93958548|511446.690102|["{\"id\":4,\"col1\":93958548,\"col2\":511446.690102}"]|object|col1|93958548|integer
+4|{"id":4,"col1":93958548,"col2":511446.690102}|93958548|511446.690102|["{\"id\":4,\"col1\":93958548,\"col2\":511446.690102}"]|object|col2|511446.690102|real
+4|{"id":4,"col1":93958548,"col2":511446.690102}|93958548|511446.690102|["{\"id\":4,\"col1\":93958548,\"col2\":511446.690102}"]|object|id|4|integer
+5|{"id":5,"col1":93494998,"col2":37002.16422}|93494998|37002.16422|["{\"id\":5,\"col1\":93494998,\"col2\":37002.16422}"]|object|col1|93494998|integer
+5|{"id":5,"col1":93494998,"col2":37002.16422}|93494998|37002.16422|["{\"id\":5,\"col1\":93494998,\"col2\":37002.16422}"]|object|col2|37002.16422|real
+5|{"id":5,"col1":93494998,"col2":37002.16422}|93494998|37002.16422|["{\"id\":5,\"col1\":93494998,\"col2\":37002.16422}"]|object|id|5|integer
+92568189|1|Not Max|7
+94463355|1|Not Max|7
+193210063|1|Not Max|7
+93958548|1|Not Max|7
+93494998|1|Not Max|7
+92626993|1|Not Max|7
+193804278|1|Max|7
+92568189|-904623.54|92568189
+94463355|-852996.493844|94463355
+193210063|-425908.3|193210063
+193804278|-418412.7|193804278
+92626993|-403075.92|92626993
+93494998|37002.16422|93494998
+93958548|511446.690102|93958548
+-904623.54|92568189|904623.54
+-852996.493844|94463355|852996.493844
+-425908.3|193210063|425908.3
+-418412.7|193804278|418412.7
+-403075.92|92626993|403075.92
+37002.16422|93494998|37002.16422
+511446.690102|93958548|511446.690102
+92568189|-904623.54
+92626993|-403075.92
+93494998|37002.16422
+93958548|511446.690102
+94463355|-852996.493844
+193210063|-425908.3
+193804278|-418412.7
+
+ERR:
+

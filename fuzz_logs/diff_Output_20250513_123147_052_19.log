@@ -1,0 +1,42 @@
+SQL:
+PRAGMA checkpoint_fullfsync;
+CREATE TABLE IF NOT EXISTS t_3caMO (c_z0wlaK6XQh REAL);
+CREATE TEMP TABLE IF NOT EXISTS t_Qd66 (c_tOi2S INTEGER DEFAULT NULL);
+
+                CREATE TRIGGER trg_HeuIT
+                BEFORE UPDATE OF c_z0wlaK6XQh ON t_3caMO
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_3caMO) > 1000;
+                END;
+INSERT OR REPLACE INTO t_3caMO (c_z0wlaK6XQh) SELECT 84414.06105;
+WITH cte_ZFm AS (SELECT 1) INSERT OR REPLACE INTO t_3caMO (c_z0wlaK6XQh) VALUES (-880997.54);
+REPLACE INTO t_3caMO (c_z0wlaK6XQh) VALUES (-838021.1), (703899.47843);
+WITH cte_9Mg AS (SELECT 1) INSERT OR REPLACE INTO t_Qd66 (c_tOi2S) VALUES (94108595);
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_u) 
+                WHERE col_u IN (
+                    SELECT (LAG(1, 1, 1) OVER(PARTITION BY 1 ORDER BY 1 DESC)) FROM (VALUES ('eNMfLcOn6OmRXVlZ'))
+                )
+            );
+SELECT c_z0wlaK6XQh FROM t_3caMO, t_Qd66 WHERE (c_tOi2S + - '70uGw') ORDER BY 1 LIMIT 73 OFFSET 6;
+SELECT t_Qd66.c_tOi2S FROM t_Qd66 ORDER BY t_Qd66.c_tOi2S DESC LIMIT 10;
+WITH cte_ceQ AS (SELECT * FROM t_Qd66 LIMIT 10) SELECT t_Qd66.c_tOi2S, t_3caMO.c_z0wlaK6XQh, c_z0wlaK6XQh FROM t_Qd66 LEFT JOIN t_3caMO ON t_Qd66.c_tOi2S = t_3caMO.c_z0wlaK6XQh UNION SELECT t_Qd66.c_tOi2S, c_tOi2S, (- t_Qd66.c_tOi2S = MAX(t_3caMO.c_z0wlaK6XQh)) FROM t_Qd66, t_3caMO WHERE EXISTS (SELECT 1 FROM t_Qd66 LIMIT 1) ORDER BY 2 ASC;
+
+--- v3.26.0 ---
+OUT:
+0
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+0
+1
+94108595
+94108595||
+94108595|94108595|0
+
+ERR:
+

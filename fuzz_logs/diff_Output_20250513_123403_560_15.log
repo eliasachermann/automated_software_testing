@@ -1,0 +1,137 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_PH612upjwC (c_RxBjmzZ REAL, c_QZzAfuai INTEGER, c_eEWkgVo TEXT);
+CREATE TABLE IF NOT EXISTS t_QTayxY3QU (c_AGBr6F5 REAL DEFAULT 606778.218311, c_N62GCgIK INTEGER, c_uvTioo2xtl NUMERIC, c_xOdtK NUMERIC, c_co8veb REAL, c_jPs7e REAL, c_dB4Un NUMERIC, c_SSo2i4TX TEXT PRIMARY KEY, c_krFog NUMERIC, c_Hx0 TEXT);
+CREATE TABLE t_05le (c_fQyabILBQ NUMERIC, c_dai5VEM NUMERIC, c_OAkdZKctM NUMERIC DEFAULT -91759, c_70kujX TEXT, c_Uljcyxxsuk NUMERIC, c_mBkg6z NUMERIC, c_8VRdGuni TEXT DEFAULT '2I1LM8b', c_YiqD NUMERIC, c_kMU NUMERIC);
+CREATE TEMP TABLE IF NOT EXISTS t_wzU (c_hVRWP TEXT);
+CREATE TABLE t_q2Pzvmmc3 (c_y2jBk TEXT, c_D8fcBD REAL, c_bw2sJ85CE NUMERIC, c_lk1VSZe94X NUMERIC PRIMARY KEY, c_qL27 REAL);
+ALTER TABLE t_q2Pzvmmc3 RENAME COLUMN c_bw2sJ85CE TO c_q5SJAyJu;
+ALTER TABLE t_wzU RENAME TO t_U7WiSqeWBK;
+
+                CREATE TRIGGER trg_4TDQm
+                AFTER DELETE ON t_QTayxY3QU
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_QTayxY3QU) > 1000;
+                END;
+
+                CREATE TRIGGER trg_b00Bs
+                AFTER UPDATE OF c_lk1VSZe94X, c_D8fcBD ON t_q2Pzvmmc3
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_q2Pzvmmc3) > 1000;
+                END;
+REPLACE INTO t_PH612upjwC (c_RxBjmzZ, c_QZzAfuai, c_eEWkgVo) VALUES (-688889.17, 98034876, 'MqoSCargBe_9841');
+INSERT OR REPLACE INTO t_PH612upjwC (c_RxBjmzZ, c_QZzAfuai, c_eEWkgVo) VALUES (-586135.77, 98194569, 'sHlLL1r3_9841'), (435224.41599999997, 196715861, 'SEqWv1UXwnIesN_19841');
+INSERT OR REPLACE INTO t_PH612upjwC (c_RxBjmzZ, c_QZzAfuai, c_eEWkgVo) VALUES (1021923.02, 98137300, 'nbm_9841');
+INSERT OR IGNORE INTO t_PH612upjwC (c_RxBjmzZ, c_QZzAfuai, c_eEWkgVo) SELECT 1090591.5185, 96551598, 'FiQ5occ4G_9841';
+INSERT OR IGNORE INTO t_PH612upjwC (c_RxBjmzZ, c_QZzAfuai, c_eEWkgVo) VALUES (-93917.82999999999, 98016808, '990gQqmHRR8P6mKe_9841');
+REPLACE INTO t_QTayxY3QU (c_AGBr6F5, c_N62GCgIK, c_uvTioo2xtl, c_xOdtK, c_co8veb, c_jPs7e, c_dB4Un, c_SSo2i4TX, c_krFog, c_Hx0) VALUES (1082.0207400000072, 96870181, 97985518, 98446663, -710104.1415, 633315.32, 101476126, 'QSOWmFFAtSzU6_10341', 104845947, '4QhNERJRpkJbJls_10541'), (578331.9650000001, 196556767, 197597584, 199736806, -365667.1, -482878.30000000005, 203142829, 'L2FzOvs6vRGkr_20341', 204548859, 'OOooZTvYJKK_20541');
+INSERT OR IGNORE INTO t_QTayxY3QU (c_AGBr6F5, c_N62GCgIK, c_uvTioo2xtl, c_xOdtK, c_co8veb, c_jPs7e, c_dB4Un, c_SSo2i4TX, c_krFog, c_Hx0) VALUES (39800.311185, 96430185, 98701728, 98716670, 167160.4, 798761.00659, 103363914, '7AOD8nZxX_10341', 103768252, 'QdY2pWT0CW4z_10541'), (-495917.64, 197530420, 197834397, 200091891, 21591.55600000001, -762032.26, 201964782, 'oro_20341', 203735169, '9dZTls1Jw27K7F_20541');
+WITH cte_YZb AS (SELECT 1) INSERT OR IGNORE INTO t_QTayxY3QU (c_AGBr6F5, c_N62GCgIK, c_uvTioo2xtl, c_xOdtK, c_co8veb, c_jPs7e, c_dB4Un, c_SSo2i4TX, c_krFog, c_Hx0) SELECT 870272.973, 97352204, 98975593, 98422256, 564710.9203, 892736.811, 102650471, 'uoZDENAmrKULDYopMwD_10341', 104737562, 'oGE6kgdf_10541';
+INSERT OR REPLACE INTO t_QTayxY3QU (c_AGBr6F5, c_N62GCgIK, c_uvTioo2xtl, c_xOdtK, c_co8veb, c_jPs7e, c_dB4Un, c_SSo2i4TX, c_krFog, c_Hx0) SELECT 430346.42161, 96840921, 98934673, 100322685, 339830.92645, -823951.3, 101723629, 'OJyUbIRX6KD2G_10341', 105054997, 'lL8BL_10541';
+REPLACE INTO t_QTayxY3QU (c_AGBr6F5, c_N62GCgIK, c_uvTioo2xtl, c_xOdtK, c_co8veb, c_jPs7e, c_dB4Un, c_SSo2i4TX, c_krFog, c_Hx0) VALUES (827083.5, 97095297, 98732066, 99090493, 539424.90674, 208828.51871899999, 103299010, '0m8p2G_10341', 103496065, 'P2fR_10541'), (-214459.28999999998, 197467586, 198559277, 200136239, -634626.851, 895384.760587, 202911598, 'vqhblxXxydpX_20341', 204856514, 'FRleOA1R_20541');
+INSERT OR IGNORE INTO t_05le (c_fQyabILBQ, c_dai5VEM, c_OAkdZKctM, c_70kujX, c_Uljcyxxsuk, c_mBkg6z, c_8VRdGuni, c_YiqD, c_kMU) VALUES (96390148, 96538275, 97927672, 'qZMN_9941', 100877793, 100796322, 'FE1a_10241', 104275879, 104396792);
+INSERT OR IGNORE INTO t_05le (c_fQyabILBQ, c_dai5VEM, c_OAkdZKctM, c_70kujX, c_Uljcyxxsuk, c_mBkg6z, c_8VRdGuni, c_YiqD, c_kMU) SELECT 96811861, 97714757, 98757319, 'jvVuaTQPML26PVABkt_9941', 101153811, 101261311, 'qWgUpC6Qomnf_10241', 103526691, 103418959;
+INSERT OR IGNORE INTO t_05le (c_fQyabILBQ, c_dai5VEM, c_OAkdZKctM, c_70kujX, c_Uljcyxxsuk, c_mBkg6z, c_8VRdGuni, c_YiqD, c_kMU) SELECT 95477030, 96983366, 98583820, 'h2GjuEi_9941', 100956526, 101355869, 'D3_10241', 103830624, 104041868;
+REPLACE INTO t_05le (c_fQyabILBQ, c_dai5VEM, c_OAkdZKctM, c_70kujX, c_Uljcyxxsuk, c_mBkg6z, c_8VRdGuni, c_YiqD, c_kMU) VALUES (97369879, 96901649, 99331045, 'w3_9941', 100406888, 101185453, 'AeT4o28Pptk4w_10241', 104005935, 105185693);
+WITH cte_fHl AS (SELECT 1) INSERT OR IGNORE INTO t_q2Pzvmmc3 (c_y2jBk, c_D8fcBD, c_q5SJAyJu, c_lk1VSZe94X, c_qL27) SELECT 'K2VR5oSxjU2hERh4_9641', -281285.27784, 98963094, 99670803, -856275.677;
+INSERT OR IGNORE INTO t_q2Pzvmmc3 (c_y2jBk, c_D8fcBD, c_q5SJAyJu, c_lk1VSZe94X, c_qL27) SELECT 'HjarJHPJaMUm2gNBG_9641', -360779.7033, 97728784, 99693649, 854451.48868;
+REPLACE INTO t_q2Pzvmmc3 (c_y2jBk, c_D8fcBD, c_q5SJAyJu, c_lk1VSZe94X, c_qL27) VALUES ('OhrXxbrxXoiUTWYx9_9641', 815026.333, 98047044, 100291146, 247.78285800000594);
+INSERT OR IGNORE INTO t_U7WiSqeWBK (c_hVRWP) VALUES ('pFwjeMSaQM4ivVV9_9641');
+INSERT OR REPLACE INTO t_U7WiSqeWBK (c_hVRWP) VALUES ('wBlCrC_9641'), ('Q6r469jcPJb_19641');
+INSERT OR REPLACE INTO t_U7WiSqeWBK (c_hVRWP) VALUES ('jKiv2D6sJ7vZNbHl_9641');
+REPLACE INTO t_U7WiSqeWBK (c_hVRWP) VALUES ('rX17J8IXrTY_9641');
+INSERT OR REPLACE INTO t_PH612upjwC DEFAULT VALUES;
+INSERT INTO t_QTayxY3QU DEFAULT VALUES;
+INSERT OR FAIL INTO t_05le DEFAULT VALUES;
+
+
+
+
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_U7WiSqeWBK
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_fQyabILBQ,
+                        (SELECT COUNT(*) FROM t_05le t2 WHERE t2.c_fQyabILBQ = t1.c_fQyabILBQ) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_05le t3 WHERE t3.c_fQyabILBQ > t1.c_fQyabILBQ LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_fQyabILBQ FROM t_05le
+                        )) as distinct_values_count
+                    FROM t_05le t1
+                    WHERE t1.c_fQyabILBQ IN (
+                        SELECT c_fQyabILBQ 
+                        FROM t_05le 
+                        WHERE typeof(c_fQyabILBQ) NOT IN ('null')
+                        GROUP BY c_fQyabILBQ
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_05le t4 WHERE t4.c_fQyabILBQ = t1.c_fQyabILBQ) DESC
+                    LIMIT 10;
+                    
+SELECT t_q2Pzvmmc3.c_y2jBk as t_q2Pzvmmc3_val, t_05le.c_OAkdZKctM as t_05le_val, t_U7WiSqeWBK.c_hVRWP as t_U7WiSqeWBK_val
+FROM t_q2Pzvmmc3
+INNER JOIN t_05le ON t_q2Pzvmmc3.ROWID = t_05le.ROWID
+INNER JOIN t_U7WiSqeWBK ON t_q2Pzvmmc3.ROWID = t_U7WiSqeWBK.ROWID
+WHERE t_U7WiSqeWBK.c_hVRWP IS NOT NULL
+ORDER BY t_q2Pzvmmc3.c_y2jBk
+LIMIT 20;
+SELECT CASE CASE WHEN t_QTayxY3QU.c_xOdtK THEN TRUE WHEN t_QTayxY3QU.c_N62GCgIK THEN 'SZcQkhWXc1rn4' WHEN t_QTayxY3QU.c_Hx0 THEN FALSE END WHEN (t_QTayxY3QU.c_xOdtK == t_QTayxY3QU.c_SSo2i4TX) THEN 'LtY' END AS alias_iKV, c_xOdtK, *, (CASE WHEN 'ymFIhbRfxqENe6noU' THEN TRUE WHEN t_QTayxY3QU.c_SSo2i4TX THEN t_QTayxY3QU.c_Hx0 ELSE t_QTayxY3QU.c_xOdtK END / t_QTayxY3QU.c_Hx0) FROM t_QTayxY3QU WHERE EXISTS (SELECT 1 FROM t_QTayxY3QU LIMIT 1) ORDER BY 1 LIMIT 64;
+
+--- v3.26.0 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+96390148|1|Not Max|5
+96811861|1|Not Max|5
+95477030|1|Not Max|5
+97369879|1|Max|5
+HjarJHPJaMUm2gNBG_9641|98757319|wBlCrC_9641
+K2VR5oSxjU2hERh4_9641|97927672|pFwjeMSaQM4ivVV9_9641
+OhrXxbrxXoiUTWYx9_9641|98583820|Q6r469jcPJb_19641
+|98446663|1082.02074000001|96870181|97985518|98446663|-710104.1415|633315.32|101476126|QSOWmFFAtSzU6_10341|104845947|4QhNERJRpkJbJls_10541|24611665.75
+|199736806|578331.965|196556767|197597584|199736806|-365667.1|-482878.3|203142829|L2FzOvs6vRGkr_20341|204548859|OOooZTvYJKK_20541|
+|98716670|39800.311185|96430185|98701728|98716670|167160.4|798761.00659|103363914|7AOD8nZxX_10341|103768252|QdY2pWT0CW4z_10541|
+|200091891|-495917.64|197530420|197834397|200091891|21591.556|-762032.26|201964782|oro_20341|203735169|9dZTls1Jw27K7F_20541|22232432.3333333
+|98422256|870272.973|97352204|98975593|98422256|564710.9203|892736.811|102650471|uoZDENAmrKULDYopMwD_10341|104737562|oGE6kgdf_10541|
+|100322685|430346.42161|96840921|98934673|100322685|339830.92645|-823951.3|101723629|OJyUbIRX6KD2G_10341|105054997|lL8BL_10541|
+|99090493|827083.5|97095297|98732066|99090493|539424.90674|208828.518719|103299010|0m8p2G_10341|103496065|P2fR_10541|
+|200136239|-214459.29|197467586|198559277|200136239|-634626.851|895384.760587|202911598|vqhblxXxydpX_20341|204856514|FRleOA1R_20541|
+||606778.218311||||||||||
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+96390148|1|Not Max|5
+96811861|1|Not Max|5
+95477030|1|Not Max|5
+97369879|1|Max|5
+HjarJHPJaMUm2gNBG_9641|98757319|wBlCrC_9641
+K2VR5oSxjU2hERh4_9641|97927672|pFwjeMSaQM4ivVV9_9641
+OhrXxbrxXoiUTWYx9_9641|98583820|Q6r469jcPJb_19641
+|98446663|1082.02074000001|96870181|97985518|98446663|-710104.1415|633315.32|101476126|QSOWmFFAtSzU6_10341|104845947|4QhNERJRpkJbJls_10541|24611665
+|199736806|578331.965|196556767|197597584|199736806|-365667.1|-482878.3|203142829|L2FzOvs6vRGkr_20341|204548859|OOooZTvYJKK_20541|
+|98716670|39800.311185|96430185|98701728|98716670|167160.4|798761.00659|103363914|7AOD8nZxX_10341|103768252|QdY2pWT0CW4z_10541|
+|200091891|-495917.64|197530420|197834397|200091891|21591.556|-762032.26|201964782|oro_20341|203735169|9dZTls1Jw27K7F_20541|22232432
+|98422256|870272.973|97352204|98975593|98422256|564710.9203|892736.811|102650471|uoZDENAmrKULDYopMwD_10341|104737562|oGE6kgdf_10541|
+|100322685|430346.42161|96840921|98934673|100322685|339830.92645|-823951.3|101723629|OJyUbIRX6KD2G_10341|105054997|lL8BL_10541|
+|99090493|827083.5|97095297|98732066|99090493|539424.90674|208828.518719|103299010|0m8p2G_10341|103496065|P2fR_10541|
+|200136239|-214459.29|197467586|198559277|200136239|-634626.851|895384.760587|202911598|vqhblxXxydpX_20341|204856514|FRleOA1R_20541|
+||606778.218311||||||||||
+
+ERR:
+

@@ -1,0 +1,82 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_YwF (c_25BnjWJQ REAL);
+ALTER TABLE t_YwF RENAME TO t_2Jw0zT5;
+ALTER TABLE t_2Jw0zT5 RENAME TO t_TaXAdYvo5;
+ALTER TABLE t_TaXAdYvo5 ADD COLUMN c_wvfwjFIIp TEXT COLLATE NOCASE;
+
+                CREATE TRIGGER trg_XuOvO
+                AFTER INSERT ON t_TaXAdYvo5
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_TaXAdYvo5) > 1000;
+                END;
+REPLACE INTO t_TaXAdYvo5 (c_25BnjWJQ, c_wvfwjFIIp) VALUES (491849.48, 'ftUCozNznx1SiqeT_8861'), (-465692.51399999997, 'JV_18861');
+REPLACE INTO t_TaXAdYvo5 (c_25BnjWJQ, c_wvfwjFIIp) VALUES (-366420.91, 'x4TPWj5b0NwEwU9MzIrX_8861');
+INSERT OR REPLACE INTO t_TaXAdYvo5 (c_25BnjWJQ, c_wvfwjFIIp) VALUES (-537082.37653, 'xZOpV6vrTTpltwnsVSg_8861'), (-226627.12789, 'g5_18861');
+INSERT OR REPLACE INTO t_TaXAdYvo5 DEFAULT VALUES;
+
+
+                SELECT c_25BnjWJQ, c_wvfwjFIIp,
+                    ROW_NUMBER() OVER (PARTITION BY c_wvfwjFIIp) as row_num,
+                    RANK() OVER (PARTITION BY c_wvfwjFIIp ORDER BY c_25BnjWJQ) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_wvfwjFIIp ORDER BY c_25BnjWJQ) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_25BnjWJQ) IN ('integer','real') THEN c_25BnjWJQ ELSE 0 END) 
+                        OVER (PARTITION BY c_wvfwjFIIp ORDER BY c_25BnjWJQ 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_25BnjWJQ) IN ('integer','real') THEN c_25BnjWJQ ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_wvfwjFIIp ORDER BY c_25BnjWJQ) as prev_value,
+                    LEAD(CASE WHEN typeof(c_25BnjWJQ) IN ('integer','real') THEN c_25BnjWJQ ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_wvfwjFIIp ORDER BY c_25BnjWJQ) as next_value
+                FROM t_TaXAdYvo5
+                ORDER BY c_wvfwjFIIp, c_25BnjWJQ
+                LIMIT 20;
+                
+SELECT t_TaXAdYvo5.c_wvfwjFIIp, t_TaXAdYvo5.c_25BnjWJQ, TYPEOF(t_TaXAdYvo5.c_25BnjWJQ) AS computed_c_25BnjWJQ FROM t_TaXAdYvo5 ORDER BY t_TaXAdYvo5.c_wvfwjFIIp ASC LIMIT 10;
+SELECT t_TaXAdYvo5.c_25BnjWJQ, t_TaXAdYvo5.c_wvfwjFIIp FROM t_TaXAdYvo5 ORDER BY t_TaXAdYvo5.c_wvfwjFIIp ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+||1|1|1|0|0|0
+-465692.514|JV_18861|1|1|1|-465692.514|0|0
+491849.48|ftUCozNznx1SiqeT_8861|1|1|1|491849.48|0|0
+-226627.12789|g5_18861|1|1|1|-226627.12789|0|0
+-366420.91|x4TPWj5b0NwEwU9MzIrX_8861|1|1|1|-366420.91|0|0
+-537082.37653|xZOpV6vrTTpltwnsVSg_8861|1|1|1|-537082.37653|0|0
+||null
+ftUCozNznx1SiqeT_8861|491849.48|real
+g5_18861|-226627.12789|real
+JV_18861|-465692.514|real
+x4TPWj5b0NwEwU9MzIrX_8861|-366420.91|real
+xZOpV6vrTTpltwnsVSg_8861|-537082.37653|real
+|
+491849.48|ftUCozNznx1SiqeT_8861
+-226627.12789|g5_18861
+-465692.514|JV_18861
+-366420.91|x4TPWj5b0NwEwU9MzIrX_8861
+-537082.37653|xZOpV6vrTTpltwnsVSg_8861
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+||1|1|1|0|0|0
+491849.48|ftUCozNznx1SiqeT_8861|1|1|1|491849.48|0|0
+-226627.12789|g5_18861|1|1|1|-226627.12789|0|0
+-465692.514|JV_18861|1|1|1|-465692.514|0|0
+-366420.91|x4TPWj5b0NwEwU9MzIrX_8861|1|1|1|-366420.91|0|0
+-537082.37653|xZOpV6vrTTpltwnsVSg_8861|1|1|1|-537082.37653|0|0
+||null
+ftUCozNznx1SiqeT_8861|491849.48|real
+g5_18861|-226627.12789|real
+JV_18861|-465692.514|real
+x4TPWj5b0NwEwU9MzIrX_8861|-366420.91|real
+xZOpV6vrTTpltwnsVSg_8861|-537082.37653|real
+|
+491849.48|ftUCozNznx1SiqeT_8861
+-226627.12789|g5_18861
+-465692.514|JV_18861
+-366420.91|x4TPWj5b0NwEwU9MzIrX_8861
+-537082.37653|xZOpV6vrTTpltwnsVSg_8861
+
+ERR:
+

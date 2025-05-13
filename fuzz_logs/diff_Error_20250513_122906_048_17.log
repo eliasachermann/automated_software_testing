@@ -1,0 +1,120 @@
+SQL:
+CREATE TABLE t_uSsW (c_tTE5XCcwy INTEGER);
+CREATE TABLE IF NOT EXISTS t_JlHZc (c_TnGFOoGj INTEGER, c_y4HaOzKH INTEGER PRIMARY KEY, c_K9wa6tdq REAL, FOREIGN KEY (c_y4HaOzKH) REFERENCES t_pSEHb(c_Lr1qS));
+INSERT OR REPLACE INTO t_uSsW (c_tTE5XCcwy) VALUES (92548947);
+REPLACE INTO t_uSsW (c_tTE5XCcwy) SELECT 93689300;
+REPLACE INTO t_uSsW (c_tTE5XCcwy) VALUES (93992476), (193224971);
+INSERT OR REPLACE INTO t_JlHZc (c_TnGFOoGj, c_y4HaOzKH, c_K9wa6tdq) SELECT 93216046, 94844603, -186170.4851;
+INSERT OR IGNORE INTO t_JlHZc (c_TnGFOoGj, c_y4HaOzKH, c_K9wa6tdq) VALUES (92514506, 94233391, -879382.3), (194176044, 195323157, -371018.05000000005);
+INSERT OR REPLACE INTO t_JlHZc (c_TnGFOoGj, c_y4HaOzKH, c_K9wa6tdq) VALUES (92519935, 94981090, 1027503.8);
+INSERT INTO t_JlHZc DEFAULT VALUES;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_uSsW LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_JlHZc SET c_TnGFOoGj = -925 WHERE ROWID = (SELECT MIN(ROWID) FROM t_JlHZc);
+UPDATE OR IGNORE t_JlHZc SET c_y4HaOzKH = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_JlHZc);
+UPDATE OR IGNORE t_JlHZc SET c_K9wa6tdq = -731 WHERE ROWID = (SELECT MIN(ROWID) FROM t_JlHZc);
+COMMIT;
+BEGIN TRANSACTION;
+INSERT OR REPLACE INTO t_uSsW (c_tTE5XCcwy) SELECT 92963676;
+INSERT OR IGNORE INTO t_uSsW (c_tTE5XCcwy) SELECT 93629243;
+COMMIT;
+SELECT * FROM t_uSsW;
+SELECT t_uSsW.c_tTE5XCcwy FROM t_uSsW LIMIT 10;
+
+                SELECT DISTINCT t_uSsW.c_tTE5XCcwy,
+                    COUNT(*) OVER (PARTITION BY t_uSsW.c_tTE5XCcwy) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_uSsW.c_tTE5XCcwy) IN ('null') THEN 0 
+                            ELSE t_uSsW.c_tTE5XCcwy END DESC,
+                            t_uSsW.c_tTE5XCcwy ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_uSsW.c_tTE5XCcwy IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_uSsW
+                WHERE t_uSsW.c_tTE5XCcwy IS NOT NULL
+                GROUP BY t_uSsW.c_tTE5XCcwy, t_uSsW.c_tTE5XCcwy
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_uSsW.c_tTE5XCcwy ASC, t_uSsW.c_tTE5XCcwy ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_uSsW.c_tTE5XCcwy,
+                    t_uSsW.c_tTE5XCcwy,
+                    SUM(CASE WHEN typeof(t_uSsW.c_tTE5XCcwy) IN ('integer', 'real', 'numeric') THEN t_uSsW.c_tTE5XCcwy ELSE 0 END) 
+                        OVER (PARTITION BY t_uSsW.c_tTE5XCcwy ORDER BY t_uSsW.c_tTE5XCcwy ASC) as window_total
+                FROM t_uSsW
+                GROUP BY t_uSsW.c_tTE5XCcwy, t_uSsW.c_tTE5XCcwy
+                HAVING SUM(CASE WHEN typeof(t_uSsW.c_tTE5XCcwy) IN ('integer', 'real', 'numeric') THEN t_uSsW.c_tTE5XCcwy ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_uSsW.c_tTE5XCcwy ASC, t_uSsW.c_tTE5XCcwy ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+92548947
+93689300
+93992476
+193224971
+92963676
+93629243
+92548947
+93689300
+93992476
+193224971
+92963676
+93629243
+92548947|1|6|Known
+92963676|1|5|Known
+93629243|1|4|Known
+93689300|1|3|Known
+93992476|1|2|Known
+193224971|1|1|Known
+193224971|193224971|193224971
+93992476|93992476|93992476
+93689300|93689300|93689300
+93629243|93629243|93629243
+92963676|92963676|92963676
+92548947|92548947|92548947
+
+ERR:
+Error: near line 19: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+92548947
+93689300
+93992476
+193224971
+92963676
+93629243
+92548947
+93689300
+93992476
+193224971
+92963676
+93629243
+92548947|1|6|Known
+92963676|1|5|Known
+93629243|1|4|Known
+93689300|1|3|Known
+93992476|1|2|Known
+193224971|1|1|Known
+193224971|193224971|193224971
+93992476|93992476|93992476
+93689300|93689300|93689300
+93629243|93629243|93629243
+92963676|92963676|92963676
+92548947|92548947|92548947
+
+ERR:
+Runtime error near line 19: datatype mismatch (20)
+

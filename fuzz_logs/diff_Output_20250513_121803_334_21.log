@@ -1,0 +1,83 @@
+SQL:
+PRAGMA page_count(0);
+CREATE TEMP TABLE IF NOT EXISTS t_lHLm (c_7viFHyPtZw TEXT, c_v1D TEXT, PRIMARY KEY (c_7viFHyPtZw, c_v1D), FOREIGN KEY (c_v1D) REFERENCES t_mOY87(c_UkHMX));
+INSERT OR IGNORE INTO t_lHLm (c_7viFHyPtZw, c_v1D) VALUES ('eClkapTKCbUWNbcwxB_8683', 'zmOVdqZdk08FuU_8783');
+INSERT OR IGNORE INTO t_lHLm (c_7viFHyPtZw, c_v1D) VALUES ('zGiPSCsFcqg_8683', 'G_8783'), ('8hmWLdyQ1vfF9Pck2raW_18683', 'yc_18783');
+INSERT OR REPLACE INTO t_lHLm (c_7viFHyPtZw, c_v1D) VALUES ('4X_8683', 'JZQleowRVfNw_8783');
+INSERT OR FAIL INTO t_lHLm DEFAULT VALUES;
+
+                WITH RECURSIVE counter(n) AS (
+                    SELECT MIN(CASE WHEN typeof(c_v1D) IN ('integer','real') THEN c_v1D ELSE 0 END) FROM t_lHLm
+                    UNION ALL
+                    SELECT n+1 FROM counter 
+                    WHERE n < (SELECT MIN(100,MAX(CASE WHEN typeof(c_v1D) IN ('integer','real') THEN c_v1D ELSE 10 END)) FROM t_lHLm)
+                    AND n < 100
+                ) 
+                SELECT n, COUNT(*) AS count_matches 
+                FROM counter 
+                LEFT JOIN t_lHLm ON counter.n = CASE WHEN typeof(c_v1D) IN ('integer','real') THEN c_v1D ELSE NULL END
+                GROUP BY n
+                ORDER BY n
+                LIMIT 20;
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_N) 
+                WHERE col_N IN (
+                    SELECT (CUME_DIST() OVER(ORDER BY 1 DESC)) FROM (VALUES (TRUE))
+                )
+            );
+SELECT t_lHLm.c_7viFHyPtZw, t_lHLm.c_v1D FROM t_lHLm LIMIT 10;
+SELECT t_lHLm.c_v1D FROM t_lHLm ORDER BY t_lHLm.c_v1D ASC LIMIT 10;
+SELECT t_lHLm.c_v1D, t_lHLm.c_7viFHyPtZw, LOWER(t_lHLm.c_7viFHyPtZw) AS computed_c_7viFHyPtZw FROM t_lHLm LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+0
+0|1
+1|1
+2|1
+3|1
+4|1
+5|1
+6|1
+7|1
+8|1
+9|1
+10|1
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+0
+0|1
+1|1
+2|1
+3|1
+4|1
+5|1
+6|1
+7|1
+8|1
+9|1
+10|1
+1
+eClkapTKCbUWNbcwxB_8683|zmOVdqZdk08FuU_8783
+zGiPSCsFcqg_8683|G_8783
+8hmWLdyQ1vfF9Pck2raW_18683|yc_18783
+4X_8683|JZQleowRVfNw_8783
+|
+
+G_8783
+JZQleowRVfNw_8783
+yc_18783
+zmOVdqZdk08FuU_8783
+zmOVdqZdk08FuU_8783|eClkapTKCbUWNbcwxB_8683|eclkaptkcbuwnbcwxb_8683
+G_8783|zGiPSCsFcqg_8683|zgipscsfcqg_8683
+yc_18783|8hmWLdyQ1vfF9Pck2raW_18683|8hmwldyq1vff9pck2raw_18683
+JZQleowRVfNw_8783|4X_8683|4x_8683
+||
+
+ERR:
+

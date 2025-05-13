@@ -1,0 +1,90 @@
+SQL:
+PRAGMA ignore_check_constraints;
+CREATE TABLE IF NOT EXISTS t_OTzW (c_nmfwR6 INTEGER PRIMARY KEY, c_L6VgT NUMERIC, c_AqR1 INTEGER) WITHOUT ROWID;
+CREATE TABLE t_v5D4e (c_2ohO TEXT, c_o5vD NUMERIC, c_E5Y8htsu88 REAL, c_TKueVmY1h TEXT, c_nS2y5UUB NUMERIC DEFAULT 83278);
+CREATE TABLE IF NOT EXISTS t_8Obcd (c_DtKy INTEGER PRIMARY KEY DEFAULT -46769, c_LpQxlMiUm INTEGER DEFAULT -412624, c_5d8QO NUMERIC, c_ARy4 REAL);
+CREATE TABLE IF NOT EXISTS t_NYJJ1loQ (c_lZERtlkv TEXT COLLATE NOCASE, c_Pgmz TEXT, c_8ovy TEXT PRIMARY KEY);
+ALTER TABLE t_8Obcd RENAME TO t_SEUocnJqe;
+ALTER TABLE t_NYJJ1loQ RENAME TO t_FOXgyk;
+ALTER TABLE t_FOXgyk RENAME COLUMN c_Pgmz TO c_5uB;
+INSERT OR REPLACE INTO t_OTzW (c_nmfwR6, c_L6VgT, c_AqR1) VALUES (89855743, 89814541, 91704125), (190112239, 190247696, 192580491);
+REPLACE INTO t_OTzW (c_nmfwR6, c_L6VgT, c_AqR1) VALUES (89755804, 91005103, 91152899), (189306331, 190277135, 192641771);
+INSERT OR REPLACE INTO t_OTzW (c_nmfwR6, c_L6VgT, c_AqR1) SELECT 89659334, 91535896, 91884968;
+WITH cte_9jJ AS (SELECT 1) REPLACE INTO t_OTzW (c_nmfwR6, c_L6VgT, c_AqR1) VALUES (90586820, 90308943, 92513937), (189235152, 191235907, 192718206);
+INSERT OR REPLACE INTO t_v5D4e (c_2ohO, c_o5vD, c_E5Y8htsu88, c_TKueVmY1h, c_nS2y5UUB) VALUES ('tnMeyDKKbVp0DXSf3nR_8975', 90812635, -199567.184566, 'w5cmt3sCAcQIsE54dJe_9275', 93635951);
+INSERT OR REPLACE INTO t_SEUocnJqe (c_DtKy, c_LpQxlMiUm, c_5d8QO, c_ARy4) VALUES (89929030, 91498362, 92119654, 599048.459), (188930956, 190516799, 191405697, 363936.577);
+INSERT OR IGNORE INTO t_SEUocnJqe (c_DtKy, c_LpQxlMiUm, c_5d8QO, c_ARy4) SELECT 88979871, 91427302, 91823876, 872156.64;
+WITH cte_SzF AS (SELECT 1) INSERT OR REPLACE INTO t_FOXgyk (c_lZERtlkv, c_5uB, c_8ovy) SELECT 'ul_8975', '1X7NlICztVpM1_9075', 'ZkI1negZP_9175';
+INSERT OR IGNORE INTO t_FOXgyk (c_lZERtlkv, c_5uB, c_8ovy) VALUES ('i0pbmqqB5RM2MjSI_8975', 'gHsZab_9075', 'ISnw4jJdOHnwxqWAeuSH_9175');
+INSERT OR IGNORE INTO t_FOXgyk (c_lZERtlkv, c_5uB, c_8ovy) SELECT 'U_8975', '0sRaO46_9075', 'k7nfJ5ODYW_9175';
+REPLACE INTO t_v5D4e DEFAULT VALUES;
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_SEUocnJqe (c_DtKy, c_LpQxlMiUm, c_5d8QO, c_ARy4) VALUES (89282097, 91081823, 91878074, -450117.83901899995), (190114512, 190897105, 191668577, 407572.687944);
+UPDATE OR IGNORE t_SEUocnJqe SET c_DtKy = 824 WHERE ROWID = (SELECT MIN(ROWID) FROM t_SEUocnJqe);
+UPDATE OR IGNORE t_SEUocnJqe SET c_LpQxlMiUm = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_SEUocnJqe);
+COMMIT;
+SELECT t_v5D4e.c_2ohO, t_v5D4e.c_TKueVmY1h, UPPER(t_v5D4e.c_TKueVmY1h) AS computed_c_TKueVmY1h FROM t_v5D4e LIMIT 10;
+SELECT t_SEUocnJqe.c_LpQxlMiUm, TYPEOF(t_SEUocnJqe.c_LpQxlMiUm) AS computed_c_LpQxlMiUm FROM t_SEUocnJqe LIMIT 10;
+SELECT *, t_OTzW.c_nmfwR6, ~ CASE NULL WHEN t_SEUocnJqe.c_ARy4 THEN t_SEUocnJqe.c_5d8QO WHEN t_SEUocnJqe.c_5d8QO THEN x'1489C599' ELSE x'D9E733' END FROM t_OTzW, t_SEUocnJqe WHERE (c_nmfwR6 == CASE t_OTzW.c_L6VgT WHEN t_OTzW.c_L6VgT THEN t_SEUocnJqe.c_LpQxlMiUm ELSE NULL END) GROUP BY c_nmfwR6 ORDER BY 1;
+
+                SELECT DISTINCT t_FOXgyk.c_lZERtlkv,
+                    COUNT(*) OVER (PARTITION BY t_FOXgyk.c_8ovy) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_FOXgyk.c_lZERtlkv) IN ('null') THEN 0 
+                            ELSE t_FOXgyk.c_lZERtlkv END DESC,
+                            t_FOXgyk.c_8ovy ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_FOXgyk.c_lZERtlkv IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_FOXgyk
+                WHERE t_FOXgyk.c_lZERtlkv IS NOT NULL
+                GROUP BY t_FOXgyk.c_lZERtlkv, t_FOXgyk.c_8ovy
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_FOXgyk.c_lZERtlkv ASC, t_FOXgyk.c_8ovy ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_FOXgyk.c_lZERtlkv,
+                    t_FOXgyk.c_8ovy,
+                    SUM(CASE WHEN typeof(t_FOXgyk.c_lZERtlkv) IN ('integer', 'real', 'numeric') THEN t_FOXgyk.c_lZERtlkv ELSE 0 END) 
+                        OVER (PARTITION BY t_FOXgyk.c_8ovy ORDER BY t_FOXgyk.c_lZERtlkv ASC) as window_total
+                FROM t_FOXgyk
+                GROUP BY t_FOXgyk.c_lZERtlkv, t_FOXgyk.c_8ovy
+                HAVING SUM(CASE WHEN typeof(t_FOXgyk.c_lZERtlkv) IN ('integer', 'real', 'numeric') THEN t_FOXgyk.c_lZERtlkv ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_FOXgyk.c_lZERtlkv ASC, t_FOXgyk.c_8ovy ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+0
+tnMeyDKKbVp0DXSf3nR_8975|w5cmt3sCAcQIsE54dJe_9275|W5CMT3SCACQISE54DJE_9275
+||
+|null
+91081823|integer
+91498362|integer
+190516799|integer
+190897105|integer
+U_8975|1|3|Known
+i0pbmqqB5RM2MjSI_8975|1|2|Known
+ul_8975|1|1|Known
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+0
+tnMeyDKKbVp0DXSf3nR_8975|w5cmt3sCAcQIsE54dJe_9275|W5CMT3SCACQISE54DJE_9275
+||
+|null
+91081823|integer
+91498362|integer
+190516799|integer
+190897105|integer
+i0pbmqqB5RM2MjSI_8975|1|2|Known
+U_8975|1|3|Known
+ul_8975|1|1|Known
+
+ERR:
+

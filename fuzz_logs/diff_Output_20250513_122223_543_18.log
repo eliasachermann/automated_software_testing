@@ -1,0 +1,54 @@
+SQL:
+PRAGMA page_size;
+CREATE TABLE t_6Vlkrni (c_Vq3e TEXT COLLATE NOCASE, c_mdRqLKqx TEXT DEFAULT 'rILSI', PRIMARY KEY (c_mdRqLKqx, c_Vq3e), UNIQUE (c_Vq3e, c_mdRqLKqx));
+ALTER TABLE t_6Vlkrni RENAME TO t_eF5c3CpQZS;
+INSERT OR IGNORE INTO t_eF5c3CpQZS (c_Vq3e, c_mdRqLKqx) VALUES ('PUC_8942', 'LnDhs_9042'), ('iZve2ohnMt_18942', 'mYcXkbLo6Ubl9P7_19042');
+REPLACE INTO t_eF5c3CpQZS (c_Vq3e, c_mdRqLKqx) VALUES ('T46HJ6kNn79wja4B_8942', 'WRouGAkYRbws_9042'), ('uN3e2i4w9EQpfX_18942', 'SxC6jigXaD_19042');
+REPLACE INTO t_eF5c3CpQZS (c_Vq3e, c_mdRqLKqx) SELECT '2dH_8942', 'uas_9042';
+INSERT OR REPLACE INTO t_eF5c3CpQZS (c_Vq3e, c_mdRqLKqx) VALUES ('dh0_8942', 'vruomtKpNmNXfU73_9042');
+INSERT OR IGNORE INTO t_eF5c3CpQZS (c_Vq3e, c_mdRqLKqx) VALUES ('cfeYo53yp1ivd0zmsq_8942', 'FwtY1WV1ebrFhmWvhfR_9042');
+
+                SELECT c_mdRqLKqx, c_Vq3e,
+                    ROW_NUMBER() OVER (PARTITION BY c_Vq3e) as row_num,
+                    RANK() OVER (PARTITION BY c_Vq3e ORDER BY c_mdRqLKqx) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_Vq3e ORDER BY c_mdRqLKqx) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_mdRqLKqx) IN ('integer','real') THEN c_mdRqLKqx ELSE 0 END) 
+                        OVER (PARTITION BY c_Vq3e ORDER BY c_mdRqLKqx 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_mdRqLKqx) IN ('integer','real') THEN c_mdRqLKqx ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_Vq3e ORDER BY c_mdRqLKqx) as prev_value,
+                    LEAD(CASE WHEN typeof(c_mdRqLKqx) IN ('integer','real') THEN c_mdRqLKqx ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_Vq3e ORDER BY c_mdRqLKqx) as next_value
+                FROM t_eF5c3CpQZS
+                ORDER BY c_Vq3e, c_mdRqLKqx
+                LIMIT 20;
+                
+SELECT CASE WHEN t_eF5c3CpQZS.c_mdRqLKqx THEN ~ 744869 ELSE x'12BD' END, *, (c_mdRqLKqx + NULL) AS alias_Byp FROM t_eF5c3CpQZS WHERE CASE WHEN CASE TRUE WHEN t_eF5c3CpQZS.c_mdRqLKqx THEN t_eF5c3CpQZS.c_Vq3e ELSE TRUE END THEN (t_eF5c3CpQZS.c_Vq3e % 'xbl33nu') END GROUP BY c_mdRqLKqx, c_Vq3e ORDER BY 1 LIMIT 64;
+
+--- v3.26.0 ---
+OUT:
+4096
+uas_9042|2dH_8942|1|1|1|0|0|0
+LnDhs_9042|PUC_8942|1|1|1|0|0|0
+WRouGAkYRbws_9042|T46HJ6kNn79wja4B_8942|1|1|1|0|0|0
+FwtY1WV1ebrFhmWvhfR_9042|cfeYo53yp1ivd0zmsq_8942|1|1|1|0|0|0
+vruomtKpNmNXfU73_9042|dh0_8942|1|1|1|0|0|0
+mYcXkbLo6Ubl9P7_19042|iZve2ohnMt_18942|1|1|1|0|0|0
+SxC6jigXaD_19042|uN3e2i4w9EQpfX_18942|1|1|1|0|0|0
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+4096
+uas_9042|2dH_8942|1|1|1|0|0|0
+FwtY1WV1ebrFhmWvhfR_9042|cfeYo53yp1ivd0zmsq_8942|1|1|1|0|0|0
+vruomtKpNmNXfU73_9042|dh0_8942|1|1|1|0|0|0
+mYcXkbLo6Ubl9P7_19042|iZve2ohnMt_18942|1|1|1|0|0|0
+LnDhs_9042|PUC_8942|1|1|1|0|0|0
+WRouGAkYRbws_9042|T46HJ6kNn79wja4B_8942|1|1|1|0|0|0
+SxC6jigXaD_19042|uN3e2i4w9EQpfX_18942|1|1|1|0|0|0
+
+ERR:
+

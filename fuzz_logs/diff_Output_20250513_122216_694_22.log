@@ -1,0 +1,171 @@
+SQL:
+PRAGMA automatic_index;
+CREATE TABLE IF NOT EXISTS t_QmdcsO (c_DGcfer REAL DEFAULT NULL, c_248rvsZRg REAL, c_hX2KoPFJ REAL, c_EN0lwItZ TEXT COLLATE RTRIM, c_U5JRmSGue TEXT, c_I1qffm8 NUMERIC PRIMARY KEY, c_TkL9LTfR INTEGER, c_8Mg6WTjMQ7 REAL, c_VN6x TEXT COLLATE NOCASE, FOREIGN KEY (c_I1qffm8) REFERENCES t_iFEBH(c_q5SuF));
+CREATE TABLE t_KR4RbG (c_w7Q7fOgcQ INTEGER PRIMARY KEY, c_ElSbHjB TEXT, c_xaIbmc28 TEXT, c_JZi5 NUMERIC);
+CREATE TABLE t_WBUA (c_WY6l33GOhM REAL, c_z1Bmm6Ju REAL, c_KYghL NUMERIC, c_Re6zhMh9 REAL DEFAULT -342598.294542, c_EKL NUMERIC, PRIMARY KEY (c_Re6zhMh9, c_z1Bmm6Ju, c_KYghL));
+CREATE TABLE IF NOT EXISTS t_EQjJC (c_ffjNRwOTL INTEGER PRIMARY KEY AUTOINCREMENT, c_v4cFNvxnP NUMERIC, c_IekDPnxo INTEGER DEFAULT NULL, c_XZWFoHIQaY TEXT DEFAULT NULL COLLATE RTRIM, c_KWkjs6Xet REAL, FOREIGN KEY (c_KWkjs6Xet) REFERENCES t_P0Sa3(c_afm1j));
+REPLACE INTO t_QmdcsO (c_DGcfer, c_248rvsZRg, c_hX2KoPFJ, c_EN0lwItZ, c_U5JRmSGue, c_I1qffm8, c_TkL9LTfR, c_8Mg6WTjMQ7, c_VN6x) VALUES (218386.91, 773873.43, 739821.4, 'aE_9235', 'eRI5Y_9335', 93576209, 95635091, -166241.2, 'QzGGuI6oN6JnLn_9735');
+INSERT OR IGNORE INTO t_QmdcsO (c_DGcfer, c_248rvsZRg, c_hX2KoPFJ, c_EN0lwItZ, c_U5JRmSGue, c_I1qffm8, c_TkL9LTfR, c_8Mg6WTjMQ7, c_VN6x) SELECT -66495.13, 537786.439, -278542.3347, 'HDNZA58ry_9235', 'Vnv54_9335', 95052891, 95390841, 893837.122718, 'XeiX3xg4oJtggb4v6s_9735';
+INSERT OR REPLACE INTO t_QmdcsO (c_DGcfer, c_248rvsZRg, c_hX2KoPFJ, c_EN0lwItZ, c_U5JRmSGue, c_I1qffm8, c_TkL9LTfR, c_8Mg6WTjMQ7, c_VN6x) VALUES (-710344.53148, -22800.949999999997, 92170.49, 'XiopVRSO1t3_9235', 'sun0YH9kqcNhX4Gh49Vj_9335', 94511391, 94884873, 245234.713272, 'ZxOlPhhXyn9XC7k_9735'), (-299589.317866, 1056461.8, 982480.14943, '5x8t_19235', '8QzZ8DUuEVCV_19335', 194775217, 195998442, -754419.922, 'qkW9_19735');
+INSERT OR REPLACE INTO t_QmdcsO (c_DGcfer, c_248rvsZRg, c_hX2KoPFJ, c_EN0lwItZ, c_U5JRmSGue, c_I1qffm8, c_TkL9LTfR, c_8Mg6WTjMQ7, c_VN6x) SELECT 474893.3, -645037.33964, -409374.50288, 'tL3MNkhl_9235', '08l_9335', 94343316, 96313516, 4843.781000000003, 'Rtt3Jqaa_9735';
+INSERT OR REPLACE INTO t_QmdcsO (c_DGcfer, c_248rvsZRg, c_hX2KoPFJ, c_EN0lwItZ, c_U5JRmSGue, c_I1qffm8, c_TkL9LTfR, c_8Mg6WTjMQ7, c_VN6x) VALUES (-666729.88857, 363656.27, -691689.5248, 'fok1_9235', 'rUn_9335', 95204788, 94976908, -721300.869, 'nFyaY85wxzwuMui_9735');
+REPLACE INTO t_KR4RbG (c_w7Q7fOgcQ, c_ElSbHjB, c_xaIbmc28, c_JZi5) VALUES (89847832, '0z_9035', 'naTLE61fvxjO65tQ_9135', 92881084);
+INSERT OR IGNORE INTO t_KR4RbG (c_w7Q7fOgcQ, c_ElSbHjB, c_xaIbmc28, c_JZi5) VALUES (89464834, 'B4_9035', 'dzQASEpcHUV40w3_9135', 93065912), (190302020, 'LRIINMxRUnRo82Vcz_19035', '9BnVvZtILq_19135', 192799476);
+WITH cte_QTj AS (SELECT 1) INSERT OR IGNORE INTO t_KR4RbG (c_w7Q7fOgcQ, c_ElSbHjB, c_xaIbmc28, c_JZi5) VALUES (89216818, 'PAZeK67nl6AvV_9035', 'DoCX4Xe8RjZ_9135', 91541501), (188796842, 'VLq5gz31eIpTeuKd9_19035', 'sszT_19135', 193305739);
+INSERT OR REPLACE INTO t_WBUA (c_WY6l33GOhM, c_z1Bmm6Ju, c_KYghL, c_Re6zhMh9, c_EKL) VALUES (358078.84414, -165970.402, 90851807, 616838.8115, 92557488);
+INSERT OR IGNORE INTO t_WBUA (c_WY6l33GOhM, c_z1Bmm6Ju, c_KYghL, c_Re6zhMh9, c_EKL) VALUES (365116.99181, -885306.546, 91627560, 675657.3, 92914999), (248508.6, 753931.2, 191878118, -373388.80000000005, 194095592);
+INSERT OR REPLACE INTO t_WBUA (c_WY6l33GOhM, c_z1Bmm6Ju, c_KYghL, c_Re6zhMh9, c_EKL) VALUES (-202575.973, 1062550.172, 92182416, -446254.16333999997, 93025013);
+INSERT OR REPLACE INTO t_EQjJC (c_ffjNRwOTL, c_v4cFNvxnP, c_IekDPnxo, c_XZWFoHIQaY, c_KWkjs6Xet) SELECT 88364548, 91278870, 91905134, 'S5Iix1B42A0H_9235', 935207.084358;
+REPLACE INTO t_EQjJC (c_ffjNRwOTL, c_v4cFNvxnP, c_IekDPnxo, c_XZWFoHIQaY, c_KWkjs6Xet) VALUES (89035873, 90114766, 91681446, 'c_9235', 1057316.3667000001), (189803312, 190524946, 190387332, 'iaj_19235', -577031.68696);
+REPLACE INTO t_KR4RbG DEFAULT VALUES;
+INSERT INTO t_EQjJC DEFAULT VALUES;
+
+                WITH RECURSIVE counter(n) AS (
+                    SELECT MIN(CASE WHEN typeof(c_w7Q7fOgcQ) IN ('integer','real') THEN c_w7Q7fOgcQ ELSE 0 END) FROM t_KR4RbG
+                    UNION ALL
+                    SELECT n+1 FROM counter 
+                    WHERE n < (SELECT MIN(100,MAX(CASE WHEN typeof(c_w7Q7fOgcQ) IN ('integer','real') THEN c_w7Q7fOgcQ ELSE 10 END)) FROM t_KR4RbG)
+                    AND n < 100
+                ) 
+                SELECT n, COUNT(*) AS count_matches 
+                FROM counter 
+                LEFT JOIN t_KR4RbG ON counter.n = CASE WHEN typeof(c_w7Q7fOgcQ) IN ('integer','real') THEN c_w7Q7fOgcQ ELSE NULL END
+                GROUP BY n
+                ORDER BY n
+                LIMIT 20;
+
+                SELECT c_U5JRmSGue, c_VN6x,
+                    ROW_NUMBER() OVER (PARTITION BY c_VN6x) as row_num,
+                    RANK() OVER (PARTITION BY c_VN6x ORDER BY c_U5JRmSGue) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_VN6x ORDER BY c_U5JRmSGue) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_U5JRmSGue) IN ('integer','real') THEN c_U5JRmSGue ELSE 0 END) 
+                        OVER (PARTITION BY c_VN6x ORDER BY c_U5JRmSGue 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_U5JRmSGue) IN ('integer','real') THEN c_U5JRmSGue ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_VN6x ORDER BY c_U5JRmSGue) as prev_value,
+                    LEAD(CASE WHEN typeof(c_U5JRmSGue) IN ('integer','real') THEN c_U5JRmSGue ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_VN6x ORDER BY c_U5JRmSGue) as next_value
+                FROM t_QmdcsO
+                ORDER BY c_VN6x, c_U5JRmSGue
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_xaIbmc28,
+                        (SELECT COUNT(*) FROM t_KR4RbG t2 WHERE t2.c_xaIbmc28 = t1.c_xaIbmc28) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_KR4RbG t3 WHERE t3.c_xaIbmc28 > t1.c_xaIbmc28 LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_xaIbmc28 FROM t_KR4RbG
+                        )) as distinct_values_count
+                    FROM t_KR4RbG t1
+                    WHERE t1.c_xaIbmc28 IN (
+                        SELECT c_xaIbmc28 
+                        FROM t_KR4RbG 
+                        WHERE typeof(c_xaIbmc28) NOT IN ('null')
+                        GROUP BY c_xaIbmc28
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_KR4RbG t4 WHERE t4.c_xaIbmc28 = t1.c_xaIbmc28) DESC
+                    LIMIT 10;
+                    
+SELECT t_WBUA.c_z1Bmm6Ju, t_WBUA.c_EKL, t_WBUA.c_KYghL FROM t_WBUA LIMIT 10;
+SELECT t_WBUA.c_Re6zhMh9, t_WBUA.c_WY6l33GOhM, t_WBUA.c_KYghL FROM t_WBUA ORDER BY t_WBUA.c_Re6zhMh9 DESC LIMIT 10;
+
+                SELECT DISTINCT t_WBUA.c_EKL,
+                    COUNT(*) OVER (PARTITION BY t_WBUA.c_z1Bmm6Ju) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_WBUA.c_EKL) IN ('null') THEN 0 
+                            ELSE t_WBUA.c_EKL END DESC,
+                            t_WBUA.c_z1Bmm6Ju ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_WBUA.c_EKL IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_WBUA
+                WHERE t_WBUA.c_EKL IS NOT NULL
+                GROUP BY t_WBUA.c_EKL, t_WBUA.c_z1Bmm6Ju
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_WBUA.c_EKL ASC, t_WBUA.c_z1Bmm6Ju ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_WBUA.c_EKL,
+                    t_WBUA.c_z1Bmm6Ju,
+                    SUM(CASE WHEN typeof(t_WBUA.c_EKL) IN ('integer', 'real', 'numeric') THEN t_WBUA.c_EKL ELSE 0 END) 
+                        OVER (PARTITION BY t_WBUA.c_z1Bmm6Ju ORDER BY t_WBUA.c_EKL ASC) as window_total
+                FROM t_WBUA
+                GROUP BY t_WBUA.c_EKL, t_WBUA.c_z1Bmm6Ju
+                HAVING SUM(CASE WHEN typeof(t_WBUA.c_EKL) IN ('integer', 'real', 'numeric') THEN t_WBUA.c_EKL ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_WBUA.c_EKL ASC, t_WBUA.c_z1Bmm6Ju ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+1
+89216818|1
+eRI5Y_9335|QzGGuI6oN6JnLn_9735|1|1|1|0|0|0
+08l_9335|Rtt3Jqaa_9735|1|1|1|0|0|0
+Vnv54_9335|XeiX3xg4oJtggb4v6s_9735|1|1|1|0|0|0
+sun0YH9kqcNhX4Gh49Vj_9335|ZxOlPhhXyn9XC7k_9735|1|1|1|0|0|0
+rUn_9335|nFyaY85wxzwuMui_9735|1|1|1|0|0|0
+8QzZ8DUuEVCV_19335|qkW9_19735|1|1|1|0|0|0
+DoCX4Xe8RjZ_9135|1|Not Max|6
+dzQASEpcHUV40w3_9135|1|Not Max|6
+naTLE61fvxjO65tQ_9135|1|Not Max|6
+sszT_19135|1|Max|6
+9BnVvZtILq_19135|1|Not Max|6
+-165970.402|92557488|90851807
+-885306.546|92914999|91627560
+753931.2|194095592|191878118
+1062550.172|93025013|92182416
+675657.3|365116.99181|91627560
+616838.8115|358078.84414|90851807
+-373388.8|248508.6|191878118
+-446254.16334|-202575.973|92182416
+92557488|1|4|Known
+92914999|1|3|Known
+93025013|1|2|Known
+194095592|1|1|Known
+194095592|753931.2|194095592
+93025013|1062550.172|93025013
+92914999|-885306.546|92914999
+92557488|-165970.402|92557488
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1
+89216818|1
+rUn_9335|nFyaY85wxzwuMui_9735|1|1|1|0|0|0
+8QzZ8DUuEVCV_19335|qkW9_19735|1|1|1|0|0|0
+eRI5Y_9335|QzGGuI6oN6JnLn_9735|1|1|1|0|0|0
+08l_9335|Rtt3Jqaa_9735|1|1|1|0|0|0
+Vnv54_9335|XeiX3xg4oJtggb4v6s_9735|1|1|1|0|0|0
+sun0YH9kqcNhX4Gh49Vj_9335|ZxOlPhhXyn9XC7k_9735|1|1|1|0|0|0
+DoCX4Xe8RjZ_9135|1|Not Max|6
+dzQASEpcHUV40w3_9135|1|Not Max|6
+naTLE61fvxjO65tQ_9135|1|Not Max|6
+sszT_19135|1|Max|6
+9BnVvZtILq_19135|1|Not Max|6
+-165970.402|92557488|90851807
+-885306.546|92914999|91627560
+753931.2|194095592|191878118
+1062550.172|93025013|92182416
+675657.3|365116.99181|91627560
+616838.8115|358078.84414|90851807
+-373388.8|248508.6|191878118
+-446254.16334|-202575.973|92182416
+92557488|1|4|Known
+92914999|1|3|Known
+93025013|1|2|Known
+194095592|1|1|Known
+194095592|753931.2|194095592
+93025013|1062550.172|93025013
+92914999|-885306.546|92914999
+92557488|-165970.402|92557488
+
+ERR:
+

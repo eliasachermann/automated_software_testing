@@ -1,0 +1,129 @@
+SQL:
+CREATE TABLE t_mxsPnG (c_Tyc0WZvi INTEGER, c_MNhgIzt REAL, c_uRddXx REAL DEFAULT -446907.90672);
+CREATE TABLE IF NOT EXISTS t_LDJgF0 (c_9gmnAwES1 INTEGER, PRIMARY KEY (c_9gmnAwES1)) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_KZTktI (c_J6vQxqTMl INTEGER DEFAULT 415370, c_3KItVuliq NUMERIC, c_JmQ INTEGER DEFAULT -240764, c_gPI TEXT COLLATE BINARY, c_kuC6ishz INTEGER DEFAULT 315646, c_HdF TEXT COLLATE NOCASE, PRIMARY KEY (c_JmQ, c_J6vQxqTMl, c_HdF));
+CREATE TEMP TABLE IF NOT EXISTS t_LWPrDZ7EwI (c_CLxJB1 NUMERIC DEFAULT -607193, c_AL3Jihl INTEGER DEFAULT 349548);
+CREATE TABLE IF NOT EXISTS t_piO (c_57GKBIVRTV TEXT, c_YYqeDD INTEGER, c_ZxtqG TEXT COLLATE RTRIM, FOREIGN KEY (c_YYqeDD) REFERENCES t_JZoaX(c_msx2Z));
+ALTER TABLE t_LDJgF0 RENAME COLUMN c_9gmnAwES1 TO c_Xpwnud7FpN;
+
+                CREATE TRIGGER trg_h50xP
+                AFTER INSERT ON t_KZTktI
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_KZTktI) > 1000;
+                END;
+
+                CREATE TRIGGER trg_lbp4Q
+                BEFORE DELETE ON t_LWPrDZ7EwI
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_LWPrDZ7EwI) > 1000;
+                END;
+
+                CREATE TRIGGER trg_G6ACn
+                AFTER INSERT ON t_piO
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_piO) > 1000;
+                END;
+REPLACE INTO t_mxsPnG (c_Tyc0WZvi, c_MNhgIzt, c_uRddXx) SELECT 92721400, 922252.16799, 264222.893496;
+INSERT OR IGNORE INTO t_mxsPnG (c_Tyc0WZvi, c_MNhgIzt, c_uRddXx) VALUES (91964868, 630488.63092, 770520.2);
+INSERT OR IGNORE INTO t_mxsPnG (c_Tyc0WZvi, c_MNhgIzt, c_uRddXx) VALUES (91474648, -444358.757, -29631.392000000007);
+INSERT OR IGNORE INTO t_LDJgF0 (c_Xpwnud7FpN) VALUES (92577951);
+REPLACE INTO t_LDJgF0 (c_Xpwnud7FpN) VALUES (91834372);
+INSERT OR IGNORE INTO t_LDJgF0 (c_Xpwnud7FpN) SELECT 92325608;
+INSERT OR IGNORE INTO t_KZTktI (c_J6vQxqTMl, c_3KItVuliq, c_JmQ, c_gPI, c_kuC6ishz, c_HdF) VALUES (92863179, 93658074, 94222637, 'GNm6MdlP_9539', 95744085, '78OF_9739');
+REPLACE INTO t_LWPrDZ7EwI (c_CLxJB1, c_AL3Jihl) SELECT 92264963, 92802683;
+INSERT OR IGNORE INTO t_piO (c_57GKBIVRTV, c_YYqeDD, c_ZxtqG) SELECT 'q3DM_9239', 94009996, 'P1n3RttSbnAfr7c_9439';
+INSERT OR REPLACE INTO t_LWPrDZ7EwI DEFAULT VALUES;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_mxsPnG SET c_uRddXx = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_mxsPnG);
+INSERT OR REPLACE INTO t_mxsPnG (c_Tyc0WZvi, c_MNhgIzt, c_uRddXx) VALUES (92276923, 743266.9, 1087963.97088);
+COMMIT;
+
+                SELECT c_YYqeDD, c_ZxtqG,
+                    ROW_NUMBER() OVER (PARTITION BY c_ZxtqG) as row_num,
+                    RANK() OVER (PARTITION BY c_ZxtqG ORDER BY c_YYqeDD) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_ZxtqG ORDER BY c_YYqeDD) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_YYqeDD) IN ('integer','real') THEN c_YYqeDD ELSE 0 END) 
+                        OVER (PARTITION BY c_ZxtqG ORDER BY c_YYqeDD 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_YYqeDD) IN ('integer','real') THEN c_YYqeDD ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_ZxtqG ORDER BY c_YYqeDD) as prev_value,
+                    LEAD(CASE WHEN typeof(c_YYqeDD) IN ('integer','real') THEN c_YYqeDD ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_ZxtqG ORDER BY c_YYqeDD) as next_value
+                FROM t_piO
+                ORDER BY c_ZxtqG, c_YYqeDD
+                LIMIT 20;
+                
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_piO
+            LIMIT 1;
+            
+SELECT DISTINCT c_J6vQxqTMl, CASE t_mxsPnG.c_Tyc0WZvi WHEN UPPER(t_mxsPnG.c_MNhgIzt) THEN + t_KZTktI.c_3KItVuliq WHEN CASE t_mxsPnG.c_MNhgIzt WHEN t_mxsPnG.c_MNhgIzt THEN t_KZTktI.c_HdF WHEN x'66A5' THEN t_piO.c_YYqeDD WHEN t_piO.c_YYqeDD THEN t_KZTktI.c_gPI END THEN CASE WHEN NULL THEN t_piO.c_ZxtqG ELSE t_mxsPnG.c_uRddXx END WHEN ('JHtu7CzyF5BEy7RC' < t_mxsPnG.c_Tyc0WZvi) THEN CASE t_KZTktI.c_kuC6ishz WHEN t_KZTktI.c_gPI THEN t_mxsPnG.c_MNhgIzt WHEN t_mxsPnG.c_Tyc0WZvi THEN t_piO.c_57GKBIVRTV WHEN t_KZTktI.c_kuC6ishz THEN t_piO.c_YYqeDD ELSE t_KZTktI.c_kuC6ishz END ELSE SUM(t_mxsPnG.c_Tyc0WZvi) END AS alias_frf, t_piO.c_57GKBIVRTV, - TRUE FROM t_piO NATURAL JOIN t_mxsPnG LEFT JOIN t_KZTktI ON 1=1 WHERE - CASE t_piO.c_YYqeDD WHEN t_mxsPnG.c_uRddXx THEN t_piO.c_YYqeDD WHEN t_piO.c_ZxtqG THEN 'BPJvkWLt' WHEN t_piO.c_ZxtqG THEN t_mxsPnG.c_uRddXx END ORDER BY 1;
+
+                SELECT DISTINCT t_LDJgF0.c_Xpwnud7FpN,
+                    COUNT(*) OVER (PARTITION BY t_LDJgF0.c_Xpwnud7FpN) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_LDJgF0.c_Xpwnud7FpN) IN ('null') THEN 0 
+                            ELSE t_LDJgF0.c_Xpwnud7FpN END DESC,
+                            t_LDJgF0.c_Xpwnud7FpN ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_LDJgF0.c_Xpwnud7FpN IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_LDJgF0
+                WHERE t_LDJgF0.c_Xpwnud7FpN IS NOT NULL
+                GROUP BY t_LDJgF0.c_Xpwnud7FpN, t_LDJgF0.c_Xpwnud7FpN
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_LDJgF0.c_Xpwnud7FpN ASC, t_LDJgF0.c_Xpwnud7FpN ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_LDJgF0.c_Xpwnud7FpN,
+                    t_LDJgF0.c_Xpwnud7FpN,
+                    SUM(CASE WHEN typeof(t_LDJgF0.c_Xpwnud7FpN) IN ('integer', 'real', 'numeric') THEN t_LDJgF0.c_Xpwnud7FpN ELSE 0 END) 
+                        OVER (PARTITION BY t_LDJgF0.c_Xpwnud7FpN ORDER BY t_LDJgF0.c_Xpwnud7FpN ASC) as window_total
+                FROM t_LDJgF0
+                GROUP BY t_LDJgF0.c_Xpwnud7FpN, t_LDJgF0.c_Xpwnud7FpN
+                HAVING SUM(CASE WHEN typeof(t_LDJgF0.c_Xpwnud7FpN) IN ('integer', 'real', 'numeric') THEN t_LDJgF0.c_Xpwnud7FpN ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_LDJgF0.c_Xpwnud7FpN ASC, t_LDJgF0.c_Xpwnud7FpN ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+94009996|P1n3RttSbnAfr7c_9439|1|1|1|94009996|0|0
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+|||-1
+
+ERR:
+Error: near line 6: no such column: c_9gmnAwES1
+Error: near line 28: table t_LDJgF0 has no column named c_Xpwnud7FpN
+Error: near line 29: table t_LDJgF0 has no column named c_Xpwnud7FpN
+Error: near line 30: table t_LDJgF0 has no column named c_Xpwnud7FpN
+Error: near line 72: no such column: t_LDJgF0.c_Xpwnud7FpN
+Error: near line 89: no such column: t_LDJgF0.c_Xpwnud7FpN
+
+
+--- v3.49.1 ---
+OUT:
+94009996|P1n3RttSbnAfr7c_9439|1|1|1|94009996|0|0
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+|||-1
+91834372|1|3|Known
+92325608|1|2|Known
+92577951|1|1|Known
+92577951|92577951|92577951
+92325608|92325608|92325608
+91834372|91834372|91834372
+
+ERR:
+

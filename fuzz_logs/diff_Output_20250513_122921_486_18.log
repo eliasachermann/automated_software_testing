@@ -1,0 +1,112 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_7Hb (c_e9xo NUMERIC);
+CREATE TABLE IF NOT EXISTS t_qaqh (c_7rLYPGaFmN INTEGER, c_KV1V TEXT, c_Rnaj INTEGER DEFAULT -985799, c_L7eMNFt INTEGER, c_eIJqEPK NUMERIC, c_ibuTF9SKz TEXT, c_wrKMARR3OJ REAL, c_riozIqk INTEGER DEFAULT -683427, c_0CkKRs INTEGER PRIMARY KEY AUTOINCREMENT, c_yhtL REAL);
+CREATE TABLE t_NG5fZ (c_uLXz NUMERIC, PRIMARY KEY (c_uLXz), UNIQUE (c_uLXz), FOREIGN KEY (c_uLXz) REFERENCES t_UBoaI(c_baOIx)) WITHOUT ROWID;
+ALTER TABLE t_NG5fZ RENAME COLUMN c_uLXz TO c_qTt9cLa87u;
+
+                CREATE TRIGGER trg_xk0OX
+                AFTER INSERT ON t_7Hb
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_7Hb) > 1000;
+                END;
+
+                CREATE TRIGGER trg_RZFPn
+                BEFORE DELETE ON t_qaqh
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_qaqh) > 1000;
+                END;
+REPLACE INTO t_7Hb (c_e9xo) VALUES (93972863), (193359958);
+INSERT OR IGNORE INTO t_7Hb (c_e9xo) SELECT 93392502;
+REPLACE INTO t_7Hb (c_e9xo) VALUES (94231530), (193361311);
+INSERT OR REPLACE INTO t_7Hb (c_e9xo) VALUES (93346636);
+INSERT OR REPLACE INTO t_qaqh (c_7rLYPGaFmN, c_KV1V, c_Rnaj, c_L7eMNFt, c_eIJqEPK, c_ibuTF9SKz, c_wrKMARR3OJ, c_riozIqk, c_0CkKRs, c_yhtL) VALUES (93960243, 'X2WH2pXeXtV6PC_9460', 95331194, 95994579, 98389073, 'fYeFPeiOM_9860', 413296.202, 100485892, 102516875, -105819.56321), (192806099, 'zniUboLwk7q8_19460', 194848328, 197205982, 197156471, 'oE7XYupEmMUQ_19860', 937986.98, 199807666, 202356712, 1120129.5);
+INSERT OR REPLACE INTO t_qaqh (c_7rLYPGaFmN, c_KV1V, c_Rnaj, c_L7eMNFt, c_eIJqEPK, c_ibuTF9SKz, c_wrKMARR3OJ, c_riozIqk, c_0CkKRs, c_yhtL) VALUES (93108682, 'EKmHUOpWX_9460', 96071475, 96223359, 98163678, 'Kptj8RDTW_9860', 340065.51214, 99677230, 100729153, 316906.88);
+INSERT OR REPLACE INTO t_qaqh (c_7rLYPGaFmN, c_KV1V, c_Rnaj, c_L7eMNFt, c_eIJqEPK, c_ibuTF9SKz, c_wrKMARR3OJ, c_riozIqk, c_0CkKRs, c_yhtL) VALUES (94023713, '8NIw0H_9460', 96063352, 95803593, 97058676, 'uISo63UeYkCXmWQ8ZK2g_9860', 410903.82, 100667288, 102418827, 203040.91061000002);
+INSERT OR IGNORE INTO t_qaqh (c_7rLYPGaFmN, c_KV1V, c_Rnaj, c_L7eMNFt, c_eIJqEPK, c_ibuTF9SKz, c_wrKMARR3OJ, c_riozIqk, c_0CkKRs, c_yhtL) VALUES (94373296, 'sbLYp3rd0_9460', 96184711, 95692399, 97055316, 'g2eJW3ov_9860', 790797.321899, 99689919, 100625926, -439095.5921), (194294815, 'XS_19460', 194783136, 196618665, 197067340, '7JKXAAN0qAkMuBNw_19860', -97031.85310000001, 201403380, 202556960, -124432.0);
+INSERT OR IGNORE INTO t_qaqh (c_7rLYPGaFmN, c_KV1V, c_Rnaj, c_L7eMNFt, c_eIJqEPK, c_ibuTF9SKz, c_wrKMARR3OJ, c_riozIqk, c_0CkKRs, c_yhtL) VALUES (93465197, 'NdxvV3BfPVpnA0_9460', 95731122, 97224975, 97226091, 'l0002IfDv1_9860', -725797.33, 99902611, 102100448, -228615.695464);
+INSERT OR IGNORE INTO t_NG5fZ (c_qTt9cLa87u) VALUES (93689720);
+INSERT OR IGNORE INTO t_NG5fZ (c_qTt9cLa87u) VALUES (93929270), (193402291);
+INSERT OR REPLACE INTO t_NG5fZ (c_qTt9cLa87u) VALUES (93826234);
+WITH cte_VX2 AS (SELECT 1) INSERT OR IGNORE INTO t_NG5fZ (c_qTt9cLa87u) SELECT 92765723;
+INSERT OR IGNORE INTO t_NG5fZ (c_qTt9cLa87u) VALUES (94279175);
+
+
+SELECT * FROM t_NG5fZ, t_qaqh, t_7Hb GROUP BY c_yhtL HAVING CASE (t_qaqh.c_Rnaj / t_qaqh.c_7rLYPGaFmN) WHEN FALSE THEN ABS(TRUE) WHEN (FALSE % t_qaqh.c_ibuTF9SKz) THEN 468673 END ORDER BY 1;
+SELECT t_NG5fZ.c_qTt9cLa87u FROM t_NG5fZ ORDER BY t_NG5fZ.c_qTt9cLa87u DESC LIMIT 10;
+
+                SELECT DISTINCT t_7Hb.c_e9xo,
+                    COUNT(*) OVER (PARTITION BY t_7Hb.c_e9xo) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_7Hb.c_e9xo) IN ('null') THEN 0 
+                            ELSE t_7Hb.c_e9xo END DESC,
+                            t_7Hb.c_e9xo ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_7Hb.c_e9xo IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_7Hb
+                WHERE t_7Hb.c_e9xo IS NOT NULL
+                GROUP BY t_7Hb.c_e9xo, t_7Hb.c_e9xo
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_7Hb.c_e9xo ASC, t_7Hb.c_e9xo ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_7Hb.c_e9xo,
+                    t_7Hb.c_e9xo,
+                    SUM(CASE WHEN typeof(t_7Hb.c_e9xo) IN ('integer', 'real', 'numeric') THEN t_7Hb.c_e9xo ELSE 0 END) 
+                        OVER (PARTITION BY t_7Hb.c_e9xo ORDER BY t_7Hb.c_e9xo ASC) as window_total
+                FROM t_7Hb
+                GROUP BY t_7Hb.c_e9xo, t_7Hb.c_e9xo
+                HAVING SUM(CASE WHEN typeof(t_7Hb.c_e9xo) IN ('integer', 'real', 'numeric') THEN t_7Hb.c_e9xo ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_7Hb.c_e9xo ASC, t_7Hb.c_e9xo ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+93346636|1|6|Known
+93392502|1|5|Known
+93972863|1|4|Known
+94231530|1|3|Known
+193359958|1|2|Known
+193361311|1|1|Known
+193361311|193361311|193361311
+193359958|193359958|193359958
+94231530|94231530|94231530
+93972863|93972863|93972863
+93392502|93392502|93392502
+93346636|93346636|93346636
+
+ERR:
+Error: near line 4: no such column: c_uLXz
+Error: near line 26: table t_NG5fZ has no column named c_qTt9cLa87u
+Error: near line 27: table t_NG5fZ has no column named c_qTt9cLa87u
+Error: near line 28: table t_NG5fZ has no column named c_qTt9cLa87u
+Error: near line 29: table t_NG5fZ has no column named c_qTt9cLa87u
+Error: near line 30: table t_NG5fZ has no column named c_qTt9cLa87u
+Error: near line 34: no such column: t_NG5fZ.c_qTt9cLa87u
+
+
+--- v3.49.1 ---
+OUT:
+193402291
+94279175
+93929270
+93826234
+93689720
+92765723
+93346636|1|6|Known
+93392502|1|5|Known
+93972863|1|4|Known
+94231530|1|3|Known
+193359958|1|2|Known
+193361311|1|1|Known
+193361311|193361311|193361311
+193359958|193359958|193359958
+94231530|94231530|94231530
+93972863|93972863|93972863
+93392502|93392502|93392502
+93346636|93346636|93346636
+
+ERR:
+

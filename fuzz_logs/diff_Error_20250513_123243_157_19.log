@@ -1,0 +1,107 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_ohp (c_F4CVlbjKu TEXT PRIMARY KEY);
+CREATE TABLE IF NOT EXISTS t_OVwF (c_8lT INTEGER, PRIMARY KEY (c_8lT));
+CREATE TABLE IF NOT EXISTS t_oYd1Ib (c_iOZBwd4Q NUMERIC PRIMARY KEY, c_8PtqyAEXFI INTEGER, c_nnlK INTEGER DEFAULT 54030, c_Z2Ww7ABB NUMERIC) WITHOUT ROWID;
+CREATE TABLE t_tVq7j (c_cvm INTEGER, c_jWo82Nt2C INTEGER, c_3uBYLNEDD TEXT DEFAULT 'O', c_VLfEw REAL, c_G1mZx TEXT, c_4Grfq6dV6j INTEGER, c_UBA13tr9tl REAL, PRIMARY KEY (c_4Grfq6dV6j, c_UBA13tr9tl));
+CREATE TABLE t_tHHbxcVZK1 (c_QI5QZPJwuP INTEGER PRIMARY KEY, c_AJnYCni INTEGER, c_mKefC INTEGER, c_xMOIO INTEGER, c_7Fiil4iO5V NUMERIC, c_bYrH REAL, c_Kr0nH5 NUMERIC, c_pPow NUMERIC DEFAULT 282388, c_zv1LMG52 REAL, c_aEtob REAL);
+REPLACE INTO t_ohp (c_F4CVlbjKu) VALUES ('Mz_9561');
+INSERT OR REPLACE INTO t_ohp (c_F4CVlbjKu) VALUES ('a1N_9561'), ('Gc5zbkPBoW_19561');
+REPLACE INTO t_ohp (c_F4CVlbjKu) VALUES ('gON_9561'), ('6nCrLh5_19561');
+REPLACE INTO t_ohp (c_F4CVlbjKu) VALUES ('Acxdi6QN5vpjnUw_9561'), ('0z1_19561');
+INSERT OR REPLACE INTO t_OVwF (c_8lT) VALUES (95943509), (195271119);
+INSERT OR REPLACE INTO t_OVwF (c_8lT) VALUES (95052929), (194815217);
+INSERT OR REPLACE INTO t_OVwF (c_8lT) VALUES (95179884);
+REPLACE INTO t_OVwF (c_8lT) VALUES (95784232), (196225291);
+INSERT OR REPLACE INTO t_OVwF (c_8lT) VALUES (96139708);
+INSERT OR IGNORE INTO t_oYd1Ib (c_iOZBwd4Q, c_8PtqyAEXFI, c_nnlK, c_Z2Ww7ABB) VALUES (95033487, 96049977, 97678098, 97776544), (194925174, 197312227, 197386651, 198802457);
+INSERT OR IGNORE INTO t_oYd1Ib (c_iOZBwd4Q, c_8PtqyAEXFI, c_nnlK, c_Z2Ww7ABB) SELECT 96081981, 97153889, 98247608, 97697971;
+INSERT OR REPLACE INTO t_oYd1Ib (c_iOZBwd4Q, c_8PtqyAEXFI, c_nnlK, c_Z2Ww7ABB) VALUES (96454540, 96666022, 98155386, 99490838);
+INSERT OR IGNORE INTO t_oYd1Ib (c_iOZBwd4Q, c_8PtqyAEXFI, c_nnlK, c_Z2Ww7ABB) VALUES (94937814, 95957250, 98116762, 99591060);
+INSERT OR REPLACE INTO t_oYd1Ib (c_iOZBwd4Q, c_8PtqyAEXFI, c_nnlK, c_Z2Ww7ABB) VALUES (95838358, 96337001, 98530664, 99507155);
+INSERT OR REPLACE INTO t_tVq7j (c_cvm, c_jWo82Nt2C, c_3uBYLNEDD, c_VLfEw, c_G1mZx, c_4Grfq6dV6j, c_UBA13tr9tl) VALUES (95968691, 96584508, 'YRs_9761', -545732.03, 'sDFWAbQPII_9961', 101503977, 831546.08), (195412554, 197519570, 'Cx7_19761', 921936.34, 'd5h2LTYqS7xhy5Xn1lu_19961', 201607530, 344917.97868);
+INSERT OR REPLACE INTO t_tVq7j (c_cvm, c_jWo82Nt2C, c_3uBYLNEDD, c_VLfEw, c_G1mZx, c_4Grfq6dV6j, c_UBA13tr9tl) VALUES (96042077, 96991814, 'Odm0YOPHqdu_9761', -243345.9915, 'ox_9961', 101277495, 182910.02250999998);
+REPLACE INTO t_tVq7j (c_cvm, c_jWo82Nt2C, c_3uBYLNEDD, c_VLfEw, c_G1mZx, c_4Grfq6dV6j, c_UBA13tr9tl) VALUES (96264238, 95912099, 'XeCrOsGdM0SYj4NKPeK_9761', -81383.74664699999, 'PrG_9961', 101451617, -521265.12924000004);
+INSERT OR IGNORE INTO t_tHHbxcVZK1 (c_QI5QZPJwuP, c_AJnYCni, c_mKefC, c_xMOIO, c_7Fiil4iO5V, c_bYrH, c_Kr0nH5, c_pPow, c_zv1LMG52, c_aEtob) VALUES (96236975, 96366528, 96877640, 98900797, 98863903, -660761.341, 102427663, 101634995, 98719.1501, 1088950.99);
+REPLACE INTO t_tHHbxcVZK1 (c_QI5QZPJwuP, c_AJnYCni, c_mKefC, c_xMOIO, c_7Fiil4iO5V, c_bYrH, c_Kr0nH5, c_pPow, c_zv1LMG52, c_aEtob) VALUES (95097099, 97052673, 97203482, 98076558, 100125320, -643453.59, 101110168, 102103231, 648368.9, -616770.886293), (195765606, 197180898, 196760920, 197893929, 199832149, 748868.664609, 201458291, 203434957, -640053.1159, -212150.97999999998);
+REPLACE INTO t_tHHbxcVZK1 (c_QI5QZPJwuP, c_AJnYCni, c_mKefC, c_xMOIO, c_7Fiil4iO5V, c_bYrH, c_Kr0nH5, c_pPow, c_zv1LMG52, c_aEtob) VALUES (96242821, 97157860, 97588022, 98419652, 99594667, 721476.28, 102027261, 102934559, 4468.422390000007, -95387.97250999999);
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_ohp LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_OVwF SET c_8lT = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_OVwF);
+INSERT OR REPLACE INTO t_OVwF (c_8lT) VALUES (95627320), (194621865);
+INSERT OR REPLACE INTO t_OVwF (c_8lT) SELECT 95418557;
+COMMIT;
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_ohp
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+SELECT DISTINCT *, * FROM t_tHHbxcVZK1, t_OVwF, t_oYd1Ib WHERE x'F0E1' GROUP BY c_8lT ORDER BY 1 DESC LIMIT 17, 16;
+SELECT t_OVwF.c_8lT, TYPEOF(t_OVwF.c_8lT) AS computed_c_8lT FROM t_OVwF ORDER BY t_OVwF.c_8lT DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+2|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+3|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+4|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+5|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+6|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+7|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+196225291|integer
+195271119|integer
+194815217|integer
+194621865|integer
+96139708|integer
+95943509|integer
+95784232|integer
+95627320|integer
+95418557|integer
+95179884|integer
+
+ERR:
+Error: near line 34: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+2|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+3|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+4|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+5|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+6|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+7|1|text|[3,4,5]|7|1.0|[1,1,1,1,1,1,1]|{"1":"text","2":"text","3":"text","4":"text","5":"text","6":"text","7":"text"}
+196225291|integer
+195271119|integer
+194815217|integer
+194621865|integer
+96139708|integer
+95943509|integer
+95784232|integer
+95627320|integer
+95418557|integer
+95179884|integer
+
+ERR:
+Runtime error near line 34: datatype mismatch (20)
+

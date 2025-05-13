@@ -1,0 +1,101 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_4aMijc4lc (c_lQQC2SD NUMERIC, c_Aac1 TEXT);
+CREATE TABLE IF NOT EXISTS t_EDBA6 (c_YNrR0HATy NUMERIC, c_nWKbie3 REAL, c_fkp3E REAL DEFAULT NULL, c_gfYm1M5JcO INTEGER, c_rIc NUMERIC, c_m64uhTEFnC INTEGER DEFAULT -965201, c_3gzsBFHczm REAL DEFAULT -162414.0, PRIMARY KEY (c_3gzsBFHczm), UNIQUE (c_m64uhTEFnC, c_nWKbie3, c_fkp3E));
+CREATE TABLE IF NOT EXISTS t_e9imAiTc (c_8eBCZ3P INTEGER, c_ZBy REAL, c_vAhyNXm NUMERIC DEFAULT NULL, c_Mbj2l4 NUMERIC, c_NFD NUMERIC DEFAULT 151249, c_dotb0R INTEGER PRIMARY KEY);
+WITH cte_0T8 AS (SELECT 1) INSERT OR IGNORE INTO t_4aMijc4lc (c_lQQC2SD, c_Aac1) SELECT 91140433, 'Z6sQObDbj5Ug_9314';
+WITH cte_gyJ AS (SELECT 1) INSERT OR REPLACE INTO t_4aMijc4lc (c_lQQC2SD, c_Aac1) VALUES (91514604, 'QA05WLxIfHN0wsw_9314');
+REPLACE INTO t_4aMijc4lc (c_lQQC2SD, c_Aac1) SELECT 92170985, 'CxK3VlHyMEd3tFUUP0Yq_9314';
+INSERT OR REPLACE INTO t_EDBA6 (c_YNrR0HATy, c_nWKbie3, c_fkp3E, c_gfYm1M5JcO, c_rIc, c_m64uhTEFnC, c_3gzsBFHczm) VALUES (91629542, 708983.0575, -805383.428, 95412864, 96982324, 96182318, 1093761.8599999999);
+REPLACE INTO t_EDBA6 (c_YNrR0HATy, c_nWKbie3, c_fkp3E, c_gfYm1M5JcO, c_rIc, c_m64uhTEFnC, c_3gzsBFHczm) SELECT 92893584, 418314.9429, 510217.6, 95824474, 96694959, 97285232, -140137.7106;
+WITH cte_oyV AS (SELECT 1) INSERT OR IGNORE INTO t_EDBA6 (c_YNrR0HATy, c_nWKbie3, c_fkp3E, c_gfYm1M5JcO, c_rIc, c_m64uhTEFnC, c_3gzsBFHczm) VALUES (91688321, 1032993.749, -56231.67999999999, 94786536, 96834913, 97975323, 484544.40161);
+REPLACE INTO t_e9imAiTc (c_8eBCZ3P, c_ZBy, c_vAhyNXm, c_Mbj2l4, c_NFD, c_dotb0R) VALUES (91553391, -769277.37196, 94443886, 95642057, 95398315, 96420945);
+INSERT OR IGNORE INTO t_e9imAiTc (c_8eBCZ3P, c_ZBy, c_vAhyNXm, c_Mbj2l4, c_NFD, c_dotb0R) VALUES (92046813, 355113.09750000003, 94840974, 96069288, 96684748, 97542184);
+INSERT INTO t_4aMijc4lc DEFAULT VALUES;
+INSERT OR FAIL INTO t_EDBA6 DEFAULT VALUES;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_e9imAiTc SET c_dotb0R = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_e9imAiTc);
+COMMIT;
+
+                SELECT c_lQQC2SD, c_Aac1,
+                    ROW_NUMBER() OVER (PARTITION BY c_Aac1) as row_num,
+                    RANK() OVER (PARTITION BY c_Aac1 ORDER BY c_lQQC2SD) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_Aac1 ORDER BY c_lQQC2SD) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_lQQC2SD) IN ('integer','real') THEN c_lQQC2SD ELSE 0 END) 
+                        OVER (PARTITION BY c_Aac1 ORDER BY c_lQQC2SD 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_lQQC2SD) IN ('integer','real') THEN c_lQQC2SD ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_Aac1 ORDER BY c_lQQC2SD) as prev_value,
+                    LEAD(CASE WHEN typeof(c_lQQC2SD) IN ('integer','real') THEN c_lQQC2SD ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_Aac1 ORDER BY c_lQQC2SD) as next_value
+                FROM t_4aMijc4lc
+                ORDER BY c_Aac1, c_lQQC2SD
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_nWKbie3,
+                        (SELECT COUNT(*) FROM t_EDBA6 t2 WHERE t2.c_nWKbie3 = t1.c_nWKbie3) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_EDBA6 t3 WHERE t3.c_nWKbie3 > t1.c_nWKbie3 LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_nWKbie3 FROM t_EDBA6
+                        )) as distinct_values_count
+                    FROM t_EDBA6 t1
+                    WHERE t1.c_nWKbie3 IN (
+                        SELECT c_nWKbie3 
+                        FROM t_EDBA6 
+                        WHERE typeof(c_nWKbie3) NOT IN ('null')
+                        GROUP BY c_nWKbie3
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_EDBA6 t4 WHERE t4.c_nWKbie3 = t1.c_nWKbie3) DESC
+                    LIMIT 10;
+                    
+SELECT t_EDBA6.c_3gzsBFHczm as t_EDBA6_val, t_e9imAiTc.c_NFD as t_e9imAiTc_val, t_4aMijc4lc.c_Aac1 as t_4aMijc4lc_val
+FROM t_EDBA6
+LEFT JOIN t_e9imAiTc ON t_EDBA6.ROWID = t_e9imAiTc.ROWID
+INNER JOIN t_4aMijc4lc ON t_EDBA6.ROWID = t_4aMijc4lc.ROWID
+WHERE t_4aMijc4lc.c_Aac1 IS NOT NULL
+ORDER BY t_EDBA6.c_3gzsBFHczm
+LIMIT 20;
+SELECT DISTINCT c_YNrR0HATy AS alias_7lG FROM t_e9imAiTc, t_EDBA6 WHERE CASE WHEN + NULL THEN CASE -808117 WHEN t_e9imAiTc.c_dotb0R THEN t_e9imAiTc.c_8eBCZ3P WHEN TRUE THEN t_e9imAiTc.c_8eBCZ3P WHEN t_EDBA6.c_m64uhTEFnC THEN t_e9imAiTc.c_Mbj2l4 END WHEN CASE WHEN t_EDBA6.c_fkp3E THEN t_e9imAiTc.c_8eBCZ3P END THEN (t_e9imAiTc.c_vAhyNXm >> 'M4rQaOhYcguO9vZa97s') WHEN LIKE(t_e9imAiTc.c_NFD, FALSE) THEN 486420 ELSE CASE WHEN t_EDBA6.c_gfYm1M5JcO THEN t_EDBA6.c_m64uhTEFnC WHEN t_EDBA6.c_YNrR0HATy THEN t_EDBA6.c_rIc END END ORDER BY 1;
+
+--- v3.26.0 ---
+OUT:
+||1|1|1|0|0|0
+92170985|CxK3VlHyMEd3tFUUP0Yq_9314|1|1|1|92170985|0|0
+91514604|QA05WLxIfHN0wsw_9314|1|1|1|91514604|0|0
+91140433|Z6sQObDbj5Ug_9314|1|1|1|91140433|0|0
+708983.0575|1|Not Max|4
+418314.9429|1|Not Max|4
+1032993.749|1|Max|4
+-140137.7106||QA05WLxIfHN0wsw_9314
+484544.40161||CxK3VlHyMEd3tFUUP0Yq_9314
+1093761.86||Z6sQObDbj5Ug_9314
+91629542
+91688321
+92893584
+
+ERR:
+Error: near line 15: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+||1|1|1|0|0|0
+92170985|CxK3VlHyMEd3tFUUP0Yq_9314|1|1|1|92170985|0|0
+91514604|QA05WLxIfHN0wsw_9314|1|1|1|91514604|0|0
+91140433|Z6sQObDbj5Ug_9314|1|1|1|91140433|0|0
+708983.0575|1|Not Max|4
+418314.9429|1|Not Max|4
+1032993.749|1|Max|4
+-140137.7106||QA05WLxIfHN0wsw_9314
+484544.40161||CxK3VlHyMEd3tFUUP0Yq_9314
+1093761.86||Z6sQObDbj5Ug_9314
+91629542
+91688321
+92893584
+
+ERR:
+Runtime error near line 15: datatype mismatch (20)
+

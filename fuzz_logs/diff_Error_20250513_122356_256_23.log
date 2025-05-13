@@ -1,0 +1,125 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_xJIUi0 (c_scvAlA INTEGER, c_59p TEXT, c_UxBryZln REAL, c_Gg5JBT TEXT, c_pZLf56g NUMERIC, c_5JhCSwZx INTEGER, c_SlT4 INTEGER, c_AcMCi INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT NULL);
+ALTER TABLE t_xJIUi0 ADD COLUMN c_aqHsik INTEGER;
+INSERT OR IGNORE INTO t_xJIUi0 (c_scvAlA, c_59p, c_UxBryZln, c_Gg5JBT, c_pZLf56g, c_5JhCSwZx, c_SlT4, c_AcMCi, c_aqHsik) VALUES (90044498, 'zzIp3ZDKm_9135', -759666.7, 'z1TslBt0sWwrEYQ_9335', 93630523, 96287927, 96528607, 97240317, 98481443), (190123312, 'ldfCEzafmSVVrl_19135', 235040.249566, 'GYFZpwDxOQ_19335', 194965103, 195654561, 195683761, 197075998, 198795100);
+INSERT OR IGNORE INTO t_xJIUi0 (c_scvAlA, c_59p, c_UxBryZln, c_Gg5JBT, c_pZLf56g, c_5JhCSwZx, c_SlT4, c_AcMCi, c_aqHsik) SELECT 89571071, 'dzZNLK0o7fBsiANTUxfw_9135', -203515.909224, 'RG7VM8YslGd6TSfij_9335', 94459894, 94910477, 97007157, 97329543, 98057600;
+INSERT OR IGNORE INTO t_xJIUi0 (c_scvAlA, c_59p, c_UxBryZln, c_Gg5JBT, c_pZLf56g, c_5JhCSwZx, c_SlT4, c_AcMCi, c_aqHsik) VALUES (89581364, 'h2GWzN8ZEI6onIH2_9135', 580673.583, 'yB4cM_9335', 93695668, 95199349, 96890171, 96393678, 97941446);
+REPLACE INTO t_xJIUi0 (c_scvAlA, c_59p, c_UxBryZln, c_Gg5JBT, c_pZLf56g, c_5JhCSwZx, c_SlT4, c_AcMCi, c_aqHsik) VALUES (89944495, 'bTyQqt4AF0m9fTq_9135', -405010.73234, '1lXDT4pS6pB2poFSR4N_9335', 93466688, 95863628, 97006109, 98191325, 97664668);
+INSERT OR REPLACE INTO t_xJIUi0 DEFAULT VALUES;
+
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_xJIUi0 SET c_aqHsik = 878 WHERE ROWID = (SELECT MIN(ROWID) FROM t_xJIUi0);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_xJIUi0 SET c_UxBryZln = -411 WHERE ROWID = (SELECT MIN(ROWID) FROM t_xJIUi0);
+UPDATE OR IGNORE t_xJIUi0 SET c_AcMCi = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_xJIUi0);
+COMMIT;
+
+                    SELECT 
+                        t1.c_UxBryZln,
+                        (SELECT COUNT(*) FROM t_xJIUi0 t2 WHERE t2.c_UxBryZln = t1.c_UxBryZln) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_xJIUi0 t3 WHERE t3.c_UxBryZln > t1.c_UxBryZln LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_UxBryZln FROM t_xJIUi0
+                        )) as distinct_values_count
+                    FROM t_xJIUi0 t1
+                    WHERE t1.c_UxBryZln IN (
+                        SELECT c_UxBryZln 
+                        FROM t_xJIUi0 
+                        WHERE typeof(c_UxBryZln) NOT IN ('null')
+                        GROUP BY c_UxBryZln
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_xJIUi0 t4 WHERE t4.c_UxBryZln = t1.c_UxBryZln) DESC
+                    LIMIT 10;
+                    
+SELECT t_xJIUi0.c_aqHsik, t_xJIUi0.c_Gg5JBT, LENGTH(t_xJIUi0.c_aqHsik) AS computed_c_aqHsik FROM t_xJIUi0 ORDER BY t_xJIUi0.c_Gg5JBT DESC LIMIT 10;
+SELECT t_xJIUi0.c_aqHsik FROM t_xJIUi0 ORDER BY t_xJIUi0.c_aqHsik ASC LIMIT 10;
+SELECT t_xJIUi0.c_59p, (NULL & t_xJIUi0.c_SlT4), *, c_scvAlA, * FROM t_xJIUi0 WHERE TRUE ORDER BY 3 DESC LIMIT 48, 18;
+
+                SELECT DISTINCT t_xJIUi0.c_59p,
+                    COUNT(*) OVER (PARTITION BY t_xJIUi0.c_scvAlA) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_xJIUi0.c_59p) IN ('null') THEN 0 
+                            ELSE t_xJIUi0.c_59p END DESC,
+                            t_xJIUi0.c_scvAlA ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_xJIUi0.c_59p IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_xJIUi0
+                WHERE t_xJIUi0.c_59p IS NOT NULL
+                GROUP BY t_xJIUi0.c_59p, t_xJIUi0.c_scvAlA
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_xJIUi0.c_59p ASC, t_xJIUi0.c_scvAlA ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_xJIUi0.c_59p,
+                    t_xJIUi0.c_scvAlA,
+                    SUM(CASE WHEN typeof(t_xJIUi0.c_59p) IN ('integer', 'real', 'numeric') THEN t_xJIUi0.c_59p ELSE 0 END) 
+                        OVER (PARTITION BY t_xJIUi0.c_scvAlA ORDER BY t_xJIUi0.c_59p ASC) as window_total
+                FROM t_xJIUi0
+                GROUP BY t_xJIUi0.c_59p, t_xJIUi0.c_scvAlA
+                HAVING SUM(CASE WHEN typeof(t_xJIUi0.c_59p) IN ('integer', 'real', 'numeric') THEN t_xJIUi0.c_59p ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_xJIUi0.c_59p ASC, t_xJIUi0.c_scvAlA ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+-411.0|1|Not Max|6
+-759666.7|1|Not Max|6
+-203515.909224|1|Not Max|6
+-405010.73234|1|Not Max|6
+235040.249566|1|Max|6
+98481443|z1TslBt0sWwrEYQ_9335|8
+878|yB4cM_9335|3
+98057600|RG7VM8YslGd6TSfij_9335|8
+198795100|GYFZpwDxOQ_19335|9
+97664668|1lXDT4pS6pB2poFSR4N_9335|8
+||
+
+878
+97664668
+98057600
+98481443
+198795100
+bTyQqt4AF0m9fTq_9135|1|5|Known
+dzZNLK0o7fBsiANTUxfw_9135|1|4|Known
+h2GWzN8ZEI6onIH2_9135|1|3|Known
+ldfCEzafmSVVrl_19135|1|2|Known
+zzIp3ZDKm_9135|1|1|Known
+
+ERR:
+Error: near line 14: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+-411.0|1|Not Max|6
+-759666.7|1|Not Max|6
+-203515.909224|1|Not Max|6
+-405010.73234|1|Not Max|6
+235040.249566|1|Max|6
+98481443|z1TslBt0sWwrEYQ_9335|8
+878|yB4cM_9335|3
+98057600|RG7VM8YslGd6TSfij_9335|8
+198795100|GYFZpwDxOQ_19335|9
+97664668|1lXDT4pS6pB2poFSR4N_9335|8
+||
+
+878
+97664668
+98057600
+98481443
+198795100
+bTyQqt4AF0m9fTq_9135|1|5|Known
+dzZNLK0o7fBsiANTUxfw_9135|1|4|Known
+h2GWzN8ZEI6onIH2_9135|1|3|Known
+ldfCEzafmSVVrl_19135|1|2|Known
+zzIp3ZDKm_9135|1|1|Known
+
+ERR:
+Runtime error near line 14: datatype mismatch (20)
+

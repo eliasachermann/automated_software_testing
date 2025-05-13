@@ -1,0 +1,84 @@
+SQL:
+CREATE TABLE t_LLTk7qozAT (c_orK TEXT PRIMARY KEY, c_0iTOqZzq REAL, c_TDeiqSG NUMERIC, c_84tYwY TEXT DEFAULT 'EtHEMAfzGefYZJ', c_b4z7ilex4O INTEGER DEFAULT -490429, c_wck49eLM INTEGER, c_fewU7 TEXT, c_W6nZz NUMERIC);
+ALTER TABLE t_LLTk7qozAT RENAME COLUMN c_wck49eLM TO c_bJEaAG;
+ALTER TABLE t_LLTk7qozAT ADD COLUMN c_WcmzW5sw REAL;
+INSERT OR IGNORE INTO t_LLTk7qozAT (c_orK, c_0iTOqZzq, c_TDeiqSG, c_84tYwY, c_b4z7ilex4O, c_bJEaAG, c_fewU7, c_W6nZz, c_WcmzW5sw) VALUES ('4OJcplerW4b9AA_9085', 913523.7, 92763721, 'a6mOK9QDeuQey0R_9385', 95486391, 95199240, 'Uu96SYmN_9685', 97041927, 557494.7891790001);
+INSERT OR IGNORE INTO t_LLTk7qozAT (c_orK, c_0iTOqZzq, c_TDeiqSG, c_84tYwY, c_b4z7ilex4O, c_bJEaAG, c_fewU7, c_W6nZz, c_WcmzW5sw) VALUES ('x8uU5Hlam8KR_9085', 328812.9, 93649057, 'OdFqR8PlC_9385', 95633526, 96307584, 'YQC2kcgT_9685', 97783611, -120284.26449);
+REPLACE INTO t_LLTk7qozAT (c_orK, c_0iTOqZzq, c_TDeiqSG, c_84tYwY, c_b4z7ilex4O, c_bJEaAG, c_fewU7, c_W6nZz, c_WcmzW5sw) VALUES ('BPQg_9085', -584169.905, 92404884, 'fbZYdSA53MtS_9385', 94470447, 95392846, 'jVLus93_9685', 97470275, -609596.44), ('FHuEI_19085', 995613.87181, 193383940, '2tzpxEaRbO9KSeNWr_19385', 194606926, 196603802, 'f5ABPrh3skLGB_19685', 197169462, 1121178.9024999999);
+INSERT OR IGNORE INTO t_LLTk7qozAT (c_orK, c_0iTOqZzq, c_TDeiqSG, c_84tYwY, c_b4z7ilex4O, c_bJEaAG, c_fewU7, c_W6nZz, c_WcmzW5sw) SELECT 'rCgD7_9085', -782510.8, 93278907, 'UWE1O_9385', 95740291, 95535653, 'hNnlx1No9T5oNMu8Jm_9685', 98796360, -365860.65;
+INSERT OR REPLACE INTO t_LLTk7qozAT (c_orK, c_0iTOqZzq, c_TDeiqSG, c_84tYwY, c_b4z7ilex4O, c_bJEaAG, c_fewU7, c_W6nZz, c_WcmzW5sw) VALUES ('oxVIbBVxnaP7m_9085', -760775.1, 92051617, 'NbgWA6YOcAeM_9385', 94695233, 96143107, 'xGb1_9685', 98331228, 709222.7), ('Vun_19085', 806770.2275, 192037418, 's_19385', 194280224, 195868595, 'HzKTWlc9XujyaKIoNbx4_19685', 196891144, 109518.625);
+INSERT INTO t_LLTk7qozAT DEFAULT VALUES;
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_LLTk7qozAT LIMIT 1;
+            
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_LLTk7qozAT
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+SELECT NOT AVG(t_LLTk7qozAT.c_W6nZz), x'174E9FC1' AS alias_xwC, NOT PRINTF('qgaGls', t_LLTk7qozAT.c_orK, t_LLTk7qozAT.c_bJEaAG, t_LLTk7qozAT.c_orK) AS alias_AXO, EXISTS (SELECT 1 FROM t_LLTk7qozAT LIMIT 1) FROM t_LLTk7qozAT UNION ALL SELECT t_LLTk7qozAT.c_W6nZz, c_b4z7ilex4O, - CASE t_LLTk7qozAT.c_0iTOqZzq WHEN t_LLTk7qozAT.c_TDeiqSG THEN t_LLTk7qozAT.c_TDeiqSG WHEN t_LLTk7qozAT.c_fewU7 THEN x'F58694' WHEN TRUE THEN t_LLTk7qozAT.c_WcmzW5sw END AS alias_Pjs, t_LLTk7qozAT.c_orK FROM t_LLTk7qozAT GROUP BY c_84tYwY ORDER BY 3 DESC;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+2|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+3|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+4|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+5|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+6|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+7|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+8|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+0|N��|1|1
+197169462|194606926||FHuEI_19085
+|-490429||
+98331228|94695233||oxVIbBVxnaP7m_9085
+97783611|95633526||x8uU5Hlam8KR_9085
+98796360|95740291||rCgD7_9085
+97041927|95486391||4OJcplerW4b9AA_9085
+97470275|94470447||BPQg_9085
+196891144|194280224||Vun_19085
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+2|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+3|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+4|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+5|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+6|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+7|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+8|1|text|[3,4,5]|8|1.0|[1,1,1,1,1,1,1,1]|{"8":"text","1":"text","3":"text","4":"text","7":"text","6":"text","5":"text","2":"text"}
+0|N��|1|1
+196891144|194280224||Vun_19085
+97470275|94470447||BPQg_9085
+97041927|95486391||4OJcplerW4b9AA_9085
+98796360|95740291||rCgD7_9085
+97783611|95633526||x8uU5Hlam8KR_9085
+98331228|94695233||oxVIbBVxnaP7m_9085
+|-490429||
+197169462|194606926||FHuEI_19085
+
+ERR:
+

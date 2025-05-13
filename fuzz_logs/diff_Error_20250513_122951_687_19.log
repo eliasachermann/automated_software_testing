@@ -1,0 +1,100 @@
+SQL:
+CREATE TABLE t_77xo (c_QVuanDvt NUMERIC DEFAULT -5458, c_odklaBYH INTEGER PRIMARY KEY, c_utZojEKx INTEGER, c_5b2jqruvw NUMERIC, c_kWHqakxaQ NUMERIC DEFAULT -949201, FOREIGN KEY (c_5b2jqruvw) REFERENCES t_ovL0R(c_pr1iW));
+
+                CREATE TRIGGER trg_WjzX0
+                AFTER DELETE ON t_77xo
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_77xo) > 1000;
+                END;
+REPLACE INTO t_77xo (c_QVuanDvt, c_odklaBYH, c_utZojEKx, c_5b2jqruvw, c_kWHqakxaQ) VALUES (93075343, 94387322, 96278500, 97840223, 98047479);
+WITH cte_o5q AS (SELECT 1) INSERT OR IGNORE INTO t_77xo (c_QVuanDvt, c_odklaBYH, c_utZojEKx, c_5b2jqruvw, c_kWHqakxaQ) VALUES (94729468, 94692391, 95461901, 97568350, 98821212);
+REPLACE INTO t_77xo (c_QVuanDvt, c_odklaBYH, c_utZojEKx, c_5b2jqruvw, c_kWHqakxaQ) VALUES (92948692, 95247214, 95723633, 96372403, 98480897);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_77xo SET c_5b2jqruvw = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_77xo);
+UPDATE OR IGNORE t_77xo SET c_odklaBYH = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_77xo);
+WITH cte_n1R AS (SELECT 1) INSERT OR REPLACE INTO t_77xo (c_QVuanDvt, c_odklaBYH, c_utZojEKx, c_5b2jqruvw, c_kWHqakxaQ) SELECT 93194922, 95207894, 95437216, 96339309, 96975729;
+COMMIT;
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_77xo
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_5b2jqruvw,
+                        (SELECT COUNT(*) FROM t_77xo t2 WHERE t2.c_5b2jqruvw = t1.c_5b2jqruvw) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_77xo t3 WHERE t3.c_5b2jqruvw > t1.c_5b2jqruvw LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_5b2jqruvw FROM t_77xo
+                        )) as distinct_values_count
+                    FROM t_77xo t1
+                    WHERE t1.c_5b2jqruvw IN (
+                        SELECT c_5b2jqruvw 
+                        FROM t_77xo 
+                        WHERE typeof(c_5b2jqruvw) NOT IN ('null')
+                        GROUP BY c_5b2jqruvw
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_77xo t4 WHERE t4.c_5b2jqruvw = t1.c_5b2jqruvw) DESC
+                    LIMIT 10;
+                    
+WITH cte_dK2 AS (SELECT * FROM t_77xo LIMIT 10) SELECT ((t_77xo.c_kWHqakxaQ - t_77xo.c_odklaBYH) - t_77xo.c_5b2jqruvw) AS alias_Fgt FROM t_77xo WHERE CASE WHEN COALESCE(NULL, t_77xo.c_odklaBYH) THEN LIKE(t_77xo.c_5b2jqruvw, t_77xo.c_QVuanDvt) WHEN + t_77xo.c_kWHqakxaQ THEN + -957625 ELSE CASE FALSE WHEN t_77xo.c_odklaBYH THEN t_77xo.c_utZojEKx WHEN NULL THEN t_77xo.c_5b2jqruvw END END UNION SELECT - CASE t_77xo.c_5b2jqruvw WHEN t_77xo.c_5b2jqruvw THEN t_77xo.c_5b2jqruvw ELSE x'E8740189' END AS alias_eGK FROM t_77xo WHERE EXISTS (SELECT 1 FROM t_77xo LIMIT 1) ORDER BY 1 ASC LIMIT 38;
+SELECT t_77xo.c_5b2jqruvw, UPPER(t_77xo.c_5b2jqruvw) AS computed_c_5b2jqruvw FROM t_77xo ORDER BY t_77xo.c_5b2jqruvw ASC LIMIT 10;
+SELECT t_77xo.c_5b2jqruvw, t_77xo.c_utZojEKx, t_77xo.c_odklaBYH, t_77xo.c_QVuanDvt FROM t_77xo ORDER BY t_77xo.c_QVuanDvt ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+97568350|1|Max|4
+96339309|1|Not Max|4
+96372403|1|Not Max|4
+-97568350
+-96372403
+-96339309
+0
+|
+96339309|96339309
+96372403|96372403
+97568350|97568350
+96372403|95723633|95247214|92948692
+|96278500|94387322|93075343
+96339309|95437216|95207894|93194922
+97568350|95461901|94692391|94729468
+
+ERR:
+Error: near line 13: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+97568350|1|Max|4
+96339309|1|Not Max|4
+96372403|1|Not Max|4
+-97568350
+-96372403
+-96339309
+0
+|
+96339309|96339309
+96372403|96372403
+97568350|97568350
+96372403|95723633|95247214|92948692
+|96278500|94387322|93075343
+96339309|95437216|95207894|93194922
+97568350|95461901|94692391|94729468
+
+ERR:
+Runtime error near line 13: datatype mismatch (20)
+

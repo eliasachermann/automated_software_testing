@@ -1,0 +1,113 @@
+SQL:
+CREATE TABLE t_DDoPubw (c_MU5Ky4erfx TEXT PRIMARY KEY DEFAULT 'Xn3RGDphKGJY0AgDDmyO', c_jpdtAMI9g5 NUMERIC DEFAULT -483743, c_uAg REAL, c_6oYhlUxu91 INTEGER, c_VzknK TEXT, c_wAdU9g2 TEXT, UNIQUE (c_MU5Ky4erfx, c_jpdtAMI9g5, c_6oYhlUxu91));
+ALTER TABLE t_DDoPubw RENAME TO t_s2FWOn0RL;
+ALTER TABLE t_s2FWOn0RL ADD COLUMN c_2YZnXMv3xf TEXT DEFAULT 'y';
+REPLACE INTO t_s2FWOn0RL (c_MU5Ky4erfx, c_jpdtAMI9g5, c_uAg, c_6oYhlUxu91, c_VzknK, c_wAdU9g2, c_2YZnXMv3xf) SELECT 'CJZ6ipYRUulN8Jh7C_8825', 89656249, 951414.20995, 91320604, 'vny3yo8QfFkEIbTymZE_9225', 'DZpjIe5lQOQHZlzh3_9325', 'PgtgQsBwMjknNIeLrc_9425';
+WITH cte_eAV AS (SELECT 1) REPLACE INTO t_s2FWOn0RL (c_MU5Ky4erfx, c_jpdtAMI9g5, c_uAg, c_6oYhlUxu91, c_VzknK, c_wAdU9g2, c_2YZnXMv3xf) VALUES ('h9IEDfWFY2zK_8825', 89936532, 414540.0, 90640196, 'GDtziTBfnj9PLudEb_9225', '28cJg_9325', 'GOlMIrTXHCJHYxy_9425');
+INSERT OR IGNORE INTO t_s2FWOn0RL (c_MU5Ky4erfx, c_jpdtAMI9g5, c_uAg, c_6oYhlUxu91, c_VzknK, c_wAdU9g2, c_2YZnXMv3xf) SELECT 'dpWxmrgzQiKnW02_8825', 90112449, -360361.53, 90361655, 'mMmilBO89ltj4R_9225', 'oHVlH4_9325', 't3bfju9b9mwu3rPMC_9425';
+INSERT OR REPLACE INTO t_s2FWOn0RL DEFAULT VALUES;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_s2FWOn0RL LIMIT 1;
+            
+
+                SELECT c_MU5Ky4erfx, c_uAg,
+                    ROW_NUMBER() OVER (PARTITION BY c_uAg) as row_num,
+                    RANK() OVER (PARTITION BY c_uAg ORDER BY c_MU5Ky4erfx) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_uAg ORDER BY c_MU5Ky4erfx) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_MU5Ky4erfx) IN ('integer','real') THEN c_MU5Ky4erfx ELSE 0 END) 
+                        OVER (PARTITION BY c_uAg ORDER BY c_MU5Ky4erfx 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_MU5Ky4erfx) IN ('integer','real') THEN c_MU5Ky4erfx ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_uAg ORDER BY c_MU5Ky4erfx) as prev_value,
+                    LEAD(CASE WHEN typeof(c_MU5Ky4erfx) IN ('integer','real') THEN c_MU5Ky4erfx ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_uAg ORDER BY c_MU5Ky4erfx) as next_value
+                FROM t_s2FWOn0RL
+                ORDER BY c_uAg, c_MU5Ky4erfx
+                LIMIT 20;
+                
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_jpdtAMI9g5,
+                        'col2', c_wAdU9g2
+                    ) as row_data
+                    FROM t_s2FWOn0RL
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_l) 
+                WHERE col_l IN (
+                    SELECT (LAST_VALUE(1) OVER(PARTITION BY 1)) FROM (VALUES (TRUE))
+                )
+            );
+SELECT t_s2FWOn0RL.c_VzknK, t_s2FWOn0RL.c_6oYhlUxu91, t_s2FWOn0RL.c_2YZnXMv3xf, t_s2FWOn0RL.c_MU5Ky4erfx FROM t_s2FWOn0RL ORDER BY t_s2FWOn0RL.c_MU5Ky4erfx ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+Xn3RGDphKGJY0AgDDmyO||1|1|1|0|0|0
+dpWxmrgzQiKnW02_8825|-360361.53|1|1|1|0|0|0
+h9IEDfWFY2zK_8825|414540.0|1|1|1|0|0|0
+CJZ6ipYRUulN8Jh7C_8825|951414.20995|1|1|1|0|0|0
+1|{"id":1,"col1":89656249,"col2":"DZpjIe5lQOQHZlzh3_9325"}|89656249|DZpjIe5lQOQHZlzh3_9325|["{\"id\":1,\"col1\":89656249,\"col2\":\"DZpjIe5lQOQHZlzh3_9325\"}"]|object|col1|89656249|integer
+1|{"id":1,"col1":89656249,"col2":"DZpjIe5lQOQHZlzh3_9325"}|89656249|DZpjIe5lQOQHZlzh3_9325|["{\"id\":1,\"col1\":89656249,\"col2\":\"DZpjIe5lQOQHZlzh3_9325\"}"]|object|col2|DZpjIe5lQOQHZlzh3_9325|text
+1|{"id":1,"col1":89656249,"col2":"DZpjIe5lQOQHZlzh3_9325"}|89656249|DZpjIe5lQOQHZlzh3_9325|["{\"id\":1,\"col1\":89656249,\"col2\":\"DZpjIe5lQOQHZlzh3_9325\"}"]|object|id|1|integer
+2|{"id":2,"col1":89936532,"col2":"28cJg_9325"}|89936532|28cJg_9325|["{\"id\":2,\"col1\":89936532,\"col2\":\"28cJg_9325\"}"]|object|col1|89936532|integer
+2|{"id":2,"col1":89936532,"col2":"28cJg_9325"}|89936532|28cJg_9325|["{\"id\":2,\"col1\":89936532,\"col2\":\"28cJg_9325\"}"]|object|col2|28cJg_9325|text
+2|{"id":2,"col1":89936532,"col2":"28cJg_9325"}|89936532|28cJg_9325|["{\"id\":2,\"col1\":89936532,\"col2\":\"28cJg_9325\"}"]|object|id|2|integer
+3|{"id":3,"col1":90112449,"col2":"oHVlH4_9325"}|90112449|oHVlH4_9325|["{\"id\":3,\"col1\":90112449,\"col2\":\"oHVlH4_9325\"}"]|object|col1|90112449|integer
+3|{"id":3,"col1":90112449,"col2":"oHVlH4_9325"}|90112449|oHVlH4_9325|["{\"id\":3,\"col1\":90112449,\"col2\":\"oHVlH4_9325\"}"]|object|col2|oHVlH4_9325|text
+3|{"id":3,"col1":90112449,"col2":"oHVlH4_9325"}|90112449|oHVlH4_9325|["{\"id\":3,\"col1\":90112449,\"col2\":\"oHVlH4_9325\"}"]|object|id|3|integer
+4|{"id":4,"col1":-483743,"col2":null}|-483743||["{\"id\":4,\"col1\":-483743,\"col2\":null}"]|object|col1|-483743|integer
+4|{"id":4,"col1":-483743,"col2":null}|-483743||["{\"id\":4,\"col1\":-483743,\"col2\":null}"]|object|col2||null
+4|{"id":4,"col1":-483743,"col2":null}|-483743||["{\"id\":4,\"col1\":-483743,\"col2\":null}"]|object|id|4|integer
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+Xn3RGDphKGJY0AgDDmyO||1|1|1|0|0|0
+dpWxmrgzQiKnW02_8825|-360361.53|1|1|1|0|0|0
+h9IEDfWFY2zK_8825|414540.0|1|1|1|0|0|0
+CJZ6ipYRUulN8Jh7C_8825|951414.20995|1|1|1|0|0|0
+1|{"id":1,"col1":89656249,"col2":"DZpjIe5lQOQHZlzh3_9325"}|89656249|DZpjIe5lQOQHZlzh3_9325|["{\"id\":1,\"col1\":89656249,\"col2\":\"DZpjIe5lQOQHZlzh3_9325\"}"]|object|col1|89656249|integer
+1|{"id":1,"col1":89656249,"col2":"DZpjIe5lQOQHZlzh3_9325"}|89656249|DZpjIe5lQOQHZlzh3_9325|["{\"id\":1,\"col1\":89656249,\"col2\":\"DZpjIe5lQOQHZlzh3_9325\"}"]|object|col2|DZpjIe5lQOQHZlzh3_9325|text
+1|{"id":1,"col1":89656249,"col2":"DZpjIe5lQOQHZlzh3_9325"}|89656249|DZpjIe5lQOQHZlzh3_9325|["{\"id\":1,\"col1\":89656249,\"col2\":\"DZpjIe5lQOQHZlzh3_9325\"}"]|object|id|1|integer
+2|{"id":2,"col1":89936532,"col2":"28cJg_9325"}|89936532|28cJg_9325|["{\"id\":2,\"col1\":89936532,\"col2\":\"28cJg_9325\"}"]|object|col1|89936532|integer
+2|{"id":2,"col1":89936532,"col2":"28cJg_9325"}|89936532|28cJg_9325|["{\"id\":2,\"col1\":89936532,\"col2\":\"28cJg_9325\"}"]|object|col2|28cJg_9325|text
+2|{"id":2,"col1":89936532,"col2":"28cJg_9325"}|89936532|28cJg_9325|["{\"id\":2,\"col1\":89936532,\"col2\":\"28cJg_9325\"}"]|object|id|2|integer
+3|{"id":3,"col1":90112449,"col2":"oHVlH4_9325"}|90112449|oHVlH4_9325|["{\"id\":3,\"col1\":90112449,\"col2\":\"oHVlH4_9325\"}"]|object|col1|90112449|integer
+3|{"id":3,"col1":90112449,"col2":"oHVlH4_9325"}|90112449|oHVlH4_9325|["{\"id\":3,\"col1\":90112449,\"col2\":\"oHVlH4_9325\"}"]|object|col2|oHVlH4_9325|text
+3|{"id":3,"col1":90112449,"col2":"oHVlH4_9325"}|90112449|oHVlH4_9325|["{\"id\":3,\"col1\":90112449,\"col2\":\"oHVlH4_9325\"}"]|object|id|3|integer
+4|{"id":4,"col1":-483743,"col2":null}|-483743||["{\"id\":4,\"col1\":-483743,\"col2\":null}"]|object|col1|-483743|integer
+4|{"id":4,"col1":-483743,"col2":null}|-483743||["{\"id\":4,\"col1\":-483743,\"col2\":null}"]|object|col2||null
+4|{"id":4,"col1":-483743,"col2":null}|-483743||["{\"id\":4,\"col1\":-483743,\"col2\":null}"]|object|id|4|integer
+1
+vny3yo8QfFkEIbTymZE_9225|91320604|PgtgQsBwMjknNIeLrc_9425|CJZ6ipYRUulN8Jh7C_8825
+||y|Xn3RGDphKGJY0AgDDmyO
+mMmilBO89ltj4R_9225|90361655|t3bfju9b9mwu3rPMC_9425|dpWxmrgzQiKnW02_8825
+GDtziTBfnj9PLudEb_9225|90640196|GOlMIrTXHCJHYxy_9425|h9IEDfWFY2zK_8825
+
+ERR:
+

@@ -1,0 +1,144 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_aM0 (c_rvgzsU0Zi INTEGER PRIMARY KEY AUTOINCREMENT, c_3iDC REAL);
+INSERT OR REPLACE INTO t_aM0 (c_rvgzsU0Zi, c_3iDC) VALUES (96941517, 307999.5), (195838520, -341732.9);
+INSERT OR IGNORE INTO t_aM0 (c_rvgzsU0Zi, c_3iDC) VALUES (97070569, -286093.303883);
+REPLACE INTO t_aM0 (c_rvgzsU0Zi, c_3iDC) VALUES (96464217, -95504.69);
+INSERT OR REPLACE INTO t_aM0 (c_rvgzsU0Zi, c_3iDC) VALUES (95234792, -158678.94997), (196840462, -303599.732209);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_aM0 SET c_rvgzsU0Zi = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_aM0);
+COMMIT;
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_3iDC,
+                        'col2', c_rvgzsU0Zi
+                    ) as row_data
+                    FROM t_aM0
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+SELECT t_aM0.c_3iDC, t_aM0.c_rvgzsU0Zi, TYPEOF(t_aM0.c_rvgzsU0Zi) AS computed_c_rvgzsU0Zi FROM t_aM0 ORDER BY t_aM0.c_rvgzsU0Zi ASC LIMIT 10;
+SELECT t_aM0.c_rvgzsU0Zi, LENGTH(t_aM0.c_rvgzsU0Zi) AS computed_c_rvgzsU0Zi FROM t_aM0 ORDER BY t_aM0.c_rvgzsU0Zi ASC LIMIT 10;
+
+                SELECT DISTINCT t_aM0.c_3iDC,
+                    COUNT(*) OVER (PARTITION BY t_aM0.c_rvgzsU0Zi) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_aM0.c_3iDC) IN ('null') THEN 0 
+                            ELSE t_aM0.c_3iDC END DESC,
+                            t_aM0.c_rvgzsU0Zi ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_aM0.c_3iDC IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_aM0
+                WHERE t_aM0.c_3iDC IS NOT NULL
+                GROUP BY t_aM0.c_3iDC, t_aM0.c_rvgzsU0Zi
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_aM0.c_3iDC ASC, t_aM0.c_rvgzsU0Zi ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_aM0.c_3iDC,
+                    t_aM0.c_rvgzsU0Zi,
+                    SUM(CASE WHEN typeof(t_aM0.c_3iDC) IN ('integer', 'real', 'numeric') THEN t_aM0.c_3iDC ELSE 0 END) 
+                        OVER (PARTITION BY t_aM0.c_rvgzsU0Zi ORDER BY t_aM0.c_3iDC ASC) as window_total
+                FROM t_aM0
+                GROUP BY t_aM0.c_3iDC, t_aM0.c_rvgzsU0Zi
+                HAVING SUM(CASE WHEN typeof(t_aM0.c_3iDC) IN ('integer', 'real', 'numeric') THEN t_aM0.c_3iDC ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_aM0.c_3iDC ASC, t_aM0.c_rvgzsU0Zi ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+95234792|{"id":95234792,"col1":-158678.94997,"col2":95234792}|-158678.94997|95234792|["{\"id\":95234792,\"col1\":-158678.94997,\"col2\":95234792}"]|object|col1|-158678.94997|real
+95234792|{"id":95234792,"col1":-158678.94997,"col2":95234792}|-158678.94997|95234792|["{\"id\":95234792,\"col1\":-158678.94997,\"col2\":95234792}"]|object|col2|95234792|integer
+95234792|{"id":95234792,"col1":-158678.94997,"col2":95234792}|-158678.94997|95234792|["{\"id\":95234792,\"col1\":-158678.94997,\"col2\":95234792}"]|object|id|95234792|integer
+96464217|{"id":96464217,"col1":-95504.69,"col2":96464217}|-95504.69|96464217|["{\"id\":96464217,\"col1\":-95504.69,\"col2\":96464217}"]|object|col1|-95504.69|real
+96464217|{"id":96464217,"col1":-95504.69,"col2":96464217}|-95504.69|96464217|["{\"id\":96464217,\"col1\":-95504.69,\"col2\":96464217}"]|object|col2|96464217|integer
+96464217|{"id":96464217,"col1":-95504.69,"col2":96464217}|-95504.69|96464217|["{\"id\":96464217,\"col1\":-95504.69,\"col2\":96464217}"]|object|id|96464217|integer
+96941517|{"id":96941517,"col1":307999.5,"col2":96941517}|307999.5|96941517|["{\"id\":96941517,\"col1\":307999.5,\"col2\":96941517}"]|object|col1|307999.5|real
+96941517|{"id":96941517,"col1":307999.5,"col2":96941517}|307999.5|96941517|["{\"id\":96941517,\"col1\":307999.5,\"col2\":96941517}"]|object|col2|96941517|integer
+96941517|{"id":96941517,"col1":307999.5,"col2":96941517}|307999.5|96941517|["{\"id\":96941517,\"col1\":307999.5,\"col2\":96941517}"]|object|id|96941517|integer
+97070569|{"id":97070569,"col1":-286093.303883,"col2":97070569}|-286093.303883|97070569|["{\"id\":97070569,\"col1\":-286093.303883,\"col2\":97070569}"]|object|col1|-286093.303883|real
+97070569|{"id":97070569,"col1":-286093.303883,"col2":97070569}|-286093.303883|97070569|["{\"id\":97070569,\"col1\":-286093.303883,\"col2\":97070569}"]|object|col2|97070569|integer
+97070569|{"id":97070569,"col1":-286093.303883,"col2":97070569}|-286093.303883|97070569|["{\"id\":97070569,\"col1\":-286093.303883,\"col2\":97070569}"]|object|id|97070569|integer
+195838520|{"id":195838520,"col1":-341732.9,"col2":195838520}|-341732.9|195838520|["{\"id\":195838520,\"col1\":-341732.9,\"col2\":195838520}"]|object|col1|-341732.9|real
+195838520|{"id":195838520,"col1":-341732.9,"col2":195838520}|-341732.9|195838520|["{\"id\":195838520,\"col1\":-341732.9,\"col2\":195838520}"]|object|col2|195838520|integer
+195838520|{"id":195838520,"col1":-341732.9,"col2":195838520}|-341732.9|195838520|["{\"id\":195838520,\"col1\":-341732.9,\"col2\":195838520}"]|object|id|195838520|integer
+-158678.94997|95234792|integer
+-95504.69|96464217|integer
+307999.5|96941517|integer
+-286093.303883|97070569|integer
+-341732.9|195838520|integer
+-303599.732209|196840462|integer
+95234792|8
+96464217|8
+96941517|8
+97070569|8
+195838520|9
+196840462|9
+-341732.9|1|6|Known
+-303599.732209|1|5|Known
+-286093.303883|1|4|Known
+-158678.94997|1|3|Known
+-95504.69|1|2|Known
+307999.5|1|1|Known
+307999.5|96941517|307999.5
+
+ERR:
+Error: near line 7: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+95234792|{"id":95234792,"col1":-158678.94997,"col2":95234792}|-158678.94997|95234792|["{\"id\":95234792,\"col1\":-158678.94997,\"col2\":95234792}"]|object|col1|-158678.94997|real
+95234792|{"id":95234792,"col1":-158678.94997,"col2":95234792}|-158678.94997|95234792|["{\"id\":95234792,\"col1\":-158678.94997,\"col2\":95234792}"]|object|col2|95234792|integer
+95234792|{"id":95234792,"col1":-158678.94997,"col2":95234792}|-158678.94997|95234792|["{\"id\":95234792,\"col1\":-158678.94997,\"col2\":95234792}"]|object|id|95234792|integer
+96464217|{"id":96464217,"col1":-95504.69,"col2":96464217}|-95504.69|96464217|["{\"id\":96464217,\"col1\":-95504.69,\"col2\":96464217}"]|object|col1|-95504.69|real
+96464217|{"id":96464217,"col1":-95504.69,"col2":96464217}|-95504.69|96464217|["{\"id\":96464217,\"col1\":-95504.69,\"col2\":96464217}"]|object|col2|96464217|integer
+96464217|{"id":96464217,"col1":-95504.69,"col2":96464217}|-95504.69|96464217|["{\"id\":96464217,\"col1\":-95504.69,\"col2\":96464217}"]|object|id|96464217|integer
+96941517|{"id":96941517,"col1":307999.5,"col2":96941517}|307999.5|96941517|["{\"id\":96941517,\"col1\":307999.5,\"col2\":96941517}"]|object|col1|307999.5|real
+96941517|{"id":96941517,"col1":307999.5,"col2":96941517}|307999.5|96941517|["{\"id\":96941517,\"col1\":307999.5,\"col2\":96941517}"]|object|col2|96941517|integer
+96941517|{"id":96941517,"col1":307999.5,"col2":96941517}|307999.5|96941517|["{\"id\":96941517,\"col1\":307999.5,\"col2\":96941517}"]|object|id|96941517|integer
+97070569|{"id":97070569,"col1":-286093.303883,"col2":97070569}|-286093.303883|97070569|["{\"id\":97070569,\"col1\":-286093.303883,\"col2\":97070569}"]|object|col1|-286093.303883|real
+97070569|{"id":97070569,"col1":-286093.303883,"col2":97070569}|-286093.303883|97070569|["{\"id\":97070569,\"col1\":-286093.303883,\"col2\":97070569}"]|object|col2|97070569|integer
+97070569|{"id":97070569,"col1":-286093.303883,"col2":97070569}|-286093.303883|97070569|["{\"id\":97070569,\"col1\":-286093.303883,\"col2\":97070569}"]|object|id|97070569|integer
+195838520|{"id":195838520,"col1":-341732.9,"col2":195838520}|-341732.9|195838520|["{\"id\":195838520,\"col1\":-341732.9,\"col2\":195838520}"]|object|col1|-341732.9|real
+195838520|{"id":195838520,"col1":-341732.9,"col2":195838520}|-341732.9|195838520|["{\"id\":195838520,\"col1\":-341732.9,\"col2\":195838520}"]|object|col2|195838520|integer
+195838520|{"id":195838520,"col1":-341732.9,"col2":195838520}|-341732.9|195838520|["{\"id\":195838520,\"col1\":-341732.9,\"col2\":195838520}"]|object|id|195838520|integer
+-158678.94997|95234792|integer
+-95504.69|96464217|integer
+307999.5|96941517|integer
+-286093.303883|97070569|integer
+-341732.9|195838520|integer
+-303599.732209|196840462|integer
+95234792|8
+96464217|8
+96941517|8
+97070569|8
+195838520|9
+196840462|9
+-341732.9|1|6|Known
+-303599.732209|1|5|Known
+-286093.303883|1|4|Known
+-158678.94997|1|3|Known
+-95504.69|1|2|Known
+307999.5|1|1|Known
+307999.5|96941517|307999.5
+
+ERR:
+Runtime error near line 7: datatype mismatch (20)
+

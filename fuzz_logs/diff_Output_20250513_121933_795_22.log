@@ -1,0 +1,84 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_LBOfngtU (c_fVEuug INTEGER);
+CREATE TABLE t_Yu45D (c_9cf REAL, c_Wj8D4PS TEXT, c_Ux90ys9aN NUMERIC, FOREIGN KEY (c_Wj8D4PS) REFERENCES t_iZ7T2(c_gF2fY));
+REPLACE INTO t_LBOfngtU (c_fVEuug) SELECT 88192860;
+INSERT OR REPLACE INTO t_LBOfngtU (c_fVEuug) SELECT 88674658;
+INSERT OR IGNORE INTO t_LBOfngtU (c_fVEuug) VALUES (88656443);
+INSERT OR IGNORE INTO t_LBOfngtU (c_fVEuug) VALUES (87564051), (187079434);
+REPLACE INTO t_Yu45D (c_9cf, c_Wj8D4PS, c_Ux90ys9aN) VALUES (1034937.85, 'jxwNhm8xui_8873', 90112883);
+REPLACE INTO t_Yu45D (c_9cf, c_Wj8D4PS, c_Ux90ys9aN) VALUES (-183365.59999999998, '8i7DPehuvLkwFgg0_8873', 89488512);
+INSERT OR IGNORE INTO t_Yu45D (c_9cf, c_Wj8D4PS, c_Ux90ys9aN) VALUES (4434.5, 'mU54nOAUBsl_8873', 89609923);
+INSERT INTO t_LBOfngtU DEFAULT VALUES;
+
+
+                    SELECT 
+                        t1.c_fVEuug,
+                        (SELECT COUNT(*) FROM t_LBOfngtU t2 WHERE t2.c_fVEuug = t1.c_fVEuug) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_LBOfngtU t3 WHERE t3.c_fVEuug > t1.c_fVEuug LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_fVEuug FROM t_LBOfngtU
+                        )) as distinct_values_count
+                    FROM t_LBOfngtU t1
+                    WHERE t1.c_fVEuug IN (
+                        SELECT c_fVEuug 
+                        FROM t_LBOfngtU 
+                        WHERE typeof(c_fVEuug) NOT IN ('null')
+                        GROUP BY c_fVEuug
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_LBOfngtU t4 WHERE t4.c_fVEuug = t1.c_fVEuug) DESC
+                    LIMIT 10;
+                    
+SELECT t_Yu45D.c_Wj8D4PS as t_Yu45D_val, t_LBOfngtU.c_fVEuug as t_LBOfngtU_val
+FROM t_Yu45D
+LEFT OUTER JOIN t_LBOfngtU ON t_Yu45D.ROWID = t_LBOfngtU.ROWID
+WHERE t_Yu45D.c_Wj8D4PS IS NOT NULL
+ORDER BY t_Yu45D.c_Wj8D4PS
+LIMIT 20;
+SELECT *, *, x'CF', EXISTS (SELECT 1 FROM t_LBOfngtU LIMIT 1) AS alias_U5v, * FROM t_LBOfngtU WHERE c_fVEuug IN (SELECT t_LBOfngtU.c_fVEuug FROM t_LBOfngtU LIMIT 5) GROUP BY c_fVEuug ORDER BY 4 DESC LIMIT 81;
+SELECT t_Yu45D.c_Ux90ys9aN, t_Yu45D.c_Wj8D4PS, t_Yu45D.c_9cf, LOWER(t_Yu45D.c_Wj8D4PS) AS computed_c_Wj8D4PS FROM t_Yu45D ORDER BY t_Yu45D.c_Wj8D4PS ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+88192860|1|Not Max|6
+88674658|1|Not Max|6
+88656443|1|Not Max|6
+87564051|1|Not Max|6
+187079434|1|Max|6
+8i7DPehuvLkwFgg0_8873|88674658
+jxwNhm8xui_8873|88192860
+mU54nOAUBsl_8873|88656443
+87564051|87564051|�|1|87564051
+88192860|88192860|�|1|88192860
+88656443|88656443|�|1|88656443
+88674658|88674658|�|1|88674658
+187079434|187079434|�|1|187079434
+89488512|8i7DPehuvLkwFgg0_8873|-183365.6|8i7dpehuvlkwfgg0_8873
+90112883|jxwNhm8xui_8873|1034937.85|jxwnhm8xui_8873
+89609923|mU54nOAUBsl_8873|4434.5|mu54noaubsl_8873
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+88192860|1|Not Max|6
+88674658|1|Not Max|6
+88656443|1|Not Max|6
+87564051|1|Not Max|6
+187079434|1|Max|6
+8i7DPehuvLkwFgg0_8873|88674658
+jxwNhm8xui_8873|88192860
+mU54nOAUBsl_8873|88656443
+187079434|187079434|�|1|187079434
+88674658|88674658|�|1|88674658
+88656443|88656443|�|1|88656443
+88192860|88192860|�|1|88192860
+87564051|87564051|�|1|87564051
+89488512|8i7DPehuvLkwFgg0_8873|-183365.6|8i7dpehuvlkwfgg0_8873
+90112883|jxwNhm8xui_8873|1034937.85|jxwnhm8xui_8873
+89609923|mU54nOAUBsl_8873|4434.5|mu54noaubsl_8873
+
+ERR:
+

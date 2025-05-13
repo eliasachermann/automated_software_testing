@@ -1,0 +1,48 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_wi82 (c_8qy INTEGER PRIMARY KEY, c_pPx NUMERIC DEFAULT -713090, c_6xacVC1d TEXT, c_U1nkrSZ4S INTEGER, c_bIpBea TEXT DEFAULT 'K', c_QuD NUMERIC, c_jila2mWz NUMERIC);
+REPLACE INTO t_wi82 (c_8qy, c_pPx, c_6xacVC1d, c_U1nkrSZ4S, c_bIpBea, c_QuD, c_jila2mWz) VALUES (94317260, 95196685, '7NPTUWFrnl3vNm_9582', 97633061, 'imHHsgH9_9782', 99071469, 100635320);
+REPLACE INTO t_wi82 (c_8qy, c_pPx, c_6xacVC1d, c_U1nkrSZ4S, c_bIpBea, c_QuD, c_jila2mWz) VALUES (93128597, 94724768, 'p_9582', 96393267, 'CKBe10U8xXl1_9782', 99061399, 99434341);
+REPLACE INTO t_wi82 (c_8qy, c_pPx, c_6xacVC1d, c_U1nkrSZ4S, c_bIpBea, c_QuD, c_jila2mWz) VALUES (92895302, 94899315, 'O4T_9582', 96409483, 'DHj1Mw6SRGUdJNrFJ_9782', 98265583, 100641886), (193088694, 194489939, 'IQP_19582', 195935049, 'Ctnl1aELs4_19782', 199046719, 200043032);
+WITH cte_5np AS (SELECT 1) REPLACE INTO t_wi82 (c_8qy, c_pPx, c_6xacVC1d, c_U1nkrSZ4S, c_bIpBea, c_QuD, c_jila2mWz) VALUES (92926837, 94492484, 'VunAduOigP4_9582', 97760347, 'i_9782', 98534788, 99762588);
+REPLACE INTO t_wi82 DEFAULT VALUES;
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_wi82 LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_wi82 SET c_U1nkrSZ4S = -245 WHERE ROWID = (SELECT MIN(ROWID) FROM t_wi82);
+UPDATE OR IGNORE t_wi82 SET c_8qy = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_wi82);
+COMMIT;
+SELECT t_wi82.c_pPx FROM t_wi82 ORDER BY t_wi82.c_pPx ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+-713090
+94492484
+94724768
+94899315
+95196685
+194489939
+
+ERR:
+Error: near line 17: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+-713090
+94492484
+94724768
+94899315
+95196685
+194489939
+
+ERR:
+Runtime error near line 17: datatype mismatch (20)
+

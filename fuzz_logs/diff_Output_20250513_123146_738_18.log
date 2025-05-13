@@ -1,0 +1,100 @@
+SQL:
+CREATE TABLE t_WJR8 (c_mJ6 REAL DEFAULT 763129.4511, c_wlh TEXT DEFAULT 'FMn4pjiZsYDWNVjX8vjD', c_ZwjYa8kc TEXT, c_mPNVl TEXT, c_6bL NUMERIC DEFAULT -692121, c_XZeK INTEGER, c_loj2NS1 REAL);
+CREATE TABLE t_1jePLp5V (c_8BU REAL DEFAULT -454586.4, c_5mZmY6hr INTEGER, c_9TX NUMERIC, c_gxQdzagh TEXT, c_b0Pus TEXT, c_RKfTi3uY TEXT COLLATE NOCASE, c_DrRAx46 REAL);
+ALTER TABLE t_1jePLp5V RENAME COLUMN c_RKfTi3uY TO c_2oWVo2T;
+
+                CREATE TRIGGER trg_MUa0T
+                BEFORE DELETE ON t_1jePLp5V
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_1jePLp5V) > 1000;
+                END;
+INSERT OR REPLACE INTO t_WJR8 (c_mJ6, c_wlh, c_ZwjYa8kc, c_mPNVl, c_6bL, c_XZeK, c_loj2NS1) SELECT 554419.315, 'zN77nQcAz_9606', 'AxKJAG_9706', 'nA6PFyJ8kBQeLLIc6_9806', 98430030, 99461530, 661868.13;
+INSERT OR REPLACE INTO t_1jePLp5V (c_8BU, c_5mZmY6hr, c_9TX, c_gxQdzagh, c_b0Pus, c_2oWVo2T, c_DrRAx46) VALUES (50223.9, 95668951, 97016832, 'GcFTScz4L9Yt2loXI_9806', '04D00ZVLqGwLWjEoCl_9906', 'eiKIScoERo1ygoKEw_10006', 197300.48664299998);
+REPLACE INTO t_1jePLp5V (c_8BU, c_5mZmY6hr, c_9TX, c_gxQdzagh, c_b0Pus, c_2oWVo2T, c_DrRAx46) VALUES (1010101.06, 95568256, 96279064, 'xgofCq8IPxxk2nUv1_9806', 'K_9906', 'VoXY2Ff5F9c1808_10006', 29363.949999999997);
+INSERT OR IGNORE INTO t_1jePLp5V (c_8BU, c_5mZmY6hr, c_9TX, c_gxQdzagh, c_b0Pus, c_2oWVo2T, c_DrRAx46) VALUES (399491.736217, 96891887, 96215382, 'MMwG5S9039cr_9806', '832xS6HZirKgpc6OZ4_9906', 'Vdmj5r1_10006', -817706.1), (-353908.01, 195976154, 196940821, '5HVRitGXS4cMwKF_19806', 'k1HZoMWReSxFxVvnVV1X_19906', 'EUlZuZCbFrrhQhxDW_20006', 966943.6);
+REPLACE INTO t_1jePLp5V (c_8BU, c_5mZmY6hr, c_9TX, c_gxQdzagh, c_b0Pus, c_2oWVo2T, c_DrRAx46) SELECT -560534.369527, 95847800, 96981427, 'WuK3Ku_9806', 'cYjau_9906', 'p_10006', 912161.204;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_1jePLp5V LIMIT 1;
+            
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_1jePLp5V
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_b0Pus,
+                        (SELECT COUNT(*) FROM t_1jePLp5V t2 WHERE t2.c_b0Pus = t1.c_b0Pus) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_1jePLp5V t3 WHERE t3.c_b0Pus > t1.c_b0Pus LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_b0Pus FROM t_1jePLp5V
+                        )) as distinct_values_count
+                    FROM t_1jePLp5V t1
+                    WHERE t1.c_b0Pus IN (
+                        SELECT c_b0Pus 
+                        FROM t_1jePLp5V 
+                        WHERE typeof(c_b0Pus) NOT IN ('null')
+                        GROUP BY c_b0Pus
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_1jePLp5V t4 WHERE t4.c_b0Pus = t1.c_b0Pus) DESC
+                    LIMIT 10;
+                    
+SELECT DISTINCT t_WJR8.c_mJ6 IN (SELECT t_1jePLp5V.c_DrRAx46 FROM t_1jePLp5V LIMIT 5), t_WJR8.c_ZwjYa8kc FROM t_WJR8, t_1jePLp5V WHERE CASE t_WJR8.c_XZeK WHEN CASE x'79ACC3' WHEN t_WJR8.c_loj2NS1 THEN t_1jePLp5V.c_b0Pus ELSE t_WJR8.c_loj2NS1 END THEN REPLACE(t_1jePLp5V.c_5mZmY6hr, 'li7x5kgHxSI', 'pwjowNr9a0XXNgmf') WHEN t_WJR8.c_mJ6 THEN FALSE WHEN NULL THEN FALSE ELSE DATETIME(t_WJR8.c_wlh, t_WJR8.c_loj2NS1, t_1jePLp5V.c_8BU) END EXCEPT SELECT DISTINCT t_1jePLp5V.c_9TX, t_WJR8.c_ZwjYa8kc FROM t_WJR8 LEFT OUTER JOIN t_1jePLp5V ON t_WJR8.c_loj2NS1 = t_1jePLp5V.c_gxQdzagh ORDER BY 1 DESC;
+SELECT DISTINCT t_1jePLp5V.c_b0Pus, t_1jePLp5V.c_8BU, t_1jePLp5V.c_8BU, t_1jePLp5V.c_gxQdzagh, + FALSE FROM t_1jePLp5V WHERE c_b0Pus IN (SELECT t_1jePLp5V.c_gxQdzagh FROM t_1jePLp5V LIMIT 5) UNION SELECT JULIANDAY((t_WJR8.c_mJ6 = t_WJR8.c_ZwjYa8kc)), t_WJR8.c_6bL, ((NULL <= TRUE) >> CASE WHEN t_WJR8.c_ZwjYa8kc THEN t_WJR8.c_XZeK WHEN t_WJR8.c_mJ6 THEN t_WJR8.c_mJ6 WHEN NULL THEN TRUE ELSE NULL END), t_WJR8.c_mJ6, t_WJR8.c_XZeK FROM t_WJR8 WHERE NULLIF(CASE t_WJR8.c_mJ6 WHEN t_WJR8.c_mPNVl THEN t_WJR8.c_wlh ELSE t_WJR8.c_6bL END, FALSE) ORDER BY 2 ASC LIMIT 69;
+SELECT DISTINCT CASE TRUE WHEN NULL THEN CASE WHEN t_WJR8.c_XZeK THEN 660874 WHEN 'HwVTgyD' THEN t_WJR8.c_XZeK ELSE TRUE END WHEN CASE NULL WHEN t_WJR8.c_ZwjYa8kc THEN t_1jePLp5V.c_2oWVo2T WHEN t_WJR8.c_ZwjYa8kc THEN t_1jePLp5V.c_5mZmY6hr WHEN t_1jePLp5V.c_DrRAx46 THEN t_1jePLp5V.c_9TX ELSE NULL END THEN NULL END, t_1jePLp5V.c_b0Pus, c_mJ6, - -513346 FROM t_1jePLp5V, t_WJR8 WHERE ~ (t_1jePLp5V.c_2oWVo2T * NULL) UNION ALL SELECT CASE NOT FALSE WHEN CASE WHEN t_1jePLp5V.c_9TX THEN 'Untt1hJi0ehh05Ekgfs' WHEN -150802 THEN t_1jePLp5V.c_gxQdzagh ELSE t_1jePLp5V.c_5mZmY6hr END THEN t_1jePLp5V.c_DrRAx46 WHEN t_1jePLp5V.c_gxQdzagh THEN + t_1jePLp5V.c_2oWVo2T ELSE (t_1jePLp5V.c_DrRAx46 AND t_1jePLp5V.c_9TX) END, c_5mZmY6hr, c_8BU, CASE ~ t_1jePLp5V.c_gxQdzagh WHEN CASE t_1jePLp5V.c_8BU WHEN NULL THEN TRUE ELSE t_1jePLp5V.c_8BU END THEN NULL ELSE RTRIM(t_1jePLp5V.c_gxQdzagh, t_1jePLp5V.c_gxQdzagh) END AS alias_Av2 FROM t_1jePLp5V WHERE c_5mZmY6hr GROUP BY c_8BU ORDER BY 1 DESC LIMIT 68;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+04D00ZVLqGwLWjEoCl_9906|1|Not Max|5
+K_9906|1|Not Max|5
+832xS6HZirKgpc6OZ4_9906|1|Not Max|5
+k1HZoMWReSxFxVvnVV1X_19906|1|Max|5
+cYjau_9906|1|Not Max|5
+0.0|98430030||554419.315|99461530
+1|95847800|-560534.369527|
+1|195976154|-353908.01|
+1|95668951|50223.9|
+1|96891887|399491.736217|
+1|95568256|1010101.06|
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+04D00ZVLqGwLWjEoCl_9906|1|Not Max|5
+K_9906|1|Not Max|5
+832xS6HZirKgpc6OZ4_9906|1|Not Max|5
+k1HZoMWReSxFxVvnVV1X_19906|1|Max|5
+cYjau_9906|1|Not Max|5
+0.0|98430030||554419.315|99461530
+1|95568256|1010101.06|
+1|96891887|399491.736217|
+1|95668951|50223.9|
+1|195976154|-353908.01|
+1|95847800|-560534.369527|
+
+ERR:
+

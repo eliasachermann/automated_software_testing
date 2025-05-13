@@ -1,0 +1,67 @@
+SQL:
+CREATE TABLE t_nyP2gk (c_VKhU7kyb REAL, c_q9x REAL DEFAULT 224718.6, c_M1aZAn REAL, c_sY0 TEXT, c_1lvE REAL, UNIQUE (c_q9x, c_sY0));
+ALTER TABLE t_nyP2gk RENAME COLUMN c_sY0 TO c_jYJDYagqae;
+
+                CREATE TRIGGER trg_Wl95c
+                BEFORE DELETE ON t_nyP2gk
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_nyP2gk) > 1000;
+                END;
+INSERT OR IGNORE INTO t_nyP2gk (c_VKhU7kyb, c_q9x, c_M1aZAn, c_jYJDYagqae, c_1lvE) VALUES (-252181.82438, -579854.487, 115811.81221999999, '4jRiy1CMXfl_9271', -519638.74225999997), (-57556.89110000001, 304600.87631, 527923.9579, 'FoyyYwqp49zrW_19271', 1143463.8456299999);
+INSERT OR FAIL INTO t_nyP2gk DEFAULT VALUES;
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_nyP2gk LIMIT 1;
+            
+
+                SELECT c_VKhU7kyb, c_jYJDYagqae,
+                    ROW_NUMBER() OVER (PARTITION BY c_jYJDYagqae) as row_num,
+                    RANK() OVER (PARTITION BY c_jYJDYagqae ORDER BY c_VKhU7kyb) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_jYJDYagqae ORDER BY c_VKhU7kyb) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_VKhU7kyb) IN ('integer','real') THEN c_VKhU7kyb ELSE 0 END) 
+                        OVER (PARTITION BY c_jYJDYagqae ORDER BY c_VKhU7kyb 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_VKhU7kyb) IN ('integer','real') THEN c_VKhU7kyb ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_jYJDYagqae ORDER BY c_VKhU7kyb) as prev_value,
+                    LEAD(CASE WHEN typeof(c_VKhU7kyb) IN ('integer','real') THEN c_VKhU7kyb ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_jYJDYagqae ORDER BY c_VKhU7kyb) as next_value
+                FROM t_nyP2gk
+                ORDER BY c_jYJDYagqae, c_VKhU7kyb
+                LIMIT 20;
+                
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_M) 
+                WHERE col_M IN (
+                    SELECT (RANK() OVER(PARTITION BY 1)) FROM (VALUES (NULL))
+                )
+            );
+SELECT t_nyP2gk.c_q9x, t_nyP2gk.c_1lvE, t_nyP2gk.c_VKhU7kyb, t_nyP2gk.c_M1aZAn, t_nyP2gk.c_jYJDYagqae FROM t_nyP2gk ORDER BY t_nyP2gk.c_jYJDYagqae DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+||1|1|1|0|0|0
+-252181.82438|4jRiy1CMXfl_9271|1|1|1|-252181.82438|0|0
+-57556.8911|FoyyYwqp49zrW_19271|1|1|1|-57556.8911|0|0
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+||1|1|1|0|0|0
+-252181.82438|4jRiy1CMXfl_9271|1|1|1|-252181.82438|0|0
+-57556.8911|FoyyYwqp49zrW_19271|1|1|1|-57556.8911|0|0
+1
+304600.87631|1143463.84563|-57556.8911|527923.9579|FoyyYwqp49zrW_19271
+-579854.487|-519638.74226|-252181.82438|115811.81222|4jRiy1CMXfl_9271
+224718.6||||
+
+ERR:
+

@@ -1,0 +1,152 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_mgpa4hhDcT (c_bS7m INTEGER PRIMARY KEY, c_mEs TEXT, UNIQUE (c_bS7m, c_mEs));
+CREATE TABLE IF NOT EXISTS t_6BCWxHQb (c_8A63 INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT -994881, c_cnvIibm7 NUMERIC, c_kpUhtYZo REAL);
+CREATE TABLE t_f7Q2 (c_i0a6uoIh INTEGER PRIMARY KEY, c_NvPuQWc NUMERIC, c_akrMAi TEXT COLLATE RTRIM) WITHOUT ROWID;
+ALTER TABLE t_mgpa4hhDcT ADD COLUMN c_klIz84ybL0 REAL;
+ALTER TABLE t_f7Q2 ADD COLUMN c_jLv REAL;
+ALTER TABLE t_6BCWxHQb RENAME COLUMN c_kpUhtYZo TO c_gp1ZorULsZ;
+INSERT OR IGNORE INTO t_mgpa4hhDcT (c_bS7m, c_mEs, c_klIz84ybL0) VALUES (87972847, 'AOA_8848', -269089.2685), (188390089, 'uQemW2C_18848', -6983.200000000012);
+WITH cte_HaL AS (SELECT 1) INSERT OR IGNORE INTO t_mgpa4hhDcT (c_bS7m, c_mEs, c_klIz84ybL0) VALUES (87704955, 'L6cbbZ_8848', 567769.7227);
+INSERT OR IGNORE INTO t_mgpa4hhDcT (c_bS7m, c_mEs, c_klIz84ybL0) VALUES (88317300, 'DxKhqFwmY0QZ9EMNbo_8848', 1076257.1178000001);
+INSERT OR REPLACE INTO t_mgpa4hhDcT (c_bS7m, c_mEs, c_klIz84ybL0) VALUES (88300398, 'NUfvKE3R077Dcr_8848', 863972.78024), (186870036, '1PcvmhCKZC_18848', -737095.9);
+INSERT OR REPLACE INTO t_mgpa4hhDcT (c_bS7m, c_mEs, c_klIz84ybL0) VALUES (88145927, 'LiLSNQ2cn9KyTezckE_8848', -235701.78000000003), (188231557, 'ColrxpTBh_18848', 1074443.656288);
+WITH cte_iVV AS (SELECT 1) REPLACE INTO t_6BCWxHQb (c_8A63, c_cnvIibm7, c_gp1ZorULsZ) VALUES (87922146, 89178678, 747427.1), (187054694, 189046813, -756377.82);
+INSERT OR REPLACE INTO t_6BCWxHQb (c_8A63, c_cnvIibm7, c_gp1ZorULsZ) VALUES (88308250, 88704466, -153693.2), (188299802, 188193174, 422209.005);
+INSERT OR IGNORE INTO t_f7Q2 (c_i0a6uoIh, c_NvPuQWc, c_akrMAi, c_jLv) VALUES (87551395, 88156588, 'DCFHcXWoChvvZZXBN_8948', -725614.657), (187897891, 187588454, 'c_18948', -652942.306);
+REPLACE INTO t_f7Q2 (c_i0a6uoIh, c_NvPuQWc, c_akrMAi, c_jLv) SELECT 87114861, 89152319, 'xyK0yoH_8948', 964026.934527;
+INSERT OR REPLACE INTO t_f7Q2 (c_i0a6uoIh, c_NvPuQWc, c_akrMAi, c_jLv) VALUES (87243740, 88349390, 'hGFAlMO2woH_8948', -72905.53700000001), (187946206, 188277102, 'PHaSxKIWmRHyCQ3gS_18948', 994522.038);
+INSERT OR IGNORE INTO t_f7Q2 (c_i0a6uoIh, c_NvPuQWc, c_akrMAi, c_jLv) VALUES (86728719, 87772684, 'O_8948', -783044.905), (187975693, 188123012, 'Dkvg_18948', 409406.172);
+REPLACE INTO t_f7Q2 (c_i0a6uoIh, c_NvPuQWc, c_akrMAi, c_jLv) SELECT 88454981, 89275494, 'DTC1De1O9HDxiCjZy_8948', -414071.515;
+
+
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_mgpa4hhDcT LIMIT 1;
+            
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_mgpa4hhDcT (c_bS7m, c_mEs, c_klIz84ybL0) SELECT 87481498, 'RXqBjjynz6rM_8848', 205809.65399999998;
+UPDATE OR IGNORE t_mgpa4hhDcT SET c_mEs = 'atrZ5_1747138748' WHERE ROWID = (SELECT MIN(ROWID) FROM t_mgpa4hhDcT);
+UPDATE OR IGNORE t_mgpa4hhDcT SET c_bS7m = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_mgpa4hhDcT);
+COMMIT;
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_6BCWxHQb
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+SELECT t_mgpa4hhDcT.c_klIz84ybL0 as t_mgpa4hhDcT_val, t_f7Q2.c_jLv as t_f7Q2_val, t_6BCWxHQb.c_cnvIibm7 as t_6BCWxHQb_val
+FROM t_mgpa4hhDcT
+INNER JOIN t_f7Q2 ON t_mgpa4hhDcT.c_bS7m = t_f7Q2.c_i0a6uoIh
+INNER JOIN t_6BCWxHQb ON t_mgpa4hhDcT.ROWID = t_6BCWxHQb.ROWID
+WHERE t_mgpa4hhDcT.c_bS7m IS NOT NULL
+ORDER BY t_mgpa4hhDcT.c_klIz84ybL0
+LIMIT 20;
+SELECT t_f7Q2.c_i0a6uoIh, t_f7Q2.c_NvPuQWc, t_f7Q2.c_akrMAi, LOWER(t_f7Q2.c_NvPuQWc) AS computed_c_NvPuQWc FROM t_f7Q2 ORDER BY t_f7Q2.c_akrMAi DESC LIMIT 10;
+SELECT t_6BCWxHQb.c_cnvIibm7 FROM t_6BCWxHQb ORDER BY t_6BCWxHQb.c_cnvIibm7 DESC LIMIT 10;
+
+                SELECT DISTINCT t_6BCWxHQb.c_8A63,
+                    COUNT(*) OVER (PARTITION BY t_6BCWxHQb.c_gp1ZorULsZ) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_6BCWxHQb.c_8A63) IN ('null') THEN 0 
+                            ELSE t_6BCWxHQb.c_8A63 END DESC,
+                            t_6BCWxHQb.c_gp1ZorULsZ ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_6BCWxHQb.c_8A63 IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_6BCWxHQb
+                WHERE t_6BCWxHQb.c_8A63 IS NOT NULL
+                GROUP BY t_6BCWxHQb.c_8A63, t_6BCWxHQb.c_gp1ZorULsZ
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_6BCWxHQb.c_8A63 ASC, t_6BCWxHQb.c_gp1ZorULsZ ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_6BCWxHQb.c_8A63,
+                    t_6BCWxHQb.c_gp1ZorULsZ,
+                    SUM(CASE WHEN typeof(t_6BCWxHQb.c_8A63) IN ('integer', 'real', 'numeric') THEN t_6BCWxHQb.c_8A63 ELSE 0 END) 
+                        OVER (PARTITION BY t_6BCWxHQb.c_gp1ZorULsZ ORDER BY t_6BCWxHQb.c_8A63 ASC) as window_total
+                FROM t_6BCWxHQb
+                GROUP BY t_6BCWxHQb.c_8A63, t_6BCWxHQb.c_gp1ZorULsZ
+                HAVING SUM(CASE WHEN typeof(t_6BCWxHQb.c_8A63) IN ('integer', 'real', 'numeric') THEN t_6BCWxHQb.c_8A63 ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_6BCWxHQb.c_8A63 ASC, t_6BCWxHQb.c_gp1ZorULsZ ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+87922146|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+88308250|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+187054694|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+188299802|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+87114861|89152319|xyK0yoH_8948|89152319
+87243740|88349390|hGFAlMO2woH_8948|88349390
+187897891|187588454|c_18948|187588454
+187946206|188277102|PHaSxKIWmRHyCQ3gS_18948|188277102
+86728719|87772684|O_8948|87772684
+187975693|188123012|Dkvg_18948|188123012
+88454981|89275494|DTC1De1O9HDxiCjZy_8948|89275494
+87551395|88156588|DCFHcXWoChvvZZXBN_8948|88156588
+189046813
+188193174
+89178678
+88704466
+87922146|1|4|Known
+88308250|1|3|Known
+187054694|1|2|Known
+188299802|1|1|Known
+188299802|422209.005|188299802
+187054694|-756377.82|187054694
+88308250|-153693.2|88308250
+87922146|747427.1|87922146
+
+ERR:
+Error: near line 32: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+87922146|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+88308250|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+187054694|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+188299802|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"87922146":"text","88308250":"text","187054694":"text","188299802":"text"}
+87114861|89152319|xyK0yoH_8948|89152319
+87243740|88349390|hGFAlMO2woH_8948|88349390
+187897891|187588454|c_18948|187588454
+187946206|188277102|PHaSxKIWmRHyCQ3gS_18948|188277102
+86728719|87772684|O_8948|87772684
+187975693|188123012|Dkvg_18948|188123012
+88454981|89275494|DTC1De1O9HDxiCjZy_8948|89275494
+87551395|88156588|DCFHcXWoChvvZZXBN_8948|88156588
+189046813
+188193174
+89178678
+88704466
+87922146|1|4|Known
+88308250|1|3|Known
+187054694|1|2|Known
+188299802|1|1|Known
+188299802|422209.005|188299802
+187054694|-756377.82|187054694
+88308250|-153693.2|88308250
+87922146|747427.1|87922146
+
+ERR:
+Runtime error near line 32: datatype mismatch (20)
+

@@ -1,0 +1,83 @@
+SQL:
+PRAGMA recursive_triggers;
+CREATE TABLE IF NOT EXISTS t_sBISEnTLtT (c_CgRKS INTEGER, c_vpA INTEGER DEFAULT -809697, c_YkV NUMERIC, c_LCW9o NUMERIC PRIMARY KEY);
+CREATE TABLE t_gD5toG2bR (c_0eAOBW1mYI TEXT COLLATE BINARY, c_rpwtUykL NUMERIC, c_44R14nI9WX REAL DEFAULT -586086.3227, c_LlM2 INTEGER DEFAULT -444975, c_ufhOk NUMERIC DEFAULT NULL, c_iLzNjoPIeI INTEGER, c_aiwyyTYNuP REAL DEFAULT 442785.537673, c_0ok NUMERIC, c_Nb5LbOmtX INTEGER PRIMARY KEY, c_z8Xuih4USt REAL);
+INSERT OR REPLACE INTO t_sBISEnTLtT (c_CgRKS, c_vpA, c_YkV, c_LCW9o) VALUES (96192075, 97648798, 98991085, 100460354);
+WITH cte_aFK AS (SELECT 1) INSERT OR REPLACE INTO t_sBISEnTLtT (c_CgRKS, c_vpA, c_YkV, c_LCW9o) VALUES (96472371, 97789135, 98719211, 99485270);
+INSERT OR IGNORE INTO t_gD5toG2bR (c_0eAOBW1mYI, c_rpwtUykL, c_44R14nI9WX, c_LlM2, c_ufhOk, c_iLzNjoPIeI, c_aiwyyTYNuP, c_0ok, c_Nb5LbOmtX, c_z8Xuih4USt) VALUES ('3_9679', 96810414, 842441.3, 100421880, 100886431, 101430350, -45312.18539999999, 103743235, 103952178, 205389.7033), ('Y4lCTp_19679', 198577357, -693397.80806, 200100051, 201650974, 202454823, -11077.299999999988, 204035619, 205041811, 388734.4);
+REPLACE INTO t_gD5toG2bR (c_0eAOBW1mYI, c_rpwtUykL, c_44R14nI9WX, c_LlM2, c_ufhOk, c_iLzNjoPIeI, c_aiwyyTYNuP, c_0ok, c_Nb5LbOmtX, c_z8Xuih4USt) VALUES ('aabELtv_9679', 98461928, -329922.976, 99346125, 99827966, 101603346, -618390.47237, 104366645, 104198209, 633335.5);
+INSERT OR IGNORE INTO t_gD5toG2bR (c_0eAOBW1mYI, c_rpwtUykL, c_44R14nI9WX, c_LlM2, c_ufhOk, c_iLzNjoPIeI, c_aiwyyTYNuP, c_0ok, c_Nb5LbOmtX, c_z8Xuih4USt) VALUES ('zgCQa1A_9679', 98616028, 442986.0, 100027320, 100140884, 101664585, -9030.300000000003, 103081966, 103795633, -797112.7);
+INSERT OR REPLACE INTO t_gD5toG2bR (c_0eAOBW1mYI, c_rpwtUykL, c_44R14nI9WX, c_LlM2, c_ufhOk, c_iLzNjoPIeI, c_aiwyyTYNuP, c_0ok, c_Nb5LbOmtX, c_z8Xuih4USt) VALUES ('RGmszB9qocKj0hM_9679', 97635612, 72194.00696, 100789026, 101369329, 102216878, -626543.17603, 104216549, 104515631, 621880.80065);
+WITH cte_Iky AS (SELECT 1) INSERT OR REPLACE INTO t_gD5toG2bR (c_0eAOBW1mYI, c_rpwtUykL, c_44R14nI9WX, c_LlM2, c_ufhOk, c_iLzNjoPIeI, c_aiwyyTYNuP, c_0ok, c_Nb5LbOmtX, c_z8Xuih4USt) VALUES ('WBfTRnDbrsjB7ji4qQf_9679', 98091371, -109763.4, 100306393, 101500141, 102608749, -723631.1, 102995468, 103854264, -300511.445);
+INSERT OR REPLACE INTO t_sBISEnTLtT DEFAULT VALUES;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_gD5toG2bR SET c_Nb5LbOmtX = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_gD5toG2bR);
+COMMIT;
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_sBISEnTLtT
+            LIMIT 1;
+            
+SELECT t_sBISEnTLtT.c_vpA, t_sBISEnTLtT.c_CgRKS, t_sBISEnTLtT.c_YkV FROM t_sBISEnTLtT ORDER BY t_sBISEnTLtT.c_vpA ASC LIMIT 10;
+SELECT t_gD5toG2bR.c_LlM2, t_gD5toG2bR.c_0eAOBW1mYI, LOWER(t_gD5toG2bR.c_0eAOBW1mYI) AS computed_c_0eAOBW1mYI FROM t_gD5toG2bR ORDER BY t_gD5toG2bR.c_LlM2 ASC LIMIT 10;
+SELECT t_gD5toG2bR.c_44R14nI9WX, t_gD5toG2bR.c_LlM2, t_gD5toG2bR.c_ufhOk, t_gD5toG2bR.c_rpwtUykL, t_gD5toG2bR.c_iLzNjoPIeI FROM t_gD5toG2bR ORDER BY t_gD5toG2bR.c_LlM2 ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+0
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+-809697||
+97648798|96192075|98991085
+97789135|96472371|98719211
+99346125|aabELtv_9679|aabeltv_9679
+100027320|zgCQa1A_9679|zgcqa1a_9679
+100306393|WBfTRnDbrsjB7ji4qQf_9679|wbftrndbrsjb7ji4qqf_9679
+100421880|3_9679|3_9679
+100789026|RGmszB9qocKj0hM_9679|rgmszb9qockj0hm_9679
+200100051|Y4lCTp_19679|y4lctp_19679
+-329922.976|99346125|99827966|98461928|101603346
+442986.0|100027320|100140884|98616028|101664585
+-109763.4|100306393|101500141|98091371|102608749
+842441.3|100421880|100886431|96810414|101430350
+72194.00696|100789026|101369329|97635612|102216878
+-693397.80806|200100051|201650974|198577357|202454823
+
+ERR:
+Error: near line 13: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+0
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+-809697||
+97648798|96192075|98991085
+97789135|96472371|98719211
+99346125|aabELtv_9679|aabeltv_9679
+100027320|zgCQa1A_9679|zgcqa1a_9679
+100306393|WBfTRnDbrsjB7ji4qQf_9679|wbftrndbrsjb7ji4qqf_9679
+100421880|3_9679|3_9679
+100789026|RGmszB9qocKj0hM_9679|rgmszb9qockj0hm_9679
+200100051|Y4lCTp_19679|y4lctp_19679
+-329922.976|99346125|99827966|98461928|101603346
+442986.0|100027320|100140884|98616028|101664585
+-109763.4|100306393|101500141|98091371|102608749
+842441.3|100421880|100886431|96810414|101430350
+72194.00696|100789026|101369329|97635612|102216878
+-693397.80806|200100051|201650974|198577357|202454823
+
+ERR:
+Runtime error near line 13: datatype mismatch (20)
+

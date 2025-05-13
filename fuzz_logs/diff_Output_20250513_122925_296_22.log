@@ -1,0 +1,132 @@
+SQL:
+PRAGMA locking_mode;
+CREATE TABLE IF NOT EXISTS t_eFxzmz0 (c_nVim2 REAL, PRIMARY KEY (c_nVim2), UNIQUE (c_nVim2), FOREIGN KEY (c_nVim2) REFERENCES t_SEDud(c_suRjx));
+ALTER TABLE t_eFxzmz0 RENAME COLUMN c_nVim2 TO c_RhBX1qSQUY;
+ALTER TABLE t_eFxzmz0 ADD COLUMN c_jWE5M3n TEXT DEFAULT '2V3';
+INSERT OR IGNORE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) SELECT 900040.1952, '2sF_9464';
+INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) SELECT -329037.83296, 'samR_9464';
+REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) VALUES (-771190.3879, 'a1hhAzs5bwtk5qwMbANt_9464');
+WITH cte_ald AS (SELECT 1) INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) VALUES (-172015.09206, 'HFKU2mFSSe9y2oOcWc9_9464');
+INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) SELECT 706301.803576, 'k4JN5Wis3uju2_9464';
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_eFxzmz0 LIMIT 1;
+            
+BEGIN TRANSACTION;
+REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) VALUES (-236143.58630000002, 'ueUdbIrj_9464');
+INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) VALUES (726368.3722, 'hchnMaQ6Ce_9464');
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_eFxzmz0 SET c_jWE5M3n = 'Rwx5f_1747139364' WHERE ROWID = (SELECT MIN(ROWID) FROM t_eFxzmz0);
+INSERT OR IGNORE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) VALUES (434365.22401, 'DQuY_9464');
+WITH cte_zxV AS (SELECT 1) INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) VALUES (979098.01, 'PJdXNJBXIgJ0_9464'), (-450938.28099999996, 'azwaOtxu0FbtawAFKq_19464');
+COMMIT;
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) SELECT -66020.1, 'WGiTe8HJqG3148TTp_9464';
+INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) SELECT -778169.43, 'vD_9464';
+WITH cte_DHy AS (SELECT 1) INSERT OR REPLACE INTO t_eFxzmz0 (c_RhBX1qSQUY, c_jWE5M3n) SELECT -678756.71378, 'CD6wIQlFlq7wddM7frwh_9464';
+COMMIT;
+
+                SELECT c_RhBX1qSQUY, c_jWE5M3n,
+                    ROW_NUMBER() OVER (PARTITION BY c_jWE5M3n) as row_num,
+                    RANK() OVER (PARTITION BY c_jWE5M3n ORDER BY c_RhBX1qSQUY) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_jWE5M3n ORDER BY c_RhBX1qSQUY) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_RhBX1qSQUY) IN ('integer','real') THEN c_RhBX1qSQUY ELSE 0 END) 
+                        OVER (PARTITION BY c_jWE5M3n ORDER BY c_RhBX1qSQUY 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_RhBX1qSQUY) IN ('integer','real') THEN c_RhBX1qSQUY ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_jWE5M3n ORDER BY c_RhBX1qSQUY) as prev_value,
+                    LEAD(CASE WHEN typeof(c_RhBX1qSQUY) IN ('integer','real') THEN c_RhBX1qSQUY ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_jWE5M3n ORDER BY c_RhBX1qSQUY) as next_value
+                FROM t_eFxzmz0
+                ORDER BY c_jWE5M3n, c_RhBX1qSQUY
+                LIMIT 20;
+                
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_eFxzmz0
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+SELECT c_RhBX1qSQUY, c_RhBX1qSQUY, FALSE AS alias_Gh4 FROM t_eFxzmz0 WHERE EXISTS (SELECT 1 FROM t_eFxzmz0 LIMIT 1) ORDER BY 1 LIMIT 57;
+
+--- v3.26.0 ---
+OUT:
+normal
+
+ERR:
+Error: near line 3: no such column: c_nVim2
+Error: near line 5: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 6: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 7: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 8: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 9: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 19: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 20: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 24: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 25: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 28: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 29: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 30: table t_eFxzmz0 has no column named c_RhBX1qSQUY
+Error: near line 33: no such column: c_RhBX1qSQUY
+Error: near line 65: no such column: c_RhBX1qSQUY
+
+
+--- v3.49.1 ---
+OUT:
+normal
+1|array|[1,2,3]|{"key":"value"}
+-678756.71378|CD6wIQlFlq7wddM7frwh_9464|1|1|1|-678756.71378|0|0
+434365.22401|DQuY_9464|1|1|1|434365.22401|0|0
+-172015.09206|HFKU2mFSSe9y2oOcWc9_9464|1|1|1|-172015.09206|0|0
+979098.01|PJdXNJBXIgJ0_9464|1|1|1|979098.01|0|0
+900040.1952|Rwx5f_1747139364|1|1|1|900040.1952|0|0
+-66020.1|WGiTe8HJqG3148TTp_9464|1|1|1|-66020.1|0|0
+-771190.3879|a1hhAzs5bwtk5qwMbANt_9464|1|1|1|-771190.3879|0|0
+-450938.281|azwaOtxu0FbtawAFKq_19464|1|1|1|-450938.281|0|0
+726368.3722|hchnMaQ6Ce_9464|1|1|1|726368.3722|0|0
+706301.803576|k4JN5Wis3uju2_9464|1|1|1|706301.803576|0|0
+-329037.83296|samR_9464|1|1|1|-329037.83296|0|0
+-236143.5863|ueUdbIrj_9464|1|1|1|-236143.5863|0|0
+-778169.43|vD_9464|1|1|1|-778169.43|0|0
+2|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+3|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+4|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+5|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+6|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+8|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+10|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+11|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+12|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+13|1|text|[3,4,5]|10|1.0|[1,1,1,1,1,1,1,1,1,1]|{"12":"text","3":"text","13":"text","10":"text","2":"text","6":"text","4":"text","11":"text","8":"text","5":"text"}
+-778169.43|-778169.43|0
+-771190.3879|-771190.3879|0
+-678756.71378|-678756.71378|0
+-450938.281|-450938.281|0
+-329037.83296|-329037.83296|0
+-236143.5863|-236143.5863|0
+-172015.09206|-172015.09206|0
+-66020.1|-66020.1|0
+434365.22401|434365.22401|0
+706301.803576|706301.803576|0
+726368.3722|726368.3722|0
+900040.1952|900040.1952|0
+979098.01|979098.01|0
+
+ERR:
+

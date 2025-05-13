@@ -1,0 +1,102 @@
+SQL:
+PRAGMA page_size(17);
+CREATE TABLE IF NOT EXISTS t_8NZIGMolr (c_GOOV0KZ INTEGER, c_uhx REAL, c_9p2AI REAL);
+CREATE TABLE IF NOT EXISTS t_yMlXdmvrRI (c_aKRcAQ3 INTEGER DEFAULT NULL, PRIMARY KEY (c_aKRcAQ3));
+CREATE TABLE IF NOT EXISTS t_pkea8h5 (c_KWmIeiVHqE REAL DEFAULT 604773.72287, c_x5HZcF3d5k NUMERIC, c_HFZz5 NUMERIC, c_9EO2Fk TEXT, c_Mt1znsh NUMERIC);
+CREATE TABLE IF NOT EXISTS t_p2NHV (c_nmYMX62v INTEGER PRIMARY KEY AUTOINCREMENT, c_2Fkgp REAL, c_Je999dLfu INTEGER DEFAULT -903554, c_PF1hlIC TEXT, c_nVzxgFXja REAL, c_Lgc0KVe7R INTEGER, c_KUOQX8LOR NUMERIC, c_gAlw8vBu TEXT, c_zqz53 NUMERIC, c_oGhpe NUMERIC);
+CREATE TABLE IF NOT EXISTS t_aAtmrC (c_aTA5H9 TEXT, c_Kq3Xh9 TEXT);
+INSERT OR IGNORE INTO t_8NZIGMolr (c_GOOV0KZ, c_uhx, c_9p2AI) VALUES (92083045, -554343.1433, 1023503.923), (190797296, -52000.600000000006, 332292.34400000004);
+INSERT OR IGNORE INTO t_8NZIGMolr (c_GOOV0KZ, c_uhx, c_9p2AI) VALUES (92081070, -338536.1983, -501618.6973), (190986755, -764450.9, -593096.04);
+REPLACE INTO t_8NZIGMolr (c_GOOV0KZ, c_uhx, c_9p2AI) VALUES (90999894, -896701.843094, -368889.333);
+INSERT OR REPLACE INTO t_yMlXdmvrRI (c_aKRcAQ3) VALUES (91024800);
+REPLACE INTO t_yMlXdmvrRI (c_aKRcAQ3) VALUES (90879037);
+INSERT OR REPLACE INTO t_yMlXdmvrRI (c_aKRcAQ3) SELECT 91136779;
+INSERT OR REPLACE INTO t_pkea8h5 (c_KWmIeiVHqE, c_x5HZcF3d5k, c_HFZz5, c_9EO2Fk, c_Mt1znsh) VALUES (-763352.358, 91943407, 93961497, 'J_9468', 94714017), (651179.3478999999, 193234842, 192737310, 'v1w7HZCM1Ua8JF8h_19468', 194827210);
+REPLACE INTO t_p2NHV (c_nmYMX62v, c_2Fkgp, c_Je999dLfu, c_PF1hlIC, c_nVzxgFXja, c_Lgc0KVe7R, c_KUOQX8LOR, c_gAlw8vBu, c_zqz53, c_oGhpe) SELECT 91282146, 988382.86, 94457585, 'fZ1sDdvbc_9468', 521860.42617, 95691857, 97342187, 'LMYcdCiT7rmLaj0V90N_9868', 99810972, 101198801;
+REPLACE INTO t_aAtmrC (c_aTA5H9, c_Kq3Xh9) SELECT 'ilfTMQhg_9168', 'CfLdnuW5vRXwj7RVk80f_9268';
+INSERT OR REPLACE INTO t_aAtmrC (c_aTA5H9, c_Kq3Xh9) VALUES ('GMWO_9168', 'wDO5NnCoj84k_9268');
+INSERT OR REPLACE INTO t_aAtmrC (c_aTA5H9, c_Kq3Xh9) SELECT 'as_9168', 'FrQ51bZllhWqmxBZMQ4_9268';
+INSERT OR REPLACE INTO t_aAtmrC (c_aTA5H9, c_Kq3Xh9) VALUES ('eRDNKgOiHwUN_9168', 'RCc_9268');
+
+
+
+
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_yMlXdmvrRI SET c_aKRcAQ3 = -630 WHERE ROWID = (SELECT MIN(ROWID) FROM t_yMlXdmvrRI);
+UPDATE OR IGNORE t_yMlXdmvrRI SET c_aKRcAQ3 = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_yMlXdmvrRI);
+COMMIT;
+SELECT t_yMlXdmvrRI.c_aKRcAQ3 FROM t_yMlXdmvrRI ORDER BY t_yMlXdmvrRI.c_aKRcAQ3 ASC LIMIT 10;
+SELECT t_aAtmrC.c_aTA5H9, t_aAtmrC.c_Kq3Xh9, TYPEOF(t_aAtmrC.c_Kq3Xh9) AS computed_c_Kq3Xh9 FROM t_aAtmrC LIMIT 10;
+SELECT t_yMlXdmvrRI.c_aKRcAQ3, LOWER(t_yMlXdmvrRI.c_aKRcAQ3) AS computed_c_aKRcAQ3 FROM t_yMlXdmvrRI LIMIT 10;
+
+                SELECT DISTINCT t_yMlXdmvrRI.c_aKRcAQ3,
+                    COUNT(*) OVER (PARTITION BY t_yMlXdmvrRI.c_aKRcAQ3) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_yMlXdmvrRI.c_aKRcAQ3) IN ('null') THEN 0 
+                            ELSE t_yMlXdmvrRI.c_aKRcAQ3 END DESC,
+                            t_yMlXdmvrRI.c_aKRcAQ3 ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_yMlXdmvrRI.c_aKRcAQ3 IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_yMlXdmvrRI
+                WHERE t_yMlXdmvrRI.c_aKRcAQ3 IS NOT NULL
+                GROUP BY t_yMlXdmvrRI.c_aKRcAQ3, t_yMlXdmvrRI.c_aKRcAQ3
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_yMlXdmvrRI.c_aKRcAQ3 ASC, t_yMlXdmvrRI.c_aKRcAQ3 ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_yMlXdmvrRI.c_aKRcAQ3,
+                    t_yMlXdmvrRI.c_aKRcAQ3,
+                    SUM(CASE WHEN typeof(t_yMlXdmvrRI.c_aKRcAQ3) IN ('integer', 'real', 'numeric') THEN t_yMlXdmvrRI.c_aKRcAQ3 ELSE 0 END) 
+                        OVER (PARTITION BY t_yMlXdmvrRI.c_aKRcAQ3 ORDER BY t_yMlXdmvrRI.c_aKRcAQ3 ASC) as window_total
+                FROM t_yMlXdmvrRI
+                GROUP BY t_yMlXdmvrRI.c_aKRcAQ3, t_yMlXdmvrRI.c_aKRcAQ3
+                HAVING SUM(CASE WHEN typeof(t_yMlXdmvrRI.c_aKRcAQ3) IN ('integer', 'real', 'numeric') THEN t_yMlXdmvrRI.c_aKRcAQ3 ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_yMlXdmvrRI.c_aKRcAQ3 ASC, t_yMlXdmvrRI.c_aKRcAQ3 ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+-630
+91024800
+91136779
+ilfTMQhg_9168|CfLdnuW5vRXwj7RVk80f_9268|text
+GMWO_9168|wDO5NnCoj84k_9268|text
+as_9168|FrQ51bZllhWqmxBZMQ4_9268|text
+eRDNKgOiHwUN_9168|RCc_9268|text
+-630|-630
+91024800|91024800
+91136779|91136779
+-630|1|3|Known
+91024800|1|2|Known
+91136779|1|1|Known
+91136779|91136779|91136779
+91024800|91024800|91024800
+
+ERR:
+Error: near line 25: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+-630
+91024800
+91136779
+ilfTMQhg_9168|CfLdnuW5vRXwj7RVk80f_9268|text
+GMWO_9168|wDO5NnCoj84k_9268|text
+as_9168|FrQ51bZllhWqmxBZMQ4_9268|text
+eRDNKgOiHwUN_9168|RCc_9268|text
+-630|-630
+91024800|91024800
+91136779|91136779
+-630|1|3|Known
+91024800|1|2|Known
+91136779|1|1|Known
+91136779|91136779|91136779
+91024800|91024800|91024800
+
+ERR:
+Runtime error near line 25: datatype mismatch (20)
+

@@ -1,0 +1,67 @@
+SQL:
+PRAGMA foreign_key_check;
+CREATE TABLE IF NOT EXISTS t_1yCOeWBJB3 (c_dibDRZp NUMERIC, c_053Pf1 NUMERIC, c_vY1uqQozw INTEGER DEFAULT -329906, c_PU7 INTEGER, c_260m2w0h INTEGER PRIMARY KEY, c_MxOY9i REAL, c_CabZfCrPk9 INTEGER DEFAULT -245315, c_OsxluSfj0 INTEGER, c_rav TEXT, FOREIGN KEY (c_CabZfCrPk9) REFERENCES t_uhHUg(c_VFHz5));
+INSERT OR REPLACE INTO t_1yCOeWBJB3 (c_dibDRZp, c_053Pf1, c_vY1uqQozw, c_PU7, c_260m2w0h, c_MxOY9i, c_CabZfCrPk9, c_OsxluSfj0, c_rav) VALUES (89134578, 90363233, 90657501, 93066309, 93008942, -231278.95145, 95209347, 96840510, 't4iy1_9726'), (190044316, 189580847, 191069524, 192791750, 193557219, -540414.95356, 194669637, 195455083, '93qF1BV7WYfR58I4NrD_19726');
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_1yCOeWBJB3 LIMIT 1;
+            
+BEGIN TRANSACTION;
+WITH cte_fzn AS (SELECT 1) INSERT OR REPLACE INTO t_1yCOeWBJB3 (c_dibDRZp, c_053Pf1, c_vY1uqQozw, c_PU7, c_260m2w0h, c_MxOY9i, c_CabZfCrPk9, c_OsxluSfj0, c_rav) VALUES (88425847, 90601053, 90865799, 91590891, 94220485, -788564.5957, 95941638, 96108205, 'z_9726');
+COMMIT;
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_1yCOeWBJB3
+            LIMIT 1;
+            
+SELECT EXISTS (SELECT 1 FROM t_1yCOeWBJB3 LIMIT 1) AS alias_9G6, t_1yCOeWBJB3.c_PU7 FROM t_1yCOeWBJB3 UNION ALL SELECT DISTINCT c_vY1uqQozw, NOT c_260m2w0h AS alias_Dtq FROM t_1yCOeWBJB3 WHERE (~ TRUE IS NOT (t_1yCOeWBJB3.c_vY1uqQozw + t_1yCOeWBJB3.c_rav)) GROUP BY c_vY1uqQozw ORDER BY 2 DESC LIMIT 45;
+SELECT t_1yCOeWBJB3.c_260m2w0h, t_1yCOeWBJB3.c_vY1uqQozw, LOWER(t_1yCOeWBJB3.c_260m2w0h) AS computed_c_260m2w0h FROM t_1yCOeWBJB3 LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+1|192791750
+1|93066309
+1|91590891
+90657501|0
+90865799|0
+191069524|0
+93008942|90657501|93008942
+94220485|90865799|94220485
+193557219|191069524|193557219
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+1|192791750
+1|93066309
+1|91590891
+191069524|0
+90865799|0
+90657501|0
+93008942|90657501|93008942
+94220485|90865799|94220485
+193557219|191069524|193557219
+
+ERR:
+

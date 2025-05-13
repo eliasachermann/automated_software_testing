@@ -1,0 +1,63 @@
+SQL:
+PRAGMA reverse_unordered_selects(0);
+CREATE TABLE IF NOT EXISTS t_VMPCb (c_JJOJRKla5 INTEGER PRIMARY KEY AUTOINCREMENT DEFAULT 273982);
+CREATE TABLE IF NOT EXISTS t_xhumRA (c_VObfQ TEXT DEFAULT 'YQbyc', PRIMARY KEY (c_VObfQ), UNIQUE (c_VObfQ));
+ALTER TABLE t_xhumRA RENAME COLUMN c_VObfQ TO c_bW41axd;
+ALTER TABLE t_xhumRA ADD COLUMN c_G7l TEXT DEFAULT 'hj0Vpukq1hOcSG';
+INSERT OR REPLACE INTO t_VMPCb (c_JJOJRKla5) VALUES (89037228), (190638909);
+INSERT OR IGNORE INTO t_VMPCb (c_JJOJRKla5) VALUES (90362474);
+REPLACE INTO t_VMPCb (c_JJOJRKla5) VALUES (90300796);
+INSERT OR IGNORE INTO t_xhumRA (c_bW41axd, c_G7l) VALUES ('ntj6VjlUwSKXgMITG0D_8996', 'qoVNBD_9096'), ('uqyINm4_18996', 'Uuugd6W_19096');
+
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_G7l,
+                        'col2', c_G7l
+                    ) as row_data
+                    FROM t_xhumRA
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+SELECT t_VMPCb.c_JJOJRKla5 FROM t_VMPCb LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+89037228
+90300796
+90362474
+190638909
+
+ERR:
+Error: near line 4: no such column: c_VObfQ
+Error: near line 9: table t_xhumRA has no column named c_bW41axd
+
+
+--- v3.49.1 ---
+OUT:
+1|{"id":1,"col1":"qoVNBD_9096","col2":"qoVNBD_9096"}|qoVNBD_9096|qoVNBD_9096|["{\"id\":1,\"col1\":\"qoVNBD_9096\",\"col2\":\"qoVNBD_9096\"}"]|object|col1|qoVNBD_9096|text
+1|{"id":1,"col1":"qoVNBD_9096","col2":"qoVNBD_9096"}|qoVNBD_9096|qoVNBD_9096|["{\"id\":1,\"col1\":\"qoVNBD_9096\",\"col2\":\"qoVNBD_9096\"}"]|object|col2|qoVNBD_9096|text
+1|{"id":1,"col1":"qoVNBD_9096","col2":"qoVNBD_9096"}|qoVNBD_9096|qoVNBD_9096|["{\"id\":1,\"col1\":\"qoVNBD_9096\",\"col2\":\"qoVNBD_9096\"}"]|object|id|1|integer
+2|{"id":2,"col1":"Uuugd6W_19096","col2":"Uuugd6W_19096"}|Uuugd6W_19096|Uuugd6W_19096|["{\"id\":2,\"col1\":\"Uuugd6W_19096\",\"col2\":\"Uuugd6W_19096\"}"]|object|col1|Uuugd6W_19096|text
+2|{"id":2,"col1":"Uuugd6W_19096","col2":"Uuugd6W_19096"}|Uuugd6W_19096|Uuugd6W_19096|["{\"id\":2,\"col1\":\"Uuugd6W_19096\",\"col2\":\"Uuugd6W_19096\"}"]|object|col2|Uuugd6W_19096|text
+2|{"id":2,"col1":"Uuugd6W_19096","col2":"Uuugd6W_19096"}|Uuugd6W_19096|Uuugd6W_19096|["{\"id\":2,\"col1\":\"Uuugd6W_19096\",\"col2\":\"Uuugd6W_19096\"}"]|object|id|2|integer
+89037228
+90300796
+90362474
+190638909
+
+ERR:
+

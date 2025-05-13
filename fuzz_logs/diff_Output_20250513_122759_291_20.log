@@ -1,0 +1,27 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_JgRpL (c_4z2y REAL, c_9iz91KK INTEGER DEFAULT -569267, PRIMARY KEY (c_4z2y, c_9iz91KK));
+REPLACE INTO t_JgRpL (c_4z2y, c_9iz91KK) VALUES (-800967.66, 94611068);
+INSERT OR REPLACE INTO t_JgRpL (c_4z2y, c_9iz91KK) VALUES (790998.5444, 93778000);
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_D) 
+                WHERE col_D IN (
+                    SELECT (LAST_VALUE(1) OVER()) FROM (VALUES (FALSE))
+                )
+            );
+SELECT t_JgRpL.c_4z2y, t_JgRpL.c_9iz91KK, LOWER(t_JgRpL.c_4z2y) AS computed_c_4z2y FROM t_JgRpL LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1
+-800967.66|94611068|-800967.66
+790998.5444|93778000|790998.5444
+
+ERR:
+

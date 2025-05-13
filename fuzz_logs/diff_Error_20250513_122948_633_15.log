@@ -1,0 +1,120 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_sIIqQZcXO2 (c_bpsQk REAL, c_9dsuADY9ok NUMERIC, c_nBVmnC6xx REAL DEFAULT 25687.336, c_VF6glqmA NUMERIC);
+CREATE TABLE IF NOT EXISTS t_d52V (c_UIQ INTEGER PRIMARY KEY, UNIQUE (c_UIQ));
+CREATE TABLE IF NOT EXISTS t_voyI7zKf3 (c_Yai5YpKN TEXT DEFAULT '6fOiqwP', c_h79 NUMERIC, c_pHrWxbrqi INTEGER PRIMARY KEY, c_E7vC1voJ NUMERIC DEFAULT NULL, c_heqrroJ INTEGER, c_riH INTEGER, c_8LezBTBT NUMERIC, c_npWx1 NUMERIC DEFAULT 713924, c_tc8vRM NUMERIC, c_UkyVe5kDlT INTEGER, UNIQUE (c_riH, c_tc8vRM));
+ALTER TABLE t_d52V ADD COLUMN c_vuOtJzO INTEGER DEFAULT -388474;
+ALTER TABLE t_sIIqQZcXO2 RENAME TO t_wTpqlx;
+ALTER TABLE t_wTpqlx RENAME TO t_krKR9Pq;
+
+                CREATE TRIGGER trg_NRlqv
+                BEFORE DELETE ON t_d52V
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_d52V) > 1000;
+                END;
+
+                CREATE TRIGGER trg_4Mbke
+                AFTER UPDATE ON t_krKR9Pq
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_krKR9Pq) > 1000;
+                END;
+INSERT OR IGNORE INTO t_d52V (c_UIQ, c_vuOtJzO) VALUES (93210782, 94448563), (194073903, 195056495);
+REPLACE INTO t_d52V (c_UIQ, c_vuOtJzO) VALUES (93572983, 95158070);
+INSERT OR REPLACE INTO t_d52V (c_UIQ, c_vuOtJzO) VALUES (93878267, 95098531);
+INSERT OR REPLACE INTO t_d52V (c_UIQ, c_vuOtJzO) SELECT 94197796, 94963762;
+INSERT OR IGNORE INTO t_d52V (c_UIQ, c_vuOtJzO) VALUES (94268131, 93953597);
+WITH cte_0dO AS (SELECT 1) REPLACE INTO t_voyI7zKf3 (c_Yai5YpKN, c_h79, c_pHrWxbrqi, c_E7vC1voJ, c_heqrroJ, c_riH, c_8LezBTBT, c_npWx1, c_tc8vRM, c_UkyVe5kDlT) SELECT '1tYAdQmbhQJ5_9387', 94518139, 96415918, 97867271, 98127898, 99250042, 99275276, 101444122, 101100035, 102648211;
+INSERT OR IGNORE INTO t_voyI7zKf3 (c_Yai5YpKN, c_h79, c_pHrWxbrqi, c_E7vC1voJ, c_heqrroJ, c_riH, c_8LezBTBT, c_npWx1, c_tc8vRM, c_UkyVe5kDlT) VALUES ('Dy2wYIOjlTqC96m4I_9387', 94137812, 95591227, 97405845, 97810408, 99669726, 100566216, 100857656, 102048183, 102166036);
+INSERT OR REPLACE INTO t_krKR9Pq (c_bpsQk, c_9dsuADY9ok, c_nBVmnC6xx, c_VF6glqmA) VALUES (-778619.7, 94287071, -560118.5, 97106537);
+REPLACE INTO t_krKR9Pq (c_bpsQk, c_9dsuADY9ok, c_nBVmnC6xx, c_VF6glqmA) VALUES (835582.9, 93933853, -852821.0, 96025325);
+WITH cte_LuW AS (SELECT 1) INSERT OR IGNORE INTO t_krKR9Pq (c_bpsQk, c_9dsuADY9ok, c_nBVmnC6xx, c_VF6glqmA) VALUES (701258.118391, 95392547, -113577.99799999999, 96527356), (-74322.09999999998, 195033464, -631095.1, 196223200);
+REPLACE INTO t_krKR9Pq (c_bpsQk, c_9dsuADY9ok, c_nBVmnC6xx, c_VF6glqmA) VALUES (-74075.0728, 95728798, -364061.6, 96351484);
+BEGIN TRANSACTION;
+INSERT OR IGNORE INTO t_voyI7zKf3 (c_Yai5YpKN, c_h79, c_pHrWxbrqi, c_E7vC1voJ, c_heqrroJ, c_riH, c_8LezBTBT, c_npWx1, c_tc8vRM, c_UkyVe5kDlT) VALUES ('FSoSjCP7E_9387', 94441813, 96225512, 97280768, 98376406, 98088494, 98900033, 100995619, 102253585, 102032184), ('kjU0ay7FaTkfJY3g_19387', 193883933, 196215834, 196471116, 197002013, 198434760, 200642266, 200628717, 201682532, 203296246);
+UPDATE OR IGNORE t_voyI7zKf3 SET c_Yai5YpKN = 'c7IUe_1747139387' WHERE ROWID = (SELECT MIN(ROWID) FROM t_voyI7zKf3);
+UPDATE OR IGNORE t_voyI7zKf3 SET c_pHrWxbrqi = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_voyI7zKf3);
+COMMIT;
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_voyI7zKf3
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+
+                    SELECT 
+                        t1.c_9dsuADY9ok,
+                        (SELECT COUNT(*) FROM t_krKR9Pq t2 WHERE t2.c_9dsuADY9ok = t1.c_9dsuADY9ok) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_krKR9Pq t3 WHERE t3.c_9dsuADY9ok > t1.c_9dsuADY9ok LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_9dsuADY9ok FROM t_krKR9Pq
+                        )) as distinct_values_count
+                    FROM t_krKR9Pq t1
+                    WHERE t1.c_9dsuADY9ok IN (
+                        SELECT c_9dsuADY9ok 
+                        FROM t_krKR9Pq 
+                        WHERE typeof(c_9dsuADY9ok) NOT IN ('null')
+                        GROUP BY c_9dsuADY9ok
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_krKR9Pq t4 WHERE t4.c_9dsuADY9ok = t1.c_9dsuADY9ok) DESC
+                    LIMIT 10;
+                    
+SELECT *, CASE WHEN c_VF6glqmA THEN AVG(t_krKR9Pq.c_nBVmnC6xx) WHEN QUOTE(FALSE) THEN HEX(t_krKR9Pq.c_VF6glqmA) END, t_krKR9Pq.c_nBVmnC6xx, t_krKR9Pq.*, t_krKR9Pq.c_9dsuADY9ok IN (SELECT t_krKR9Pq.c_9dsuADY9ok FROM t_krKR9Pq LIMIT 5) AS alias_Qgo FROM t_krKR9Pq WHERE NULL ORDER BY 1;
+SELECT t_d52V.c_vuOtJzO, t_d52V.c_UIQ FROM t_d52V ORDER BY t_d52V.c_vuOtJzO ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+95591227|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+96225512|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+96415918|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+196215834|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+94287071|1|Not Max|5
+93933853|1|Not Max|5
+95392547|1|Not Max|5
+195033464|1|Max|5
+95728798|1|Not Max|5
+||||||||||
+93953597|94268131
+94448563|93210782
+94963762|94197796
+95098531|93878267
+95158070|93572983
+195056495|194073903
+
+ERR:
+Error: near line 33: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+95591227|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+96225512|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+96415918|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+196215834|1|text|[3,4,5]|4|1.0|[1,1,1,1]|{"96225512":"text","96415918":"text","95591227":"text","196215834":"text"}
+94287071|1|Not Max|5
+93933853|1|Not Max|5
+95392547|1|Not Max|5
+195033464|1|Max|5
+95728798|1|Not Max|5
+||||||||||
+93953597|94268131
+94448563|93210782
+94963762|94197796
+95098531|93878267
+95158070|93572983
+195056495|194073903
+
+ERR:
+Runtime error near line 33: datatype mismatch (20)
+

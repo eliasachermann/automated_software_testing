@@ -1,0 +1,78 @@
+SQL:
+CREATE TEMP TABLE t_XDwpzKyDdN (c_yVxC8yjF NUMERIC DEFAULT -841077, c_WMzf97hT NUMERIC, c_gbP6QI0R INTEGER DEFAULT -480968, c_UgB0uxP4w6 TEXT);
+CREATE TABLE IF NOT EXISTS t_lSiMp (c_ghVKeZx4c4 NUMERIC, c_82Cw9BiUqL INTEGER);
+INSERT OR REPLACE INTO t_XDwpzKyDdN (c_yVxC8yjF, c_WMzf97hT, c_gbP6QI0R, c_UgB0uxP4w6) VALUES (90701869, 90948240, 92308172, '7bBWXaDc62_9279');
+INSERT OR IGNORE INTO t_XDwpzKyDdN (c_yVxC8yjF, c_WMzf97hT, c_gbP6QI0R, c_UgB0uxP4w6) VALUES (89502744, 90554139, 92501125, 'JkkAggWkMpQ2EtsdL_9279');
+INSERT OR REPLACE INTO t_lSiMp (c_ghVKeZx4c4, c_82Cw9BiUqL) VALUES (90023012, 91310441);
+INSERT OR REPLACE INTO t_lSiMp (c_ghVKeZx4c4, c_82Cw9BiUqL) VALUES (90461285, 90891013);
+WITH cte_Lkj AS (SELECT 1) INSERT OR IGNORE INTO t_lSiMp (c_ghVKeZx4c4, c_82Cw9BiUqL) VALUES (89458425, 90675358), (189974922, 191463164);
+INSERT OR IGNORE INTO t_lSiMp (c_ghVKeZx4c4, c_82Cw9BiUqL) VALUES (89096544, 90607373);
+INSERT OR ABORT INTO t_XDwpzKyDdN DEFAULT VALUES;
+INSERT INTO t_lSiMp DEFAULT VALUES;
+
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_XDwpzKyDdN LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_UgB0uxP4w6,
+                        (SELECT COUNT(*) FROM t_XDwpzKyDdN t2 WHERE t2.c_UgB0uxP4w6 = t1.c_UgB0uxP4w6) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_XDwpzKyDdN t3 WHERE t3.c_UgB0uxP4w6 > t1.c_UgB0uxP4w6 LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_UgB0uxP4w6 FROM t_XDwpzKyDdN
+                        )) as distinct_values_count
+                    FROM t_XDwpzKyDdN t1
+                    WHERE t1.c_UgB0uxP4w6 IN (
+                        SELECT c_UgB0uxP4w6 
+                        FROM t_XDwpzKyDdN 
+                        WHERE typeof(c_UgB0uxP4w6) NOT IN ('null')
+                        GROUP BY c_UgB0uxP4w6
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_XDwpzKyDdN t4 WHERE t4.c_UgB0uxP4w6 = t1.c_UgB0uxP4w6) DESC
+                    LIMIT 10;
+                    
+SELECT NULL, c_ghVKeZx4c4 FROM t_XDwpzKyDdN NATURAL LEFT JOIN t_lSiMp WHERE NULL UNION ALL SELECT DISTINCT + (-845275 != FALSE), (CASE WHEN 697833 THEN t_XDwpzKyDdN.c_gbP6QI0R WHEN 'y' THEN t_XDwpzKyDdN.c_yVxC8yjF END / x'365C') AS alias_gao FROM t_XDwpzKyDdN ORDER BY 1 ASC;
+SELECT t_lSiMp.c_82Cw9BiUqL, t_lSiMp.c_ghVKeZx4c4, LENGTH(t_lSiMp.c_82Cw9BiUqL) AS computed_c_82Cw9BiUqL FROM t_lSiMp LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+7bBWXaDc62_9279|1|Not Max|3
+JkkAggWkMpQ2EtsdL_9279|1|Max|3
+1|15384695.3333333
+1|15416854.1666667
+1|-80161.3333333333
+91310441|90023012|8
+90891013|90461285|8
+90675358|89458425|8
+191463164|189974922|9
+90607373|89096544|8
+||
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+7bBWXaDc62_9279|1|Not Max|3
+JkkAggWkMpQ2EtsdL_9279|1|Max|3
+1|15384695
+1|15416854
+1|-80161
+91310441|90023012|8
+90891013|90461285|8
+90675358|89458425|8
+191463164|189974922|9
+90607373|89096544|8
+||
+
+ERR:
+

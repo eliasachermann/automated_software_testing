@@ -1,0 +1,79 @@
+SQL:
+CREATE TABLE t_nZuVXxrsu (c_HU4L2Fy5 INTEGER, c_zUseenpW TEXT, c_0wEG0i INTEGER, c_2CmjPFZAh INTEGER PRIMARY KEY AUTOINCREMENT, c_Het INTEGER);
+CREATE TABLE IF NOT EXISTS t_s35Maf (c_pcNXn008 TEXT, c_DbXBHxtGb TEXT, c_baUpeE TEXT, c_Qa6inUPyF TEXT, c_nleyvYO NUMERIC DEFAULT 672326, c_FTBthUNb TEXT DEFAULT 'Jh2qIBCIF4AkeQI', c_v8o TEXT, c_LsqFYww REAL, c_HWeBfgT REAL, c_im7wd TEXT, PRIMARY KEY (c_nleyvYO), UNIQUE (c_Qa6inUPyF));
+INSERT OR REPLACE INTO t_nZuVXxrsu (c_HU4L2Fy5, c_zUseenpW, c_0wEG0i, c_2CmjPFZAh, c_Het) VALUES (88482422, 'b7Ell0wLcygFA1B_8930', 90050696, 90674658, 92088294);
+INSERT OR REPLACE INTO t_s35Maf (c_pcNXn008, c_DbXBHxtGb, c_baUpeE, c_Qa6inUPyF, c_nleyvYO, c_FTBthUNb, c_v8o, c_LsqFYww, c_HWeBfgT, c_im7wd) SELECT 'nf4RL0VCXvC4_8830', 'vxF4TEY34DQ4C_8930', '7Ui9sWTzMBsZsbq_9030', 'Cq9PyPwppLA_9130', 92449138, 'n43KqfCaOPM_9330', 'dqe_9430', 312620.6591, -900388.2, 'SSpo768JmyByqCw_9730';
+INSERT OR REPLACE INTO t_s35Maf (c_pcNXn008, c_DbXBHxtGb, c_baUpeE, c_Qa6inUPyF, c_nleyvYO, c_FTBthUNb, c_v8o, c_LsqFYww, c_HWeBfgT, c_im7wd) VALUES ('3PHH7S6nGLFSA_8830', '4OdRr6_8930', 'ZFOtwc4vVI9dTaQjO8lm_9030', '3rSSVafoAT0v_9130', 91767643, '3pJAZakdJ53lAxTS0trH_9330', 'KnzKWfJ_9430', -401364.765642, 992523.8568, 'Xy7nzZ1PRL_9730');
+
+
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_nZuVXxrsu SET c_Het = 219 WHERE ROWID = (SELECT MIN(ROWID) FROM t_nZuVXxrsu);
+UPDATE OR IGNORE t_nZuVXxrsu SET c_2CmjPFZAh = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_nZuVXxrsu);
+UPDATE OR IGNORE t_nZuVXxrsu SET c_HU4L2Fy5 = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_nZuVXxrsu);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_s35Maf SET c_baUpeE = 'bwUzW_1747138830' WHERE ROWID = (SELECT MIN(ROWID) FROM t_s35Maf);
+WITH cte_Jzo AS (SELECT 1) INSERT OR REPLACE INTO t_s35Maf (c_pcNXn008, c_DbXBHxtGb, c_baUpeE, c_Qa6inUPyF, c_nleyvYO, c_FTBthUNb, c_v8o, c_LsqFYww, c_HWeBfgT, c_im7wd) VALUES ('gFjwxZ7DWkkatwO_8830', 'v7weOelp6CpbvqRhG_8930', 'hTdiodx_9030', 'QTZ_9130', 91481713, '40UN7_9330', 'rZxSPDGW53M9v_9430', 30595.9, -731556.71, 'nYoLTl_9730');
+COMMIT;
+
+                SELECT c_Het, c_2CmjPFZAh,
+                    ROW_NUMBER() OVER (PARTITION BY c_2CmjPFZAh) as row_num,
+                    RANK() OVER (PARTITION BY c_2CmjPFZAh ORDER BY c_Het) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_2CmjPFZAh ORDER BY c_Het) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_Het) IN ('integer','real') THEN c_Het ELSE 0 END) 
+                        OVER (PARTITION BY c_2CmjPFZAh ORDER BY c_Het 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_Het) IN ('integer','real') THEN c_Het ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_2CmjPFZAh ORDER BY c_Het) as prev_value,
+                    LEAD(CASE WHEN typeof(c_Het) IN ('integer','real') THEN c_Het ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_2CmjPFZAh ORDER BY c_Het) as next_value
+                FROM t_nZuVXxrsu
+                ORDER BY c_2CmjPFZAh, c_Het
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_HU4L2Fy5,
+                        (SELECT COUNT(*) FROM t_nZuVXxrsu t2 WHERE t2.c_HU4L2Fy5 = t1.c_HU4L2Fy5) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_nZuVXxrsu t3 WHERE t3.c_HU4L2Fy5 > t1.c_HU4L2Fy5 LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_HU4L2Fy5 FROM t_nZuVXxrsu
+                        )) as distinct_values_count
+                    FROM t_nZuVXxrsu t1
+                    WHERE t1.c_HU4L2Fy5 IN (
+                        SELECT c_HU4L2Fy5 
+                        FROM t_nZuVXxrsu 
+                        WHERE typeof(c_HU4L2Fy5) NOT IN ('null')
+                        GROUP BY c_HU4L2Fy5
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_nZuVXxrsu t4 WHERE t4.c_HU4L2Fy5 = t1.c_HU4L2Fy5) DESC
+                    LIMIT 10;
+                    
+SELECT t_s35Maf.c_im7wd, t_s35Maf.c_Qa6inUPyF, t_s35Maf.c_pcNXn008, t_s35Maf.c_FTBthUNb, TYPEOF(t_s35Maf.c_Qa6inUPyF) AS computed_c_Qa6inUPyF FROM t_s35Maf ORDER BY t_s35Maf.c_im7wd DESC LIMIT 10;
+SELECT t_nZuVXxrsu.c_0wEG0i, t_nZuVXxrsu.c_2CmjPFZAh, t_nZuVXxrsu.c_Het, t_nZuVXxrsu.c_HU4L2Fy5, LOWER(t_nZuVXxrsu.c_HU4L2Fy5) AS computed_c_HU4L2Fy5 FROM t_nZuVXxrsu ORDER BY t_nZuVXxrsu.c_2CmjPFZAh DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+219|90674658|1|1|1|219|0|0
+nYoLTl_9730|QTZ_9130|gFjwxZ7DWkkatwO_8830|40UN7_9330|text
+Xy7nzZ1PRL_9730|3rSSVafoAT0v_9130|3PHH7S6nGLFSA_8830|3pJAZakdJ53lAxTS0trH_9330|text
+SSpo768JmyByqCw_9730|Cq9PyPwppLA_9130|nf4RL0VCXvC4_8830|n43KqfCaOPM_9330|text
+90050696|90674658|219||
+
+ERR:
+Error: near line 10: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+219|90674658|1|1|1|219|0|0
+nYoLTl_9730|QTZ_9130|gFjwxZ7DWkkatwO_8830|40UN7_9330|text
+Xy7nzZ1PRL_9730|3rSSVafoAT0v_9130|3PHH7S6nGLFSA_8830|3pJAZakdJ53lAxTS0trH_9330|text
+SSpo768JmyByqCw_9730|Cq9PyPwppLA_9130|nf4RL0VCXvC4_8830|n43KqfCaOPM_9330|text
+90050696|90674658|219||
+
+ERR:
+Runtime error near line 10: datatype mismatch (20)
+

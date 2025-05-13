@@ -1,0 +1,80 @@
+SQL:
+PRAGMA auto_vacuum = 0;
+CREATE TEMP TABLE t_k4nxjg (c_sPuPFCL INTEGER PRIMARY KEY, UNIQUE (c_sPuPFCL));
+ALTER TABLE t_k4nxjg RENAME COLUMN c_sPuPFCL TO c_cGK8eWxIUD;
+ALTER TABLE t_k4nxjg RENAME TO t_MXUUqaoK;
+
+                CREATE TRIGGER trg_AroGh
+                BEFORE UPDATE ON t_MXUUqaoK
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_MXUUqaoK) > 1000;
+                END;
+REPLACE INTO t_MXUUqaoK (c_cGK8eWxIUD) VALUES (89385208), (188448982);
+INSERT OR IGNORE INTO t_MXUUqaoK (c_cGK8eWxIUD) VALUES (89352420), (189316818);
+WITH cte_SrE AS (SELECT 1) INSERT OR IGNORE INTO t_MXUUqaoK (c_cGK8eWxIUD) SELECT 88254166;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_MXUUqaoK SET c_cGK8eWxIUD = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_MXUUqaoK);
+COMMIT;
+SELECT t_MXUUqaoK.c_cGK8eWxIUD, CASE WHEN t_MXUUqaoK.c_cGK8eWxIUD THEN + 716002 WHEN t_MXUUqaoK.c_cGK8eWxIUD THEN CASE WHEN t_MXUUqaoK.c_cGK8eWxIUD THEN t_MXUUqaoK.c_cGK8eWxIUD WHEN t_MXUUqaoK.c_cGK8eWxIUD THEN t_MXUUqaoK.c_cGK8eWxIUD ELSE t_MXUUqaoK.c_cGK8eWxIUD END ELSE CASE WHEN TRUE THEN t_MXUUqaoK.c_cGK8eWxIUD WHEN t_MXUUqaoK.c_cGK8eWxIUD THEN t_MXUUqaoK.c_cGK8eWxIUD ELSE t_MXUUqaoK.c_cGK8eWxIUD END END, t_MXUUqaoK.c_cGK8eWxIUD, t_MXUUqaoK.c_cGK8eWxIUD FROM t_MXUUqaoK WHERE CASE WHEN NOT t_MXUUqaoK.c_cGK8eWxIUD THEN - t_MXUUqaoK.c_cGK8eWxIUD WHEN c_cGK8eWxIUD THEN FALSE ELSE (t_MXUUqaoK.c_cGK8eWxIUD <> t_MXUUqaoK.c_cGK8eWxIUD) END ORDER BY 1 LIMIT 93;
+
+                SELECT DISTINCT t_MXUUqaoK.c_cGK8eWxIUD,
+                    COUNT(*) OVER (PARTITION BY t_MXUUqaoK.c_cGK8eWxIUD) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_MXUUqaoK.c_cGK8eWxIUD) IN ('null') THEN 0 
+                            ELSE t_MXUUqaoK.c_cGK8eWxIUD END DESC,
+                            t_MXUUqaoK.c_cGK8eWxIUD ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_MXUUqaoK.c_cGK8eWxIUD IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_MXUUqaoK
+                WHERE t_MXUUqaoK.c_cGK8eWxIUD IS NOT NULL
+                GROUP BY t_MXUUqaoK.c_cGK8eWxIUD, t_MXUUqaoK.c_cGK8eWxIUD
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_MXUUqaoK.c_cGK8eWxIUD ASC, t_MXUUqaoK.c_cGK8eWxIUD ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_MXUUqaoK.c_cGK8eWxIUD,
+                    t_MXUUqaoK.c_cGK8eWxIUD,
+                    SUM(CASE WHEN typeof(t_MXUUqaoK.c_cGK8eWxIUD) IN ('integer', 'real', 'numeric') THEN t_MXUUqaoK.c_cGK8eWxIUD ELSE 0 END) 
+                        OVER (PARTITION BY t_MXUUqaoK.c_cGK8eWxIUD ORDER BY t_MXUUqaoK.c_cGK8eWxIUD ASC) as window_total
+                FROM t_MXUUqaoK
+                GROUP BY t_MXUUqaoK.c_cGK8eWxIUD, t_MXUUqaoK.c_cGK8eWxIUD
+                HAVING SUM(CASE WHEN typeof(t_MXUUqaoK.c_cGK8eWxIUD) IN ('integer', 'real', 'numeric') THEN t_MXUUqaoK.c_cGK8eWxIUD ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_MXUUqaoK.c_cGK8eWxIUD ASC, t_MXUUqaoK.c_cGK8eWxIUD ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+88254166|1|5|Known
+89352420|1|4|Known
+89385208|1|3|Known
+188448982|1|2|Known
+189316818|1|1|Known
+189316818|189316818|189316818
+188448982|188448982|188448982
+89385208|89385208|89385208
+89352420|89352420|89352420
+88254166|88254166|88254166
+
+ERR:
+Error: near line 15: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+88254166|1|5|Known
+89352420|1|4|Known
+89385208|1|3|Known
+188448982|1|2|Known
+189316818|1|1|Known
+189316818|189316818|189316818
+188448982|188448982|188448982
+89385208|89385208|89385208
+89352420|89352420|89352420
+88254166|88254166|88254166
+
+ERR:
+Runtime error near line 15: datatype mismatch (20)
+

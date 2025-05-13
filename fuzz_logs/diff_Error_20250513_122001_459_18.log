@@ -1,0 +1,81 @@
+SQL:
+CREATE TABLE t_O7JM6Q (c_dYhsv REAL, c_8acR6Wo TEXT, c_rTV INTEGER PRIMARY KEY, c_4moT REAL, c_GZqiH INTEGER, c_5HJz4PIjGi REAL DEFAULT -678990.133947, FOREIGN KEY (c_GZqiH) REFERENCES t_yMa7D(c_3V1Ln));
+ALTER TABLE t_O7JM6Q RENAME TO t_5fcBS;
+INSERT OR REPLACE INTO t_5fcBS (c_dYhsv, c_8acR6Wo, c_rTV, c_4moT, c_GZqiH, c_5HJz4PIjGi) VALUES (-649960.713, 'kVMnj5_8901', 89497528, 369688.5, 92333412, -584861.0517);
+REPLACE INTO t_5fcBS (c_dYhsv, c_8acR6Wo, c_rTV, c_4moT, c_GZqiH, c_5HJz4PIjGi) VALUES (612178.76397, 'I8NY_8901', 90511334, -845919.4221, 92937137, -26162.5);
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_5fcBS LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_5fcBS SET c_rTV = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_5fcBS);
+COMMIT;
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_rTV,
+                        'col2', c_8acR6Wo
+                    ) as row_data
+                    FROM t_5fcBS
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+SELECT t_5fcBS.c_GZqiH, t_5fcBS.c_8acR6Wo, t_5fcBS.c_4moT, t_5fcBS.c_dYhsv, t_5fcBS.c_rTV FROM t_5fcBS ORDER BY t_5fcBS.c_rTV ASC LIMIT 10;
+SELECT *, t_5fcBS.c_8acR6Wo, t_5fcBS.c_GZqiH FROM t_5fcBS ORDER BY 1 LIMIT 27;
+SELECT t_5fcBS.c_GZqiH FROM t_5fcBS LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+89497528|{"id":89497528,"col1":89497528,"col2":"kVMnj5_8901"}|89497528|kVMnj5_8901|["{\"id\":89497528,\"col1\":89497528,\"col2\":\"kVMnj5_8901\"}"]|object|col1|89497528|integer
+89497528|{"id":89497528,"col1":89497528,"col2":"kVMnj5_8901"}|89497528|kVMnj5_8901|["{\"id\":89497528,\"col1\":89497528,\"col2\":\"kVMnj5_8901\"}"]|object|col2|kVMnj5_8901|text
+89497528|{"id":89497528,"col1":89497528,"col2":"kVMnj5_8901"}|89497528|kVMnj5_8901|["{\"id\":89497528,\"col1\":89497528,\"col2\":\"kVMnj5_8901\"}"]|object|id|89497528|integer
+90511334|{"id":90511334,"col1":90511334,"col2":"I8NY_8901"}|90511334|I8NY_8901|["{\"id\":90511334,\"col1\":90511334,\"col2\":\"I8NY_8901\"}"]|object|col1|90511334|integer
+90511334|{"id":90511334,"col1":90511334,"col2":"I8NY_8901"}|90511334|I8NY_8901|["{\"id\":90511334,\"col1\":90511334,\"col2\":\"I8NY_8901\"}"]|object|col2|I8NY_8901|text
+90511334|{"id":90511334,"col1":90511334,"col2":"I8NY_8901"}|90511334|I8NY_8901|["{\"id\":90511334,\"col1\":90511334,\"col2\":\"I8NY_8901\"}"]|object|id|90511334|integer
+92333412|kVMnj5_8901|369688.5|-649960.713|89497528
+92937137|I8NY_8901|-845919.4221|612178.76397|90511334
+-649960.713|kVMnj5_8901|89497528|369688.5|92333412|-584861.0517|kVMnj5_8901|92333412
+612178.76397|I8NY_8901|90511334|-845919.4221|92937137|-26162.5|I8NY_8901|92937137
+92333412
+92937137
+
+ERR:
+Error: near line 13: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+89497528|{"id":89497528,"col1":89497528,"col2":"kVMnj5_8901"}|89497528|kVMnj5_8901|["{\"id\":89497528,\"col1\":89497528,\"col2\":\"kVMnj5_8901\"}"]|object|col1|89497528|integer
+89497528|{"id":89497528,"col1":89497528,"col2":"kVMnj5_8901"}|89497528|kVMnj5_8901|["{\"id\":89497528,\"col1\":89497528,\"col2\":\"kVMnj5_8901\"}"]|object|col2|kVMnj5_8901|text
+89497528|{"id":89497528,"col1":89497528,"col2":"kVMnj5_8901"}|89497528|kVMnj5_8901|["{\"id\":89497528,\"col1\":89497528,\"col2\":\"kVMnj5_8901\"}"]|object|id|89497528|integer
+90511334|{"id":90511334,"col1":90511334,"col2":"I8NY_8901"}|90511334|I8NY_8901|["{\"id\":90511334,\"col1\":90511334,\"col2\":\"I8NY_8901\"}"]|object|col1|90511334|integer
+90511334|{"id":90511334,"col1":90511334,"col2":"I8NY_8901"}|90511334|I8NY_8901|["{\"id\":90511334,\"col1\":90511334,\"col2\":\"I8NY_8901\"}"]|object|col2|I8NY_8901|text
+90511334|{"id":90511334,"col1":90511334,"col2":"I8NY_8901"}|90511334|I8NY_8901|["{\"id\":90511334,\"col1\":90511334,\"col2\":\"I8NY_8901\"}"]|object|id|90511334|integer
+92333412|kVMnj5_8901|369688.5|-649960.713|89497528
+92937137|I8NY_8901|-845919.4221|612178.76397|90511334
+-649960.713|kVMnj5_8901|89497528|369688.5|92333412|-584861.0517|kVMnj5_8901|92333412
+612178.76397|I8NY_8901|90511334|-845919.4221|92937137|-26162.5|I8NY_8901|92937137
+92333412
+92937137
+
+ERR:
+Runtime error near line 13: datatype mismatch (20)
+

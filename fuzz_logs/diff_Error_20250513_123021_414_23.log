@@ -1,0 +1,183 @@
+SQL:
+CREATE TABLE t_Tz1rP (c_x58lCX1gU TEXT, c_0hfr NUMERIC DEFAULT -70947, c_YHOz INTEGER PRIMARY KEY);
+CREATE TABLE IF NOT EXISTS t_Ilt4l (c_zXZia INTEGER, c_uyz NUMERIC, c_ve8v6wMd INTEGER DEFAULT NULL, c_vCoT REAL DEFAULT 923125.02205);
+CREATE TABLE t_Ziw1GzIS (c_A78 INTEGER DEFAULT -671312, c_XS0SNC TEXT COLLATE NOCASE, c_iFr TEXT COLLATE BINARY, c_6dYb NUMERIC, c_1vW TEXT, c_LHIiHCQ REAL, c_jgo4Od TEXT, c_0kVaD3 TEXT);
+ALTER TABLE t_Ilt4l RENAME COLUMN c_vCoT TO c_PEw4bJ;
+ALTER TABLE t_Ziw1GzIS RENAME TO t_Ah6BuBV;
+
+                CREATE TRIGGER trg_y3Osm
+                AFTER INSERT ON t_Tz1rP
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_Tz1rP) > 1000;
+                END;
+INSERT OR IGNORE INTO t_Tz1rP (c_x58lCX1gU, c_0hfr, c_YHOz) VALUES ('wusxvswcz1IA_9419', 95769787, 95810877), ('p5_19419', 195355153, 196603082);
+INSERT OR REPLACE INTO t_Tz1rP (c_x58lCX1gU, c_0hfr, c_YHOz) VALUES ('gJb_9419', 96081867, 96331646);
+INSERT OR REPLACE INTO t_Tz1rP (c_x58lCX1gU, c_0hfr, c_YHOz) VALUES ('hbAfieb9kvk9kx_9419', 95467415, 97182261), ('4_19419', 195957120, 196842070);
+INSERT OR REPLACE INTO t_Ilt4l (c_zXZia, c_uyz, c_ve8v6wMd, c_PEw4bJ) SELECT 94681875, 95921356, 95508651, -664997.643;
+REPLACE INTO t_Ilt4l (c_zXZia, c_uyz, c_ve8v6wMd, c_PEw4bJ) VALUES (94447786, 94795982, 96725765, 471476.587033), (194361068, 195763547, 196613878, 93069.457);
+INSERT OR REPLACE INTO t_Ilt4l (c_zXZia, c_uyz, c_ve8v6wMd, c_PEw4bJ) SELECT 94907308, 95188200, 96839684, 1046519.6277;
+INSERT OR REPLACE INTO t_Ilt4l (c_zXZia, c_uyz, c_ve8v6wMd, c_PEw4bJ) VALUES (94846018, 95526581, 95516242, 20273.199999999997);
+INSERT OR IGNORE INTO t_Ah6BuBV (c_A78, c_XS0SNC, c_iFr, c_6dYb, c_1vW, c_LHIiHCQ, c_jgo4Od, c_0kVaD3) SELECT 93862106, 'k_9519', '3Nol_9619', 97424298, '6m6LxY2_9819', 133225.6319, 'NdhxcKZUBIAMsgNLbLz_10019', 'MbvfCw_10119';
+INSERT OR REPLACE INTO t_Ah6BuBV (c_A78, c_XS0SNC, c_iFr, c_6dYb, c_1vW, c_LHIiHCQ, c_jgo4Od, c_0kVaD3) VALUES (93634293, 'vAPjADBf8_9519', 'CprSS_9619', 96480955, 'BKSTjFyqRo3KeRXBP0_9819', -781619.6093, 'ktGLtf_10019', 'KzK88y_10119'), (195188400, 'VzV8Qa256s_19519', '2QplB60s0p7_19619', 196723191, 'S6xiz8DFmLSmxuVtg55H_19819', -669657.331988, '2gle6xgpg57QmX_20019', 'EZWvzNfwMO_20119');
+WITH cte_jc2 AS (SELECT 1) REPLACE INTO t_Ah6BuBV (c_A78, c_XS0SNC, c_iFr, c_6dYb, c_1vW, c_LHIiHCQ, c_jgo4Od, c_0kVaD3) VALUES (94486396, 'ColE8zEGE4lGoGclszH_9519', 'YEz_9619', 97382803, 'WJBeLfiAq2aphW4_9819', -390402.83, 'UqenOrxHeVPi_10019', 'oPx_10119');
+INSERT INTO t_Tz1rP DEFAULT VALUES;
+INSERT OR FAIL INTO t_Ilt4l DEFAULT VALUES;
+
+
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_Ah6BuBV LIMIT 1;
+            
+BEGIN TRANSACTION;
+INSERT OR REPLACE INTO t_Tz1rP (c_x58lCX1gU, c_0hfr, c_YHOz) VALUES ('edJwWa1QDlW7pdFhV_9419', 95158701, 96018733), ('NR3LSVu0nw0zXI_19419', 195103487, 196843504);
+REPLACE INTO t_Tz1rP (c_x58lCX1gU, c_0hfr, c_YHOz) VALUES ('GY1XeALw4L_9419', 94324498, 95272802);
+UPDATE OR IGNORE t_Tz1rP SET c_YHOz = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_Tz1rP);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_Ah6BuBV SET c_0kVaD3 = 'zONje_1747139419' WHERE ROWID = (SELECT MIN(ROWID) FROM t_Ah6BuBV);
+COMMIT;
+BEGIN TRANSACTION;
+REPLACE INTO t_Tz1rP (c_x58lCX1gU, c_0hfr, c_YHOz) VALUES ('0I50_9419', 95304206, 96149661), ('MG9DBmBr6lOPP0VQ2xYO_19419', 194957211, 195971842);
+UPDATE OR IGNORE t_Tz1rP SET c_YHOz = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_Tz1rP);
+COMMIT;
+
+                    SELECT 
+                        t1.c_YHOz,
+                        (SELECT COUNT(*) FROM t_Tz1rP t2 WHERE t2.c_YHOz = t1.c_YHOz) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_Tz1rP t3 WHERE t3.c_YHOz > t1.c_YHOz LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_YHOz FROM t_Tz1rP
+                        )) as distinct_values_count
+                    FROM t_Tz1rP t1
+                    WHERE t1.c_YHOz IN (
+                        SELECT c_YHOz 
+                        FROM t_Tz1rP 
+                        WHERE typeof(c_YHOz) NOT IN ('null')
+                        GROUP BY c_YHOz
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_Tz1rP t4 WHERE t4.c_YHOz = t1.c_YHOz) DESC
+                    LIMIT 10;
+                    
+SELECT t_Ah6BuBV.c_6dYb FROM t_Ah6BuBV ORDER BY t_Ah6BuBV.c_6dYb ASC LIMIT 10;
+SELECT t_Tz1rP.c_YHOz, t_Tz1rP.c_0hfr, LENGTH(t_Tz1rP.c_0hfr) AS computed_c_0hfr FROM t_Tz1rP ORDER BY t_Tz1rP.c_0hfr ASC LIMIT 10;
+SELECT LIKELY((NULL < t_Tz1rP.c_0hfr)) AS alias_wf1, c_YHOz IN (SELECT t_Tz1rP.c_YHOz FROM t_Tz1rP LIMIT 5) AS alias_4gy FROM t_Tz1rP INTERSECT SELECT t_Tz1rP.c_0hfr, c_YHOz FROM t_Ilt4l, t_Ah6BuBV, t_Tz1rP WHERE EXISTS (SELECT 1 FROM t_Ah6BuBV LIMIT 1) ORDER BY 2 ASC;
+
+                SELECT DISTINCT t_Ilt4l.c_ve8v6wMd,
+                    COUNT(*) OVER (PARTITION BY t_Ilt4l.c_uyz) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_Ilt4l.c_ve8v6wMd) IN ('null') THEN 0 
+                            ELSE t_Ilt4l.c_ve8v6wMd END DESC,
+                            t_Ilt4l.c_uyz ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_Ilt4l.c_ve8v6wMd IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_Ilt4l
+                WHERE t_Ilt4l.c_ve8v6wMd IS NOT NULL
+                GROUP BY t_Ilt4l.c_ve8v6wMd, t_Ilt4l.c_uyz
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_Ilt4l.c_ve8v6wMd ASC, t_Ilt4l.c_uyz ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_Ilt4l.c_ve8v6wMd,
+                    t_Ilt4l.c_uyz,
+                    SUM(CASE WHEN typeof(t_Ilt4l.c_ve8v6wMd) IN ('integer', 'real', 'numeric') THEN t_Ilt4l.c_ve8v6wMd ELSE 0 END) 
+                        OVER (PARTITION BY t_Ilt4l.c_uyz ORDER BY t_Ilt4l.c_ve8v6wMd ASC) as window_total
+                FROM t_Ilt4l
+                GROUP BY t_Ilt4l.c_ve8v6wMd, t_Ilt4l.c_uyz
+                HAVING SUM(CASE WHEN typeof(t_Ilt4l.c_ve8v6wMd) IN ('integer', 'real', 'numeric') THEN t_Ilt4l.c_ve8v6wMd ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_Ilt4l.c_ve8v6wMd ASC, t_Ilt4l.c_uyz ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+95272802|1|Not Max|11
+95810877|1|Not Max|11
+96018733|1|Not Max|11
+96149661|1|Not Max|11
+96331646|1|Not Max|11
+97182261|1|Not Max|11
+195971842|1|Not Max|11
+196603082|1|Not Max|11
+196842070|1|Not Max|11
+196842071|1|Not Max|11
+96480955
+97382803
+97424298
+196723191
+196842071|-70947|6
+95272802|94324498|8
+96018733|95158701|8
+96149661|95304206|8
+97182261|95467415|8
+95810877|95769787|8
+96331646|96081867|8
+195971842|194957211|9
+196843504|195103487|9
+196603082|195355153|9
+95508651|1|5|Known
+95516242|1|4|Known
+96725765|1|3|Known
+96839684|1|2|Known
+196613878|1|1|Known
+196613878|195763547|196613878
+96839684|95188200|96839684
+96725765|94795982|96725765
+95516242|95526581|95516242
+95508651|95921356|95508651
+
+ERR:
+Error: near line 37: datatype mismatch
+Error: near line 44: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+95272802|1|Not Max|11
+95810877|1|Not Max|11
+96018733|1|Not Max|11
+96149661|1|Not Max|11
+96331646|1|Not Max|11
+97182261|1|Not Max|11
+195971842|1|Not Max|11
+196603082|1|Not Max|11
+196842070|1|Not Max|11
+196842071|1|Not Max|11
+96480955
+97382803
+97424298
+196723191
+196842071|-70947|6
+95272802|94324498|8
+96018733|95158701|8
+96149661|95304206|8
+97182261|95467415|8
+95810877|95769787|8
+96331646|96081867|8
+195971842|194957211|9
+196843504|195103487|9
+196603082|195355153|9
+95508651|1|5|Known
+95516242|1|4|Known
+96725765|1|3|Known
+96839684|1|2|Known
+196613878|1|1|Known
+196613878|195763547|196613878
+96839684|95188200|96839684
+96725765|94795982|96725765
+95516242|95526581|95516242
+95508651|95921356|95508651
+
+ERR:
+Runtime error near line 37: datatype mismatch (20)
+Runtime error near line 44: datatype mismatch (20)
+

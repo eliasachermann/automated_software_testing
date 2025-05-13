@@ -1,0 +1,84 @@
+SQL:
+CREATE TEMP TABLE t_j9tY0Wju (c_mtI3lEX REAL, c_0dj8 INTEGER PRIMARY KEY, c_TEg NUMERIC, c_HoOoA TEXT DEFAULT NULL, c_Gouo NUMERIC, c_9nLBtKtAIh INTEGER);
+ALTER TABLE t_j9tY0Wju ADD COLUMN c_hHF NUMERIC;
+ALTER TABLE t_j9tY0Wju RENAME COLUMN c_mtI3lEX TO c_lpVKGxzre;
+ALTER TABLE t_j9tY0Wju RENAME COLUMN c_HoOoA TO c_5tcK1g0ey;
+INSERT OR REPLACE INTO t_j9tY0Wju (c_lpVKGxzre, c_0dj8, c_TEg, c_5tcK1g0ey, c_Gouo, c_9nLBtKtAIh, c_hHF) VALUES (659074.49025, 90110867, 91737233, 'bDLwg4w_9277', 93724773, 95205194, 96732430);
+INSERT OR IGNORE INTO t_j9tY0Wju (c_lpVKGxzre, c_0dj8, c_TEg, c_5tcK1g0ey, c_Gouo, c_9nLBtKtAIh, c_hHF) VALUES (-529191.807, 90352454, 91291843, '9GG46tlJHdwKoJ3fLCA_9277', 93380985, 95329589, 96349254);
+INSERT OR IGNORE INTO t_j9tY0Wju (c_lpVKGxzre, c_0dj8, c_TEg, c_5tcK1g0ey, c_Gouo, c_9nLBtKtAIh, c_hHF) VALUES (-175180.02500000002, 90191263, 91661984, 'EA32O7Uj6o3Ua_9277', 94581617, 95546019, 96712025), (-495483.17299999995, 190421769, 192512091, 'mOC9LeuefENeQyVZ6_19277', 194091474, 195445221, 196590739);
+BEGIN TRANSACTION;
+REPLACE INTO t_j9tY0Wju (c_lpVKGxzre, c_0dj8, c_TEg, c_5tcK1g0ey, c_Gouo, c_9nLBtKtAIh, c_hHF) VALUES (938085.505815, 91288394, 92029763, 'qtZSkDeAUIUvgUlXuTjc_9277', 94467216, 94742334, 95146740), (-81601.5477, 191212850, 190786168, '98hVY6aVDt5_19277', 193580672, 194604001, 195017535);
+REPLACE INTO t_j9tY0Wju (c_lpVKGxzre, c_0dj8, c_TEg, c_5tcK1g0ey, c_Gouo, c_9nLBtKtAIh, c_hHF) VALUES (583337.4924999999, 90485589, 91880694, 'WP7EdYUCDPRT_9277', 92931269, 95646593, 95773858);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_j9tY0Wju SET c_hHF = -984 WHERE ROWID = (SELECT MIN(ROWID) FROM t_j9tY0Wju);
+UPDATE OR IGNORE t_j9tY0Wju SET c_0dj8 = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_j9tY0Wju);
+INSERT OR REPLACE INTO t_j9tY0Wju (c_lpVKGxzre, c_0dj8, c_TEg, c_5tcK1g0ey, c_Gouo, c_9nLBtKtAIh, c_hHF) VALUES (102690.25412, 90269761, 92008550, 'F3cM82_9277', 94237517, 94529350, 94849296);
+COMMIT;
+
+                    SELECT 
+                        t1.c_0dj8,
+                        (SELECT COUNT(*) FROM t_j9tY0Wju t2 WHERE t2.c_0dj8 = t1.c_0dj8) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_j9tY0Wju t3 WHERE t3.c_0dj8 > t1.c_0dj8 LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_0dj8 FROM t_j9tY0Wju
+                        )) as distinct_values_count
+                    FROM t_j9tY0Wju t1
+                    WHERE t1.c_0dj8 IN (
+                        SELECT c_0dj8 
+                        FROM t_j9tY0Wju 
+                        WHERE typeof(c_0dj8) NOT IN ('null')
+                        GROUP BY c_0dj8
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_j9tY0Wju t4 WHERE t4.c_0dj8 = t1.c_0dj8) DESC
+                    LIMIT 10;
+                    
+SELECT t_j9tY0Wju.c_hHF, t_j9tY0Wju.c_lpVKGxzre FROM t_j9tY0Wju ORDER BY t_j9tY0Wju.c_lpVKGxzre DESC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+90110867|1|Not Max|8
+90191263|1|Not Max|8
+90269761|1|Not Max|8
+90352454|1|Not Max|8
+90485589|1|Not Max|8
+91288394|1|Not Max|8
+190421769|1|Not Max|8
+191212850|1|Max|8
+95146740|938085.505815
+-984|659074.49025
+95773858|583337.4925
+94849296|102690.25412
+195017535|-81601.5477
+96712025|-175180.025
+196590739|-495483.173
+96349254|-529191.807
+
+ERR:
+Error: near line 14: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+90110867|1|Not Max|8
+90191263|1|Not Max|8
+90269761|1|Not Max|8
+90352454|1|Not Max|8
+90485589|1|Not Max|8
+91288394|1|Not Max|8
+190421769|1|Not Max|8
+191212850|1|Max|8
+95146740|938085.505815
+-984|659074.49025
+95773858|583337.4925
+94849296|102690.25412
+195017535|-81601.5477
+96712025|-175180.025
+196590739|-495483.173
+96349254|-529191.807
+
+ERR:
+Runtime error near line 14: datatype mismatch (20)
+

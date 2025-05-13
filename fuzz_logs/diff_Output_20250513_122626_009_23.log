@@ -1,0 +1,68 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_hvK (c_YRuyk3L INTEGER PRIMARY KEY);
+CREATE TABLE IF NOT EXISTS t_Fkq6QQL (c_MzvFtK7Tvy REAL DEFAULT 298702.1755, c_lcpLkoXS REAL, c_ROWzKHs TEXT, c_qBA8hi TEXT PRIMARY KEY DEFAULT 'aEGQghJxdorv6H2Wo', c_xugp REAL, c_PJjOAnl2z NUMERIC, c_koJhrrj NUMERIC DEFAULT 986787, c_lFMl TEXT COLLATE NOCASE, c_KXR NUMERIC, c_BxPrRINi5 REAL);
+ALTER TABLE t_hvK RENAME COLUMN c_YRuyk3L TO c_yKY;
+ALTER TABLE t_Fkq6QQL ADD COLUMN c_Y1m2zWc NUMERIC;
+ALTER TABLE t_Fkq6QQL RENAME COLUMN c_ROWzKHs TO c_WGK6;
+REPLACE INTO t_hvK (c_yKY) VALUES (91584462);
+INSERT OR IGNORE INTO t_hvK (c_yKY) VALUES (92582393);
+INSERT OR IGNORE INTO t_hvK (c_yKY) VALUES (91523779), (192430054);
+INSERT OR IGNORE INTO t_hvK (c_yKY) SELECT 91617950;
+INSERT OR IGNORE INTO t_Fkq6QQL (c_MzvFtK7Tvy, c_lcpLkoXS, c_WGK6, c_qBA8hi, c_xugp, c_PJjOAnl2z, c_koJhrrj, c_lFMl, c_KXR, c_BxPrRINi5, c_Y1m2zWc) VALUES (-305348.3, 970255.2, 'T6f1WzGQlWiV6WGtJXqL_9385', 'hukXnt6FVjdXMg5CzQb_9485', 230770.070817, 96321047, 98564303, 'bYsvTPmdsj4MW_9885', 99777758, 326012.722, 101072354);
+INSERT OR REPLACE INTO t_Fkq6QQL (c_MzvFtK7Tvy, c_lcpLkoXS, c_WGK6, c_qBA8hi, c_xugp, c_PJjOAnl2z, c_koJhrrj, c_lFMl, c_KXR, c_BxPrRINi5, c_Y1m2zWc) VALUES (635768.9, 145442.53541, '8iIGAwLu9tC237Spyc_9385', 'yfc4zSmjUJEiqfX2_9485', 578171.9909999999, 96850680, 98281987, 'wCpcF1DSwrLFk_9885', 100751701, -432216.767262, 102802185), (122236.81, 763381.51042, 'bEvDmTO8VxoaE2Oo0_19385', 'tK4dpVD7C1S2R_19485', 578804.23, 196917109, 197753506, 'huFSvO9eGcpn8ydYBi_19885', 200398748, -434012.59699999995, 202419645);
+REPLACE INTO t_Fkq6QQL (c_MzvFtK7Tvy, c_lcpLkoXS, c_WGK6, c_qBA8hi, c_xugp, c_PJjOAnl2z, c_koJhrrj, c_lFMl, c_KXR, c_BxPrRINi5, c_Y1m2zWc) VALUES (1020419.19, 355041.24846, 'bUetmI0Upp5_9385', 'c1TcHpMnFEzumdlnMz_9485', 509391.57, 96054754, 98004530, 'uf45oVhQgpMI_9885', 100618806, 789489.085, 101641994), (354540.409399, 641424.599011, 'gW70VuY_19385', 'xF00kqdZqzs9ZjT6FTlG_19485', -122669.50994100003, 196750801, 198590917, 'bU2BDAgmYJIK_19885', 200379428, -386501.1, 201983901);
+INSERT OR REPLACE INTO t_Fkq6QQL (c_MzvFtK7Tvy, c_lcpLkoXS, c_WGK6, c_qBA8hi, c_xugp, c_PJjOAnl2z, c_koJhrrj, c_lFMl, c_KXR, c_BxPrRINi5, c_Y1m2zWc) VALUES (-355918.3836, -490717.19999999995, 's9SrGxfh_9385', 'wBr4EwH_9485', 840212.334303, 97725724, 97568171, 'Qoej7JOsfU_9885', 100041704, -407093.24, 102781150);
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_Fkq6QQL SET c_PJjOAnl2z = 14 WHERE ROWID = (SELECT MIN(ROWID) FROM t_Fkq6QQL);
+UPDATE OR IGNORE t_Fkq6QQL SET c_KXR = 833 WHERE ROWID = (SELECT MIN(ROWID) FROM t_Fkq6QQL);
+UPDATE OR IGNORE t_Fkq6QQL SET c_WGK6 = 'vGFae_1747139185' WHERE ROWID = (SELECT MIN(ROWID) FROM t_Fkq6QQL);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_hvK SET c_yKY = -799 WHERE ROWID = (SELECT MIN(ROWID) FROM t_hvK);
+INSERT OR IGNORE INTO t_hvK (c_yKY) SELECT 91978404;
+COMMIT;
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_hvK
+            LIMIT 1;
+            
+SELECT *, *, *, ((t_hvK.c_yKY + t_hvK.c_yKY) << NOT t_Fkq6QQL.c_lFMl) AS alias_6AM FROM t_Fkq6QQL CROSS JOIN t_hvK WHERE CASE c_yKY WHEN x'A14F56' THEN t_hvK.c_yKY WHEN ~ t_Fkq6QQL.c_koJhrrj THEN (t_Fkq6QQL.c_Y1m2zWc * t_hvK.c_yKY) WHEN t_Fkq6QQL.c_lFMl THEN t_Fkq6QQL.c_BxPrRINi5 ELSE CASE WHEN t_Fkq6QQL.c_qBA8hi THEN t_Fkq6QQL.c_koJhrrj WHEN x'77DD' THEN t_Fkq6QQL.c_WGK6 ELSE t_hvK.c_yKY END END GROUP BY c_yKY HAVING ~ t_hvK.c_yKY ORDER BY 1 DESC;
+SELECT DISTINCT NOT c_PJjOAnl2z, CASE TRUE WHEN (t_Fkq6QQL.c_qBA8hi IS TRUE) THEN (t_hvK.c_yKY GLOB t_Fkq6QQL.c_Y1m2zWc) ELSE TOTAL(t_hvK.c_yKY) END AS alias_Cau FROM t_Fkq6QQL NATURAL JOIN t_hvK WHERE CASE WHEN CASE WHEN t_hvK.c_yKY THEN t_Fkq6QQL.c_koJhrrj WHEN t_Fkq6QQL.c_WGK6 THEN t_hvK.c_yKY END THEN CASE WHEN t_Fkq6QQL.c_qBA8hi THEN t_hvK.c_yKY ELSE t_Fkq6QQL.c_Y1m2zWc END ELSE ~ t_hvK.c_yKY END ORDER BY 1 DESC LIMIT 94;
+
+--- v3.26.0 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|-799|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|-799|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|-799|-3196
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91584462|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91584462|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91584462|366337848
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91617950|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91617950|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91617950|366471800
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91978404|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91978404|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91978404|367913616
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|92582393|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|92582393|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|92582393|370329572
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|192430054|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|192430054|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|192430054|769720216
+0|3361154784.0
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|192430054|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|192430054|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|192430054|769720216
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|92582393|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|92582393|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|92582393|370329572
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91978404|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91978404|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91978404|367913616
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91617950|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91617950|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91617950|366471800
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91584462|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91584462|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|91584462|366337848
+-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|-799|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|-799|-305348.3|970255.2|vGFae_1747139185|hukXnt6FVjdXMg5CzQb_9485|230770.070817|14|98564303|bYsvTPmdsj4MW_9885|833|326012.722|101072354|-799|-3196
+0|3361154784.0
+
+ERR:
+

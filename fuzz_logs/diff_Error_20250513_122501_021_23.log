@@ -1,0 +1,143 @@
+SQL:
+CREATE TABLE t_tIRMRB (c_Va2 INTEGER PRIMARY KEY AUTOINCREMENT, c_RvyTB1HOL NUMERIC, c_NIC9G TEXT, c_Nh6kzNLSj NUMERIC, c_qOcePcge NUMERIC, c_H1Vpor4 NUMERIC, c_z9qSemk TEXT, c_oaYG INTEGER, c_URSYY INTEGER, c_0YC2Y TEXT DEFAULT 'Nvd9gIlRXOJdX3SQ');
+CREATE TABLE t_buhb (c_YNEOpPN INTEGER PRIMARY KEY);
+
+                CREATE TRIGGER trg_KDYBf
+                BEFORE INSERT ON t_buhb
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_buhb) > 1000;
+                END;
+INSERT OR IGNORE INTO t_tIRMRB (c_Va2, c_RvyTB1HOL, c_NIC9G, c_Nh6kzNLSj, c_qOcePcge, c_H1Vpor4, c_z9qSemk, c_oaYG, c_URSYY, c_0YC2Y) VALUES (91346832, 92772877, 'Qkxh4HPZf5Z_9300', 93154721, 95406519, 96278204, '6n_9700', 97788967, 99669562, 'RRTYJS_10000');
+INSERT OR REPLACE INTO t_tIRMRB (c_Va2, c_RvyTB1HOL, c_NIC9G, c_Nh6kzNLSj, c_qOcePcge, c_H1Vpor4, c_z9qSemk, c_oaYG, c_URSYY, c_0YC2Y) SELECT 91853174, 91241399, 'dN_9300', 93093591, 95170060, 95539772, '8PwH3b95_9700', 98779568, 98484252, 'XLHueQ9QkKBGlQI_10000';
+REPLACE INTO t_tIRMRB (c_Va2, c_RvyTB1HOL, c_NIC9G, c_Nh6kzNLSj, c_qOcePcge, c_H1Vpor4, c_z9qSemk, c_oaYG, c_URSYY, c_0YC2Y) VALUES (91932081, 91854559, 'aojT_9300', 94011689, 95258422, 96451662, 'HOTDRFqSiUXR4fXPT_9700', 98251181, 99611020, 'jQ_10000');
+INSERT OR REPLACE INTO t_buhb (c_YNEOpPN) VALUES (91536733), (191764068);
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_buhb LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_buhb SET c_YNEOpPN = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_buhb);
+COMMIT;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_tIRMRB SET c_RvyTB1HOL = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_tIRMRB);
+INSERT OR IGNORE INTO t_tIRMRB (c_Va2, c_RvyTB1HOL, c_NIC9G, c_Nh6kzNLSj, c_qOcePcge, c_H1Vpor4, c_z9qSemk, c_oaYG, c_URSYY, c_0YC2Y) VALUES (91046080, 92395230, 'kgPrMcjBtkw_9300', 94859083, 95429052, 95278226, 'VbwYZZa9C0FYY_9700', 97850889, 99568026, 'chCKcBbAKHz_10000');
+COMMIT;
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_RvyTB1HOL,
+                        'col2', c_RvyTB1HOL
+                    ) as row_data
+                    FROM t_tIRMRB
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_oaYG,
+                        (SELECT COUNT(*) FROM t_tIRMRB t2 WHERE t2.c_oaYG = t1.c_oaYG) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_tIRMRB t3 WHERE t3.c_oaYG > t1.c_oaYG LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_oaYG FROM t_tIRMRB
+                        )) as distinct_values_count
+                    FROM t_tIRMRB t1
+                    WHERE t1.c_oaYG IN (
+                        SELECT c_oaYG 
+                        FROM t_tIRMRB 
+                        WHERE typeof(c_oaYG) NOT IN ('null')
+                        GROUP BY c_oaYG
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_tIRMRB t4 WHERE t4.c_oaYG = t1.c_oaYG) DESC
+                    LIMIT 10;
+                    
+SELECT t_buhb.c_YNEOpPN as t_buhb_val, t_tIRMRB.c_NIC9G as t_tIRMRB_val
+FROM t_buhb
+LEFT JOIN t_tIRMRB ON t_buhb.ROWID = t_tIRMRB.ROWID
+ORDER BY t_buhb.c_YNEOpPN
+LIMIT 20;
+SELECT t_buhb.c_YNEOpPN FROM t_buhb LIMIT 10;
+SELECT t_buhb.c_YNEOpPN FROM t_buhb ORDER BY t_buhb.c_YNEOpPN ASC LIMIT 10;
+SELECT t_buhb.c_YNEOpPN FROM t_buhb LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+91046080|{"id":91046080,"col1":92395230,"col2":92395230}|92395230|92395230|["{\"id\":91046080,\"col1\":92395230,\"col2\":92395230}"]|object|col1|92395230|integer
+91046080|{"id":91046080,"col1":92395230,"col2":92395230}|92395230|92395230|["{\"id\":91046080,\"col1\":92395230,\"col2\":92395230}"]|object|col2|92395230|integer
+91046080|{"id":91046080,"col1":92395230,"col2":92395230}|92395230|92395230|["{\"id\":91046080,\"col1\":92395230,\"col2\":92395230}"]|object|id|91046080|integer
+91346832|{"id":91346832,"col1":null,"col2":null}|||["{\"id\":91346832,\"col1\":null,\"col2\":null}"]|object|col1||null
+91346832|{"id":91346832,"col1":null,"col2":null}|||["{\"id\":91346832,\"col1\":null,\"col2\":null}"]|object|col2||null
+91346832|{"id":91346832,"col1":null,"col2":null}|||["{\"id\":91346832,\"col1\":null,\"col2\":null}"]|object|id|91346832|integer
+91853174|{"id":91853174,"col1":91241399,"col2":91241399}|91241399|91241399|["{\"id\":91853174,\"col1\":91241399,\"col2\":91241399}"]|object|col1|91241399|integer
+91853174|{"id":91853174,"col1":91241399,"col2":91241399}|91241399|91241399|["{\"id\":91853174,\"col1\":91241399,\"col2\":91241399}"]|object|col2|91241399|integer
+91853174|{"id":91853174,"col1":91241399,"col2":91241399}|91241399|91241399|["{\"id\":91853174,\"col1\":91241399,\"col2\":91241399}"]|object|id|91853174|integer
+91932081|{"id":91932081,"col1":91854559,"col2":91854559}|91854559|91854559|["{\"id\":91932081,\"col1\":91854559,\"col2\":91854559}"]|object|col1|91854559|integer
+91932081|{"id":91932081,"col1":91854559,"col2":91854559}|91854559|91854559|["{\"id\":91932081,\"col1\":91854559,\"col2\":91854559}"]|object|col2|91854559|integer
+91932081|{"id":91932081,"col1":91854559,"col2":91854559}|91854559|91854559|["{\"id\":91932081,\"col1\":91854559,\"col2\":91854559}"]|object|id|91932081|integer
+97850889|1|Not Max|4
+97788967|1|Not Max|4
+98779568|1|Max|4
+98251181|1|Not Max|4
+91536733|
+191764068|
+91536733
+191764068
+91536733
+191764068
+91536733
+191764068
+
+ERR:
+Error: near line 22: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+91046080|{"id":91046080,"col1":92395230,"col2":92395230}|92395230|92395230|["{\"id\":91046080,\"col1\":92395230,\"col2\":92395230}"]|object|col1|92395230|integer
+91046080|{"id":91046080,"col1":92395230,"col2":92395230}|92395230|92395230|["{\"id\":91046080,\"col1\":92395230,\"col2\":92395230}"]|object|col2|92395230|integer
+91046080|{"id":91046080,"col1":92395230,"col2":92395230}|92395230|92395230|["{\"id\":91046080,\"col1\":92395230,\"col2\":92395230}"]|object|id|91046080|integer
+91346832|{"id":91346832,"col1":null,"col2":null}|||["{\"id\":91346832,\"col1\":null,\"col2\":null}"]|object|col1||null
+91346832|{"id":91346832,"col1":null,"col2":null}|||["{\"id\":91346832,\"col1\":null,\"col2\":null}"]|object|col2||null
+91346832|{"id":91346832,"col1":null,"col2":null}|||["{\"id\":91346832,\"col1\":null,\"col2\":null}"]|object|id|91346832|integer
+91853174|{"id":91853174,"col1":91241399,"col2":91241399}|91241399|91241399|["{\"id\":91853174,\"col1\":91241399,\"col2\":91241399}"]|object|col1|91241399|integer
+91853174|{"id":91853174,"col1":91241399,"col2":91241399}|91241399|91241399|["{\"id\":91853174,\"col1\":91241399,\"col2\":91241399}"]|object|col2|91241399|integer
+91853174|{"id":91853174,"col1":91241399,"col2":91241399}|91241399|91241399|["{\"id\":91853174,\"col1\":91241399,\"col2\":91241399}"]|object|id|91853174|integer
+91932081|{"id":91932081,"col1":91854559,"col2":91854559}|91854559|91854559|["{\"id\":91932081,\"col1\":91854559,\"col2\":91854559}"]|object|col1|91854559|integer
+91932081|{"id":91932081,"col1":91854559,"col2":91854559}|91854559|91854559|["{\"id\":91932081,\"col1\":91854559,\"col2\":91854559}"]|object|col2|91854559|integer
+91932081|{"id":91932081,"col1":91854559,"col2":91854559}|91854559|91854559|["{\"id\":91932081,\"col1\":91854559,\"col2\":91854559}"]|object|id|91932081|integer
+97850889|1|Not Max|4
+97788967|1|Not Max|4
+98779568|1|Max|4
+98251181|1|Not Max|4
+91536733|
+191764068|
+91536733
+191764068
+91536733
+191764068
+91536733
+191764068
+
+ERR:
+Runtime error near line 22: datatype mismatch (20)
+

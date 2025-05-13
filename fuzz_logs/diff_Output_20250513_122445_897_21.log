@@ -1,0 +1,135 @@
+SQL:
+PRAGMA foreign_key_check;
+CREATE TABLE t_yXOZ2g (c_vf36lc7eWW TEXT COLLATE NOCASE, c_5JwV INTEGER DEFAULT 94608, c_hTc NUMERIC DEFAULT -847712, c_bxT7T81t INTEGER PRIMARY KEY AUTOINCREMENT, c_TifZAnw REAL, c_u51p INTEGER DEFAULT 707143, c_iCSOM REAL, c_YOxRWI REAL);
+CREATE TABLE IF NOT EXISTS t_n8Bm (c_PMtfHU NUMERIC DEFAULT -439751, c_kvb REAL, c_cTG8 INTEGER, c_mkvYCo0 REAL, c_SOs8 NUMERIC, c_UVgSli3cKr INTEGER, c_n94zbNB REAL, c_gK7n8 INTEGER, c_qYmo3t1 TEXT DEFAULT NULL, c_Cl70g NUMERIC);
+INSERT OR IGNORE INTO t_yXOZ2g (c_vf36lc7eWW, c_5JwV, c_hTc, c_bxT7T81t, c_TifZAnw, c_u51p, c_iCSOM, c_YOxRWI) VALUES ('tCUM7QWpFXRw_9085', 92147712, 92268585, 93081056, -829640.11, 95582107, -23893.077019999997, -470443.61), ('fm_19085', 190972270, 193528420, 194592005, 944629.5, 195671047, -463756.4, 615888.005919);
+INSERT OR REPLACE INTO t_yXOZ2g (c_vf36lc7eWW, c_5JwV, c_hTc, c_bxT7T81t, c_TifZAnw, c_u51p, c_iCSOM, c_YOxRWI) VALUES ('08dUO7WvpVl29evbQ_9085', 91124895, 92265016, 94500535, 259776.4876, 94928290, -856933.10184, 327166.48), ('CSZ_19085', 191751002, 192000425, 194014307, 620242.5, 195612094, 1112936.4562, -53601.79999999999);
+INSERT OR IGNORE INTO t_yXOZ2g (c_vf36lc7eWW, c_5JwV, c_hTc, c_bxT7T81t, c_TifZAnw, c_u51p, c_iCSOM, c_YOxRWI) VALUES ('mr9M86KFjddLGtn_9085', 91976166, 92519826, 94230680, 702638.09907, 96760146, -745036.924756, 115600.9134), ('sZ1x9BUcO5k7ggziv5F5_19085', 190915580, 192666686, 193189586, 980511.3863, 196177392, -6657.819373000006, 974459.6);
+INSERT OR REPLACE INTO t_yXOZ2g (c_vf36lc7eWW, c_5JwV, c_hTc, c_bxT7T81t, c_TifZAnw, c_u51p, c_iCSOM, c_YOxRWI) VALUES ('EoLTga6o05pR_9085', 91046669, 93550104, 93004591, 759160.02, 96484635, -287774.52587, 122312.342), ('0gGUaD2xIVmPt_19085', 190965943, 192769919, 193474378, -645217.49399, 195949801, -355604.6, -422720.37159899995);
+WITH cte_qDj AS (SELECT 1) REPLACE INTO t_n8Bm (c_PMtfHU, c_kvb, c_cTG8, c_mkvYCo0, c_SOs8, c_UVgSli3cKr, c_n94zbNB, c_gK7n8, c_qYmo3t1, c_Cl70g) VALUES (91468932, -795511.216, 92367893, -2120.9922300000035, 95617263, 95963769, -525820.711, 98560535, '0yQlAmy1rI_9885', 99127393), (189867512, -704930.77326, 192400803, 1028065.07, 194664552, 196471283, 483039.42, 198184954, '5Zu_19885', 199674080);
+INSERT OR IGNORE INTO t_n8Bm (c_PMtfHU, c_kvb, c_cTG8, c_mkvYCo0, c_SOs8, c_UVgSli3cKr, c_n94zbNB, c_gK7n8, c_qYmo3t1, c_Cl70g) SELECT 90090656, 422397.752, 91956521, -873332.962321, 94661426, 96801651, -314651.23123, 97840012, 'Z3jd21BBg2M_9885', 100609043;
+INSERT OR REPLACE INTO t_n8Bm (c_PMtfHU, c_kvb, c_cTG8, c_mkvYCo0, c_SOs8, c_UVgSli3cKr, c_n94zbNB, c_gK7n8, c_qYmo3t1, c_Cl70g) VALUES (91501186, -265899.122641, 92106520, -725005.8, 95789636, 96452590, 450396.0142, 96987838, 'nLN3rdKHDQy22HZz5O_9885', 99216883), (190629064, 625042.9931000001, 192992057, 797554.3, 195465714, 196363157, 178916.91999999998, 197659555, 'JrH_19885', 198929418);
+INSERT OR FAIL INTO t_yXOZ2g DEFAULT VALUES;
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_yXOZ2g SET c_iCSOM = 492 WHERE ROWID = (SELECT MIN(ROWID) FROM t_yXOZ2g);
+WITH cte_oyY AS (SELECT 1) INSERT OR IGNORE INTO t_yXOZ2g (c_vf36lc7eWW, c_5JwV, c_hTc, c_bxT7T81t, c_TifZAnw, c_u51p, c_iCSOM, c_YOxRWI) VALUES ('Y9XhetWM8G8fRvAK_9085', 92075145, 93677276, 93510816, 470575.311, 96013752, 765356.015, 436324.401);
+UPDATE OR IGNORE t_yXOZ2g SET c_5JwV = 855 WHERE ROWID = (SELECT MIN(ROWID) FROM t_yXOZ2g);
+COMMIT;
+
+                SELECT c_YOxRWI, c_vf36lc7eWW,
+                    ROW_NUMBER() OVER (PARTITION BY c_vf36lc7eWW) as row_num,
+                    RANK() OVER (PARTITION BY c_vf36lc7eWW ORDER BY c_YOxRWI) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_vf36lc7eWW ORDER BY c_YOxRWI) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_YOxRWI) IN ('integer','real') THEN c_YOxRWI ELSE 0 END) 
+                        OVER (PARTITION BY c_vf36lc7eWW ORDER BY c_YOxRWI 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_YOxRWI) IN ('integer','real') THEN c_YOxRWI ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_vf36lc7eWW ORDER BY c_YOxRWI) as prev_value,
+                    LEAD(CASE WHEN typeof(c_YOxRWI) IN ('integer','real') THEN c_YOxRWI ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_vf36lc7eWW ORDER BY c_YOxRWI) as next_value
+                FROM t_yXOZ2g
+                ORDER BY c_vf36lc7eWW, c_YOxRWI
+                LIMIT 20;
+                
+
+            SELECT json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as simple_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]') as array_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e') as nested_extract,
+                json_extract('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.i[0].j') as nested_array_extract,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a') as type_number,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.b') as type_text,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c') as type_array,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as type_object,
+                json_type('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.f') as type_null,
+                json_array(1, 'text', NULL, 3.14, json_object('key', 'value')) as created_array,
+                json_object('a', 1, 'b', 'text', 'c', NULL, 'd', json_array(1,2,3)) as created_object,
+                json_valid('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}') as is_valid_json,
+                json_valid('{invalid json}') as is_invalid_json
+            FROM t_yXOZ2g
+            LIMIT 1;
+            
+
+                    SELECT 
+                        t1.c_UVgSli3cKr,
+                        (SELECT COUNT(*) FROM t_n8Bm t2 WHERE t2.c_UVgSli3cKr = t1.c_UVgSli3cKr) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_n8Bm t3 WHERE t3.c_UVgSli3cKr > t1.c_UVgSli3cKr LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_UVgSli3cKr FROM t_n8Bm
+                        )) as distinct_values_count
+                    FROM t_n8Bm t1
+                    WHERE t1.c_UVgSli3cKr IN (
+                        SELECT c_UVgSli3cKr 
+                        FROM t_n8Bm 
+                        WHERE typeof(c_UVgSli3cKr) NOT IN ('null')
+                        GROUP BY c_UVgSli3cKr
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_n8Bm t4 WHERE t4.c_UVgSli3cKr = t1.c_UVgSli3cKr) DESC
+                    LIMIT 10;
+                    
+SELECT t_yXOZ2g.c_u51p, t_yXOZ2g.c_iCSOM, t_yXOZ2g.c_TifZAnw, t_yXOZ2g.c_vf36lc7eWW FROM t_yXOZ2g ORDER BY t_yXOZ2g.c_vf36lc7eWW ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+||1|1|1|0|0|0
+327166.48|08dUO7WvpVl29evbQ_9085|1|1|1|327166.48|0|0
+-422720.371599|0gGUaD2xIVmPt_19085|1|1|1|-422720.371599|0|0
+-53601.8|CSZ_19085|1|1|1|-53601.8|0|0
+122312.342|EoLTga6o05pR_9085|1|1|1|122312.342|0|0
+436324.401|Y9XhetWM8G8fRvAK_9085|1|1|1|436324.401|0|0
+615888.005919|fm_19085|1|1|1|615888.005919|0|0
+115600.9134|mr9M86KFjddLGtn_9085|1|1|1|115600.9134|0|0
+974459.6|sZ1x9BUcO5k7ggziv5F5_19085|1|1|1|974459.6|0|0
+-470443.61|tCUM7QWpFXRw_9085|1|1|1|-470443.61|0|0
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+95963769|1|Not Max|5
+196471283|1|Max|5
+96801651|1|Not Max|5
+96452590|1|Not Max|5
+196363157|1|Not Max|5
+707143|||
+94928290|-856933.10184|259776.4876|08dUO7WvpVl29evbQ_9085
+195949801|-355604.6|-645217.49399|0gGUaD2xIVmPt_19085
+195612094|1112936.4562|620242.5|CSZ_19085
+96484635|492.0|759160.02|EoLTga6o05pR_9085
+195671047|-463756.4|944629.5|fm_19085
+96760146|-745036.924756|702638.09907|mr9M86KFjddLGtn_9085
+196177392|-6657.81937300001|980511.3863|sZ1x9BUcO5k7ggziv5F5_19085
+95582107|-23893.07702|-829640.11|tCUM7QWpFXRw_9085
+96013752|765356.015|470575.311|Y9XhetWM8G8fRvAK_9085
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+||1|1|1|0|0|0
+327166.48|08dUO7WvpVl29evbQ_9085|1|1|1|327166.48|0|0
+-422720.371599|0gGUaD2xIVmPt_19085|1|1|1|-422720.371599|0|0
+-53601.8|CSZ_19085|1|1|1|-53601.8|0|0
+122312.342|EoLTga6o05pR_9085|1|1|1|122312.342|0|0
+615888.005919|fm_19085|1|1|1|615888.005919|0|0
+115600.9134|mr9M86KFjddLGtn_9085|1|1|1|115600.9134|0|0
+974459.6|sZ1x9BUcO5k7ggziv5F5_19085|1|1|1|974459.6|0|0
+-470443.61|tCUM7QWpFXRw_9085|1|1|1|-470443.61|0|0
+436324.401|Y9XhetWM8G8fRvAK_9085|1|1|1|436324.401|0|0
+1|4|6|10|integer|text|array|object|null|[1,"text",null,3.14,{"key":"value"}]|{"a":1,"b":"text","c":null,"d":[1,2,3]}|1|0
+95963769|1|Not Max|5
+196471283|1|Max|5
+96801651|1|Not Max|5
+96452590|1|Not Max|5
+196363157|1|Not Max|5
+707143|||
+94928290|-856933.10184|259776.4876|08dUO7WvpVl29evbQ_9085
+195949801|-355604.6|-645217.49399|0gGUaD2xIVmPt_19085
+195612094|1112936.4562|620242.5|CSZ_19085
+96484635|492.0|759160.02|EoLTga6o05pR_9085
+195671047|-463756.4|944629.5|fm_19085
+96760146|-745036.924756|702638.09907|mr9M86KFjddLGtn_9085
+196177392|-6657.81937300001|980511.3863|sZ1x9BUcO5k7ggziv5F5_19085
+95582107|-23893.07702|-829640.11|tCUM7QWpFXRw_9085
+96013752|765356.015|470575.311|Y9XhetWM8G8fRvAK_9085
+
+ERR:
+

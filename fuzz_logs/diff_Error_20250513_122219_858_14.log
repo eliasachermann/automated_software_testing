@@ -1,0 +1,77 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_McZgp (c_USsI INTEGER, PRIMARY KEY (c_USsI));
+CREATE TABLE IF NOT EXISTS t_A4ZKCGm (c_DtqO INTEGER DEFAULT 825627, c_K0q6309Ecg REAL DEFAULT -941464.73, c_6mX09VpIGj NUMERIC DEFAULT 286057, c_tSoS NUMERIC, c_TrN0 INTEGER, c_fpQdjCR4O TEXT PRIMARY KEY COLLATE BINARY, c_QM0USIU INTEGER, c_FxUrOR REAL, FOREIGN KEY (c_QM0USIU) REFERENCES t_QBwJl(c_gGZmO)) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_M7k1py (c_fJJpYQJ TEXT);
+CREATE TABLE IF NOT EXISTS t_vGPA19 (c_8KQ4h REAL, c_KNRXbwQ4R NUMERIC);
+INSERT OR REPLACE INTO t_McZgp (c_USsI) SELECT 88885728;
+REPLACE INTO t_A4ZKCGm (c_DtqO, c_K0q6309Ecg, c_6mX09VpIGj, c_tSoS, c_TrN0, c_fpQdjCR4O, c_QM0USIU, c_FxUrOR) VALUES (90231408, -15626.615843000007, 91945297, 93152794, 94098764, 'meHCNnoRb40GR_9438', 94549644, -2689.100000000006);
+INSERT OR IGNORE INTO t_M7k1py (c_fJJpYQJ) VALUES ('UrixXKzvy8BFs9Lk_8938');
+INSERT OR IGNORE INTO t_M7k1py (c_fJJpYQJ) SELECT 'o1ZnsE_8938';
+INSERT OR REPLACE INTO t_M7k1py (c_fJJpYQJ) VALUES ('agho9uiGuEXAswMoTIOn_8938'), ('KbAz7lpVfv_18938');
+REPLACE INTO t_M7k1py (c_fJJpYQJ) VALUES ('Li_8938'), ('pHxqgTz7YdarQg6A_18938');
+INSERT OR IGNORE INTO t_vGPA19 (c_8KQ4h, c_KNRXbwQ4R) VALUES (324499.3, 90877816), (-117031.09999999998, 189391084);
+
+REPLACE INTO t_vGPA19 DEFAULT VALUES;
+
+
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_A4ZKCGm LIMIT 1;
+            
+BEGIN TRANSACTION;
+UPDATE OR IGNORE t_McZgp SET c_USsI = -379 WHERE ROWID = (SELECT MIN(ROWID) FROM t_McZgp);
+INSERT OR IGNORE INTO t_McZgp (c_USsI) VALUES (90226276);
+UPDATE OR IGNORE t_McZgp SET c_USsI = NULL WHERE ROWID = (SELECT MIN(ROWID) FROM t_McZgp);
+COMMIT;
+
+                    WITH json_data(id, data) AS (
+                        SELECT ROWID, '{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}'
+                        FROM t_McZgp
+                        LIMIT 10
+                    )
+                    SELECT id,
+                        json_extract(data, '$.a') as a_value,
+                        json_extract(data, '$.b') as b_value,
+                        json_extract(data, '$.c') as c_array,
+                        SUM(json_extract(data, '$.a')) OVER () as sum_a,
+                        AVG(json_extract(data, '$.a')) OVER () as avg_a,
+                        json_group_array(json_extract(data, '$.a')) OVER () as all_a_values,
+                        json_group_object(id, json_extract(data, '$.b')) OVER () as id_to_b_map
+                    FROM json_data
+                    ORDER BY id;
+                    
+SELECT t_McZgp.c_USsI, ABS(t_McZgp.c_USsI) AS computed_c_USsI FROM t_McZgp ORDER BY t_McZgp.c_USsI ASC LIMIT 10;
+SELECT t_vGPA19.c_KNRXbwQ4R, t_vGPA19.c_8KQ4h FROM t_vGPA19 ORDER BY t_vGPA19.c_KNRXbwQ4R ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+-379|1|text|[3,4,5]|2|1.0|[1,1]|{"-379":"text","90226276":"text"}
+90226276|1|text|[3,4,5]|2|1.0|[1,1]|{"-379":"text","90226276":"text"}
+-379|379
+90226276|90226276
+|
+90877816|324499.3
+189391084|-117031.1
+
+ERR:
+Error: near line 26: datatype mismatch
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+-379|1|text|[3,4,5]|2|1.0|[1,1]|{"-379":"text","90226276":"text"}
+90226276|1|text|[3,4,5]|2|1.0|[1,1]|{"-379":"text","90226276":"text"}
+-379|379
+90226276|90226276
+|
+90877816|324499.3
+189391084|-117031.1
+
+ERR:
+Runtime error near line 26: datatype mismatch (20)
+

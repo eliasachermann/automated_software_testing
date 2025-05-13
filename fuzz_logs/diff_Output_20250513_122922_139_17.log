@@ -1,0 +1,91 @@
+SQL:
+CREATE TABLE t_qKFOJ93n58 (c_z8KcyvMRpH INTEGER, c_ex7u2Cm INTEGER, c_jzlZm9 INTEGER, c_kF0dZ INTEGER, c_IwJKB0t5v INTEGER DEFAULT NULL, c_aAjMIo TEXT COLLATE NOCASE, c_Nvwj INTEGER);
+CREATE TEMP TABLE t_D7w (c_80Sge TEXT DEFAULT 'D4hDe3QhZu', c_Rv9yZyV NUMERIC DEFAULT -391210, c_AHS INTEGER DEFAULT 66516, c_0hBvB INTEGER, c_Dqux2xmXn INTEGER, c_UkjFHGn INTEGER, c_QDcZuUpU2 REAL, c_vmXxYbf7z TEXT);
+CREATE TABLE t_yOBF2WMiC5 (c_5995 NUMERIC, c_WdQUha NUMERIC, c_GKZ INTEGER, c_1tX7zDT32m NUMERIC, c_oIjMPn4fw9 REAL, c_uqGQ2iKP NUMERIC, c_VGC TEXT, c_57qBAlpAe INTEGER DEFAULT 832100, c_XVWEftzqM NUMERIC PRIMARY KEY DEFAULT -197943);
+CREATE TABLE IF NOT EXISTS t_SZG (c_OQy NUMERIC PRIMARY KEY, c_4WToCpoU TEXT, c_M4nxaaWFs TEXT) WITHOUT ROWID;
+CREATE TEMP TABLE IF NOT EXISTS t_vYFSekU5w (c_T1Pp5G TEXT DEFAULT 'PfnM5dGrGfGA', c_KiWweUN INTEGER PRIMARY KEY, c_FbbKlP NUMERIC, c_hikKtkFp TEXT, c_4nqg REAL DEFAULT 924034.724906, c_BFG INTEGER, c_65tIOers6i TEXT, c_d0pavGp5uN TEXT DEFAULT 'FRE71L7qldRYt1S3', c_Uqhl NUMERIC, c_NFs5ER3 NUMERIC, FOREIGN KEY (c_FbbKlP) REFERENCES t_5Q54w(c_d6yUx));
+ALTER TABLE t_SZG RENAME COLUMN c_OQy TO c_rnq;
+ALTER TABLE t_vYFSekU5w RENAME TO t_T2u3cVR;
+ALTER TABLE t_D7w ADD COLUMN c_nX63DGJmbh NUMERIC DEFAULT -992504;
+
+                CREATE TRIGGER trg_ZxMLw
+                BEFORE DELETE ON t_D7w
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_D7w) > 1000;
+                END;
+INSERT OR REPLACE INTO t_qKFOJ93n58 (c_z8KcyvMRpH, c_ex7u2Cm, c_jzlZm9, c_kF0dZ, c_IwJKB0t5v, c_aAjMIo, c_Nvwj) SELECT 93723274, 93843943, 95975786, 96072813, 97630497, '0m01PtyAa8CTnL4_9861', 99617639;
+INSERT OR IGNORE INTO t_D7w (c_80Sge, c_Rv9yZyV, c_AHS, c_0hBvB, c_Dqux2xmXn, c_UkjFHGn, c_QDcZuUpU2, c_vmXxYbf7z, c_nX63DGJmbh) SELECT '5U1qncl7ukKBeAAfcK8t_9361', 94531895, 95958415, 97258597, 97283347, 97896494, -731963.528, 'HgRO2T3h27_10061', 100795737;
+REPLACE INTO t_D7w (c_80Sge, c_Rv9yZyV, c_AHS, c_0hBvB, c_Dqux2xmXn, c_UkjFHGn, c_QDcZuUpU2, c_vmXxYbf7z, c_nX63DGJmbh) SELECT 'fjfX_9361', 95148008, 96515672, 97506911, 97497333, 99074976, -366435.5, 'hzhJ9AxrG_10061', 102400212;
+INSERT OR REPLACE INTO t_yOBF2WMiC5 (c_5995, c_WdQUha, c_GKZ, c_1tX7zDT32m, c_oIjMPn4fw9, c_uqGQ2iKP, c_VGC, c_57qBAlpAe, c_XVWEftzqM) VALUES (93520130, 95479086, 95532877, 96737161, 1083877.1927689998, 99415137, 'MsWPdHvoSroP0dbdYLH_9961', 100098792, 102066264);
+REPLACE INTO t_yOBF2WMiC5 (c_5995, c_WdQUha, c_GKZ, c_1tX7zDT32m, c_oIjMPn4fw9, c_uqGQ2iKP, c_VGC, c_57qBAlpAe, c_XVWEftzqM) VALUES (94169720, 94640090, 95177372, 96976038, 142526.665, 99324025, 'sCkezLehSuu1rPnlYkXO_9961', 100960081, 101775728);
+REPLACE INTO t_yOBF2WMiC5 (c_5995, c_WdQUha, c_GKZ, c_1tX7zDT32m, c_oIjMPn4fw9, c_uqGQ2iKP, c_VGC, c_57qBAlpAe, c_XVWEftzqM) SELECT 93652996, 94654101, 96144842, 97062959, 702686.2, 99033056, 'ggG3J4iVal8Ko_9961', 100200759, 101729880;
+REPLACE INTO t_SZG (c_rnq, c_4WToCpoU, c_M4nxaaWFs) VALUES (93279852, 'fXb0FwwA_9461', 'GtUnINBfXE0SBUCgy_9561'), (193746548, 'fna0_19461', 'f1422Z1n4LgpBt2R_19561');
+INSERT OR IGNORE INTO t_SZG (c_rnq, c_4WToCpoU, c_M4nxaaWFs) VALUES (94438063, 'YiDUsT_9461', 'u_9561');
+WITH cte_PEZ AS (SELECT 1) INSERT OR REPLACE INTO t_SZG (c_rnq, c_4WToCpoU, c_M4nxaaWFs) VALUES (92715078, 'xlVkPe8iFzv2n3BG_9461', '56veB_9561'), (193199500, 'Fy3gSGF_19461', 'PqFoTHUO9SXI225g_19561');
+REPLACE INTO t_T2u3cVR (c_T1Pp5G, c_KiWweUN, c_FbbKlP, c_hikKtkFp, c_4nqg, c_BFG, c_65tIOers6i, c_d0pavGp5uN, c_Uqhl, c_NFs5ER3) VALUES ('iOOQI8DGLX2eOoJSqOpB_9361', 93921994, 95199138, 'gN_9661', 1051988.915, 98941536, '0g6Gu7y7_9961', 'EpF2yOjch_10061', 100820750, 102691470);
+WITH cte_10Y AS (SELECT 1) INSERT OR IGNORE INTO t_T2u3cVR (c_T1Pp5G, c_KiWweUN, c_FbbKlP, c_hikKtkFp, c_4nqg, c_BFG, c_65tIOers6i, c_d0pavGp5uN, c_Uqhl, c_NFs5ER3) VALUES ('PjNaIUmdSQ_9361', 94637635, 94953985, 'gCME4Q6ujEo6o8zcXd_9661', 698585.8414, 98833880, 'bx0kb_9961', 'eBczuWbMFvU1ald0Co_10061', 100818711, 102330299), ('3TFUJb3x8IxHsggDbXV_19361', 193723802, 194699848, 'YlI_19661', 1175158.788, 199117051, '6xDka_19961', 'GzcydaZhWxa1I9_20061', 201795826, 203306235);
+REPLACE INTO t_T2u3cVR (c_T1Pp5G, c_KiWweUN, c_FbbKlP, c_hikKtkFp, c_4nqg, c_BFG, c_65tIOers6i, c_d0pavGp5uN, c_Uqhl, c_NFs5ER3) VALUES ('si5UiKcHLTM_9361', 95129422, 95107908, 'yzXd_9661', 350159.5, 98294744, 'V93ld1ioZse2cE9f5Y_9961', 'CS2np_10061', 101436018, 103189718);
+INSERT OR ABORT INTO t_T2u3cVR DEFAULT VALUES;
+
+                WITH row_json AS (
+                    SELECT ROWID, json_object(
+                        'id', ROWID,
+                        'col1', c_5995,
+                        'col2', c_57qBAlpAe
+                    ) as row_data
+                    FROM t_yOBF2WMiC5
+                    LIMIT 5
+                )
+                SELECT ROWID,
+                    row_data,
+                    json_extract(row_data, '$.col1') as extracted_col1,
+                    json_extract(row_data, '$.col2') as extracted_col2,
+                    json_array(row_data) as array_of_rows,
+                    json_type(row_data) as json_type,
+                    json_each.key, 
+                    json_each.value,
+                    json_each.type
+                FROM row_json, json_each(row_data)
+                ORDER BY ROWID, json_each.key
+                LIMIT 20;
+                
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_i) 
+                WHERE col_i IN (
+                    SELECT (ROW_NUMBER() OVER(ORDER BY 1 ASC RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING)) FROM (VALUES (FALSE))
+                )
+            );
+SELECT t_qKFOJ93n58.c_ex7u2Cm, t_qKFOJ93n58.c_IwJKB0t5v, t_qKFOJ93n58.c_Nvwj, t_qKFOJ93n58.c_aAjMIo, t_qKFOJ93n58.c_jzlZm9, LOWER(t_qKFOJ93n58.c_Nvwj) AS computed_c_Nvwj FROM t_qKFOJ93n58 ORDER BY t_qKFOJ93n58.c_IwJKB0t5v ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|{"id":1,"col1":93520130,"col2":100098792}|93520130|100098792|["{\"id\":1,\"col1\":93520130,\"col2\":100098792}"]|object|col1|93520130|integer
+1|{"id":1,"col1":93520130,"col2":100098792}|93520130|100098792|["{\"id\":1,\"col1\":93520130,\"col2\":100098792}"]|object|col2|100098792|integer
+1|{"id":1,"col1":93520130,"col2":100098792}|93520130|100098792|["{\"id\":1,\"col1\":93520130,\"col2\":100098792}"]|object|id|1|integer
+2|{"id":2,"col1":94169720,"col2":100960081}|94169720|100960081|["{\"id\":2,\"col1\":94169720,\"col2\":100960081}"]|object|col1|94169720|integer
+2|{"id":2,"col1":94169720,"col2":100960081}|94169720|100960081|["{\"id\":2,\"col1\":94169720,\"col2\":100960081}"]|object|col2|100960081|integer
+2|{"id":2,"col1":94169720,"col2":100960081}|94169720|100960081|["{\"id\":2,\"col1\":94169720,\"col2\":100960081}"]|object|id|2|integer
+3|{"id":3,"col1":93652996,"col2":100200759}|93652996|100200759|["{\"id\":3,\"col1\":93652996,\"col2\":100200759}"]|object|col1|93652996|integer
+3|{"id":3,"col1":93652996,"col2":100200759}|93652996|100200759|["{\"id\":3,\"col1\":93652996,\"col2\":100200759}"]|object|col2|100200759|integer
+3|{"id":3,"col1":93652996,"col2":100200759}|93652996|100200759|["{\"id\":3,\"col1\":93652996,\"col2\":100200759}"]|object|id|3|integer
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|{"id":1,"col1":93520130,"col2":100098792}|93520130|100098792|["{\"id\":1,\"col1\":93520130,\"col2\":100098792}"]|object|col1|93520130|integer
+1|{"id":1,"col1":93520130,"col2":100098792}|93520130|100098792|["{\"id\":1,\"col1\":93520130,\"col2\":100098792}"]|object|col2|100098792|integer
+1|{"id":1,"col1":93520130,"col2":100098792}|93520130|100098792|["{\"id\":1,\"col1\":93520130,\"col2\":100098792}"]|object|id|1|integer
+2|{"id":2,"col1":94169720,"col2":100960081}|94169720|100960081|["{\"id\":2,\"col1\":94169720,\"col2\":100960081}"]|object|col1|94169720|integer
+2|{"id":2,"col1":94169720,"col2":100960081}|94169720|100960081|["{\"id\":2,\"col1\":94169720,\"col2\":100960081}"]|object|col2|100960081|integer
+2|{"id":2,"col1":94169720,"col2":100960081}|94169720|100960081|["{\"id\":2,\"col1\":94169720,\"col2\":100960081}"]|object|id|2|integer
+3|{"id":3,"col1":93652996,"col2":100200759}|93652996|100200759|["{\"id\":3,\"col1\":93652996,\"col2\":100200759}"]|object|col1|93652996|integer
+3|{"id":3,"col1":93652996,"col2":100200759}|93652996|100200759|["{\"id\":3,\"col1\":93652996,\"col2\":100200759}"]|object|col2|100200759|integer
+3|{"id":3,"col1":93652996,"col2":100200759}|93652996|100200759|["{\"id\":3,\"col1\":93652996,\"col2\":100200759}"]|object|id|3|integer
+1
+93843943|97630497|99617639|0m01PtyAa8CTnL4_9861|95975786|99617639
+
+ERR:
+

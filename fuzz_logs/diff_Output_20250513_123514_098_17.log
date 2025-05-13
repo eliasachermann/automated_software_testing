@@ -1,0 +1,96 @@
+SQL:
+CREATE TEMP TABLE IF NOT EXISTS t_vDTWGAN (c_7hNO1z NUMERIC, c_lquLTl INTEGER DEFAULT 263002);
+CREATE TABLE t_b4xQ9iz2Qq (c_F9zGkYc INTEGER, c_sFqk INTEGER, c_KMJgx1n5 INTEGER, c_pVQrdAKc9 INTEGER DEFAULT 713730, c_iimmRb6 TEXT, c_umv INTEGER, c_a8dfZMgma REAL);
+CREATE TABLE IF NOT EXISTS t_FomDk (c_PiP0QhuAT TEXT, c_pa0Qo REAL, c_7Mf REAL, c_iA70Ue3 INTEGER DEFAULT 499767, c_js6Qe INTEGER DEFAULT -332955, c_1hwnacbC INTEGER, c_bvzL6 NUMERIC, c_pskloaFOjH TEXT COLLATE NOCASE);
+ALTER TABLE t_b4xQ9iz2Qq RENAME TO t_syrmez;
+ALTER TABLE t_syrmez RENAME COLUMN c_pVQrdAKc9 TO c_dfZtKVmX;
+ALTER TABLE t_syrmez ADD COLUMN c_sPslymz INTEGER DEFAULT 463236;
+
+                CREATE TRIGGER trg_FHa3o
+                AFTER INSERT ON t_vDTWGAN
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_vDTWGAN) > 1000;
+                END;
+INSERT OR REPLACE INTO t_vDTWGAN (c_7hNO1z, c_lquLTl) VALUES (96276937, 97630728);
+INSERT OR REPLACE INTO t_FomDk (c_PiP0QhuAT, c_pa0Qo, c_7Mf, c_iA70Ue3, c_js6Qe, c_1hwnacbC, c_bvzL6, c_pskloaFOjH) SELECT 'LKZi_9713', -199786.26400000002, 834166.389096, 99921885, 100400329, 102873172, 103762629, 'F2xgS09J9oLHuh_10413';
+REPLACE INTO t_FomDk (c_PiP0QhuAT, c_pa0Qo, c_7Mf, c_iA70Ue3, c_js6Qe, c_1hwnacbC, c_bvzL6, c_pskloaFOjH) VALUES ('6fkDd_9713', -416856.1, -731859.9658, 99682951, 100406323, 102160746, 103922588, 'Ph2nY8KgKT7cM_10413'), ('mKaMq0cqCBnwU3dwILUY_19713', 465741.577, -398276.97400000005, 199735995, 201143193, 201465053, 202389168, '6QzkUdlnNCCzgmzQK9y_20413');
+WITH cte_Mbd AS (SELECT 1) INSERT OR IGNORE INTO t_FomDk (c_PiP0QhuAT, c_pa0Qo, c_7Mf, c_iA70Ue3, c_js6Qe, c_1hwnacbC, c_bvzL6, c_pskloaFOjH) VALUES ('pb_9713', -347266.26455, 563699.4867199999, 99146902, 100644059, 101319535, 103980807, 'qWJRvLKO6PY0UtxLbYx_10413'), ('AvyCgfLm_19713', 1007307.505, -50647.166, 200503896, 201116731, 201308006, 203348418, 'TFR0KvmHcrv2_20413');
+REPLACE INTO t_FomDk (c_PiP0QhuAT, c_pa0Qo, c_7Mf, c_iA70Ue3, c_js6Qe, c_1hwnacbC, c_bvzL6, c_pskloaFOjH) VALUES ('UPVNa_9713', 504956.446, 1031672.07, 100332135, 100222690, 102688378, 102420720, 'GJ_10413');
+INSERT OR IGNORE INTO t_syrmez (c_F9zGkYc, c_sFqk, c_KMJgx1n5, c_dfZtKVmX, c_iimmRb6, c_umv, c_a8dfZMgma, c_sPslymz) VALUES (97750586, 97175511, 99730625, 99815094, 'pHKlNc_10113', 102683658, 621894.6, 104231817), (196201639, 198846798, 199979232, 199479714, 'kfcWse_20113', 201278833, 582956.19, 204023429);
+INSERT OR IGNORE INTO t_syrmez (c_F9zGkYc, c_sFqk, c_KMJgx1n5, c_dfZtKVmX, c_iimmRb6, c_umv, c_a8dfZMgma, c_sPslymz) VALUES (97565089, 98594076, 99389870, 99639571, 'Rit9ysP2NUlTVUG0P_10113', 101721411, -869183.03877, 103713314);
+INSERT OR REPLACE INTO t_syrmez (c_F9zGkYc, c_sFqk, c_KMJgx1n5, c_dfZtKVmX, c_iimmRb6, c_umv, c_a8dfZMgma, c_sPslymz) VALUES (97271877, 98268985, 98923900, 100844308, 'KAJwvP_10113', 102570362, 53349.4, 103757377), (197053368, 198702558, 199064456, 200209343, 'vtITNVaE_20113', 202721266, 526060.3089000001, 203774369);
+REPLACE INTO t_syrmez (c_F9zGkYc, c_sFqk, c_KMJgx1n5, c_dfZtKVmX, c_iimmRb6, c_umv, c_a8dfZMgma, c_sPslymz) SELECT 96284134, 98949099, 98766702, 100624591, 'O6h5s_10113', 101761717, 55775.4, 104313591;
+INSERT OR REPLACE INTO t_vDTWGAN DEFAULT VALUES;
+
+                SELECT c_PiP0QhuAT, c_pskloaFOjH,
+                    ROW_NUMBER() OVER (PARTITION BY c_pskloaFOjH) as row_num,
+                    RANK() OVER (PARTITION BY c_pskloaFOjH ORDER BY c_PiP0QhuAT) as rank_val,
+                    DENSE_RANK() OVER (PARTITION BY c_pskloaFOjH ORDER BY c_PiP0QhuAT) as dense_rank_val,
+                    SUM(CASE WHEN typeof(c_PiP0QhuAT) IN ('integer','real') THEN c_PiP0QhuAT ELSE 0 END) 
+                        OVER (PARTITION BY c_pskloaFOjH ORDER BY c_PiP0QhuAT 
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) as running_total,
+                    LAG(CASE WHEN typeof(c_PiP0QhuAT) IN ('integer','real') THEN c_PiP0QhuAT ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_pskloaFOjH ORDER BY c_PiP0QhuAT) as prev_value,
+                    LEAD(CASE WHEN typeof(c_PiP0QhuAT) IN ('integer','real') THEN c_PiP0QhuAT ELSE 0 END, 1, 0) 
+                        OVER (PARTITION BY c_pskloaFOjH ORDER BY c_PiP0QhuAT) as next_value
+                FROM t_FomDk
+                ORDER BY c_pskloaFOjH, c_PiP0QhuAT
+                LIMIT 20;
+                
+
+                    SELECT 
+                        t1.c_sFqk,
+                        (SELECT COUNT(*) FROM t_syrmez t2 WHERE t2.c_sFqk = t1.c_sFqk) as same_value_count,
+                        CASE WHEN EXISTS(SELECT 1 FROM t_syrmez t3 WHERE t3.c_sFqk > t1.c_sFqk LIMIT 1) 
+                            THEN 'Not Max' ELSE 'Max' END as is_max_value,
+                        (SELECT COUNT(*) FROM (
+                            SELECT DISTINCT c_sFqk FROM t_syrmez
+                        )) as distinct_values_count
+                    FROM t_syrmez t1
+                    WHERE t1.c_sFqk IN (
+                        SELECT c_sFqk 
+                        FROM t_syrmez 
+                        WHERE typeof(c_sFqk) NOT IN ('null')
+                        GROUP BY c_sFqk
+                        HAVING COUNT(*) > 0
+                    )
+                    ORDER BY (SELECT COUNT(*) FROM t_syrmez t4 WHERE t4.c_sFqk = t1.c_sFqk) DESC
+                    LIMIT 10;
+                    
+WITH cte_SHl AS (SELECT * FROM t_syrmez LIMIT 10) SELECT DISTINCT EXISTS (SELECT 1 FROM t_vDTWGAN LIMIT 1), (CASE WHEN x'93D8C352' THEN x'8B' WHEN t_FomDk.c_1hwnacbC THEN t_syrmez.c_iimmRb6 ELSE t_vDTWGAN.c_7hNO1z END & (x'92FE' % t_FomDk.c_pskloaFOjH)), *, CASE t_syrmez.c_KMJgx1n5 WHEN 404166 THEN LENGTH(t_FomDk.c_iA70Ue3) WHEN QUOTE(t_vDTWGAN.c_7hNO1z) THEN 402415 ELSE LIKE(t_syrmez.c_iimmRb6, t_FomDk.c_7Mf) END FROM t_syrmez, t_FomDk, t_vDTWGAN ORDER BY 1 LIMIT 92, 16;
+
+--- v3.26.0 ---
+OUT:
+mKaMq0cqCBnwU3dwILUY_19713|6QzkUdlnNCCzgmzQK9y_20413|1|1|1|0|0|0
+LKZi_9713|F2xgS09J9oLHuh_10413|1|1|1|0|0|0
+UPVNa_9713|GJ_10413|1|1|1|0|0|0
+6fkDd_9713|Ph2nY8KgKT7cM_10413|1|1|1|0|0|0
+AvyCgfLm_19713|TFR0KvmHcrv2_20413|1|1|1|0|0|0
+pb_9713|qWJRvLKO6PY0UtxLbYx_10413|1|1|1|0|0|0
+97175511|1|Not Max|6
+198846798|1|Max|6
+98594076|1|Not Max|6
+98268985|1|Not Max|6
+198702558|1|Not Max|6
+98949099|1|Not Max|6
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+mKaMq0cqCBnwU3dwILUY_19713|6QzkUdlnNCCzgmzQK9y_20413|1|1|1|0|0|0
+LKZi_9713|F2xgS09J9oLHuh_10413|1|1|1|0|0|0
+UPVNa_9713|GJ_10413|1|1|1|0|0|0
+6fkDd_9713|Ph2nY8KgKT7cM_10413|1|1|1|0|0|0
+pb_9713|qWJRvLKO6PY0UtxLbYx_10413|1|1|1|0|0|0
+AvyCgfLm_19713|TFR0KvmHcrv2_20413|1|1|1|0|0|0
+97175511|1|Not Max|6
+198846798|1|Max|6
+98594076|1|Not Max|6
+98268985|1|Not Max|6
+198702558|1|Not Max|6
+98949099|1|Not Max|6
+
+ERR:
+

@@ -1,0 +1,126 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_FQcmS (c_8h4Rwnn INTEGER, c_tHx7xWj0SJ REAL, c_9kI9GzK INTEGER, FOREIGN KEY (c_8h4Rwnn) REFERENCES t_rZfwo(c_uD2WS));
+CREATE TABLE IF NOT EXISTS t_Pop2LRIyK (c_Z21w5zuP83 NUMERIC, c_1aQZVK INTEGER DEFAULT 165963, c_QGrO NUMERIC PRIMARY KEY, c_fbu6 REAL DEFAULT -465452.5, UNIQUE (c_Z21w5zuP83));
+CREATE TABLE IF NOT EXISTS t_7IuYvTf (c_rx45BGJh NUMERIC, c_otIkj REAL, c_GDYlOsQ TEXT, c_unOLY NUMERIC, c_cNeh6 INTEGER PRIMARY KEY, c_hcg NUMERIC DEFAULT 697545, c_VAHuyZlgX INTEGER) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_bKkOXf (c_2sc3 INTEGER PRIMARY KEY, c_daskMlcj NUMERIC, c_mm42 TEXT DEFAULT 'D', c_q10T NUMERIC DEFAULT 422257, c_xhT NUMERIC, c_j6CZB5 NUMERIC, c_UENdc3haY TEXT, c_Q8LUp NUMERIC, UNIQUE (c_j6CZB5, c_xhT, c_mm42)) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS t_dyrKIT (c_L3g NUMERIC DEFAULT 586925, c_EQQ NUMERIC, c_W9lq1CGs REAL, c_Ow9Ene TEXT, c_rhqMKf6 NUMERIC, c_56o15yGLKP INTEGER, c_uisX NUMERIC, c_tQUWvD INTEGER PRIMARY KEY, c_439BDGOU NUMERIC DEFAULT 810566, UNIQUE (c_W9lq1CGs, c_439BDGOU, c_Ow9Ene));
+
+                CREATE TRIGGER trg_qLD11
+                AFTER DELETE ON t_Pop2LRIyK
+                BEGIN
+                    SELECT RAISE(IGNORE) WHERE (SELECT count(*) FROM t_Pop2LRIyK) > 1000;
+                END;
+REPLACE INTO t_FQcmS (c_8h4Rwnn, c_tHx7xWj0SJ, c_9kI9GzK) SELECT 94758441, 832207.17185, 97920154;
+INSERT OR IGNORE INTO t_FQcmS (c_8h4Rwnn, c_tHx7xWj0SJ, c_9kI9GzK) VALUES (95960547, 1016822.674, 97375501), (195279834, 1003447.09, 197263998);
+INSERT OR IGNORE INTO t_Pop2LRIyK (c_Z21w5zuP83, c_1aQZVK, c_QGrO, c_fbu6) SELECT 96210019, 97029161, 97527390, -892955.3981;
+WITH cte_BGW AS (SELECT 1) REPLACE INTO t_Pop2LRIyK (c_Z21w5zuP83, c_1aQZVK, c_QGrO, c_fbu6) VALUES (94953252, 95632682, 96597556, 429232.5);
+INSERT OR IGNORE INTO t_Pop2LRIyK (c_Z21w5zuP83, c_1aQZVK, c_QGrO, c_fbu6) VALUES (96347639, 96623806, 98128288, 72007.946511);
+INSERT OR IGNORE INTO t_Pop2LRIyK (c_Z21w5zuP83, c_1aQZVK, c_QGrO, c_fbu6) VALUES (95409651, 95467247, 97645993, 799544.1), (195978814, 196237345, 197929668, -2735.540000000008);
+INSERT OR IGNORE INTO t_7IuYvTf (c_rx45BGJh, c_otIkj, c_GDYlOsQ, c_unOLY, c_cNeh6, c_hcg, c_VAHuyZlgX) SELECT 95671108, 796880.2318, 'luqtK_9741', 98156794, 99264490, 99935145, 101197764;
+INSERT OR REPLACE INTO t_7IuYvTf (c_rx45BGJh, c_otIkj, c_GDYlOsQ, c_unOLY, c_cNeh6, c_hcg, c_VAHuyZlgX) SELECT 96002987, 9178.699999999997, 'CjC6_9741', 98654198, 99711812, 100624959, 101775060;
+INSERT OR IGNORE INTO t_7IuYvTf (c_rx45BGJh, c_otIkj, c_GDYlOsQ, c_unOLY, c_cNeh6, c_hcg, c_VAHuyZlgX) VALUES (95838499, -210868.71999999997, 'x1gpcWgh39z_9741', 98705062, 99198248, 99705216, 100422556), (195108974, -194546.93800000002, 'iRQlhKMWhcGVuj5qK0Z_19741', 198202351, 200054081, 199961862, 200461788);
+WITH cte_afI AS (SELECT 1) REPLACE INTO t_7IuYvTf (c_rx45BGJh, c_otIkj, c_GDYlOsQ, c_unOLY, c_cNeh6, c_hcg, c_VAHuyZlgX) VALUES (96346588, 380327.68, 'LD86riU214Zj_9741', 97554164, 99800933, 100067662, 102147805), (195223168, -494176.80000000005, '4j0zOlAl86_19741', 198445455, 199414510, 201289544, 202057336);
+REPLACE INTO t_7IuYvTf (c_rx45BGJh, c_otIkj, c_GDYlOsQ, c_unOLY, c_cNeh6, c_hcg, c_VAHuyZlgX) VALUES (95737493, -674710.9, 'EbglyKzmUXR_9741', 97717873, 99627608, 100638038, 101867704), (196125061, -141622.57992, 'APZ_19741', 198271981, 199842532, 199533180, 202265395);
+REPLACE INTO t_bKkOXf (c_2sc3, c_daskMlcj, c_mm42, c_q10T, c_xhT, c_j6CZB5, c_UENdc3haY, c_Q8LUp) SELECT 95659500, 95906920, 'j0VcWgKc9Il1YMzt_9741', 99394188, 99170651, 101233854, 'SeOPPtzKTu_10141', 102552287;
+INSERT OR REPLACE INTO t_bKkOXf (c_2sc3, c_daskMlcj, c_mm42, c_q10T, c_xhT, c_j6CZB5, c_UENdc3haY, c_Q8LUp) VALUES (94976927, 96795526, '4J6tXi_9741', 98417770, 98876354, 101325279, 'axmDYnQb_10141', 103371228);
+INSERT OR REPLACE INTO t_bKkOXf (c_2sc3, c_daskMlcj, c_mm42, c_q10T, c_xhT, c_j6CZB5, c_UENdc3haY, c_Q8LUp) SELECT 95799166, 96417355, '7n79jTLIF00kA5C_9741', 97992078, 100031979, 99984944, 'tmWjawT_10141', 102350333;
+INSERT OR REPLACE INTO t_dyrKIT (c_L3g, c_EQQ, c_W9lq1CGs, c_Ow9Ene, c_rhqMKf6, c_56o15yGLKP, c_uisX, c_tQUWvD, c_439BDGOU) SELECT 95400766, 95714888, 744933.675427, 'SC2EYYY_9841', 98855809, 100230274, 100666307, 102928472, 103763569;
+INSERT OR REPLACE INTO t_dyrKIT (c_L3g, c_EQQ, c_W9lq1CGs, c_Ow9Ene, c_rhqMKf6, c_56o15yGLKP, c_uisX, c_tQUWvD, c_439BDGOU) VALUES (96207194, 95632377, -556795.5, '4OGIElK11zdaTho_9841', 99483911, 99917066, 100995271, 101626169, 103668500);
+REPLACE INTO t_dyrKIT (c_L3g, c_EQQ, c_W9lq1CGs, c_Ow9Ene, c_rhqMKf6, c_56o15yGLKP, c_uisX, c_tQUWvD, c_439BDGOU) SELECT 95897037, 95659402, -521434.65962100006, 'xHIfcDu8JRBcBE_9841', 98987829, 101084168, 102246047, 101610454, 103290630;
+INSERT OR REPLACE INTO t_dyrKIT (c_L3g, c_EQQ, c_W9lq1CGs, c_Ow9Ene, c_rhqMKf6, c_56o15yGLKP, c_uisX, c_tQUWvD, c_439BDGOU) SELECT 95707162, 95744117, -118026.39000000001, 'WwIPYFkw_9841', 98549771, 100749629, 100774003, 103182224, 103743166;
+REPLACE INTO t_dyrKIT DEFAULT VALUES;
+BEGIN TRANSACTION;
+WITH cte_NH6 AS (SELECT 1) INSERT OR REPLACE INTO t_dyrKIT (c_L3g, c_EQQ, c_W9lq1CGs, c_Ow9Ene, c_rhqMKf6, c_56o15yGLKP, c_uisX, c_tQUWvD, c_439BDGOU) VALUES (94934726, 95945497, 428728.931, 'cH_9841', 99686860, 100461516, 102126620, 101443554, 102585233), (194434354, 196981951, 400595.9619, 'iT_19841', 198637200, 199567191, 201428649, 203067304, 204350143);
+COMMIT;
+BEGIN TRANSACTION;
+WITH cte_flu AS (SELECT 1) INSERT OR REPLACE INTO t_FQcmS (c_8h4Rwnn, c_tHx7xWj0SJ, c_9kI9GzK) VALUES (95182661, -350070.1, 98366243);
+COMMIT;
+
+            SELECT json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 100) as modified_a,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.e', 200) as modified_nested,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d.new', 'new value') as added_property,
+                json_set('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[1]', 99) as modified_array,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.j', 'inserted') as inserted_j,
+                json_insert('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 'ignored') as insert_existing,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.a', 999) as replaced_a,
+                json_replace('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.nonexistent', 'ignored') as replace_nonexistent,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.d') as removed_d,
+                json_remove('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '$.c[0]') as removed_array_element,
+                json_patch('{"a":1, "b":"text", "c":[3,4,5], "d":{"e":6, "f":null}, "g":true, "h":false, "i":[{"j":10},{"j":20}]}', '{"a":null, "z":100}') as patched
+            FROM t_FQcmS
+            LIMIT 1;
+            
+SELECT * FROM t_Pop2LRIyK, t_FQcmS GROUP BY c_tHx7xWj0SJ ORDER BY 1 DESC;
+SELECT t_FQcmS.c_9kI9GzK, t_FQcmS.c_8h4Rwnn, t_FQcmS.c_tHx7xWj0SJ FROM t_FQcmS ORDER BY t_FQcmS.c_9kI9GzK ASC LIMIT 10;
+
+                SELECT DISTINCT t_FQcmS.c_tHx7xWj0SJ,
+                    COUNT(*) OVER (PARTITION BY t_FQcmS.c_8h4Rwnn) as window_count,
+                    RANK() OVER (ORDER BY 
+                            CASE WHEN typeof(t_FQcmS.c_tHx7xWj0SJ) IN ('null') THEN 0 
+                            ELSE t_FQcmS.c_tHx7xWj0SJ END DESC,
+                            t_FQcmS.c_8h4Rwnn ASC     /* Only use columns that definitely exist */
+                    ) as rank_val,
+                    CASE WHEN t_FQcmS.c_tHx7xWj0SJ IS NULL THEN 'Unknown' ELSE 'Known' END as status
+                FROM t_FQcmS
+                WHERE t_FQcmS.c_tHx7xWj0SJ IS NOT NULL
+                GROUP BY t_FQcmS.c_tHx7xWj0SJ, t_FQcmS.c_8h4Rwnn
+                HAVING COUNT(*) > 0
+                /* Only use columns that definitely exist in ORDER BY */
+                ORDER BY t_FQcmS.c_tHx7xWj0SJ ASC, t_FQcmS.c_8h4Rwnn ASC, window_count DESC
+                LIMIT 20;
+                
+
+                SELECT t_FQcmS.c_tHx7xWj0SJ,
+                    t_FQcmS.c_8h4Rwnn,
+                    SUM(CASE WHEN typeof(t_FQcmS.c_tHx7xWj0SJ) IN ('integer', 'real', 'numeric') THEN t_FQcmS.c_tHx7xWj0SJ ELSE 0 END) 
+                        OVER (PARTITION BY t_FQcmS.c_8h4Rwnn ORDER BY t_FQcmS.c_tHx7xWj0SJ ASC) as window_total
+                FROM t_FQcmS
+                GROUP BY t_FQcmS.c_tHx7xWj0SJ, t_FQcmS.c_8h4Rwnn
+                HAVING SUM(CASE WHEN typeof(t_FQcmS.c_tHx7xWj0SJ) IN ('integer', 'real', 'numeric') THEN t_FQcmS.c_tHx7xWj0SJ ELSE 0 END) > 0
+                ORDER BY window_total DESC, t_FQcmS.c_tHx7xWj0SJ ASC, t_FQcmS.c_8h4Rwnn ASC
+                LIMIT 10;
+                
+
+--- v3.26.0 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+96210019|97029161|97527390|-892955.3981|95182661|-350070.1|98366243
+96210019|97029161|97527390|-892955.3981|94758441|832207.17185|97920154
+96210019|97029161|97527390|-892955.3981|195279834|1003447.09|197263998
+96210019|97029161|97527390|-892955.3981|95960547|1016822.674|97375501
+97375501|95960547|1016822.674
+97920154|94758441|832207.17185
+98366243|95182661|-350070.1
+197263998|195279834|1003447.09
+-350070.1|1|4|Known
+832207.17185|1|3|Known
+1003447.09|1|2|Known
+1016822.674|1|1|Known
+1016822.674|95960547|1016822.674
+1003447.09|195279834|1003447.09
+832207.17185|94758441|832207.17185
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+{"a":100,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":200,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null,"new":"new value"},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,99,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"j":"inserted"}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":999,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[3,4,5],"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"a":1,"b":"text","c":[4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}]}|{"b":"text","c":[3,4,5],"d":{"e":6,"f":null},"g":true,"h":false,"i":[{"j":10},{"j":20}],"z":100}
+96210019|97029161|97527390|-892955.3981|95960547|1016822.674|97375501
+96210019|97029161|97527390|-892955.3981|195279834|1003447.09|197263998
+96210019|97029161|97527390|-892955.3981|94758441|832207.17185|97920154
+96210019|97029161|97527390|-892955.3981|95182661|-350070.1|98366243
+97375501|95960547|1016822.674
+97920154|94758441|832207.17185
+98366243|95182661|-350070.1
+197263998|195279834|1003447.09
+-350070.1|1|4|Known
+832207.17185|1|3|Known
+1003447.09|1|2|Known
+1016822.674|1|1|Known
+1016822.674|95960547|1016822.674
+1003447.09|195279834|1003447.09
+832207.17185|94758441|832207.17185
+
+ERR:
+
