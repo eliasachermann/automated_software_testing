@@ -1,0 +1,4 @@
+CREATE TABLE t_DX44 (c_ewZ, c_EwP);
+INSERT INTO t_DX44 (c_ewZ, c_EwP) VALUES ('7131k8CH2I7rflmaZmFh_102', '1sGjUivjzF_103');
+SELECT 1 FROM t_DX44 WHERE (t_DX44.c_EwP / t_DX44.c_ewZ);
+

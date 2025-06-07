@@ -1,0 +1,3 @@
+CREATE  TABLE  biq (ype);
+INSERT INTO biq (ype) VALUES (CURRENT_TIMESTAMP);
+SELECT ype FROM biq WHERE biq.ype / 709620288 ;
