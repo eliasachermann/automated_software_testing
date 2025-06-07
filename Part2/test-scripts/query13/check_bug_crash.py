@@ -21,8 +21,8 @@ if test_case_location:
     print(f"TEST_CASE_LOCATION is set to: {test_case_location}")
 else:
     print("TEST_CASE_LOCATION environment variable is not set")
-    base_path = os.path.abspath(os.path.join(os.getcwd(), "..", ".."))
-    test_case_location = os.path.join(base_path, "test-scripts/query6/query.sql")
+    test_case_location = os.path.join(os.getcwd(), "query.sql")
+
 
 sqlite_v1 = "/usr/bin/sqlite3-3.26.0"
 sqlite_v2 = "/usr/bin/sqlite3-3.39.4"
