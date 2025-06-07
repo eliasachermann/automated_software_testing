@@ -1,0 +1,46 @@
+SQL:
+CREATE TABLE IF NOT EXISTS t_tNHe9HRfs (c_fMfpH4KOZ TEXT, c_zEqdgv3G3C TEXT, c_fExA2v TEXT, c_wFK7ZhUk INTEGER);
+INSERT OR IGNORE INTO t_tNHe9HRfs (c_fMfpH4KOZ, c_zEqdgv3G3C, c_fExA2v, c_wFK7ZhUk) VALUES ('mP0ULmmCRa0qnoM_6491', 'B1M1j_6591', 'tRbjW5M266B_6691', 67755775), ('Ql46q_16491', 'p1Dq_16591', 'qMS2tqEKgJkFjgu_16691', 167562177);
+REPLACE INTO t_tNHe9HRfs (c_fMfpH4KOZ, c_zEqdgv3G3C, c_fExA2v, c_wFK7ZhUk) VALUES ('ih7nVkN6wJYh3_6491', 'U9DiWttDZAnAC7b_6591', 'AtT_6691', 68175464);
+INSERT OR IGNORE INTO t_tNHe9HRfs (c_fMfpH4KOZ, c_zEqdgv3G3C, c_fExA2v, c_wFK7ZhUk) SELECT '6P85GAZ1B8G_6491', 'HweQPCmWD_6591', 't_6691', 67894569;
+
+        SELECT json_extract('{"a": 1, "b": 2}', '$.a') as json_value,
+            json_type('{"a": [1, 2]}', '$.a') as json_type,
+            json_array(1, 2, 3) as json_arr,
+            json_object('key', 'value') as json_obj
+        FROM t_tNHe9HRfs LIMIT 1;
+            
+
+            SELECT * FROM (
+                SELECT * FROM (SELECT 1 AS col_P) 
+                WHERE col_P IN (
+                    SELECT (LEAD(1, 1, 1) OVER(ORDER BY 1 DESC RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)) FROM (VALUES (NULL))
+                )
+            );
+SELECT t_tNHe9HRfs.c_wFK7ZhUk, t_tNHe9HRfs.c_fExA2v, t_tNHe9HRfs.c_fMfpH4KOZ, t_tNHe9HRfs.c_zEqdgv3G3C FROM t_tNHe9HRfs ORDER BY t_tNHe9HRfs.c_fExA2v DESC LIMIT 10;
+SELECT c_fExA2v IN (SELECT t_tNHe9HRfs.c_wFK7ZhUk FROM t_tNHe9HRfs LIMIT 5), *, NULL FROM t_tNHe9HRfs WHERE c_fMfpH4KOZ GROUP BY c_fExA2v, c_zEqdgv3G3C ORDER BY 2 ASC;
+SELECT t_tNHe9HRfs.c_zEqdgv3G3C FROM t_tNHe9HRfs ORDER BY t_tNHe9HRfs.c_zEqdgv3G3C ASC LIMIT 10;
+
+--- v3.26.0 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+
+ERR:
+
+
+--- v3.49.1 ---
+OUT:
+1|array|[1,2,3]|{"key":"value"}
+1
+67894569|t_6691|6P85GAZ1B8G_6491|HweQPCmWD_6591
+67755775|tRbjW5M266B_6691|mP0ULmmCRa0qnoM_6491|B1M1j_6591
+167562177|qMS2tqEKgJkFjgu_16691|Ql46q_16491|p1Dq_16591
+68175464|AtT_6691|ih7nVkN6wJYh3_6491|U9DiWttDZAnAC7b_6591
+0|6P85GAZ1B8G_6491|HweQPCmWD_6591|t_6691|67894569|
+B1M1j_6591
+HweQPCmWD_6591
+U9DiWttDZAnAC7b_6591
+p1Dq_16591
+
+ERR:
+
