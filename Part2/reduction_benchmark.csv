@@ -1,0 +1,20 @@
+Test Case,Original Tokens,Reduced Tokens,Reduction (%),Time (s)
+query1,216,89,58.8,23.58
+query2,481,N/A,N/A,ERROR
+query3,1564,63,95.97,24.27
+query4,955,951,0.42,103.97
+query5,68,N/A,N/A,ERROR
+query6,3810,N/A,N/A,ERROR
+query7,619,593,4.2,98.46
+query8,1694,N/A,N/A,ERROR
+query9,1245,1064,14.54,14.98
+query10,259,215,16.99,17.37
+query11,114,51,55.26,13.72
+query12,3818,3675,3.75,484.43
+query13,287,279,2.79,106.64
+query15,224,224,0.0,38.82
+query16,5051,124,97.55,3.0
+query17,10559,N/A,N/A,ERROR
+query18,209,N/A,N/A,ERROR
+query19,211,196,7.11,19.36
+query20,9539,N/A,N/A,ERROR
