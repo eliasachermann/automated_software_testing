@@ -939,10 +939,13 @@ def delta_debug_statements(statements, test_script):
     return statements
 
 def reduce_sql_query(sql_query: str, test_script: str) -> str:
-
-    sql_query = re.sub(r'OVER\s*\(\s*RA[^)]*\)', 'OVER()', sql_query, flags=re.IGNORECASE)
+    
+    
 
     try:
+        sql_query = re.sub(r"X'([^']*)'", r"'\1'", sql_query)
+        sql_query = re.sub(r'\bREPLACE\s+INTO\b', 'INSERT OR REPLACE INTO', sql_query, flags=re.IGNORECASE)
+        sql_query = re.sub(r'\bINSERT\s+OR\s+REPLACE\s+OR\s+REPLACE\s+INTO\b', 'INSERT OR REPLACE INTO', sql_query, flags=re.IGNORECASE)
         parsed_statements = parse(sql_query, error_level='ignore')
         
         if not parsed_statements:
@@ -1027,8 +1030,29 @@ def simplify_expression(node):
 def get_query_from_parsed(parsed_statements):
     if not parsed_statements:
         return ""
+
     sql_string = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in parsed_statements) + ";"
     sql_string = re.sub(r'\bCURRENT_TIMESTAMP\(\)', 'CURRENT_TIMESTAMP', sql_string)
+    sql_string = re.sub(r'OVER\s*\(\s*RA[^)]*\)', 'OVER()', sql_string, flags=re.IGNORECASE)
+    sql_string = re.sub(r'\b0\s+AS\s+x7067e3cec226b60e\b', '0x7067e3cec226b60e', sql_string, flags=re.IGNORECASE)
+    pattern = r'INSERT\s+INTO\s+(\w+)\s+\(VALUES\s*\(([^)]+)\)\)\s+AS\s+"([^"]+)"'
+    def fix_insert_values(match):
+        table_name = match.group(1)
+        values_content = match.group(2)
+        hex_alias = match.group(3)
+        values_fixed = values_content.replace(', x', f", X'{hex_alias}', NULL")
+        return f"INSERT INTO {table_name} VALUES({values_fixed})"
+
+    sql_string = re.sub(pattern, fix_insert_values, sql_string)
+
+    # values_pattern = r'\(VALUES\s*\(([^)]+)\)\)\s+AS\s+"([^"]+)"'
+    # def replace_values_with_insert(match):
+    #     values_content = match.group(1)
+    #     table_alias = match.group(2)
+    #     return f"VALUES({values_content},X'{table_alias}',NULL);"
+
+    # sql_string = re.sub(values_pattern, replace_values_with_insert, sql_string)
+
 
     return sql_string
 
