@@ -251,11 +251,18 @@ def simplify_statement(stmt: Expression) -> Expression:
     
     return stmt
 
-def simplify_sql_constants(parsed_statements: list[Expression]) -> list[Expression]:
+def simplify_sql_constants(parsed_statements: list[Expression], test_script) -> list[Expression]:
+
+    original_statements = parsed_statements.copy()
+
     simplified_statements = []
     for stmt in parsed_statements:
         simplified = simplify_statement(stmt)
         simplified_statements.append(simplified)
+
+    query = get_query_from_parsed(simplified_statements)
+    if not test_query(query, test_script):
+        return original_statements
     
     return simplified_statements
 
@@ -802,6 +809,38 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
     if not hasattr(node, 'args') or not node.args:
         return node
     
+    # Add validation helper
+    def validate_reduction(new_node):
+        test_statements = full_statements.copy()
+        test_statements[stmt_index] = new_node
+        try:
+            sql = get_query_from_parsed(test_statements)
+            return test_query(sql, test_script)
+        except Exception:
+            return False
+            
+    if not hasattr(node, 'args') or not node.args:
+        return node
+    
+    # Don't reduce certain critical expressions
+    if isinstance(node, exp.Where):
+        if not validate_reduction(node):
+            return node
+            
+    # Be more careful with CASE expressions    
+    if isinstance(node, exp.Case):
+        # Don't modify CASE structure if it changes behavior
+        if not validate_reduction(node):
+            return node
+            
+    # Keep WHERE conditions on joins
+    if isinstance(node, exp.Join):
+        if node.args.get('on'):
+            test_node = copy.deepcopy(node)
+            test_node.args['on'] = None
+            if not validate_reduction(test_node):
+                return node
+    
     if not isinstance(node.args, (dict, list)):
         return node
 
@@ -904,7 +943,15 @@ def delta_debug_statements(statements, test_script):
     if len(statements) <= 1:
         if statements:
             reduced_stmt = delta_debug_node(statements[0], test_script, statements, 0)
-            return [reduced_stmt]
+            # Validate the single statement reduction
+            if reduced_stmt != statements[0]:
+                try:
+                    sql = get_query_from_parsed([reduced_stmt])
+                    if test_query(sql, test_script):
+                        return [reduced_stmt]
+                except Exception:
+                    pass
+            return statements
         return statements
 
     n = len(statements)
@@ -916,26 +963,54 @@ def delta_debug_statements(statements, test_script):
             remaining = [statements[j] for j in range(n) if j not in remove_idxs]
             if not remaining:
                 continue
+                
+            # First validate the immediate reduction
             try:
                 sql = get_query_from_parsed(remaining)
-                if test_query(sql, test_script):
-                    return delta_debug_statements(remaining, test_script)
+                if not test_query(sql, test_script):
+                    continue
+                    
+                # Only attempt further reduction if current one is valid
+                temp_reduced = delta_debug_statements(remaining, test_script)
+                # Validate the final state after all reductions
+                temp_sql = get_query_from_parsed(temp_reduced)
+                if test_query(temp_sql, test_script):
+                    return temp_reduced
             except Exception:
                 continue
+                
         subset_size //= 2
 
+    # Individual statement reduction with stricter validation
+    modified = False
+    new_statements = statements.copy()
+    
     for i, stmt in enumerate(statements):
         reduced = delta_debug_node(stmt, test_script, statements, i)
         if reduced != stmt:
-            new_statements = statements.copy()
-            new_statements[i] = reduced
+            temp_statements = new_statements.copy()
+            temp_statements[i] = reduced
             try:
-                sql = get_query_from_parsed(new_statements)
+                # Validate each individual reduction
+                sql = get_query_from_parsed(temp_statements)
                 if test_query(sql, test_script):
-                    return new_statements
+                    # Double check the entire statement set still triggers bug
+                    final_sql = get_query_from_parsed(temp_statements)
+                    if test_query(final_sql, test_script):
+                        new_statements[i] = reduced
+                        modified = True
             except Exception:
                 continue
 
+    # Final validation of all changes
+    if modified:
+        try:
+            final_sql = get_query_from_parsed(new_statements)
+            if test_query(final_sql, test_script):
+                return new_statements
+        except Exception:
+            pass
+            
     return statements
 
 def reduce_sql_query(sql_query: str, test_script: str) -> str:
@@ -970,19 +1045,74 @@ def reduce_sql_query(sql_query: str, test_script: str) -> str:
     print(f"\033[91mOriginal query has {prev_token_count} tokens\033[0m\n", sql_query)    
 
     for iteration in range(max_iterations):
-        parsed_statements = reduce_unused_table_inserts(parsed_statements, test_script)
-        parsed_statements = reduce_insert_statements_aggressively(parsed_statements, test_script)
-        parsed_statements = reduce_statements_aggressively(parsed_statements, test_script)
-        parsed_statements = reduce_columns_minimally(parsed_statements, test_script)
-        parsed_statements = eliminate_unused_tables(parsed_statements, test_script)
-        parsed_statements = delta_debug_statements(parsed_statements, test_script)
-        parsed_statements = simplify_sql_constants(parsed_statements)
+        iteration_statements = copy.deepcopy(parsed_statements)
         
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_unused_table_inserts(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_insert_statements_aggressively(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_statements_aggressively(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_columns_minimally(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = eliminate_unused_tables(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = simplify_join_conditions(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_select_columns(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = flatten_subqueries(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = remove_unused_ctes(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = delta_debug_statements(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = simplify_sql_constants(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
         parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
         
+        backup_statements = copy.deepcopy(parsed_statements)
         for i, stmt in enumerate(parsed_statements):
             if stmt is not None:
-                parsed_statements[i] = reduce_node_aggressively(stmt, test_script, parsed_statements, i)
+                reduced_stmt = reduce_node_aggressively(stmt, test_script, backup_statements, i)
+                if reduced_stmt != stmt:
+                    test_statements = copy.deepcopy(backup_statements)
+                    test_statements[i] = reduced_stmt
+                    if test_query(get_query_from_parsed(test_statements), test_script):
+                        parsed_statements[i] = reduced_stmt
         
         parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
         
@@ -998,7 +1128,7 @@ def reduce_sql_query(sql_query: str, test_script: str) -> str:
             break
             
         prev_token_count = current_token_count
-    
+        
     reduced_statements = [stmt for stmt in parsed_statements if stmt is not None]
     
     if not reduced_statements:
@@ -1026,6 +1156,247 @@ def simplify_expression(node):
         pass
 
     return node
+
+def simplify_join_conditions(statements, test_script):
+    """Simplifies complex JOIN conditions while preserving bug-triggering behavior"""
+    new_statements = []
+    modified = False
+    
+    for stmt in statements:
+        node = copy.deepcopy(stmt)
+        for join_node in node.walk():
+            if isinstance(join_node, exp.Join):
+                if join_node.args.get('on'):
+                    condition = join_node.args['on']
+                    if isinstance(condition, (exp.And, exp.Or)):
+                        # Try each condition individually
+                        for cond in condition.args['this']:
+                            if isinstance(cond, exp.Binary):
+                                test_node = copy.deepcopy(node)
+                                for test_join in test_node.walk():
+                                    if isinstance(test_join, exp.Join) and test_join.args.get('on') == condition:
+                                        test_join.set('on', cond)
+                                        break
+                                test_statements = [test_node if s == stmt else s for s in statements]
+                                try:
+                                    sql = get_query_from_parsed(test_statements)
+                                    if test_query(sql, test_script):
+                                        join_node.set('on', cond)
+                                        modified = True
+                                        break
+                                except Exception:
+                                    continue
+        new_statements.append(node)
+    
+    if modified:
+        try:
+            sql = get_query_from_parsed(new_statements) 
+            if test_query(sql, test_script):
+                return new_statements
+        except Exception:
+            pass
+            
+    return statements
+
+def reduce_select_columns(statements, test_script):
+    """Reduces SELECT columns to minimal set needed"""
+    def find_dependencies(expr, deps=None):
+        """Find all column dependencies in an expression"""
+        if deps is None:
+            deps = set()
+            
+        if isinstance(expr, exp.Column):
+            deps.add(str(expr.name))
+            if expr.args.get('table'):
+                table = str(expr.args['table'])
+                deps.add(f"{table}.{expr.name}")
+        elif isinstance(expr, exp.Alias):
+            # Add the alias itself as a dependency
+            deps.add(str(expr.alias))
+            # Check the underlying expression for dependencies
+            if hasattr(expr.this, 'walk'):
+                for node in expr.this.walk():
+                    if isinstance(node, exp.Column):
+                        deps.add(str(node.name))
+                        if node.args.get('table'):
+                            table = str(node.args['table'])
+                            deps.add(f"{table}.{node.name}")
+        elif isinstance(expr, exp.Binary):
+            # Add dependencies from both sides of binary operations
+            if hasattr(expr, 'left'):
+                deps.update(find_dependencies(expr.left))
+            if hasattr(expr, 'right'):
+                deps.update(find_dependencies(expr.right))
+        elif hasattr(expr, 'walk'):
+            for node in expr.walk():
+                if isinstance(node, exp.Column):
+                    deps.add(str(node.name))
+                    if node.args.get('table'):
+                        table = str(node.args['table'])
+                        deps.add(f"{table}.{node.name}")
+        
+        return deps
+    
+    def is_expr_needed(expr, col_deps, where_deps, order_deps):
+        """Check if expression is needed based on dependencies"""
+        # Always keep expressions in WHERE clause or ORDER BY
+        if expr_deps := find_dependencies(expr):
+            if expr_deps & (where_deps | order_deps | col_deps):
+                return True
+            
+        # Keep if it's an alias that others depend on
+        if isinstance(expr, exp.Alias):
+            alias = str(expr.alias)
+            if alias in col_deps:
+                return True
+                
+        # Keep if it's part of CASE expression or complex logic
+        if isinstance(expr, (exp.Case, exp.Binary, exp.Func)):
+            return True
+            
+        # Keep column references that might be needed
+        if isinstance(expr, exp.Column):
+            return True
+            
+        return False
+
+    # Main reduction logic
+    new_statements = []
+    modified = False
+    
+    for stmt in statements:
+        if isinstance(stmt, exp.Select):
+            if stmt.args.get('expressions'):
+                # First pass: gather all dependencies
+                all_deps = set()
+                
+                # Get dependencies from WHERE clause
+                if stmt.args.get('where'):
+                    for node in stmt.args['where'].walk():
+                        all_deps.update(find_dependencies(node))
+                
+                # Get dependencies from ORDER BY
+                if stmt.args.get('order'):
+                    for expr in stmt.args['order'].expressions:
+                        all_deps.update(find_dependencies(expr.this))
+                
+                # Get dependencies between expressions
+                for expr in stmt.args['expressions']:
+                    all_deps.update(find_dependencies(expr))
+                
+                # Second pass: try removing expressions only if safe
+                expressions = stmt.args['expressions']
+                kept_exprs = []
+                for expr in expressions:
+                    if is_expr_needed(expr, all_deps, all_deps, all_deps):
+                        kept_exprs.append(expr)
+                
+                if len(kept_exprs) > 0 and len(kept_exprs) < len(expressions):
+                    test_stmt = copy.deepcopy(stmt)
+                    test_stmt.set('expressions', kept_exprs)
+                    test_statements = [test_stmt if s == stmt else s for s in statements]
+                    try:
+                        sql = get_query_from_parsed(test_statements)
+                        if test_query(sql, test_script):
+                            stmt = test_stmt
+                            modified = True
+                    except Exception:
+                        pass
+        
+        new_statements.append(stmt)
+                            
+    return new_statements if modified else statements
+
+def flatten_subqueries(statements, test_script):
+    """Flattens simple subqueries into parent query"""
+    new_statements = []
+    modified = False
+    
+    for stmt in statements:
+        if isinstance(stmt, exp.Select):
+            node = copy.deepcopy(stmt)
+            if node.args.get('from'):
+                from_clause = node.args['from']
+                if isinstance(from_clause, exp.From) and isinstance(from_clause.this, exp.Subquery):
+                    subq = from_clause.this.this
+                    if (isinstance(subq, exp.Select) and 
+                        not subq.args.get('group') and
+                        not subq.args.get('having')):
+                        # Merge conditions
+                        if node.args.get('where') and subq.args.get('where'):
+                            new_where = exp.And(this=[node.args['where'], subq.args['where']])
+                            node.set('where', new_where)
+                        elif subq.args.get('where'):
+                            node.set('where', subq.args['where'])
+                            
+                        # Merge FROM clauses
+                        if subq.args.get('from'):
+                            node.set('from', subq.args['from'])
+                            modified = True
+            new_statements.append(node)
+        else:
+            new_statements.append(stmt)
+            
+    if modified:
+        try:
+            sql = get_query_from_parsed(new_statements)
+            if test_query(sql, test_script):
+                return new_statements
+        except Exception:
+            pass
+            
+    return statements
+
+def remove_unused_ctes(statements, test_script):
+    """Removes unused CTEs from WITH clauses"""
+    new_statements = []
+    modified = False
+    
+    for stmt in statements:
+        if isinstance(stmt, exp.Select) and stmt.args.get('with'):
+            node = copy.deepcopy(stmt)
+            used_ctes = set()
+            
+            # Find CTE references in main query
+            def find_cte_refs(select_node):
+                for subnode in select_node.walk():
+                    if isinstance(subnode, exp.Table):
+                        if hasattr(subnode, 'name'):
+                            table_name = str(subnode.name).lower()
+                            if table_name.startswith('cte'):
+                                used_ctes.add(table_name)
+            
+            find_cte_refs(node)
+            
+            # Only keep used CTEs
+            ctes = node.args['with'].expressions
+            kept_ctes = []
+            for cte in ctes:
+                cte_name = str(cte.alias).lower()
+                if cte_name in used_ctes:
+                    kept_ctes.append(cte)
+                    find_cte_refs(cte.this)  # Check CTE definition for nested refs
+            
+            if not kept_ctes:
+                node.set('with', None)
+                modified = True
+            elif len(kept_ctes) < len(ctes):
+                node.args['with'].set('expressions', kept_ctes)
+                modified = True
+                
+            new_statements.append(node)
+        else:
+            new_statements.append(stmt)
+            
+    if modified:
+        try:
+            sql = get_query_from_parsed(new_statements)
+            if test_query(sql, test_script):
+                return new_statements
+        except Exception:
+            pass
+            
+    return statements
 
 def get_query_from_parsed(parsed_statements):
     if not parsed_statements:
