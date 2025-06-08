@@ -10,7 +10,9 @@ def count_tokens(sql_query):
 
 BASE_DIR = os.getcwd()
 REDUCER_IMAGE = "reduce-env"
-TEST_CASES = [f"query{i}" for i in range(8,9)]
+TEST_CASES = [f"query{i}" for i in range(1, 14)]
+TEST_CASES += [f"query{i}" for i in range(15, 21)]
+TEST_CASES += [f"query{i}" for i in range(14, 15)]
 CSV_PATH = os.path.join(BASE_DIR, "reduction_benchmark.csv")
 
 results = []
