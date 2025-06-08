@@ -90,29 +90,32 @@ elif (code1 != code2):
     bug_detected = True
 # both don't work
 else:
-    def extract_errors(stderr, error_keywords):
-        stderr_lower = stderr.lower()
-        return [keyword for keyword in error_keywords if keyword in stderr_lower]
-
-    errors_v1 = extract_errors(err1, error_keywords)
-    errors_v2 = extract_errors(err2, error_keywords)
-
-    # Bug still occurs (only in version 1)
-    if errors_v1 and not errors_v2:
+    if (out1 != out2):
         bug_detected = True
-    # Bug still occurs (only in version 2)
-    elif not errors_v1 and errors_v2:
-        bug_detected = True
-    elif errors_v1 and errors_v2:
-        # Both versions have the same error
-        if set(errors_v1) == set(errors_v2):
-            bug_detected = False
-        # Bug still occurs (different errors)
-        else:
-            bug_detected = True
-    # No bug in either version
     else:
-        bug_detected = False
+        def extract_errors(stderr, error_keywords):
+            stderr_lower = stderr.lower()
+            return [keyword for keyword in error_keywords if keyword in stderr_lower]
+
+        errors_v1 = extract_errors(err1, error_keywords)
+        errors_v2 = extract_errors(err2, error_keywords)
+
+        # Bug still occurs (only in version 1)
+        if errors_v1 and not errors_v2:
+            bug_detected = True
+        # Bug still occurs (only in version 2)
+        elif not errors_v1 and errors_v2:
+            bug_detected = True
+        elif errors_v1 and errors_v2:
+            # Both versions have the same error
+            if set(errors_v1) == set(errors_v2):
+                bug_detected = False
+            # Bug still occurs (different errors)
+            else:
+                bug_detected = True
+        # No bug in either version
+        else:
+            bug_detected = False
 
 
 

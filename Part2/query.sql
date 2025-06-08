@@ -1,2 +1,4 @@
-CREATE TABLE f (p NOT NULL, i);
-INSERT INTO f SELECT * FROM (VALUES (TRUE, FALSE), (NULL, TRUE)) AS l WHERE FALSE;
+CREATE TABLE tbl_wqiwo (icol_dhwup, rcol_eitnk, tcol_yqthy, rcol_bjzii, icol_jcscw, tcol_wskpp);
+INSERT INTO tbl_wqiwo (rcol_eitnk, tcol_wskpp, tcol_yqthy) VALUES (1.0, 11960.180152676927, CAST('v_citjr' GLOB 'rAag' AS TEXT)), (CAST(UNLIKELY(-NULL) / NULLIF(0, 0) AS FLOAT), 3802.849483805112, 1), (CAST(PRINTF('%.6e', TRUE) AS FLOAT), 8446, 'v_bwaja'), (24227.630527005007, 999999999999999999999999999999999999999999999999999999999999999999999999, 'v_fgzuu');
+ALTER TABLE tbl_wqiwo ADD COLUMN icol_ovpnc INT;
+WITH with_vysww AS (SELECT * FROM tbl_wqiwo WHERE EXISTS(SELECT 1 FROM tbl_wqiwo WHERE tbl_wqiwo.icol_dhwup IS NULL) AND (EXISTS(SELECT SUM(COALESCE(NULL, CAST(tbl_wqiwo.icol_ovpnc <> -551 AS FLOAT))) FROM tbl_wqiwo WHERE NOT tbl_wqiwo.tcol_yqthy IS NULL AND tbl_wqiwo.icol_ovpnc IN (1, 1, 1, 1)) OR tbl_wqiwo.tcol_yqthy LIKE 'v_hkpkj') ORDER BY tbl_wqiwo.tcol_wskpp), with_ekqzi AS (SELECT * FROM with_vysww WHERE with_vysww.icol_jcscw <> 5472), with_kepqw AS (SELECT * FROM with_vysww GROUP BY with_vysww.icol_ovpnc ORDER BY with_vysww.rcol_bjzii) SELECT * FROM with_kepqw;
