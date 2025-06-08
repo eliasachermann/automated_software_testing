@@ -939,10 +939,11 @@ def delta_debug_statements(statements, test_script):
     return statements
 
 def reduce_sql_query(sql_query: str, test_script: str) -> str:
-
-
+    
+    
 
     try:
+        sql_query = re.sub(r"X'([^']*)'", r"'\1'", sql_query)
         sql_query = re.sub(r'\bREPLACE\s+INTO\b', 'INSERT OR REPLACE INTO', sql_query, flags=re.IGNORECASE)
         sql_query = re.sub(r'\bINSERT\s+OR\s+REPLACE\s+OR\s+REPLACE\s+INTO\b', 'INSERT OR REPLACE INTO', sql_query, flags=re.IGNORECASE)
         parsed_statements = parse(sql_query, error_level='ignore')
