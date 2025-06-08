@@ -817,10 +817,10 @@ if __name__ == "__main__":
     if not test_case_location:
         test_case_location = os.path.join(os.getcwd(), "query.sql")
 
+    if not test_query(sql_query, args.test):
+        print("WARNING: FINAL REDUCED QUERY DOES NOT TRIGGER THE BUG")
     with open(test_case_location, 'w') as f:
         f.write(reduced_query)
 
-    if not test_query(sql_query, args.test):
-        print("WARNING: FINAL REDUCED QUERY DOES NOT TRIGGER THE BUG")
 
     print(reduced_query)
