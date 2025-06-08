@@ -12,6 +12,13 @@ from sqlglot import parse, exp
 from sqlglot.optimizer.simplify import simplify
 from sqlglot.optimizer import optimize
 from sqlglot.expressions import Expression, Select, Insert, Where, Values
+from sqlglot import tokenize
+import re
+
+
+def count_tokens(sql_query):
+    tokens = list(tokenize(sql_query))
+    return len(tokens)
 
 def evaluate_arithmetic_expr(expr: Expression) -> Expression:
     if isinstance(expr, exp.Literal):
@@ -192,6 +199,7 @@ def evaluate_arithmetic_expr(expr: Expression) -> Expression:
     
     return expr
 
+
 def simplify_where_clause(where_expr: Expression) -> Expression:
     if where_expr is None:
         return None
@@ -258,7 +266,7 @@ def reduce_statements_aggressively(statements, test_script):
     filtered = [s for s in statements if not isinstance(s, (exp.Transaction, exp.Commit))]
     if len(filtered) < len(statements):
         try:
-            sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in filtered) + ";"
+            sql = get_query_from_parsed(filtered)
             if test_query(sql, test_script):
                 return reduce_statements_aggressively(filtered, test_script)
         except Exception:
@@ -267,7 +275,7 @@ def reduce_statements_aggressively(statements, test_script):
     filtered = [s for s in statements if not isinstance(s, (exp.Update, exp.Delete))]
     if len(filtered) < len(statements):
         try:
-            sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in filtered) + ";"
+            sql = get_query_from_parsed(filtered)
             if test_query(sql, test_script):
                 return reduce_statements_aggressively(filtered, test_script)
         except Exception:
@@ -276,7 +284,7 @@ def reduce_statements_aggressively(statements, test_script):
     essential = [s for s in statements if isinstance(s, (exp.Create, exp.Insert, exp.Select))]
     if len(essential) < len(statements) and essential:
         try:
-            sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in essential) + ";"
+            sql = get_query_from_parsed(essential)
             if test_query(sql, test_script):
                 return reduce_statements_aggressively(essential, test_script)
         except Exception:
@@ -285,7 +293,7 @@ def reduce_statements_aggressively(statements, test_script):
     filtered = [s for s in statements if not (hasattr(s, 'kind') and s.kind in ['VIEW', 'INDEX', 'TRIGGER'])]
     if len(filtered) < len(statements):
         try:
-            sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in filtered) + ";"
+            sql = get_query_from_parsed(filtered)
             if test_query(sql, test_script):
                 return reduce_statements_aggressively(filtered, test_script)
         except Exception:
@@ -297,7 +305,7 @@ def reduce_statements_aggressively(statements, test_script):
         for single_insert in inserts:
             test_statements = non_inserts + [single_insert]
             try:
-                sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in test_statements) + ";"
+                sql = get_query_from_parsed(test_statements)
                 if test_query(sql, test_script):
                     return reduce_statements_aggressively(test_statements, test_script)
             except Exception:
@@ -309,7 +317,7 @@ def test_reduced_node(node, test_script, full_statements, stmt_index):
     test_statements = full_statements.copy()
     test_statements[stmt_index] = node
     try:
-        sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in test_statements) + ";"
+        sql = get_query_from_parsed(test_statements)
         result = test_query(sql, test_script)
         return result
     except Exception:
@@ -363,6 +371,198 @@ def reduce_create_table(node, test_script, full_statements, stmt_index):
                     columns = test_columns
     
     return node
+
+def reduce_unused_table_inserts(statements, test_script):
+    select_stmt = None
+    referenced_tables = set()
+    
+    for stmt in statements:
+        if isinstance(stmt, exp.Select):
+            select_stmt = stmt
+            for node in stmt.walk():
+                if isinstance(node, exp.Table):
+                    if hasattr(node, 'name'):
+                        if hasattr(node.name, 'this'):
+                            table_name = str(node.name.this).lower()
+                            referenced_tables.add(table_name)
+                        else:
+                            table_name = str(node.name).lower()
+                            referenced_tables.add(table_name)
+                elif isinstance(node, exp.Column) and node.args.get('table'):
+                    table_ref = node.args['table']
+                    if hasattr(table_ref, 'this'):
+                        table_name = str(table_ref.this).lower()
+                        referenced_tables.add(table_name)
+                    elif hasattr(table_ref, 'name'):
+                        table_name = str(table_ref.name).lower()
+                        referenced_tables.add(table_name)
+                    else:
+                        table_name = str(table_ref).lower()
+                        referenced_tables.add(table_name)
+    
+    if not select_stmt or not referenced_tables:
+        return statements
+    
+    filtered_statements = []
+    for stmt in statements:
+        keep_stmt = True
+        
+        if isinstance(stmt, exp.Create) and stmt.args.get('this'):
+            table_schema = stmt.args['this']
+            if hasattr(table_schema, 'this'):
+                table_name = str(table_schema.this).lower()
+                if hasattr(table_schema.this, 'name'):
+                    table_name = str(table_schema.this.name).lower()
+            else:
+                table_name = str(table_schema).lower()
+            
+            if table_name not in referenced_tables:
+                keep_stmt = False
+                
+        elif isinstance(stmt, exp.Insert) and stmt.args.get('this'):
+            table_ref = stmt.args['this']
+            table_name = None
+            
+            if hasattr(table_ref, 'this'):
+                table_name = str(table_ref.this).lower()
+            elif hasattr(table_ref, 'name'):
+                if hasattr(table_ref.name, 'this'):
+                    table_name = str(table_ref.name.this).lower()
+                else:
+                    table_name = str(table_ref.name).lower()
+            else:
+                table_str = str(table_ref).lower()
+                table_name = table_str
+            
+            if table_name and table_name not in referenced_tables:
+                keep_stmt = False
+        
+        if keep_stmt:
+            filtered_statements.append(stmt)
+    
+    if len(filtered_statements) < len(statements):
+        try:
+            sql = get_query_from_parsed(filtered_statements)
+            if test_query(sql, test_script):
+                return filtered_statements
+        except Exception as e:
+            pass
+    
+    return statements
+
+def eliminate_unused_tables(statements, test_script):
+    select_stmt = None
+    table_names = set()
+    
+    for stmt in statements:
+        if isinstance(stmt, exp.Select):
+            select_stmt = stmt
+            for node in stmt.walk():
+                if isinstance(node, exp.Table):
+                    if hasattr(node, 'name'):
+                        if hasattr(node.name, 'this'):
+                            table_names.add(str(node.name.this).lower())
+                        else:
+                            table_names.add(str(node.name).lower())
+                    elif hasattr(node, 'this'):
+                        table_names.add(str(node.this).lower())
+                elif isinstance(node, exp.Column) and node.args.get('table'):
+                    table_ref = node.args['table']
+                    if hasattr(table_ref, 'this'):
+                        table_names.add(str(table_ref.this).lower())
+                    elif hasattr(table_ref, 'name'):
+                        table_names.add(str(table_ref.name).lower())
+                    else:
+                        table_names.add(str(table_ref).lower())
+    
+    if not select_stmt:
+        return statements
+    
+    essential_statements = []
+    for stmt in statements:
+        if isinstance(stmt, exp.Create) and stmt.args.get('this'):
+            table_schema = stmt.args['this']
+            if hasattr(table_schema, 'this'):
+                table_ref = table_schema.this
+                if hasattr(table_ref, 'name'):
+                    table_name = str(table_ref.name).lower()
+                elif hasattr(table_ref, 'this'):
+                    table_name = str(table_ref.this).lower()
+                else:
+                    table_name = str(table_ref).lower()
+            else:
+                table_name = str(table_schema).lower()
+            
+            if table_name in table_names:
+                essential_statements.append(stmt)
+                
+        elif isinstance(stmt, exp.Insert) and stmt.args.get('this'):
+            table_ref = stmt.args['this']
+            table_name = None
+            
+            if hasattr(table_ref, 'sql'):
+                table_name = table_ref.sql().lower()
+            elif hasattr(table_ref, 'name'):
+                if hasattr(table_ref.name, 'this'):
+                    table_name = str(table_ref.name.this).lower()
+                else:
+                    table_name = str(table_ref.name).lower()
+            elif hasattr(table_ref, 'this'):
+                table_name = str(table_ref.this).lower()
+            else:
+                table_name = str(table_ref).lower()
+            
+            if table_name and table_name in table_names:
+                essential_statements.append(stmt)
+        else:
+            essential_statements.append(stmt)
+    
+    if len(essential_statements) < len(statements):
+        try:
+            sql = get_query_from_parsed(essential_statements)
+            if test_query(sql, test_script):
+                return essential_statements
+        except Exception:
+            pass
+    
+    return statements
+
+def reduce_insert_statements_aggressively(statements, test_script):
+    insert_statements = [(i, stmt) for i, stmt in enumerate(statements) if isinstance(stmt, exp.Insert)]
+    if len(insert_statements) <= 1:
+        return statements
+    
+    inserts_by_table = {}
+    for i, stmt in insert_statements:
+        if stmt.args.get('this'):
+            table_name = str(stmt.args['this'].name).lower()
+            if table_name not in inserts_by_table:
+                inserts_by_table[table_name] = []
+            inserts_by_table[table_name].append((i, stmt))
+    
+    for table_name, table_inserts in inserts_by_table.items():
+        if len(table_inserts) > 1:
+            for _, single_insert in table_inserts:
+                test_statements = []
+                for i, orig_stmt in enumerate(statements):
+                    if isinstance(orig_stmt, exp.Insert) and orig_stmt.args.get('this'):
+                        orig_table = str(orig_stmt.args['this'].name).lower()
+                        if orig_table == table_name:
+                            if orig_stmt == single_insert:
+                                test_statements.append(orig_stmt)
+                        else:
+                            test_statements.append(orig_stmt)
+                    else:
+                        test_statements.append(orig_stmt)
+                
+                try:
+                    sql = get_query_from_parsed(test_statements)
+                    if test_query(sql, test_script):
+                        return test_statements
+                except Exception:
+                    continue
+    
+    return statements
 
 def reduce_insert_values(node, test_script, full_statements, stmt_index):
     if not isinstance(node, exp.Insert):
@@ -518,76 +718,85 @@ def reduce_node_aggressively(node, test_script, full_statements, stmt_index):
     return result
 
 def reduce_columns_minimally(statements, test_script):
-    create_stmt = None
-    insert_stmt = None
     select_stmt = None
-    
     for stmt in statements:
-        if isinstance(stmt, exp.Create):
-            create_stmt = stmt
-        elif isinstance(stmt, exp.Insert):
-            insert_stmt = stmt
-        elif isinstance(stmt, exp.Select):
+        if isinstance(stmt, exp.Select):
             select_stmt = stmt
+            break
     
-    if not (create_stmt and insert_stmt and select_stmt):
+    if not select_stmt:
         return statements
     
-    used_columns = set()
-    if select_stmt.args.get('where'):
-        for node in select_stmt.args['where'].walk():
-            if isinstance(node, exp.Column):
-                used_columns.add(node.name)
-    
-    if len(used_columns) >= 2:
-        used_columns_list = list(used_columns)[:2]
-        
-        if create_stmt.args.get('this') and hasattr(create_stmt.args['this'], 'expressions'):
-            columns = create_stmt.args['this'].expressions
-            reduced_columns = []
-            for col in columns:
-                if hasattr(col, 'this') and col.this.name in used_columns_list:
-                    simple_col = exp.ColumnDef(this=col.this)
-                    reduced_columns.append(simple_col)
-            
-            if reduced_columns:
-                test_statements = statements.copy()
-                test_create = copy.deepcopy(create_stmt)
-                test_create.args['this'].set('expressions', reduced_columns)
+    used_columns = {}
+    for node in select_stmt.walk():
+        if isinstance(node, exp.Column):
+            table_ref = node.args.get('table', '')
+            if table_ref:
+                if hasattr(table_ref, 'this'):
+                    table_name = str(table_ref.this).lower()
+                else:
+                    table_name = str(table_ref).lower()
                 
-                if insert_stmt.args.get('this') and insert_stmt.args.get('expression'):
-                    test_insert = copy.deepcopy(insert_stmt)
-                    values_list = insert_stmt.args['expression'].expressions
-                    for values_tuple in values_list:
-                        if hasattr(values_tuple, 'expressions') and len(values_tuple.expressions) >= len(used_columns_list):
-                            test_insert.set('this', exp.Table(this=create_stmt.args['this'].this))
-                            col_list = [exp.Column(this=col) for col in used_columns_list]
-                            test_insert.set('this', exp.Schema(this=test_insert.args['this'], expressions=col_list))
-                            
-                            orig_columns = [col.this.name for col in columns]
-                            new_values = []
-                            for col_name in used_columns_list:
-                                if col_name in orig_columns:
-                                    idx = orig_columns.index(col_name)
-                                    if idx < len(values_tuple.expressions):
-                                        new_values.append(values_tuple.expressions[idx])
-                            
-                            if new_values:
-                                new_tuple = exp.Tuple(expressions=new_values)
-                                test_insert.args['expression'].set('expressions', [new_tuple])
-                                
-                                test_statements[statements.index(create_stmt)] = test_create
-                                test_statements[statements.index(insert_stmt)] = test_insert
-                                
-                                try:
-                                    sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in test_statements) + ";"
-                                    if test_query(sql, test_script):
-                                        return test_statements
-                                except Exception:
-                                    pass
-                            break
+                if table_name not in used_columns:
+                    used_columns[table_name] = set()
+                
+                col_name = node.name
+                if hasattr(col_name, 'this'):
+                    col_name = str(col_name.this).lower()
+                else:
+                    col_name = str(col_name).lower()
+                
+                used_columns[table_name].add(col_name)
     
-    return statements
+    if not used_columns:
+        return statements
+    
+    new_statements = []
+    modified = False
+    
+    for stmt in statements:
+        if isinstance(stmt, exp.Create) and stmt.args.get('this'):
+            table_ref = stmt.args['this'].this
+            table_name = str(table_ref).lower()
+            
+            if table_name in used_columns and hasattr(stmt.args['this'], 'expressions'):
+                columns = stmt.args['this'].expressions
+                used_cols = used_columns[table_name]
+                
+                kept_columns = []
+                for col in columns:
+                    if hasattr(col, 'this') and hasattr(col.this, 'this'):
+                        col_name = str(col.this.this).lower()
+                    elif hasattr(col, 'this'):
+                        col_name = str(col.this).lower()
+                    else:
+                        col_name = str(col).lower()
+                    
+                    if col_name in used_cols:
+                        kept_columns.append(col)
+                
+                if len(kept_columns) < len(columns) and kept_columns:
+                    test_stmt = copy.deepcopy(stmt)
+                    test_stmt.args['this'].set('expressions', kept_columns)
+                    test_statements = [test_stmt if s == stmt else s for s in statements]
+                    
+                    try:
+                        sql = get_query_from_parsed(test_statements)
+                        if test_query(sql, test_script):
+                            new_statements.append(test_stmt)
+                            modified = True
+                            continue
+                    except Exception:
+                        pass
+            
+            new_statements.append(stmt)
+            
+        elif isinstance(stmt, exp.Insert) and stmt.args.get('this'):
+            new_statements.append(stmt)
+        else:
+            new_statements.append(stmt)
+    
+    return new_statements if modified else statements
 
 def delta_debug_node(node, test_script, full_statements, stmt_index):
     if not hasattr(node, 'args') or not node.args:
@@ -595,6 +804,17 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
     
     if not isinstance(node.args, (dict, list)):
         return node
+
+    if isinstance(node, exp.Window):
+        return node
+    
+    if isinstance(node, exp.WindowSpec):
+        return node
+    
+    if isinstance(node, exp.Func) and hasattr(node, 'this'):
+        func_name = str(node.this).upper()
+        if func_name in ['ROW_NUMBER', 'LAG', 'LEAD', 'RANK', 'DENSE_RANK']:
+            return node
 
     if isinstance(node.args, dict):
         children = [(k, v) for k, v in node.args.items() if v is not None]
@@ -620,7 +840,7 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
                 test_statements = full_statements.copy()
                 test_statements[stmt_index] = new_node
                 try:
-                    sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in test_statements) + ";"
+                    sql = get_query_from_parsed(test_statements)
                     if test_query(sql, test_script):
                         return new_node
                 except Exception:
@@ -636,6 +856,10 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
             kept_children = [c for j, c in enumerate(children) if j not in remove_idxs]
             if not kept_children:
                 continue
+            
+            if isinstance(node, (exp.Select, exp.Alias)) and any(isinstance(child[1], exp.Window) for child in children):
+                continue
+                
             new_node = copy.deepcopy(node)
             if isinstance(node.args, dict):
                 new_node.args = {k: v for k, v in kept_children}
@@ -645,7 +869,7 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
             test_statements = full_statements.copy()
             test_statements[stmt_index] = new_node
             try:
-                sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in test_statements) + ";"
+                sql = get_query_from_parsed(test_statements)
                 if test_query(sql, test_script):
                     return delta_debug_node(new_node, test_script, test_statements, stmt_index)
             except Exception:
@@ -667,7 +891,7 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
                 test_statements = full_statements.copy()
                 test_statements[stmt_index] = new_node
                 try:
-                    sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in test_statements) + ";"
+                    sql = get_query_from_parsed(test_statements)
                     if test_query(sql, test_script):
                         return new_node
                 except Exception:
@@ -693,7 +917,7 @@ def delta_debug_statements(statements, test_script):
             if not remaining:
                 continue
             try:
-                sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in remaining) + ";"
+                sql = get_query_from_parsed(remaining)
                 if test_query(sql, test_script):
                     return delta_debug_statements(remaining, test_script)
             except Exception:
@@ -706,7 +930,7 @@ def delta_debug_statements(statements, test_script):
             new_statements = statements.copy()
             new_statements[i] = reduced
             try:
-                sql = ";\n".join(s.sql(normalize=True, pad=0) for s in new_statements) + ";"
+                sql = get_query_from_parsed(new_statements)
                 if test_query(sql, test_script):
                     return new_statements
             except Exception:
@@ -715,24 +939,41 @@ def delta_debug_statements(statements, test_script):
     return statements
 
 def reduce_sql_query(sql_query: str, test_script: str) -> str:
+
+    sql_query = re.sub(r'OVER\s*\(\s*RA[^)]*\)', 'OVER()', sql_query, flags=re.IGNORECASE)
+
     try:
-        parsed_statements = parse(sql_query, error_level="ignore")
+        parsed_statements = parse(sql_query, error_level='ignore')
+        
         if not parsed_statements:
             return sql_query
     except Exception as e:
+        print(f"Parse error: {e}")
         return sql_query
-
-    if not test_query(sql_query, test_script):
-        return sql_query
-
-    prev_size = len(sql_query)
-    max_iterations = 7
     
+    parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
+    current_sql = get_query_from_parsed(parsed_statements)
+    if not test_query(current_sql,test_script):
+        print("\033[91m\033[1mWARNING: ORIGINAL QUERY DOES NOT TRIGGER THE BUG\033[0m")
+        print("Original: \n", sql_query)
+        print("Parsed query: \n", current_sql)
+        for i, stmt in enumerate(parsed_statements):
+            print(f"Statement {i}:\n", stmt)
+        # return sql_query
+
+    prev_token_count = count_tokens(sql_query)
+    max_iterations = 7
+
+    print(f"\033[91mOriginal query has {prev_token_count} tokens\033[0m\n", sql_query)    
+
     for iteration in range(max_iterations):
-        parsed_statements = simplify_sql_constants(parsed_statements)
+        parsed_statements = reduce_unused_table_inserts(parsed_statements, test_script)
+        parsed_statements = reduce_insert_statements_aggressively(parsed_statements, test_script)
         parsed_statements = reduce_statements_aggressively(parsed_statements, test_script)
         parsed_statements = reduce_columns_minimally(parsed_statements, test_script)
+        parsed_statements = eliminate_unused_tables(parsed_statements, test_script)
         parsed_statements = delta_debug_statements(parsed_statements, test_script)
+        parsed_statements = simplify_sql_constants(parsed_statements)
         
         parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
         
@@ -745,20 +986,22 @@ def reduce_sql_query(sql_query: str, test_script: str) -> str:
         if not parsed_statements:
             break
             
-        current_sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in parsed_statements) + ";"
-        current_size = len(current_sql)
-        
-        if current_size >= prev_size:
+        current_sql = get_query_from_parsed(parsed_statements)
+        current_token_count = count_tokens(current_sql)
+
+        print(f"\033[91mIteration {iteration} has {current_token_count} tokens\033[0m\n", current_sql)
+
+        if current_token_count >= prev_token_count:
             break
             
-        prev_size = current_size
+        prev_token_count = current_token_count
     
     reduced_statements = [stmt for stmt in parsed_statements if stmt is not None]
     
     if not reduced_statements:
         return sql_query
         
-    reduced_sql = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in reduced_statements) + ";"
+    reduced_sql = get_query_from_parsed(reduced_statements)
     return reduced_sql
 
 def simplify_expression(node):
@@ -780,6 +1023,14 @@ def simplify_expression(node):
         pass
 
     return node
+
+def get_query_from_parsed(parsed_statements):
+    if not parsed_statements:
+        return ""
+    sql_string = ";\n".join(stmt.sql(normalize=True, pad=0) for stmt in parsed_statements) + ";"
+    sql_string = re.sub(r'\bCURRENT_TIMESTAMP\(\)', 'CURRENT_TIMESTAMP', sql_string)
+
+    return sql_string
 
 def test_query(query: str, test_script: str) -> bool:    
     try:
@@ -817,10 +1068,11 @@ if __name__ == "__main__":
     if not test_case_location:
         test_case_location = os.path.join(os.getcwd(), "query.sql")
 
+    print("\033[92m\033[1mFINAL REDUCED QUERY:\033[0m\n", reduced_query)
+
+    if not test_query(reduced_query, args.test):
+        print("\033[91m\033[1mWARNING: FINAL REDUCED QUERY DOES NOT TRIGGER THE BUG\033[0m")
+
     with open(test_case_location, 'w') as f:
         f.write(reduced_query)
 
-    if not test_query(sql_query, args.test):
-        print("WARNING: FINAL REDUCED QUERY DOES NOT TRIGGER THE BUG")
-
-    print(reduced_query)
