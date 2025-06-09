@@ -1666,7 +1666,7 @@ def reduce_sql_query(sql_query: str, test_script: str) -> str:
             flags=re.IGNORECASE,
         )
         sql_query = re.sub(
-            r"\bINSERT\s+OR\s+REPLACE\s+OR\s+REPLACE\s+INTO\b",
+            r"\bINSERT\s+OR\s+INSERT\s+OR\s+REPLACE\s+INTO\b",
             "INSERT OR REPLACE INTO",
             sql_query,
             flags=re.IGNORECASE,
