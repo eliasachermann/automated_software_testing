@@ -10,12 +10,8 @@ def count_tokens(sql_query):
 
 BASE_DIR = os.getcwd()
 REDUCER_IMAGE = "reduce-env"
-TEST_CASES = [f"query{i}" for i in range(1, 14)]
-TEST_CASES += [f"query{i}" for i in range(15, 21)]
-TEST_CASES += [f"query{i}" for i in range(14, 15)]
+TEST_CASES = [f"query{i}" for i in range(1, 21)]
 CSV_PATH = os.path.join(BASE_DIR, "reduction_benchmark.csv")
-
-results = []
 
 # Prepare CSV file with headers
 with open(CSV_PATH, "w", newline="") as csvfile:
@@ -60,7 +56,6 @@ for test in TEST_CASES:
             "Reduction (%)": "N/A",
             "Time (s)": "ERROR"
         }
-        results.append(row)
         with open(CSV_PATH, "a", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=row.keys())
             writer.writerow(row)
@@ -83,14 +78,7 @@ for test in TEST_CASES:
         "Reduction (%)": reduction_percent,
         "Time (s)": elapsed
     }
-    results.append(row)
 
-    # Append row to CSV immediately
     with open(CSV_PATH, "a", newline="") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=row.keys())
         writer.writerow(row)
-
-# Optional: Print summary
-print("\nBenchmark Summary")
-for r in results:
-    print(r)
