@@ -39,7 +39,7 @@ for test in TEST_CASES:
     try:
         start_time = time.perf_counter()
         subprocess.run([
-            "docker", "run", "--platform", "linux/amd64", "--rm",
+            "sudo", "docker", "run", "--rm",
             "-v", f"{BASE_DIR}:/app",
             REDUCER_IMAGE, "reducer",
             "--query", f"/app/test-scripts/{test}/original_test.sql",
