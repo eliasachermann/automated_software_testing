@@ -537,7 +537,7 @@ def reduce_unused_table_inserts(statements, test_script):
             sql = get_query_from_parsed(filtered_statements)
             if test_query(sql, test_script):
                 return filtered_statements
-        except Exception as e:
+        except Exception:
             pass
 
     return statements
@@ -1171,148 +1171,6 @@ def delta_debug_statements(statements, test_script):
     return statements
 
 
-def reduce_sql_query(sql_query: str, test_script: str) -> str:
-    try:
-        sql_query = re.sub(
-            r"OVER\s*\(\s*RA[^)]*\)", "OVER()", sql_query, flags=re.IGNORECASE
-        )
-        sql_query = re.sub(r"x'([^']*)'", r"BLOB\1BLOB", sql_query, flags=re.IGNORECASE)
-        sql_query = re.sub(
-            r"\bREPLACE\s+INTO\b",
-            "INSERT OR REPLACE INTO",
-            sql_query,
-            flags=re.IGNORECASE,
-        )
-        sql_query = re.sub(
-            r"\bINSERT\s+OR\s+REPLACE\s+OR\s+REPLACE\s+INTO\b",
-            "INSERT OR REPLACE INTO",
-            sql_query,
-            flags=re.IGNORECASE,
-        )
-        lines = sql_query.strip().split("\n")
-        if lines and lines[0].strip().lower().startswith(".mode"):
-            sql_query = "\n".join(lines[1:])
-        parsed_statements = parse(sql_query, error_level="ignore")
-
-        if not parsed_statements:
-            return sql_query
-    except Exception as e:
-        print(f"Parse error: {e}")
-        return sql_query
-
-    parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
-
-    prev_token_count = count_tokens(sql_query)
-    max_iterations = 7
-
-    print(f"\033[91mOriginal query has {prev_token_count} tokens\033[0m\n", sql_query)
-
-    for iteration in range(max_iterations):
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = reduce_unused_table_inserts(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = reduce_insert_statements_aggressively(
-            parsed_statements, test_script
-        )
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = reduce_statements_aggressively(
-            parsed_statements, test_script
-        )
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = reduce_columns_minimally(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = eliminate_unused_tables(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = simplify_join_conditions(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = reduce_select_columns(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = flatten_subqueries(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = remove_unused_ctes(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = delta_debug_statements(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = simplify_sql_constants(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        for i, stmt in enumerate(parsed_statements):
-            if stmt is not None:
-                reduced_stmt = reduce_node_aggressively(
-                    stmt, test_script, backup_statements, i
-                )
-                if not expressions_equal(reduced_stmt, stmt):
-                    test_statements = copy.deepcopy(backup_statements)
-                    test_statements[i] = reduced_stmt
-                    if test_query(get_query_from_parsed(test_statements), test_script):
-                        parsed_statements[i] = reduced_stmt
-
-        backup_statements = copy.deepcopy(parsed_statements)
-        parsed_statements = reduce_create_table_columns(parsed_statements, test_script)
-        if not test_query(get_query_from_parsed(parsed_statements), test_script):
-            parsed_statements = copy.deepcopy(backup_statements)
-
-        parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
-
-        if not parsed_statements:
-            break
-
-        current_sql = get_query_from_parsed(parsed_statements)
-        current_token_count = count_tokens(current_sql)
-
-        print(
-            f"\033[91mIteration {iteration} has {current_token_count} tokens\033[0m\n",
-            current_sql,
-        )
-
-        if current_token_count >= prev_token_count:
-            break
-
-        prev_token_count = current_token_count
-
-    reduced_statements = [stmt for stmt in parsed_statements if stmt is not None]
-
-    if not reduced_statements:
-        return sql_query
-
-    reduced_sql = get_query_from_parsed(reduced_statements)
-    return reduced_sql
-
-
 def simplify_expression(node):
     if not isinstance(node, exp.Expression):
         return node
@@ -1466,6 +1324,39 @@ def simplify_subquery_expressions(node, test_script, full_statements, stmt_index
 
     return node
 
+def simplify_where_clauses(statements, test_script):
+    for i, stmt in enumerate(statements):
+        if isinstance(stmt, exp.Select) and stmt.args.get("where"):
+            test_stmt = copy.deepcopy(stmt)
+            test_stmt.set("where", None)
+            test_statements = statements.copy()
+            test_statements[i] = test_stmt
+            
+            try:
+                sql = get_query_from_parsed(test_statements)
+                if test_query(sql, test_script):
+                    statements = test_statements
+                    continue
+            except Exception:
+                pass
+            
+            for node in stmt.args["where"].walk():
+                if isinstance(node, exp.Case):
+                    test_stmt = copy.deepcopy(stmt)
+                    test_stmt.set("where", exp.Where(this=node))
+                    test_statements = statements.copy()
+                    test_statements[i] = test_stmt
+                    
+                    try:
+                        sql = get_query_from_parsed(test_statements)
+                        if test_query(sql, test_script):
+                            statements = test_statements
+                            break
+                    except Exception:
+                        pass
+    
+    return statements
+
 
 def simplify_case_expressions(node, test_script, full_statements, stmt_index):
     if isinstance(node, exp.Case):
@@ -1501,7 +1392,6 @@ def simplify_case_expressions(node, test_script, full_statements, stmt_index):
                         return test_node
 
     return node
-
 
 def reduce_select_columns(statements, test_script):
     def find_dependencies(expr, deps=None):
@@ -1760,8 +1650,154 @@ def test_query(query: str, test_script: str) -> bool:
 
     except subprocess.TimeoutExpired:
         return False
-    except Exception as e:
+    except Exception:
         return False
+
+def reduce_sql_query(sql_query: str, test_script: str) -> str:
+    try:
+        sql_query = re.sub(
+            r"OVER\s*\(\s*RA[^)]*\)", "OVER()", sql_query, flags=re.IGNORECASE
+        )
+        sql_query = re.sub(r"x'([^']*)'", r"BLOB\1BLOB", sql_query, flags=re.IGNORECASE)
+        sql_query = re.sub(
+            r"\bREPLACE\s+INTO\b",
+            "INSERT OR REPLACE INTO",
+            sql_query,
+            flags=re.IGNORECASE,
+        )
+        sql_query = re.sub(
+            r"\bINSERT\s+OR\s+REPLACE\s+OR\s+REPLACE\s+INTO\b",
+            "INSERT OR REPLACE INTO",
+            sql_query,
+            flags=re.IGNORECASE,
+        )
+        lines = sql_query.strip().split("\n")
+        if lines and lines[0].strip().lower().startswith(".mode"):
+            sql_query = "\n".join(lines[1:])
+        parsed_statements = parse(sql_query, error_level="ignore")
+
+        if not parsed_statements:
+            return sql_query
+    except Exception as e:
+        print(f"Parse error: {e}")
+        return sql_query
+
+    parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
+
+    prev_token_count = count_tokens(sql_query)
+    max_iterations = 7
+
+    print(f"\033[91mOriginal query has {prev_token_count} tokens\033[0m\n", sql_query)
+
+    for iteration in range(max_iterations):
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_unused_table_inserts(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_insert_statements_aggressively(
+            parsed_statements, test_script
+        )
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_statements_aggressively(
+            parsed_statements, test_script
+        )
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_columns_minimally(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = eliminate_unused_tables(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = simplify_join_conditions(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_select_columns(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = flatten_subqueries(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = remove_unused_ctes(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = delta_debug_statements(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = simplify_sql_constants(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = simplify_where_clauses(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+        
+        parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        for i, stmt in enumerate(parsed_statements):
+            if stmt is not None:
+                reduced_stmt = reduce_node_aggressively(
+                    stmt, test_script, backup_statements, i
+                )
+                if not expressions_equal(reduced_stmt, stmt):
+                    test_statements = copy.deepcopy(backup_statements)
+                    test_statements[i] = reduced_stmt
+                    if test_query(get_query_from_parsed(test_statements), test_script):
+                        parsed_statements[i] = reduced_stmt
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = reduce_create_table_columns(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        parsed_statements = [stmt for stmt in parsed_statements if stmt is not None]
+
+        if not parsed_statements:
+            break
+
+        current_sql = get_query_from_parsed(parsed_statements)
+        current_token_count = count_tokens(current_sql)
+
+        print(
+            f"\033[91mIteration {iteration} has {current_token_count} tokens\033[0m\n",
+            current_sql,
+        )
+
+        if current_token_count >= prev_token_count:
+            break
+
+        prev_token_count = current_token_count
+
+    reduced_statements = [stmt for stmt in parsed_statements if stmt is not None]
+
+    if not reduced_statements:
+        return sql_query
+
+    reduced_sql = get_query_from_parsed(reduced_statements)
+    return reduced_sql
 
 
 if __name__ == "__main__":
@@ -1774,7 +1810,7 @@ if __name__ == "__main__":
     try:
         with open(args.query, "r") as f:
             sql_query = f.read().strip()
-    except Exception as e:
+    except Exception:
         sys.exit(1)
 
     reduced_query = reduce_sql_query(sql_query, args.test)
