@@ -24,117 +24,34 @@ def evaluate_arithmetic_expr(expr: Expression) -> Expression:
     if isinstance(expr, exp.Null):
         return expr
 
-    if isinstance(expr, exp.Binary):
+    def extract_numeric_value(node):
+        if isinstance(node, exp.Literal):
+            val = node.this
+            if isinstance(val, str):
+                try:
+                    return float(val) if "." in val else int(val)
+                except ValueError:
+                    return None
+            return val
+        elif isinstance(node, exp.Paren):
+            return extract_numeric_value(node.this)
+        elif isinstance(node, exp.Neg):
+            inner_val = extract_numeric_value(node.this)
+            return -inner_val if inner_val is not None else None
+        elif isinstance(node, exp.Boolean):
+            return 1 if node.this else 0
+        return None
+
+    def evaluate_complex_binary(expr):
+        if not isinstance(expr, exp.Binary):
+            return expr
+            
         left = evaluate_arithmetic_expr(expr.left)
         right = evaluate_arithmetic_expr(expr.right)
-
-        if isinstance(expr, exp.NEQ):
-            if isinstance(left, exp.Boolean) and isinstance(right, exp.Boolean):
-                result = left.this != right.this
-                return exp.Boolean(this=result)
-            elif (
-                isinstance(left, exp.Paren)
-                and isinstance(left.this, exp.Boolean)
-                and isinstance(right, exp.Paren)
-                and isinstance(right.this, exp.Boolean)
-            ):
-                result = left.this.this != right.this.this
-                return exp.Boolean(this=result)
-        elif isinstance(expr, exp.EQ):
-            if isinstance(left, exp.Boolean) and isinstance(right, exp.Boolean):
-                result = left.this == right.this
-                return exp.Boolean(this=result)
-            elif (
-                isinstance(left, exp.Paren)
-                and isinstance(left.this, exp.Boolean)
-                and isinstance(right, exp.Paren)
-                and isinstance(right.this, exp.Boolean)
-            ):
-                result = left.this.this == right.this.this
-                return exp.Boolean(this=result)
-
-            if isinstance(left, exp.Literal) and isinstance(right, exp.Boolean):
-                try:
-                    left_val = (
-                        float(left.this) if "." in str(left.this) else int(left.this)
-                    )
-                    right_val = 1 if right.this else 0
-                    result = left_val == right_val
-                    return exp.Boolean(this=result)
-                except:
-                    pass
-            elif isinstance(right, exp.Literal) and isinstance(left, exp.Boolean):
-                try:
-                    right_val = (
-                        float(right.this) if "." in str(right.this) else int(right.this)
-                    )
-                    left_val = 1 if left.this else 0
-                    result = left_val == right_val
-                    return exp.Boolean(this=result)
-                except:
-                    pass
-
-        left_val = None
-        right_val = None
-
-        if isinstance(left, exp.Literal):
-            left_val = left.this
-            if isinstance(left_val, str):
-                try:
-                    left_val = float(left_val) if "." in left_val else int(left_val)
-                except ValueError:
-                    left_val = None
-        elif isinstance(left, exp.Paren) and isinstance(left.this, exp.Literal):
-            left_val = left.this.this
-            if isinstance(left_val, str):
-                try:
-                    left_val = float(left_val) if "." in left_val else int(left_val)
-                except ValueError:
-                    left_val = None
-        elif isinstance(left, exp.Neg) and isinstance(
-            left.this, (exp.Literal, exp.Paren)
-        ):
-            inner = left.this
-            if isinstance(inner, exp.Paren):
-                inner = inner.this
-            if isinstance(inner, exp.Literal):
-                try:
-                    val = inner.this
-                    if isinstance(val, str):
-                        val = float(val) if "." in val else int(val)
-                    left_val = -val
-                except (ValueError, TypeError):
-                    left_val = None
-
-        if isinstance(right, exp.Literal):
-            right_val = right.this
-            if isinstance(right_val, str):
-                try:
-                    right_val = float(right_val) if "." in right_val else int(right_val)
-                except ValueError:
-                    right_val = None
-        elif isinstance(right, exp.Paren) and isinstance(right.this, exp.Literal):
-            right_val = right.this.this
-            if isinstance(right_val, str):
-                try:
-                    right_val = float(right_val) if "." in right_val else int(right_val)
-                except ValueError:
-                    right_val = None
-        elif isinstance(right, exp.Neg) and isinstance(
-            right.this, (exp.Literal, exp.Paren)
-        ):
-            inner = right.this
-            if isinstance(inner, exp.Paren):
-                inner = inner.this
-            if isinstance(inner, exp.Literal):
-                try:
-                    val = inner.this
-                    if isinstance(val, str):
-                        val = float(val) if "." in val else int(val)
-                    right_val = -val
-                except (ValueError, TypeError):
-                    right_val = None
-
+        
+        left_val = extract_numeric_value(left)
+        right_val = extract_numeric_value(right)
+        
         if left_val is not None and right_val is not None:
             try:
                 result = None
@@ -147,6 +64,8 @@ def evaluate_arithmetic_expr(expr: Expression) -> Expression:
                 elif isinstance(expr, exp.Div):
                     if right_val != 0:
                         result = left_val / right_val
+                    else:
+                        return expr
                 elif isinstance(expr, exp.EQ):
                     result = left_val == right_val
                 elif isinstance(expr, exp.NEQ):
@@ -159,58 +78,177 @@ def evaluate_arithmetic_expr(expr: Expression) -> Expression:
                     result = left_val <= right_val
                 elif isinstance(expr, exp.GTE):
                     result = left_val >= right_val
-
+                
                 if result is not None:
                     if isinstance(result, bool):
                         return exp.Boolean(this=result)
                     elif isinstance(result, (int, float)):
-                        return exp.Literal.number(str(result))
-
-            except (ZeroDivisionError, TypeError, ValueError):
+                        if isinstance(result, float) and result.is_integer():
+                            return exp.Literal.number(str(int(result)))
+                        else:
+                            return exp.Literal.number(str(result))
+                            
+            except (ZeroDivisionError, TypeError, ValueError, OverflowError):
                 pass
+        
+        if left != expr.left or right != expr.right:
+            new_expr = copy.deepcopy(expr)
+            new_expr.set("left", left)
+            new_expr.set("right", right)
+            return new_expr
+            
+        return expr
 
-        new_expr = copy.deepcopy(expr)
-        new_expr.set("left", left)
-        new_expr.set("right", right)
-        return new_expr
+    if isinstance(expr, exp.Binary):
+        simplified = evaluate_complex_binary(expr)
+        
+        if isinstance(expr, (exp.EQ, exp.NEQ)) and isinstance(simplified, exp.Binary):
+            left = evaluate_arithmetic_expr(expr.left)
+            right = evaluate_arithmetic_expr(expr.right)
+            
+            if isinstance(left, exp.Boolean) and isinstance(right, exp.Boolean):
+                if isinstance(expr, exp.EQ):
+                    result = left.this == right.this
+                elif isinstance(expr, exp.NEQ):
+                    result = left.this != right.this
+                return exp.Boolean(this=result)
+            elif isinstance(left, exp.Boolean) and isinstance(right, exp.Binary):
+                right_eval = evaluate_arithmetic_expr(right)
+                if isinstance(right_eval, exp.Boolean):
+                    if isinstance(expr, exp.EQ):
+                        result = left.this == right_eval.this
+                    elif isinstance(expr, exp.NEQ):
+                        result = left.this != right_eval.this
+                    return exp.Boolean(this=result)
+            elif isinstance(left, exp.Binary) and isinstance(right, exp.Boolean):
+                left_eval = evaluate_arithmetic_expr(left)
+                if isinstance(left_eval, exp.Boolean):
+                    if isinstance(expr, exp.EQ):
+                        result = left_eval.this == right.this
+                    elif isinstance(expr, exp.NEQ):
+                        result = left_eval.this != right.this
+                    return exp.Boolean(this=result)
+        
+        return simplified
 
     if isinstance(expr, exp.Unary):
         operand = evaluate_arithmetic_expr(expr.this)
-
-        if isinstance(operand, exp.Literal):
-            try:
-                val = operand.this
-                if isinstance(val, str):
-                    try:
-                        val = float(val) if "." in val else int(val)
-                    except ValueError:
-                        pass
-
-                if isinstance(expr, exp.Neg):
-                    result = -val
+        
+        if isinstance(expr, exp.Neg):
+            val = extract_numeric_value(operand)
+            if val is not None:
+                result = -val
+                if isinstance(result, float) and result.is_integer():
+                    return exp.Literal.number(str(int(result)))
+                else:
                     return exp.Literal.number(str(result))
-            except (TypeError, ValueError):
-                pass
-
-        if isinstance(expr, exp.Not):
+        elif isinstance(expr, exp.Not):
             if isinstance(operand, exp.Boolean):
                 result = not operand.this
                 return exp.Boolean(this=result)
-
-        new_expr = copy.deepcopy(expr)
-        new_expr.set("this", operand)
-        return new_expr
+        
+        if operand != expr.this:
+            new_expr = copy.deepcopy(expr)
+            new_expr.set("this", operand)
+            return new_expr
 
     if isinstance(expr, exp.Paren):
         inner = evaluate_arithmetic_expr(expr.this)
         if isinstance(inner, (exp.Literal, exp.Boolean)):
             return inner
-        new_expr = copy.deepcopy(expr)
-        new_expr.set("this", inner)
-        return new_expr
+        if inner != expr.this:
+            new_expr = copy.deepcopy(expr)
+            new_expr.set("this", inner)
+            return new_expr
 
     return expr
 
+
+def aggressively_evaluate_expressions(statements, test_script):
+    new_statements = []
+    modified = False
+
+    def deep_evaluate(node):
+        if isinstance(node, exp.Binary):
+            prev_node = None
+            current_node = node
+            max_passes = 10
+            
+            for _ in range(max_passes):
+                evaluated = evaluate_arithmetic_expr(current_node)
+                if expressions_equal(evaluated, current_node):
+                    break
+                current_node = evaluated
+                
+            return current_node
+            
+        elif isinstance(node, exp.Unary):
+            operand = deep_evaluate(node.this)
+            if operand != node.this:
+                new_node = copy.deepcopy(node)
+                new_node.set("this", operand)
+                return evaluate_arithmetic_expr(new_node)
+            return evaluate_arithmetic_expr(node)
+            
+        elif isinstance(node, exp.Paren):
+            inner = deep_evaluate(node.this)
+            if isinstance(inner, (exp.Literal, exp.Boolean)):
+                return inner
+            if inner != node.this:
+                new_node = copy.deepcopy(node)
+                new_node.set("this", inner)
+                return new_node
+            return node
+            
+        elif hasattr(node, "args") and node.args:
+            changed = False
+            new_node = copy.deepcopy(node)
+            
+            if isinstance(node.args, dict):
+                for key, value in node.args.items():
+                    if isinstance(value, exp.Expression):
+                        evaluated_value = deep_evaluate(value)
+                        if not expressions_equal(evaluated_value, value):
+                            new_node.set(key, evaluated_value)
+                            changed = True
+                    elif isinstance(value, list):
+                        new_list = []
+                        list_changed = False
+                        for item in value:
+                            if isinstance(item, exp.Expression):
+                                evaluated_item = deep_evaluate(item)
+                                if not expressions_equal(evaluated_item, item):
+                                    list_changed = True
+                                new_list.append(evaluated_item)
+                            else:
+                                new_list.append(item)
+                        if list_changed:
+                            new_node.set(key, new_list)
+                            changed = True
+            
+            return new_node if changed else node
+            
+        return node
+
+    for stmt in statements:
+        new_stmt = copy.deepcopy(stmt)
+        evaluated_stmt = deep_evaluate(new_stmt)
+        
+        if not expressions_equal(evaluated_stmt, stmt):
+            test_statements = [evaluated_stmt if s == stmt else s for s in statements]
+            try:
+                sql = get_query_from_parsed(test_statements)
+                if test_query(sql, test_script):
+                    new_statements.append(evaluated_stmt)
+                    modified = True
+                else:
+                    new_statements.append(stmt)
+            except Exception:
+                new_statements.append(stmt)
+        else:
+            new_statements.append(stmt)
+
+    return new_statements if modified else statements
 
 def simplify_boolean_literals(statements, test_script):
     new_statements = []
@@ -1971,6 +2009,11 @@ def reduce_sql_query(sql_query: str, test_script: str) -> str:
         parsed_statements = reduce_insert_statements_aggressively(
             parsed_statements, test_script
         )
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = aggressively_evaluate_expressions(parsed_statements, test_script)
         if not test_query(get_query_from_parsed(parsed_statements), test_script):
             parsed_statements = copy.deepcopy(backup_statements)
 
