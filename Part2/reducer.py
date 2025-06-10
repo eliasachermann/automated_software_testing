@@ -316,6 +316,192 @@ def simplify_boolean_literals(statements, test_script):
     return new_statements if modified else statements
 
 
+def remove_unnecessary_parentheses(statements, test_script):
+    new_statements = []
+    modified = False
+
+    def simplify_parentheses(node):
+        if isinstance(node, exp.Paren):
+            inner = node.this
+            
+            if isinstance(inner, (exp.Literal, exp.Column, exp.Boolean, exp.Null)):
+                return inner
+            
+            if isinstance(inner, exp.Paren):
+                return simplify_parentheses(inner)
+            
+            if isinstance(inner, exp.Binary):
+                simplified_inner = simplify_parentheses(inner)
+                
+                if isinstance(simplified_inner, (exp.Literal, exp.Column, exp.Boolean)):
+                    return simplified_inner
+                
+                new_paren = copy.deepcopy(node)
+                new_paren.set("this", simplified_inner)
+                return new_paren
+            
+            simplified_inner = simplify_parentheses(inner)
+            if simplified_inner != inner:
+                if isinstance(simplified_inner, (exp.Literal, exp.Column, exp.Boolean, exp.Null)):
+                    return simplified_inner
+                new_paren = copy.deepcopy(node)
+                new_paren.set("this", simplified_inner)
+                return new_paren
+                
+        elif isinstance(node, exp.Binary):
+            left = simplify_parentheses(node.left)
+            right = simplify_parentheses(node.right)
+            
+            if left != node.left or right != node.right:
+                new_binary = copy.deepcopy(node)
+                new_binary.set("left", left)
+                new_binary.set("right", right)
+                return new_binary
+                
+        elif isinstance(node, exp.Unary):
+            operand = simplify_parentheses(node.this)
+            if operand != node.this:
+                new_unary = copy.deepcopy(node)
+                new_unary.set("this", operand)
+                return new_unary
+                
+        elif hasattr(node, "args") and node.args:
+            changed = False
+            new_node = copy.deepcopy(node)
+            
+            if isinstance(node.args, dict):
+                for key, value in node.args.items():
+                    if isinstance(value, exp.Expression):
+                        simplified_value = simplify_parentheses(value)
+                        if simplified_value != value:
+                            new_node.set(key, simplified_value)
+                            changed = True
+                    elif isinstance(value, list):
+                        new_list = []
+                        list_changed = False
+                        for item in value:
+                            if isinstance(item, exp.Expression):
+                                simplified_item = simplify_parentheses(item)
+                                if simplified_item != item:
+                                    list_changed = True
+                                new_list.append(simplified_item)
+                            else:
+                                new_list.append(item)
+                        if list_changed:
+                            new_node.set(key, new_list)
+                            changed = True
+            
+            if changed:
+                return new_node
+        
+        return node
+
+    for stmt in statements:
+        new_stmt = copy.deepcopy(stmt)
+        simplified_stmt = simplify_parentheses(new_stmt)
+        
+        if not expressions_equal(simplified_stmt, stmt):
+            test_statements = [simplified_stmt if s == stmt else s for s in statements]
+            try:
+                sql = get_query_from_parsed(test_statements)
+                if test_query(sql, test_script):
+                    new_statements.append(simplified_stmt)
+                    modified = True
+                else:
+                    new_statements.append(stmt)
+            except Exception:
+                new_statements.append(stmt)
+        else:
+            new_statements.append(stmt)
+    
+    return new_statements if modified else statements
+
+
+def aggressive_parentheses_removal(statements, test_script):
+    def find_and_test_paren_removal(node, test_statements, stmt_index):
+        if isinstance(node, exp.Paren):
+            test_node = node.this
+            temp_statements = copy.deepcopy(test_statements)
+            temp_statements[stmt_index] = replace_node_in_statement(
+                temp_statements[stmt_index], node, test_node
+            )
+            
+            try:
+                sql = get_query_from_parsed(temp_statements)
+                if test_query(sql, test_script):
+                    return test_node, True
+            except Exception:
+                pass
+        
+        if hasattr(node, "args") and node.args:
+            if isinstance(node.args, dict):
+                for key, value in node.args.items():
+                    if isinstance(value, exp.Expression):
+                        result, changed = find_and_test_paren_removal(
+                            value, test_statements, stmt_index
+                        )
+                        if changed:
+                            new_node = copy.deepcopy(node)
+                            new_node.set(key, result)
+                            return new_node, True
+                    elif isinstance(value, list):
+                        for i, item in enumerate(value):
+                            if isinstance(item, exp.Expression):
+                                result, changed = find_and_test_paren_removal(
+                                    item, test_statements, stmt_index
+                                )
+                                if changed:
+                                    new_node = copy.deepcopy(node)
+                                    new_list = list(value)
+                                    new_list[i] = result
+                                    new_node.set(key, new_list)
+                                    return new_node, True
+        
+        return node, False
+
+    def replace_node_in_statement(stmt, old_node, new_node):
+        def replace_in_node(current_node):
+            if current_node is old_node:
+                return new_node
+            
+            if hasattr(current_node, "args") and current_node.args:
+                new_current = copy.deepcopy(current_node)
+                if isinstance(current_node.args, dict):
+                    for key, value in current_node.args.items():
+                        if isinstance(value, exp.Expression):
+                            new_current.set(key, replace_in_node(value))
+                        elif isinstance(value, list):
+                            new_list = []
+                            for item in value:
+                                if isinstance(item, exp.Expression):
+                                    new_list.append(replace_in_node(item))
+                                else:
+                                    new_list.append(item)
+                            new_current.set(key, new_list)
+                return new_current
+            
+            return current_node
+        
+        return replace_in_node(stmt)
+
+    modified = True
+    iteration = 0
+    max_iterations = 10
+    
+    while modified and iteration < max_iterations:
+        modified = False
+        iteration += 1
+        
+        for i, stmt in enumerate(statements):
+            result, changed = find_and_test_paren_removal(stmt, statements, i)
+            if changed:
+                statements[i] = result
+                modified = True
+                break  
+    
+    return statements
+
+
 def simplify_where_clause(where_expr: Expression) -> Expression:
     if where_expr is None:
         return None
