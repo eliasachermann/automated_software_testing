@@ -4,7 +4,6 @@ import sys
 import os
 import copy
 from sqlglot import parse, exp
-from sqlglot.optimizer.simplify import simplify
 from sqlglot.expressions import Expression, Select, Insert
 from sqlglot import tokenize
 import re
@@ -1035,7 +1034,6 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
                     new_args = list(node.args)
                     new_args[children[0][0]] = reduced_child
                     new_node.set("args", new_args)
-                new_node = simplify_expression(new_node)
                 test_statements = full_statements.copy()
                 test_statements[stmt_index] = new_node
                 try:
@@ -1066,7 +1064,6 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
                 new_node.args = {k: v for k, v in kept_children}
             else:
                 new_node.args = [v for _, v in kept_children]
-            new_node = simplify_expression(new_node)
             test_statements = full_statements.copy()
             test_statements[stmt_index] = new_node
             try:
@@ -1090,7 +1087,6 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
                     new_args = list(node.args)
                     new_args[k] = reduced
                     new_node.set("args", new_args)
-                new_node = simplify_expression(new_node)
                 test_statements = full_statements.copy()
                 test_statements[stmt_index] = new_node
                 try:
@@ -1104,7 +1100,6 @@ def delta_debug_node(node, test_script, full_statements, stmt_index):
 
 
 def delta_debug_statements(statements, test_script):
-    statements = [simplify_expression(s) for s in statements]
     if len(statements) <= 1:
         if statements:
             reduced_stmt = delta_debug_node(statements[0], test_script, statements, 0)
@@ -1169,28 +1164,6 @@ def delta_debug_statements(statements, test_script):
             pass
 
     return statements
-
-
-def simplify_expression(node):
-    if not isinstance(node, exp.Expression):
-        return node
-
-    items = list(node.args.items())
-    for k, v in items:
-        if isinstance(v, list):
-            node.set(k, [simplify_expression(child) for child in v])
-        elif isinstance(v, exp.Expression):
-            node.set(k, simplify_expression(v))
-
-    try:
-        simplified = simplify(node)
-        if isinstance(simplified, exp.Expression):
-            return simplified
-    except Exception:
-        pass
-
-    return node
-
 
 def simplify_join_conditions(statements, test_script):
     new_statements = []
