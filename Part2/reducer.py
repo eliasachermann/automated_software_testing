@@ -212,6 +212,110 @@ def evaluate_arithmetic_expr(expr: Expression) -> Expression:
     return expr
 
 
+def simplify_boolean_literals(statements, test_script):
+    new_statements = []
+    modified = False
+
+    def simplify_not_expressions(node):
+        if isinstance(node, exp.Not):
+            inner = node.this
+
+            if isinstance(inner, exp.Boolean) and inner.this is False:
+                return exp.Boolean(this=True)
+
+            if isinstance(inner, exp.Boolean) and inner.this is True:
+                return exp.Boolean(this=False)
+
+            if isinstance(inner, exp.Not):
+                return simplify_not_expressions(inner.this)
+
+            if isinstance(inner, exp.Paren):
+                if isinstance(inner.this, exp.Boolean):
+                    if inner.this.this is False:
+                        return exp.Boolean(this=True)
+                    elif inner.this.this is True:
+                        return exp.Boolean(this=False)
+                simplified_inner = simplify_not_expressions(inner.this)
+                if simplified_inner != inner.this:
+                    new_paren = copy.deepcopy(inner)
+                    new_paren.set("this", simplified_inner)
+                    return exp.Not(this=new_paren)
+
+            simplified_inner = simplify_not_expressions(inner)
+            if simplified_inner != inner:
+                return exp.Not(this=simplified_inner)
+
+        elif isinstance(node, exp.Paren):
+            simplified_inner = simplify_not_expressions(node.this)
+            if simplified_inner != node.this:
+                if isinstance(simplified_inner, (exp.Boolean, exp.Literal)):
+                    return simplified_inner
+                new_paren = copy.deepcopy(node)
+                new_paren.set("this", simplified_inner)
+                return new_paren
+
+        elif isinstance(node, exp.Binary):
+            left = simplify_not_expressions(node.left)
+            right = simplify_not_expressions(node.right)
+
+            if left != node.left or right != node.right:
+                new_binary = copy.deepcopy(node)
+                new_binary.set("left", left)
+                new_binary.set("right", right)
+                return new_binary
+
+        elif hasattr(node, "args") and node.args:
+            changed = False
+            new_node = copy.deepcopy(node)
+
+            if isinstance(node.args, dict):
+                for key, value in node.args.items():
+                    if isinstance(value, exp.Expression):
+                        simplified_value = simplify_not_expressions(value)
+                        if simplified_value != value:
+                            new_node.set(key, simplified_value)
+                            changed = True
+                    elif isinstance(value, list):
+                        new_list = []
+                        list_changed = False
+                        for item in value:
+                            if isinstance(item, exp.Expression):
+                                simplified_item = simplify_not_expressions(item)
+                                if simplified_item != item:
+                                    list_changed = True
+                                new_list.append(simplified_item)
+                            else:
+                                new_list.append(item)
+                        if list_changed:
+                            new_node.set(key, new_list)
+                            changed = True
+
+            if changed:
+                return new_node
+
+        return node
+
+    for stmt in statements:
+        new_stmt = copy.deepcopy(stmt)
+        simplified_stmt = simplify_not_expressions(new_stmt)
+
+        if not expressions_equal(simplified_stmt, stmt):
+            test_statements = [simplified_stmt if s == stmt else s for s in statements]
+            try:
+                sql = get_query_from_parsed(test_statements)
+                if test_query(sql, test_script):
+                    new_statements.append(simplified_stmt)
+                    modified = True
+                else:
+                    new_statements.append(stmt)
+            except Exception:
+                new_statements.append(stmt)
+        else:
+            new_statements.append(stmt)
+
+    return new_statements if modified else statements
+
+
 def simplify_where_clause(where_expr: Expression) -> Expression:
     if where_expr is None:
         return None
@@ -1165,6 +1269,7 @@ def delta_debug_statements(statements, test_script):
 
     return statements
 
+
 def simplify_join_conditions(statements, test_script):
     new_statements = []
     modified = False
@@ -1668,6 +1773,11 @@ def reduce_sql_query(sql_query: str, test_script: str) -> str:
     for iteration in range(max_iterations):
         backup_statements = copy.deepcopy(parsed_statements)
         parsed_statements = reduce_unused_table_inserts(parsed_statements, test_script)
+        if not test_query(get_query_from_parsed(parsed_statements), test_script):
+            parsed_statements = copy.deepcopy(backup_statements)
+
+        backup_statements = copy.deepcopy(parsed_statements)
+        parsed_statements = simplify_boolean_literals(parsed_statements, test_script)
         if not test_query(get_query_from_parsed(parsed_statements), test_script):
             parsed_statements = copy.deepcopy(backup_statements)
 
